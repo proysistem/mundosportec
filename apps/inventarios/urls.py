@@ -1,6 +1,12 @@
 from django.conf.urls import include, url
 #from django.conf.urls import url
-from .views import  PrdLista, PrdNuevo, PrdView, PrdEdita, PrdDelet, ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista, DivLista, DivNuevo, DivView, DivEdita, DivDelet, MrkLista, MrkNuevo, MrkView, MrkEdita, MrkDelet, ModLista, ModNuevo, ModView, ModEdita, ModDelet, ColLista, ColNuevo, ColView, ColEdita, ColDelet, TllLista, TllNuevo, TllView, TllEdita, TllDelet, Mrkkyselect, ProdkyLista
+from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista,
+                    DivLista, DivNuevo, DivView, DivEdita, DivDelet, MrkLista,
+                    MrkNuevo, MrkView, MrkEdita, MrkDelet, ModLista, ModNuevo,
+                    ModView, ModEdita, ModDelet, ColLista, ColNuevo, ColView,
+                    ColEdita, ColDelet, TllLista, TllNuevo, TllView, TllEdita,
+                    TllDelet, Mrkkyselect)
+
 #from django.conf import settings
 
 #from apps.parametros.views import  CliLista, PrvLista, VndLista, MviLista, PedLista, FacLista
@@ -14,11 +20,11 @@ urlpatterns = [
 #    url(r'^PrdEdita/(?P<pk>\d+)/$',    PrdEdita.as_view(), name='prd_edit'),
 #    url(r'^PrdElimina/(?P<pk>\d+)/$',  PrdDelet.as_view(), name='prd_delet'),
 
-	url(r'^DivPanel',                  DivLista.as_view(), name='div_panel'),
-	url(r'^DivNuevo/$',                DivNuevo.as_view(), name='div_new'),
-	url(r'^DivConsulta/(?P<pk>\d+)/$', DivView.as_view(),  name='div_view'),
-	url(r'^DivEdita/(?P<pk>\d+)/$',    DivEdita.as_view(), name='div_edit'),
-	url(r'^DivElimina/(?P<pk>\d+)/$',  DivDelet.as_view(), name='div_delet'),
+    url(r'^DivPanel',                  DivLista.as_view(), name='div_panel'),
+    url(r'^DivNuevo/$',                DivNuevo.as_view(), name='div_new'),
+    url(r'^DivConsulta/(?P<pk>\d+)/$', DivView.as_view(),  name='div_view'),
+    url(r'^DivEdita/(?P<pk>\d+)/$',    DivEdita.as_view(), name='div_edit'),
+    url(r'^DivElimina/(?P<pk>\d+)/$',  DivDelet.as_view(), name='div_delet'),
 
     url(r'^MrkPanel',                  MrkLista.as_view(), name='mrk_panel'),
     url(r'^MrkNuevo/$',                MrkNuevo.as_view(), name='mrk_new'),
@@ -43,14 +49,6 @@ urlpatterns = [
     url(r'^TllConsulta/(?P<pk>\d+)/$', TllView.as_view(),  name='tll_view'),
     url(r'^TllEdita/(?P<pk>\d+)/$',    TllEdita.as_view(), name='tll_edit'),
     url(r'^TllElimina/(?P<pk>\d+)/$',  TllDelet.as_view(), name='tll_delet'),
-
-    url(r'^PrdPanel',                  PrdLista.as_view(), name='prd_panel'),
-    url(r'^PrdSelect/$',               Mrkkyselect.as_view(), name='prd_select'),
-    url(r'^PrdKeys/$',                 ProdkyLista.as_view(), name='prd_keys'),
-    url(r'^PrdNuevo/$',                PrdNuevo.as_view(), name='prd_new'),
-    url(r'^PrdConsulta/(?P<pk>\d+)/$', PrdView.as_view(),  name='prd_view'),
-    url(r'^PrdEdita/(?P<pk>\d+)/$',    PrdEdita.as_view(), name='prd_edit'),
-    url(r'^PrdElimina/(?P<pk>\d+)/$',  PrdDelet.as_view(), name='prd_delet'),
 
      url(r'^ExiPanel',                  ExiLista.as_view(), name='exi_panel'),
      url(r'^ExiNuevo/$',                ExiNuevo.as_view(), name='exi_new'),
@@ -129,7 +127,7 @@ urlpatterns = [
 ]
 
 #if settings.DEBUG:
-#	urlpatterns += [
-#		url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}
-#			),
-#	]
+#   urlpatterns += [
+#       url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}
+#           ),
+#   ]
