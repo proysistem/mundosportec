@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 *.pyc
 *.db
 *.sqlite
+=======
+*.pyc
+*.db
+*.sqlite
+>>>>>>> 267096c5fefdd0568e7942242f8ccf49e055f6a7
