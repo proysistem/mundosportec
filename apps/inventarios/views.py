@@ -52,8 +52,8 @@ class DivDelet(DeleteView):
 class ProdkyLista(CreateView):
 	model = Productkey
 	form_class = ProductkeyForm
-	template_name = 'inventarios/Prd_Keys.html'
-	success_url = reverse_lazy('inventarios:prd_Keys')
+	template_name = 'inventarios/Exi_New.html'
+	success_url = reverse_lazy('inventarios:exi_panel')
 
 class Mrkkyselect(ListView):
 	model = Marca

@@ -20,11 +20,11 @@
 								{{ form.error }}
 							</div>
 						{% endif %}
-						<div class="form_row"><div class="form_label"><label for="{{form.pky_idsucur.name}}">{{form.pky_idsucur.label}}</label></div><div>{{form.pky_idsucur}}</div></div>
-						<div class="form_row"><div class="form_label"><label for="{{form.pky_iddivis.name}}">{{form.pky_iddivis.label}}</label></div><div>{{form.pky_iddivis}}</div></div>
-						<div class="form_row"><div class="form_label"><label for="{{form.pky_idmarca.name}}">{{form.pky_idmarca.label}}</label></div><div>{{form.pky_idmarca}}</div></div>
-						<div class="form_row"><div class="form_label"><label for="{{form.pky_idmodel.name}}">{{form.pky_idmodel.label}}</label></div><div>{{form.pky_idmodel}}</div></div>
-						<div class="form_row"><div class="form_label"><label for="{{form.pky_idcolor.name}}">{{form.pky_idcolor.label}}</label></div><div>{{form.pky_idcolor}}</div></div>
+						<div class="form_row"><div class="form_label"><label>Sucursal</label></div><div>{{form.pky_idsucur}}</div></div>
+						<div class="form_row"><div class="form_label"><label>Division</label></div><div>{{form.pky_iddivis}}</div></div>
+						<div class="form_row"><div class="form_label"><label>Marca   </label></div><div>{{form.pky_idmarca}}</div></div>
+						<div class="form_row"><div class="form_label"><label>Modelo  </label></div><div>{{form.pky_idmodel}}</div></div>
+						<div class="form_row"><div class="form_label"><label>Color   </label></div><div>{{form.pky_idcolor}}</div></div>
 						<hr><br>
 						{% if pky_idcolor %} {{	llave = pky_iddivis + pky_idmarca + pky_idmodel + pky_idcolor 
 						print llave }} 

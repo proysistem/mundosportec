@@ -6,18 +6,21 @@ class ProductkeyForm(forms.ModelForm):
 		model = Productkey
 #		exclude('prd_imgprod',)
 		fields = [
+				'pky_idsucur',
 				'pky_iddivis',
 				'pky_idmarca',
 				'pky_idmodel',
 				'pky_idcolor',
 		]
 		labels = {
+				'pky_idsucur': 'Sucursal',
 				'pky_iddivis': 'División',
 				'pky_idmarca': 'Marca',
 				'pky_idmodel': 'Modelo',
 				'pky_idcolor': 'Color',
 		}
 		widgets = {
+				'pky_idsucur': forms.Select(),
 				'pky_iddivis': forms.Select(),
 				'pky_idmarca': forms.Select(),
 				'pky_idmodel': forms.Select(),
