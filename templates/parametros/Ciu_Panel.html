@@ -1,0 +1,58 @@
+{% extends 'base/base_parametros.html' %}
+
+{% block title %} Panel de Ciudades {% endblock title %}</title>
+
+{% block context %}
+
+			<div class="crea_content">
+				<h3 class="crea_proceso">Parametros:Ciudades)</h3>
+				<a class="icon-database crea_boton" href="{% url 'parametros:ciu_new' %}">Crear nuevo</a>
+
+			</div>
+			<div>
+				<table border="1" >
+					<thead>
+					 	<tr color="#:000066">
+					 		<th class="head_tab">Pais</th>
+					 		<th class="head_tab">Provincia</th>
+					 		<th class="head_tab">Ciudad</th>
+					 		<th class="head_tab">Abreviatura</th>
+					 		<th class="head_tab" colspan="3">Opción</th>
+					 	</tr>
+					</thead>
+					<tbody border="0">
+					 	{% if object_list %}
+					 	{% for var_ciufield in object_list %}
+					 	<tr>
+							<td class="columns_tab">{{ var_ciufield.ciu_country }} </td>
+							<td class="columns_tab">{{ var_ciufield.ciu_estados }} </td>
+							<td class="columns_tab">{{ var_ciufield.ciu_nombres }} </td>
+							<td class="columns_tab">{{ var_ciufield.ciu_abrevia }} </td>
+
+							<td class="columns_tab"><a class="icon-eye   botones" href="{% url 'parametros:ciu_view'  var_ciufield.id %}"></a></td>
+							<td class="columns_tab"><a class="icon-edit  botones" href="{% url 'parametros:ciu_edit'  var_ciufield.id %}"></a></td>
+							<td class="columns_tab"><a class="icon-trash botones" href="{% url 'parametros:ciu_delet' var_ciufield.id %}"></a></td>
+						</tr>
+						{% endfor %}
+						{% else %}
+						<h4> No hay registros de Cód. Postal </h4>
+						{% endif %}
+						</>
+					</tbody>
+				</table>
+				<div class="page_content">
+					<ul class="pager_botons">
+						<li>
+							{% if page_obj.has_previous %}
+							<a class="icon-left-open pager_prev" href="?page={{page_obj.previous_page_number}}">Previous</a>
+							{% endif %}
+						</li>
+						<li>
+							{% if page_obj.has_next %}
+							<a class="pager_next" href="?page={{page_obj.next_page_number}}">Next <span class="icon-right-open"></span></a>
+							{% endif %}
+						</li>
+					</ul>
+			</div>
+		</div>
+{% endblock context %}

@@ -1,0 +1,824 @@
+/*  Autor:  Luis Salinas
+/*  Date:   Feb-19-2012
+/*  CSS3:   Hoja de estilos de presentacion aplicada a web_proysistem
+
+/*  Esta hoja de estilos se clasifica en 4 reglas basicas:
+/*	1.- Asignar estylos a las etiquetas que se codifican en html
+/*	2.- Asignar estylos a los ID, o sea todo parrafo que comiensa con # es un "ID".
+/*	3.- Asignar estylos a las etiquetas de clases, o sea que comiensan con un punto.
+/*  4.- Y la cuarta regla es que dentro de cada grupo cada atributo se ordena alfabeticamente.  */
+
+div#scroll_bars::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+div#scroll_bars::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+div#scroll_bars::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #D62929;
+}
+div#scroll_bars::-moz-scrollbar-track
+{
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+div#scroll_bars::-moz-scrollbar
+{
+	width: 12px;
+	background-color: #0000ff;
+}
+
+div#scroll_bars::-moz-scrollbar-thumb
+{
+	border-radius: 10px;
+	box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #00ff00;
+}
+
+
+
+/*	===============================================================
+   	Inicializamos los margenes, paddings y font-size:  				
+	===============================================================	*/
+@charset "utf-8";
+*	{
+	margin: 		0;
+	padding:		0;
+ 	} 	
+/*	------------------------------------------------------------------------
+	Seteamos todos los #contenedores con un mismo margen a los cuatro lados         
+ 	ademas que todos se displayen en blok y verticalmente=arriba 
+  	------------------------------------------------------------------------
+*/  
+	#article_content, 
+	#article_inter-content, 
+	#aside_content,
+	#aside_form-content,
+	#aside_image-content,
+	#aside_news-content,
+	#flash-content,
+	#main_content,
+	#sheet_content
+	{
+	display: 		block;
+	margin: 		.15em auto;
+	vertical-align: top;
+	}
+/*	=================================================================   */
+/*   1er. Grupo de Stylos: Aplicación a las <ETIQUETAS>  html           */
+/*	=================================================================   */
+a
+	{
+	color: 			#F7A443;
+	font-weight: 	bold;
+	text-decoration:none; 
+	}
+body
+	{					 /*  bytes que  generan fondo-espacio */
+	background: 	url(images/starry.gif) repeat;   
+	color: 			#ffffff;
+	font-family: 	Calibri(cuerpo), Arial, Helvetica, sans-serif;
+	font-size: 		1.05em;
+	font-weight: 	bold;
+ 	font-style: 	normal;
+ 	}
+/*button[type="submit"],input[type="reset"],input[type="button"]
+	{
+ 	box-shadow:  	2.5px  2.5px 2px rgba(216,207,169,10);
+	cursor: 		pointer;
+	display: 		inline-block;
+	height: 		2em;
+	width: 			30px;
+	vertical-align: top;
+	} */ 	
+div#scroll_bars
+	{
+   	width:    		54%;
+   	overflow: 		auto;	
+	} 	 	
+fieldset
+	{
+	border: 0.1em solid	#EEDCB4;
+	border-radius:  0.2em;
+	margin: auto;
+	padding: 0.3em;
+	}
+/* figcaption   */
+input[type="email"],input[type="password"],input[type="text"],input[type="tel"],textarea, select
+	{
+	background-color:#709AB7;
+	border-radius:  0.25em;
+	font-size: 		1em;
+	margin: 		0.08em 0 0.5em 0.25em;
+	}
+input[type="email"],input[type="text"],textarea
+	{
+	width: 			90%;				 	
+	}
+input[type="email"]:focus,input[type="password"]:focus,input[type="text"]:focus,input[type="tel"]:focus, textarea:focus, option
+	{
+	background-color:#ee1;
+	}		
+input[type="password"],input[id="username"],
+	{
+	width: 			50%;	
+	}
+input[type="submit"], input[type="reset"], input[type="button"]
+	{
+ 	box-shadow:  	2.5px  2.5px 2px rgba(216,207,169,10);
+	display: 		inline-block;
+	font-size: 		75%;
+	margin: 		0.5em 2%;
+	max-width: 		180px;
+	min-width: 		60px;
+	padding: 		0.1em 2%;
+	vertical-align: top;
+	width: 			35%;
+	}
+input[type="submit"]:hover,input[type="reset"]:hover,input[type="button"]:hover
+	{
+ 	box-shadow:  	-1px  -1px 1px rgba(0,0,0,10);
+ 	color: 			#0303FC;
+	cursor: 		pointer;
+	}
+input[type="tel"]
+	{
+	width: 			40%;	
+	}			
+input[id="codzip"]
+	{
+	width: 			20%;
+	vertical-align: top;	
+	}	
+label:hover
+	{
+	cursor: 		pointer;
+	}
+legend
+	{
+	color: 		#1408B9;	
+	font-size: 	1.20em;
+	margin:     0 0.5em;	
+	}
+nav
+	{
+
+
+	}	
+/*	===============================================================   */
+/*  2do. Grupo de Stylos: Aplica a los "ID" o se a los #ETIQUETAS     */
+/*	===============================================================   */
+#rerearticle_content
+	{
+	background: 	url(images/fondo_red.png) repeat;   
+	font-weight:	bold;
+	text-align: 	justify;
+	max-width: 		98%;
+	min-width: 		1%;
+	}
+
+#article_content
+	{
+	display: 		block;
+  	background: 	url(images/fondo_protect.png) repeat; */   
+ 	border-radius:  0.5em;
+ 	box-shadow:  	0.5px  0.5px 0.6px rgba(255,255,255,0.9);
+ 	box-shadow:  	-0.1px -0.1px 0.2px rgba(255,255,255,0.7);
+ 	height:   		auto;
+ 	margin: 		0.5em auto;
+ 	min-height: 	1em;
+	min-width: 		5%;
+ 	width:  		98%;
+ 	vertical-align: top;
+	}
+#article_inter-content
+	{
+	-webkit-transform:  all 0.25% ease-in;
+ 	background:   	url(images/fondo_protect.png) repeat;
+ 	border-radius:  0.75em;
+ 	box-shadow:   	5px 5px 6px rgba(255,255,255,0.5);
+ 	transform:    	all 0.25% ease-in;
+ 	width:   		47%;
+ 	}
+ #article_content:hover,#article_inter-content
+ 	{
+ 	-webkit-transform: rotate(0deg) translateY(10px);
+ 	background: url(images/fondo_bi-plomo.jpg) no-repeat; 
+ 	}	
+	
+/*  ----------------- aside  -------------------------       */
+#aside_content
+	{
+ 	background: 	url(images/fondo_bage2.png) repeat ;
+ 	border-radius: 	0.3em; 	display: 		inline-block;
+ 	font-size: 		0.6em;
+ 	margin: 		0.5em auto;
+ 	min-width: 		1%;
+ 	padding: 		0.5%;
+ 	vertical-align: top;
+  	width:    		23%;
+ 	}
+#aside_image-content
+	{
+	background-color:#F9D50D;	
+/*	background: url(images/fondo_multicolor.jpg) no-repeat;  
+	background-size:100% 100%;    */
+ 	border-radius: 	0.5em;
+	color: 			#0B2699;
+ 	margin:			1%;
+  	padding: 		3%;
+  	text-align: 	justify;
+  	}
+#aside_image-content>fieldset
+	{
+	border: 0.1em solid	#000;
+	}	
+#aside_news-content
+	{
+	background-color: #53D5CA;	
+/* 	background:  url(images/fondo_forms.png) repeat;     / *  bytes que  generan una malla */
+ 	border-radius: 	0.5em;
+ 	color: 			#005;
+ 	margin:			1%;
+  	padding: 		3%;
+  	text-align: 	justify;
+ 	}
+#aside_image-piramid
+	{
+	background-color:#fff;	
+/*	background: url(images/fondo_multicolor.jpg) no-repeat;  
+	background-size:100% 100%;    */
+ 	border-radius: 	0.5em;
+	color: 			#0B2699;
+ 	margin:			1%;
+  	padding: 		3%;
+  	text-align: justify;
+  	}
+#flash-content
+{
+
+}
+#footer_content
+	{
+/*	background: 	#709AB7;  */
+	clear:			both;									/*  Permite al pie de pagina mantenerse al final */
+  	background: 	url(images/fondo_forms.png) repeat;  	/*  Fondo de la tira del pie de pagina */
+	box-shadow:		5px -3px 5px rgba(255,255,255,0.5);
+	display:		block;									/*  Estabiliza en un punto fijo a la barra del msg copyright */
+	height:			1.8em;
+	position:		fixed;
+	bottom:			0px;
+	width: 			99%;
+	}
+#footer_text
+	{
+	font-weight:	bold; 
+	margin: 		-0.05em;
+	text-align: 	center;
+	}	
+#main_content 	
+	{
+ 	background: 	url(images/fondo_space.png) repeat;   
+ 	border-radius:  0.5em;
+ 	box-shadow:  	-0.1px -0.1px 0.1px rgba(255,255,255,0.7);
+ 	height:   		auto;
+ 	margin-bottom: 	2.5em;
+ 	min-width:  	1px;
+ 	width:  		99%;
+ 	}
+#sheet_content
+	{
+	background: 	url(images/fondo_cielo.png) repeat; */
+ 	border-radius:  0.5em;
+ 	box-shadow:  	0.5px 0.5px 0.6px rgba(255,255,255,0.7);
+ 	display:		inline-block;
+ 	margin: 		0.5em 2%; 
+ 	min-width: 		1%;
+ 	vertical-align: top;
+   	width:    		70%;	
+	}
+/*	==================================================================   */
+/*  3er. Grupo de Stylos: Aplica a las "CLASES" o se a los .ETIQUETAS    */
+/*  desde HTML son llamadas con class="" y puede repetirse el llamado    */
+/*	==================================================================   */
+.article_columns 	/* Formato para articulo en columnas (columna "lef") */
+	{
+	background: 	url(images/fondo_protect.png) repeat;
+	border-radius: 	0.3em;
+	box-shadow:		2px -3px 5px rgba(255,255,255,0.5);
+	display: 		inline-block;
+	margin:			1em 1% 1em 1%;
+	padding: 		0.5% 0.5% 0.5% 0.5%;
+	vertical-align: top;
+	width: 			46%;
+	}
+.article_format-text/* El formato del texto en las paginas en general */	
+	{
+	display: 		inline-block;	
+	margin: 		.5em 1em 1em 1em;	
+/*	max-width: 		98%;  */	/* ojo si se distorciona el texto cambie esto */
+	text-align: 	justify;
+	vertical-align: top;
+	}		
+.article_title-text		/* Formato para el titulo general de un texto */
+	{
+	display: 		block;	
+	font-weight:	bold;
+	font-size:  	150%;
+	text-align: 	center;
+	}
+.back_content-button
+	{
+	border-radius: 	0.1em;	
+	display: 		block;
+	font-size: 		1.3em;
+	height:     	1.65em;
+	margin: 		.1em .01em auto;
+	text-align: 	center;
+	width: 			2.25em;
+	}
+.back_text
+	{
+	background-color: #ffffff;	
+	}
+.block_content		/* Formato para formulario creacion de ctas */
+	{
+	display: 		inline-block;
+	margin:			0.3% 0 0.05% 2%;
+	padding: 		0.5% 1% 1% 1%;
+	vertical-align: top;
+	width: 			95%;
+	}
+.block_simple		/* Formato para separar div y que no se sobrepongan ej: direccion ip en driver_test-simula.php; */
+	{
+	display: 		inline-block;
+	margin:			1em auto;
+	padding: 		0.5em auto;
+	vertical-align: top;
+	width: 			98%;
+	}	
+.degradado_lineal
+	{
+	padding: 0 .5em 0 .5em; 	
+	background: -webkit-linear-gradient(#837D5C, #666350, #959073); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(#837D5C, #666350); /* For Opera 11.1 to 12.0 */
+ 	background: -moz-linear-gradient(#837D5C, #666350); /* For Firefox 3.6 to 15 */
+ 	background: linear-gradient(#837D5C, #666350, #666150,  #837D5C); /* Standard syntax */
+
+   /* background: linear-gradient(top, #89781C, #453C0C); 
+	/*background-color: #ff00ff;  */
+	}
+.degradado_lineal-gren
+	{
+	padding: 0 .5em 0 .5em; 	
+	background: -webkit-linear-gradient(#837D5C, #666350, #959073); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(#837D5C, #666350); /* For Opera 11.1 to 12.0 */
+ 	background: -moz-linear-gradient(#837D5C, #666350); /* For Firefox 3.6 to 15 */
+ 	background: linear-gradient(#38A356, #18A356, #03642E, #38A356); /* Standard syntax */
+
+   /* background: linear-gradient(top, #89781C, #453C0C); 
+	/*background-color: #ff00ff;  */
+	}
+.degradado_lineal-blue
+	{
+	padding: 0 .5em 0 .5em; 	
+	background: -webkit-linear-gradient(#837D5C, #666350, #959073); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(#837D5C, #666350); /* For Opera 11.1 to 12.0 */
+ 	background: -moz-linear-gradient(#837D5C, #666350); /* For Firefox 3.6 to 15 */
+ 	background: linear-gradient(#6171C3, #2A3FA6, #2A3FA6, #6171C3); /* Standard syntax */
+	}
+.degradado_lineal-red
+	{
+	padding: 0 .5em 0 .5em; 	
+	background: -webkit-linear-gradient(#837D5C, #666350, #959073); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(#837D5C, #666350); /* For Opera 11.1 to 12.0 */
+ 	background: -moz-linear-gradient(#837D5C, #666350); /* For Firefox 3.6 to 15 */
+ 	background: linear-gradient(#FD1A1A, #7C2626, #7C2626, #FD1A1A); /* Standard syntax */
+	}			
+.degradado_round
+	{
+ background: -webkit-radial-gradient(#252318, #668350, #837D5C); /* Safari 5.1 to 6.0 */
+ background: -o-radial-gradient(#252318, #666350, #837D5C); /* For Opera 11.6 to 12.0 */
+ background: -moz-radial-gradient(#252318, #666350, #837D5C); /* For Firefox 3.6 to 15 */
+ background: radial-gradient(#252318, #666350, #837D5C); /*opacity: 0.5; /* Standard syntax */
+	}
+.degradado_round-gren
+	{
+ 	background: -webkit-radial-gradient(#252318, #668350, #837D5C); /* Safari 5.1 to 6.0 */
+ 	background: -o-radial-gradient(#252318, #666350, #837D5C); /* For Opera 11.6 to 12.0 */
+ 	background: -moz-radial-gradient(#252318, #666350, #837D5C); /* For Firefox 3.6 to 15 */
+ 	background: radial-gradient(#28A356, #18A356, #38A356); /*opacity: 0.5; /* Standard syntax */
+	}
+.degradado_round-red
+	{
+ 	background: -webkit-radial-gradient(#252318, #668350, #837D5C); /* Safari 5.1 to 6.0 */
+ 	background: -o-radial-gradient(#252318, #666350, #837D5C); /* For Opera 11.6 to 12.0 */
+ 	background: -moz-radial-gradient(#252318, #666350, #837D5C); /* For Firefox 3.6 to 15 */
+ 	background: radial-gradient(#FD1A1A, #FD1A1A, #FD1A1A); /*opacity: 0.5; /* Standard syntax */
+	}					
+.menu_format-text/* El formato del texto para un menu */	
+	{
+	display: 		inline-block;
+	height: 		1.75em;	
+	margin: 		.05em auto;	
+	width:	 		80%;
+	padding: 		auto;
+	text-align: 	center;
+	}	
+.text_size-midm		/* Formato para el autor en las hojas dinamicas y otros textos pequenos */
+	{
+	font-weight:	bold;
+	font-size : 	0.75em;
+	}
+.text_size-small	/* Formato para el autor en las hojas dinamicas y otros textos pequenos */
+	{
+	font-weight:	bold;
+	font-size : 	0.50em;
+	}
+
+.create_content		/* Formato para formulario creacion de ctas */
+	{
+	background: 	url(images/fondo_protect.png) repeat;
+	border-radius: 	0.3em;
+	box-shadow:		2px -3px 5px rgba(255,255,255,0.5);
+	display: 		inline-block;
+	margin:			0.3% 0 0.05% 2%;
+	padding: 		0.5% 1% 1% 1%;
+	vertical-align: top;
+	width: 			46%;
+	}
+.div_top
+	{
+	display: inline-block;
+	vertical-align: top;	
+	}	
+.image_content-button
+	{
+	background-color: #3d2aff;
+	border-radius: 	0.1em;	
+	display: 		block;
+	font-size: 		1.3em;
+	height:     	1.65em;
+	margin: 		.1em .01em auto;
+	text-align: 	center;
+	width: 			2.25em;
+	}
+.image_content-lupa
+	{
+	background-color: #ffffff;
+	border-radius: 	0.3em;	
+	display: 		block;
+	height:     	1.65em;
+	margin: 		auto;
+	width: 			2.25em;
+	}
+.image_content-med
+	{
+	display: 		block;
+	height: 		auto;
+	margin: 		auto;
+	width: 			48%;
+	}
+.image_content-sml
+	{
+	display: 		block;
+	height:     	180px;
+	margin: 		auto;
+	width: 			180px;
+	}
+.image_format
+	{
+/*	background: 	url(images/via-001.jpg) no-repeat;  /* Fondo de la hoja de datos dinamicos */
+	border-radius:  .3em;
+	display: 		block;
+	height:     	auto;
+	margin: 		auto;
+	width: 			98%;
+	vertical-align: top;
+	}
+.image_trj-content
+	{
+	background: 	url(images/matrvx.jpg) no-repeat;  /* Fondo de la hoja de datos dinamicos */
+	background-size:100% 100%;
+	border-radius: 	0.5em;
+	box-shadow:		-2px -2px 5px rgba(255,255,255,0.5);
+	display:		block;	
+	height:			auto;
+	margin: 		.5em .5em;
+	padding:		0.75em;
+	vertical-align: top;
+	width: 			10%;
+	}
+.image_sml-content
+	{
+	background: 	url(images/matrvx.jpg) no-repeat;  /* Fondo de la hoja de datos dinamicos */
+	background-size:100% 100%;
+	border-radius: 	0.5em;
+	box-shadow:		-2px -2px 5px rgba(255,255,255,0.5);
+	display:		block;	
+	height:			auto;
+	margin: 		.1em .1%;
+	padding:		0.25em;
+	vertical-align: top;
+	width: 			20%;
+	}
+.image_med-content
+	{
+	background: 	url(images/matrax.jpg) no-repeat;  /* Fondo de la hoja de datos dinamicos */
+	background-size:100% 100%;
+	border-radius: 	0.5em;
+	box-shadow:		-2px -2px 5px rgba(255,255,255,0.5);
+	display: 		block;
+	margin: 		.75em;
+	padding:		0.75em;
+	vertical-align: top;
+	width: 			50%;
+	}
+.image_lrg-content
+	{
+	background: 	url(images/matrax.jpg) no-repeat;  /* Fondo de la hoja de datos dinamicos */
+	background-size:100% 100%;
+	border-radius: 	0.5em;
+	box-shadow:		-2px -2px 5px rgba(255,255,255,0.5);
+	display: 		block;
+	font-size: 		0.75em;
+	height:			95%;
+	margin: 		1em auto;
+	padding:		1em 0.75em;
+	vertical-align: top;
+	width: 			90%;
+	}
+.image_acr-content
+	{
+	background: 	url(images/starry.gif) repeat;   
+	background-size:100% 100%;
+	vertical-align: top;
+	}
+.image_std-content
+	{
+	background: 	url(images/fondo_dggifuso.jpg) repeat;  /* Fondo de la hoja de datos dinamicos */
+	background-size:100% 100%;
+	border-radius: 	0.5em;
+	box-shadow:		-2px -2px 5px rgba(255,255,255,0.5);
+	display:		block;	
+	height:			auto;
+	margin: 		.5em .5em;
+	padding:		0.75em;
+	vertical-align: top;
+	width: 			30%;
+	}
+.image_sml-gota
+	{
+ 	border-radius: 50% 0 50% 50%;
+ 	border: 2px solid grey;
+	display: inline-block;
+	height:100%;	
+ 	margin: 0;
+ 	overflow: hidden;
+ 	padding: 0;
+ 	vertical-align: top;
+ 	width: 100%;
+ 	}
+.image_sml-circle
+	{
+	background: url(images/starry.gif) repeat;   
+ 	border-radius: 50% 50% 50% 50%;
+ 	border: 2px solid grey;
+	display: inline-block;
+ 	overflow: hidden;
+ 	vertical-align:top;
+ 	width: 90%;
+ 	}
+.floating_left
+	{
+	float: 			left;
+	margin-right: 	2%;
+	}
+.floating_right
+	{
+	float: 			right;
+	margin-left: 	2%;
+	}
+.login_content
+	{
+	background: 	url(images/fondo_protect.png) repeat;  
+	border-radius: 	0.3em;
+	box-shadow:		2px -3px 5px rgba(255,255,255,0.5);
+	display: 		inline-block;
+	margin:			0.3em 0 0.05em 0em;
+	padding: 		0.5em 1em 1em 1em;
+	vertical-align: top;
+	width: 			35%;
+	}
+.signin-content
+	{
+ 	background: 	url(images/candadito.png) no-repeat; 
+	background-size:100% 100%;
+ 	box-shadow: 	-2px -2px 5px rgba(255,255,255,0.5);
+ 	margin:			1%;
+  	padding: 		1%;
+ 	}	
+.tab_header			/* Fondo de la hoja de datos dinamicos */
+	{
+	/*background: 	url(images/fondo_protect.png) repeat;   */
+	background-color: #fffff3; 
+	border-radius: 	0.2em;
+	box-shadow:		1px 1px 1px rgba(255,255,255,0.3);
+	display: inline-block;
+	color:			#000021;
+	vertical-align: top;
+	}
+.tab_title
+	{
+	padding: 0 .5em 0 .5em; 	
+	background: -webkit-linear-gradient(#A15A9D, #666350, #A15A9D); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(#837D5C, #666350); /* For Opera 11.1 to 12.0 */
+ 	background: -moz-linear-gradient(#837D5C, #666350); /* For Firefox 3.6 to 15 */
+ 	background: linear-gradient(#A15A9D, #81056B, #81056B,  #A15A9D); /* Standard syntax */
+
+   /* background: linear-gradient(top, #89781C, #453C0C); 
+	/*background-color: #ff00ff;  */
+	}	
+.text_search
+	{
+	background-color:#709AB7;
+	display: inline-block;
+	font-size: 1em;
+	padding: .2em 0 0 .2em;
+	vertical-align: top;	
+	}
+.titulo_form 		/* Formato del fondo del titulo en las hojas dinamicas */
+	{
+	background: 	url(images/fondo_titulos.png) repeat;  
+	box-shadow:		3px 3px 3px rgba(255,255,255,0.5);
+	display: 		block;	
+	margin:			-0.3em 0 0 1em;
+	}	
+.tv_sml-content
+	{
+/*	background-color: rgba(0,0,0,1);	
+	box-shadow:		-2px -2px 5px rgba(255,255,255,0.5); */
+	border-radius: 	.3em;
+	display:		block;	
+	height:			auto;
+	vertical-align: top;
+	width: 			auto;
+	padding: .5em auto;
+	}
+
+
+
+ 
+#cabecera {
+  background-color: $colorAzul;
+  color: #FFF;
+}
+
+#text_column
+ 	{
+    -webkit-column-count: 3; 				/* Número de columnas */
+    -webkit-column-width: 30%; 				/* Ancho de las columnas */
+    -webkit-column-gap:   1%; 				/* Ancho entre columnas */
+    -webkit-column-rule:  1px dotted blue;  /*Borde entre columnas (se escribe como la forma reducida de bordes) */ 
+	}
+	
+	#nav
+	{
+		float: none;
+		width: auto;
+	}
+	
+	#extras
+	{
+		float: none;
+		width: auto;
+		margin: 0;
+	}
+	
+@media only screen and (max-width: 620px) {
+	#article_inter-content
+		{
+		background-color: rgba(255,255,222,0.1);
+		}
+	#aside_content
+		{
+		display:	none;
+		}
+	#sheet_content
+		{
+		background-color: yellow;	
+		margin: 	0.5em auto;	
+		width:		98%;
+		}
+        .article_columns 	/* Formato para articulo en columnas (columna "lef") */
+		{		
+		width: 		98%;
+		}	
+	.bottom-content
+		{
+		margin: 	0.5%  2%;
+		width: 		25%;
+		}
+	.article_title-text
+		{
+		font-size:  	105%;	
+		}	
+	.image_sml-content,.image_std-content
+		{
+		width: 			90%;
+		}
+	.image_med-content
+		{
+		width: 			90%;
+		}	
+
+	}
+======================
+/* Smartphones (portrait and landscape) ----------- */ 
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+ /* Styles */ }
+
+/* Smartphones (landscape) ----------- */ 
+
+@media only screen and (min-width : 321px) { /* Styles */ }
+
+/* Smartphones (portrait) ----------- */ 
+
+@media only screen and (max-width : 320px) { /* Styles */ }
+
+/* iPads (portrait and landscape) ----------- */ 
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) { /* Styles */ }
+
+/* iPads (landscape) ----------- */ 
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) { /* Styles */ }
+
+/* iPads (portrait) ----------- */ 
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { /* Styles */ }
+
+/* Desktops and laptops ----------- */ 
+
+@media only screen and (min-width : 1224px) { /* Styles */ }
+
+/* Large screens ----------- */ 
+
+@media only screen and (min-width : 1824px) { /* Styles */ }
+
+/* iPhone 4 ----------- */ 
+
+@media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) { /* Styles */ }
+
+========================================
+
+/* Smartphones (vertical and horizontal) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px)
+{ /* STYLES GO HERE */ } 
+/* Smartphones (Horizontal) ----------- */ 
+@media only screen and (min-width : 321px) { /* STYLES GO HERE */ } 
+/* Smartphones (vertical) ----------- */ 
+@media only screen and (max-width : 320px) { /* STYLES GO HERE */ } 
+/* iPads (vertical y horizontal) ----------- */ 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px){ /* STYLES GO HERE */ } 
+/* iPads (horizontal) ----------- */ 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape){ /* STYLES GO HERE */ } 
+/* iPads (vertical) ----------- */ 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) { /* STYLES GO HERE */ } /* Desktops and laptops ----------- */ 
+@media only screen and (min-width : 1224px){ /* STYLES GO HERE */ } 
+/* Pantallas grandes ----------- */ 
+@media only screen and (min-width : 1824px){ /* STYLES GO HERE */ } 
+/* iPhone 5 (vertical y horizontal)----------- */ 
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px){ /* STYLES GO HERE */ } 
+/* iPhone 5 (Horizontal)----------- */ 
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : landscape){ /* STYLES GO HERE */ } 
+/* iPhone 5 (vertical)----------- */ 
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : portrait){ /* STYLES GO HERE */ }
+
+=======================
+
+@media  only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {  
+/* Styles */  
+
+}  
+
+
+if (screen.width + "x" +screen.height == "640x480" location.href="pagina640x480.htm" 
+
+if (screen.width + "x" +screen.height == "800x600" location.href="pagina800x600.htm" 
+
+if (screen.width + "x" +screen.height == "1024x768" location.href="pagina1024x768.htm" 
+

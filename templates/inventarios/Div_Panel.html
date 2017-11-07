@@ -1,0 +1,60 @@
+{% extends 'base/base_inventarios.html' %}
+
+{% block title %} Panel de Divisiones {% endblock title %}</title>
+
+{% block context %}
+
+			<div class="crea_content">
+				<h3 class="crea_proceso">Inventarios:Divisiones</h3>
+				<a class="icon-database crea_boton" href="{% url 'inventarios:div_new' %}">Crear nuevo</a>
+
+			</div>
+			<div>
+				<table border="1" >
+					<thead>
+					 	<tr color="#:000066">
+					 		<th class="head_tab">Código</th>
+					 		<th class="head_tab">Nombre</th>
+					 		<th class="head_tab">Abreviat</th>
+					 		<th class="head_tab">Indic.</th>
+					 		<th class="head_tab">Status</th>
+					 		<th class="head_tab" colspan="3">Opcoón</th>
+					 	</tr>
+					</thead>
+					<tbody border="0">
+					 	{% if object_list %}
+					 	{% for var_divfield in object_list %}
+					 	<tr>
+							<td class="columns_tab">{{ var_divfield.id }} </td>
+							<td class="columns_tab">{{ var_divfield.div_detalle }} </td>
+							<td class="columns_tab">{{ var_divfield.div_abrevia }} </td>
+							<td class="columns_tab">{{ var_divfield.div_indicad }} </td>
+							<td class="columns_tab">{{ var_divfield.div_statreg }} </td>
+
+							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:div_view'  var_divfield.id %}"></a></td>
+							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:div_edit'  var_divfield.id %}"></a></td>
+							<td class="columns_tab"><a class="icon-trash botones" href="{% url 'inventarios:div_delet' var_divfield.id %}"></a></td>
+						</tr>
+						{% endfor %}
+						{% else %}
+						<h4> No hay registros en Divisiones </h4>
+						{% endif %}
+						</>
+					</tbody>
+				</table>
+				<div class="page_content">
+					<ul class="pager_botons">
+						<li>
+							{% if page_obj.has_previous %}
+							<a class="icon-left-open pager_prev" href="?page={{page_obj.previous_page_number}}">Previous</a>
+							{% endif %}
+						</li>
+						<li>
+							{% if page_obj.has_next %}
+							<a class="pager_next" href="?page={{page_obj.next_page_number}}">Next <span class="icon-right-open"></span></a>
+							{% endif %}
+						</li>
+					</ul>
+				</div>
+			</div>
+{% endblock context %}

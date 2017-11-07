@@ -1,0 +1,30 @@
+{% extends 'base/base_parametros.html' %}
+
+{% block title %} Elimina Ciudad {% endblock title %}</title>
+
+			{% block context%}
+			<div class="crea_content">
+				<h3 class="crea_proceso">Parametros:Ciudad</h3>
+				<a class="icon-reply crea_boton" href="{% url 'parametros:ciu_panel' %}">Volver</a>
+
+			</div>
+			<div>
+				<div>
+					<form method="POST">{% csrf_token %}
+					<div class="form_content">
+						<div class="form_titulo"><h1>Elimina Ciudad</h1></div>
+						<div class="form_esc">
+							<a class="icon-cancel" href="{% url 'parametros:ciu_panel' %}"></a>
+						</div>
+						<div class="form_row"><div class="form_label">Pais 		  </div><div class="form_widget">{{ object.ciu_country }}</div></div>
+						<div class="form_row"><div class="form_label">Provincia   </div><div class="form_widget">{{ object.ciu_estados }}</div></div>
+						<div class="form_row"><div class="form_label">Ciudad      </div><div class="form_widget">{{ object.ciu_nombres }}</div></div>
+						<div class="form_row"><div class="form_label">Abreviatura </div><div class="form_widget">{{ object.ciu_abrevia }}</div></div>
+						<br><br>
+						<div ><button class="icon-trash form_submit" type="submit">  Eliminar  </button></div>
+						<br>
+					</div>
+					</form>
+				</div>
+			</div>
+		{% endblock context%}

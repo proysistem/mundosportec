@@ -1,0 +1,35 @@
+{% extends 'base/base_inventarios.html' %}
+
+{% block title %} Elimina Productos {% endblock title %}</title>
+
+			{% block context%}
+			<div class="crea_content">
+				<h3 class="crea_proceso">Inventarios: Productos</h3>
+				<a class="icon-reply crea_boton" href="{% url 'inventarios:prd_panel' %}">Volver</a>
+
+			</div>
+			<div>
+				<form method="POST" enctype="multipart">{% csrf_token %}
+					<div class="form_content">
+						<div class="form_titulo"><h1>Elimina Productos</h1></div>
+						<div class="form_esc">
+							<a class="icon-cancel" href="{% url 'inventarios:prd_panel' %}"></a>
+						</div>
+						{% if forms.error %}
+							<div class="form_errors" role="alert">
+								{{ form.error }}
+							</div>
+						{% endif %}
+						<div class="form_row"><div class="form_label">Código 	    </div><div class="form_widget">{{ object.prd_product }}</div></div>
+						<div class="form_row"><div class="form_label">Detalle       </div><div class="form_widget">{{ object.prd_detalle }}</div></div>
+						<div class="form_row"><div class="form_label">Abreviatura   </div><div class="form_widget">{{ object.prd_abrevia }}</div></div>
+						<div class="form_row"><div class="form_label">Tipo/producto </div><div class="form_widget">{{ object.prd_tpoprod }}</div></div>
+						<div class="form_row"><div class="form_label">Talla         </div><div class="form_widget">{{ object.prd_tabtall }}</div></div>
+						<div class="form_row"><div class="form_label">Status        </div><div class="form_widget">{{ object.prd_statreg }}</div></div>
+						<br><br>
+						<div ><button class="icon-trash form_submit" type="submit">  Eliminar  </button></div>
+						<br>
+					</div>
+				</form>
+			</div>
+		{% endblock context%}

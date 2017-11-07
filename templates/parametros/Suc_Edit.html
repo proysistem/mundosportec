@@ -1,0 +1,37 @@
+{% extends 'base/base_parametros.html' %}
+
+{% block title %} Modifica Sucursal {% endblock title %}</title>
+
+			{% block context%}
+			<div class="crea_content">
+				<h3 class="crea_proceso">Parametros:Sucursal</h3>
+				<a class="icon-reply crea_boton" href="{% url 'parametros:suc_panel' %}">Volver</a>
+
+			</div>
+			<div>
+				<form  id="form_CreaSuc" name="form_CreaSuc" method="POST" enctype="multipart">{% csrf_token %}
+					<div class="form_content">
+						<div class="form_titulo"><h1>Modifica Sucursal</h1></div>
+						<div class="form_esc">
+							<a class="icon-cancel" href="{% url 'parametros:suc_panel' %}"></a>
+						</div>
+						{% if forms.error %}
+							<div class="form_errors" role="alert">
+								{{ form.error }}
+							</div>
+						{% endif %}
+						<div class="form_row"><div class="form_label"><label for="{{form.suc_nombres.name}}">{{form.suc_nombres.label}}</label></div><div class="form_widget">{{form.suc_nombres}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.suc_abrevia.name}}">{{form.suc_abrevia.label}}</label></div><div class="form_widget">{{form.suc_abrevia}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.suc_direcci.name}}">{{form.suc_direcci.label}}</label></div><div class="form_widget">{{form.suc_direcci}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.suc_ciudads.name}}">{{form.suc_ciudads.label}}</label></div><div class="form_widget">{{form.suc_ciudads}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.suc_estados.name}}">{{form.suc_estados.label}}</label></div><div class="form_widget">{{form.suc_estados}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.suc_country.name}}">{{form.suc_country.label}}</label></div><div class="form_widget">{{form.suc_country}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.suc_zipcodg.name}}">{{form.suc_zipcodg.label}}</label></div><div class="form_widget">{{form.suc_zipcodg}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.suc_statreg.name}}">{{form.suc_statreg.label}}</label></div><div class="form_widget">{{form.suc_statreg}}</div></div>
+						<br><br>
+						<div ><button class="icon-database form_submit" type="submit">  Guardar  </button></div>
+						<br>
+					</div>
+				</form>
+			</div>
+		{% endblock context%}

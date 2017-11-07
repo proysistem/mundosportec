@@ -1,0 +1,69 @@
+{% extends 'base/base_inventarios.html' %}
+
+{% block title %} Modifica Tabla de Tallas {% endblock title %}</title>
+
+			{% block context%}
+			<div class="crea_content">
+				<h3 class="crea_proceso">Inventarios:Tabla de Tallas</h3>
+				<a class="icon-reply crea_boton" href="{% url 'inventarios:tll_panel' %}">Volver</a>
+
+			</div>
+			<div>
+				<form method="POST" enctype="multipart">{% csrf_token %}
+					<div class="form_content">
+						<div class="form_titulo"><h1>Modifica Tabla de Tallas</h1></div>
+						<div class="form_esc">
+							<a class="icon-cancel" href="{% url 'inventarios:tll_panel' %}"></a>
+						</div>
+						{% if forms.error %}
+							<div class="form_errors" role="alert">
+								{{ form.error }}
+							</div>
+						{% endif %}
+						<div class="form_row"><div class="form_label"><label for="{{form.jgo_divisio.name}}">{{form.jgo_divisio.label}}</label></div><div>{{form.jgo_divisio}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.jgo_idtalla.name}}">{{form.jgo_idtalla.label}}</label></div><div>{{form.jgo_idtalla}}</div></div>
+						<div>
+							<table border="1" >
+								<thead>
+								 	<tr color="#:000066">
+								 		<th class="head_tab">Tall.01</th>
+								 		<th class="head_tab">Tall.02</th>
+								 		<th class="head_tab">Tall.03</th>
+								 		<th class="head_tab">Tall.04</th>
+								 		<th class="head_tab">Tall.05</th>
+								 		<th class="head_tab">Tall.06</th>
+								 		<th class="head_tab">Tall.07</th>
+								 		<th class="head_tab">Tall.08</th>
+								 		<th class="head_tab">Tall.09</th>
+								 		<th class="head_tab">Tall.10</th>
+								 		<th class="head_tab">Tall.11</th>
+								 		<th class="head_tab">Tall.12</th>
+								 		<th class="head_tab">Tall.13</th>
+								 	</tr>
+								</thead>
+								<tbody border="0">
+								 	<tr>
+										<td class="columns_tab">{{ form.jgo_medid01 }} </td>
+										<td class="columns_tab">{{ form.jgo_medid02 }} </td>
+										<td class="columns_tab">{{ form.jgo_medid03 }} </td>
+										<td class="columns_tab">{{ form.jgo_medid04 }} </td>
+										<td class="columns_tab">{{ form.jgo_medid05 }} </td>
+										<td class="columns_tab">{{ form.jgo_medid06 }} </td>
+										<td class="columns_tab">{{ form.jgo_medid07 }} </td>
+										<td class="columns_tab">{{ form.jgo_medid08 }} </td>
+										<td class="columns_tab">{{ form.jgo_medid09 }} </td>
+										<td class="columns_tab">{{ form.jgo_medid10 }} </td>
+										<td class="columns_tab">{{ form.jgo_medid11 }} </td>
+										<td class="columns_tab">{{ form.jgo_medid12 }} </td>
+										<td class="columns_tab">{{ form.jgo_medid13 }} </td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<br><br>
+						<div ><button class="icon-database form_submit" type="submit">  Guardar  </button></div>
+						<br>
+					</div>
+				</form>
+			</div>
+		{% endblock context%}

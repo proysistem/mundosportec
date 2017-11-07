@@ -1,0 +1,27 @@
+{% extends 'base/base_parametros.html' %}
+
+{% block title %} Consutal País {% endblock title %}</title>
+
+			{% block context%}
+			<div class="crea_content">
+				<h3 class="crea_proceso">Parametros:Paices</h3>
+				<a class="icon-reply crea_boton" href="{% url 'parametros:pai_panel' %}">Volver</a>
+
+			</div>
+			<div>
+				<div>
+					<div class="form_content">
+							
+						<div class="form_titulo"><h1>Visualiza País</h1></div>
+						<div class="form_esc">
+							<a class="icon-cancel" href="{% url 'parametros:pai_panel' %}"></a>
+						</div>
+						<div class="form_row"><div class="form_label">Nombre      </div><div class="form_widget">{{ object.pai_detalle }}</div></div>
+						<div class="form_row"><div class="form_label">Abreviatura </div><div class="form_widget">{{ object.pai_abrevia }}</div></div>
+						<br><br>
+						<div ><a class="icon-reply crea_boton" href="{% url 'parametros:pai_panel' %}">  Ok   </a></div>
+						<br>
+					</div>
+				</div>
+			</div>
+		{% endblock context%}

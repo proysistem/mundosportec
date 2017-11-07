@@ -1,0 +1,366 @@
+
+
+VISTAS  
+
+
+class ZipLista(ListView):
+	"""Listado de Zipcodigo"""
+	model = Zipcodigo
+	template_name = 'parametros/Zip_Panel.html'
+	paginate_by = 8
+
+class CiuLista(ListView):
+	"""Listado de Ciudad"""
+	model = Ciudad
+	template_name = 'parametros/Ciu_Panel.html'
+	paginate_by = 8
+
+class PviLista(ListView):
+	"""Listado de Provincia"""
+	model = Provincia
+	template_name = 'parametros/Pvi_Panel.html'
+	paginate_by = 8
+
+class PaiLista(ListView):
+	"""Listado de Pais"""
+	model = Pais
+	template_name = 'parametros/Pai_Panel.html'
+	paginate_by = 8
+
+class DivLista(ListView):
+	"""Listado de Division"""
+	model = Division
+	template_name = 'parametros/Div_Panel.html'
+	paginate_by = 8
+
+class MrkLista(ListView):
+	"""Listado de Marca"""
+	model = Marca
+	template_name = 'parametros/Mrk_Panel.html'
+	paginate_by = 8
+
+class ModLista(ListView):
+	"""Listado de Modelo"""
+	model = Modelo
+	template_name = 'parametros/Mod_Panel.html'
+	paginate_by = 8
+
+class ColLista(ListView):
+	"""Listado de Color"""
+	model = Color
+	template_name = 'parametros/Col_Panel.html'
+	paginate_by = 8
+
+class TllLista(ListView):
+	"""Listado de Tabtalla"""
+	model = Tabtalla
+	template_name = 'parametros/Tll_Panel.html'
+	paginate_by = 8
+
+class PrdLista(ListView):
+	"""Listado de Producto"""
+	model = Producto
+	template_name = 'parametros/Prd_Panel.html'
+	paginate_by = 8
+
+class PrcLista(ListView):
+	"""Listado de Precio"""
+	model = Precio
+	template_name = 'parametros/Prc_Panel.html'
+	paginate_by = 8
+
+class ExiLista(ListView):
+	"""Listado de Existencia"""
+	model = Existencia
+	template_name = 'parametros/Exi_Panel.html'
+	paginate_by = 8
+
+class SxtLista(ListView):
+	"""Listado de Saldoxtalla"""
+	model = Saldoxtalla
+	template_name = 'parametros/Sxt_Panel.html'
+	paginate_by = 8
+
+class CliLista(ListView):
+	"""Listado de Cliente"""
+	model = Cliente
+	template_name = 'parametros/Cli_Panel.html'
+	paginate_by = 8
+
+class PrvLista(ListView):
+	"""Listado de Proveedor"""
+	model = Proveedor
+	template_name = 'parametros/Prv_Panel.html'
+	paginate_by = 8
+
+class VndLista(ListView):
+	"""Listado de Vendedor"""
+	model = Vendedor
+	template_name = 'parametros/Vnd_Panel.html'
+	paginate_by = 8
+
+class MviLista(ListView):
+	"""Listado de Movinvent"""
+	model = Movinvent
+	template_name = 'parametros/Mvi_Panel.html'
+	paginate_by = 8
+
+class PedLista(ListView):
+	"""Listado de Pedido"""
+	model = Pedido
+	template_name = 'parametros/Ped_Panel.html'
+	paginate_by = 8
+
+class FacLista(ListView):
+	"""Listado de Factura"""
+	model = Factura
+	template_name = 'parametros/Fac_Panel.html'
+	paginate_by = 8
+
+class MdaLista(ListView):
+	"""Listado de Moneda"""
+	model = Moneda
+	template_name = 'parametros/Mda_Panel.html'
+	paginate_by = 8
+
+class CjrLista(ListView):
+	"""Listado de Cajera"""
+	model = Cajera
+	template_name = 'parametros/Cjr_Panel.html'
+	paginate_by = 8
+
+class CjaLista(ListView):
+	"""Listado de Caja"""
+	model = Caja
+	template_name = 'parametros/Cja_Panel.html'
+	paginate_by = 8
+
+class McjLista(ListView):
+	"""Listado de Movicaja"""
+	model = Movicaja
+	template_name = 'parametros/Mcj_Panel.html'
+	paginate_by = 8
+
+#def crear_sucursal(request):
+#	if request.method == 'POST':
+#		modelform = SucursalForm(request.POST, request.FILES)
+#		if modelform.is_valid():
+#			modelform.save()
+#			return redirect(reverse('parametros:suc_panel',))
+#	else:
+#		modelform = SucursalForm()
+#
+#	return render(request, 'parametros/Suc_New.html', { 'form': SucursalForm })
+
+class ZipNuevo(CreateView):
+	"""Crear Zipcodigo"""
+	model = Zipcodigo
+	form_class = ZipcodigoForm
+	template_name = 'parametros/Zip_New.html'
+	success_url = reverse_lazy('parametros:zip_panel')
+
+class PaiNuevo(CreateView):
+	"""Crear Paises"""
+	model = Pais
+	form_class = PaisForm
+	template_name = 'parametros/Pai_New.html'
+	success_url = reverse_lazy('parametros:pai_panel')
+
+class PviNuevo(CreateView):
+	"""Crear Provincias"""
+	model = Provincia
+	form_class = ProvinciaForm
+	template_name = 'parametros/Pvi_New.html'
+	success_url = reverse_lazy('parametros:pvi_panel')
+
+class CiuNuevo(CreateView):
+	"""Crear Ciudades"""
+	model = Ciudad
+	form_class = CiudadForm
+	template_name = 'parametros/Ciu_New.html'
+	success_url = reverse_lazy('parametros:ciu_panel')
+#  /---- Invnentarios ---/
+class DivNuevo(CreateView):
+	"""Crear Divisiones"""
+	model = Division
+	form_class = DivisionForm
+	template_name = 'parametros/Div_New.html'
+	success_url = reverse_lazy('parametros:div_panel')
+
+class MrkNuevo(CreateView):
+	"""Crear Marcas"""
+	model = Marca
+	form_class = MarcaForm
+	template_name = 'parametros/Mrk_New.html'
+	success_url = reverse_lazy('parametros:mrk_panel')
+
+class ModNuevo(CreateView):
+	"""Crear Modelos"""
+	model = Modelo
+	form_class = ModeloForm
+	template_name = 'parametros/Mod_New.html'
+	success_url = reverse_lazy('parametros:mod_panel')
+
+class ColNuevo(CreateView):
+	"""Crear Colores"""
+	model = Color
+	form_class = ColorForm
+	template_name = 'parametros/Col_New.html'
+	success_url = reverse_lazy('parametros:col_panel')
+
+class TllNuevo(CreateView):
+	"""Crear Tabtallas"""
+	model = Tabtalla
+	form_class = TabtallaForm
+	template_name = 'parametros/Tll_New.html'
+	success_url = reverse_lazy('parametros:tll_panel')
+
+class PrdNuevo(CreateView):
+	"""Crear Productos"""
+	model = Producto
+	form_class = ProductoForm
+	template_name = 'parametros/Prd_New.html'
+	success_url = reverse_lazy('parametros:prd_panel')
+
+class ExiNuevo(CreateView):
+	"""Crear Existencias"""
+	model = Existencia
+	form_class = ExistenciaForm
+	template_name = 'parametros/Exi_New.html'
+	success_url = reverse_lazy('parametros:exi_panel')
+
+class PrcNuevo(CreateView):
+	"""Crear Precios"""
+	model = Precio
+	form_class = PrecioForm
+	template_name = 'parametros/Prc_New.html'
+	success_url = reverse_lazy('parametros:prc_panel')
+
+class SxtNuevo(CreateView):
+	"""Crear Saldoxtallas"""
+	model = Saldoxtalla
+	form_class = SaldoxtallaForm
+	template_name = 'parametros/Sxt_New.html'
+	success_url = reverse_lazy('parametros:sxt_panel')
+#   /--- Comercial  --/
+class CliNuevo(CreateView):
+	"""Crear Clientes"""
+	model = Cliente
+	form_class = ClienteForm
+	template_name = 'parametros/Cli_New.html'
+	success_url = reverse_lazy('parametros:cli_panel')
+
+class PrvNuevo(CreateView):
+	"""Crear Proveedores"""
+	model = Proveedor
+	form_class = ProveedorForm
+	template_name = 'parametros/Prv_New.html'
+	success_url = reverse_lazy('parametros:prv_panel')
+
+class VndNuevo(CreateView):
+	"""Crear Vendedores"""
+	model = Vendedor
+	form_class = VendedorForm
+	template_name = 'parametros/Vnd_New.html'
+	success_url = reverse_lazy('parametros:vnd_panel')
+
+class MviNuevo(CreateView):
+	"""Crear Movinvent"""
+	model = Movinvent
+	form_class = MovinventForm
+	template_name = 'parametros/Mvi_New.html'
+	success_url = reverse_lazy('parametros:mvi_panel')
+
+class PedNuevo(CreateView):
+	"""Crear Pedidos"""
+	model = Pedido
+	form_class = PedidoForm
+	template_name = 'parametros/Ped_New.html'
+	success_url = reverse_lazy('parametros:ped_panel')
+
+class FacNuevo(CreateView):
+	"""Crear Facturas"""
+	model = Factura
+	form_class = FacturaForm
+	template_name = 'parametros/Fac_New.html'
+	success_url = reverse_lazy('parametros:fac_panel')
+
+class MdaNuevo(CreateView):
+	"""Crear Monedas"""
+	model = Moneda
+	form_class = MonedaForm
+	template_name = 'parametros/Mda_New.html'
+	success_url = reverse_lazy('parametros:mda_panel')
+
+class CjaNuevo(CreateView):
+	"""Crear Cajas"""
+	model = Caja
+	form_class = CajaForm
+	template_name = 'parametros/Cja_New.html'
+	success_url = reverse_lazy('parametros:cja_panel')
+
+class CjrNuevo(CreateView):
+	"""Crear Cajeras"""
+	model = Cajera
+	form_class = CajeraForm
+	template_name = 'parametros/Cjr_New.html'
+	success_url = reverse_lazy('parametros:cjr_panel')
+
+class McjNuevo(CreateView):
+	"""Crear Movicajaes"""
+	model = Movicaja
+	form_class = MovicajaForm
+	template_name = 'parametros/Mcj_New.html'
+	success_url = reverse_lazy('parametros:mcj_panel')
+
+
+
+
+forms  ================
+
+class ZipcodigoForm(forms.ModelForm):
+	class Meta:
+		model = Zipcodigo
+
+
+class ProvinciaForm(forms.ModelForm):					
+	class Meta:
+		model = Provincia
+		Fields = [
+			'est_country','est_detalle','est_abrevia','est_capital',
+		]			
+					
+		labels = {	
+			'est_country':   'País',
+			'est_detalle':   'Nombre',
+			'est_abrevia':   'Abreviatura',
+			'est_capital':   'Capital',
+		}
+
+		widgets = {	
+			'est_country':  forms.Select(),
+			'est_detalle':  forms.TextInput(),
+			'est_abrevia':  forms.TextInput(),
+			'est_capital':  forms.TextInput(),
+		}
+					
+					
+class PaisForm(forms.ModelForm):
+	class Meta:
+		model = Pais
+		fields = [
+			'pai_detalle',		
+			'pai_abrevia',		
+		]
+
+		labels = {	
+			'pai_detalle':   'Nombre',
+			'pai_abrevia':   'Abreviatura'
+		}
+
+		widgets = {	
+			'pai_detalle':  forms.TextInput(),
+			'pai_abrevia':  forms.TextInput(),
+		}
+
+

@@ -1,0 +1,31 @@
+{% extends 'base/base_inventarios.html' %}
+
+{% block title %} Consutal  Modelos {% endblock title %}</title>
+
+			{% block context%}
+			<div class="crea_content">
+				<h3 class="crea_proceso">inventarios: Modelos</h3>
+				<a class="icon-reply crea_boton" href="{% url 'inventarios:mod_panel' %}">Volver</a>
+
+			</div>
+			<div>
+				<div>
+					<div class="form_content">
+							
+						<div class="form_titulo"><h1>Visualiza  Modelos</h1></div> 
+						<div class="form_esc">
+							<a class="icon-cancel" href="{% url 'inventarios:mod_panel' %}"></a>
+						</div>
+						<div class="form_row"><div class="form_label">Marca  </div><div>{{ object.mod_idmarca }}</div></div>
+						<div class="form_row"><div class="form_label">Código </div><div>{{ object.mod_idmodel }}</div></div>
+						<div class="form_row"><div class="form_label">Detalle</div><div>{{ object.mod_detalle }}</div></div>
+						<div class="form_row"><div class="form_label">Abrevia</div><div>{{ object.mod_abrevia }}</div></div>
+						<div class="form_row"><div class="form_label">Talaa  </div><div>{{ object.mod_tabtall }}</div></div>
+						<div class="form_row"><div class="form_label">Status </div><div>{{ object.mod_statreg }}</div></div>
+						<br><br>
+						<div ><a class="icon-reply crea_boton" href="{% url 'inventarios:mod_panel' %}">  Ok   </a></div>
+						<br>
+					</div>
+				</div>
+			</div>
+		{% endblock context%}

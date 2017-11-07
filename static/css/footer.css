@@ -1,0 +1,76 @@
+#footer_content
+	{
+    background: linear-gradient(90deg, #133F44, #0D545C);
+	justify-content: space-between;
+	border-top: 1px solid #fff;
+	padding: 0 15px 0 15px;
+	width: 100%;
+	color: #fff;
+	text-decoration: none;
+	margin-bottom: 0;
+	}
+.footer_fields{
+    background: linear-gradient(90deg, #133F44, #022327);
+	flex-direction:column;
+	/*background-color: rgba(155,155,155,0.07);  */
+	font-size: 1em;
+	height: auto;
+	overflow: hidden;
+	margin: 20px auto;
+ 	text-align: center; 
+ 	width: 90%;
+	}
+/* - - - - - - - - - derechos  - - - - - - - - - - - - - - - - - - */	
+#footer_rights{
+	display: table;
+	background: rgba(93,95,99,0.4);
+	text-align: center;
+	width: 100%;
+  	text-decoration: inherit;
+	color:#fff;
+	}
+.footer_sociales {
+	display: flex;
+	justify-content: space-between;
+	margin: auto;
+	padding: 1px;
+	width: 98%;
+	color:#fff;
+	}
+.footer_sociales [class^="icon-"]
+	{
+	background: #eee;	
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	line-height: 40px;
+	padding: 5px;
+	vertical-align: center;
+	font-size: 2.6em;
+	text-align: center;	
+	}
+.footer_sociales a{
+	color: #333;
+	float: left;
+	text-decoration: none;
+	margin: 0 0 0 15px;
+}
+.footer_sociales a:hover{	background-color: rgba(255,255,255,0.9); color: rgba(0,0,255,0.7);
+ }
+@media (min-width: 1024px){
+	#fields_content{
+		width: 100%;
+		display: flex;
+		}
+	.footer_fields{
+		background-color: rgba(31,101,12,1);	
+		flex-flow:column;
+		height: 155px;
+		padding: 3px;
+		width: 33%;
+		}
+		#footer_rights{
+		font-size: 1em;
+		}
+	}
+

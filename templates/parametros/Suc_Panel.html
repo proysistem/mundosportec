@@ -1,0 +1,68 @@
+{% extends 'base/base_parametros.html' %}
+
+{% block title %} Template html {% endblock title %}</title>
+
+{% block context %}
+
+			<div class="crea_content">
+				<h3 class="crea_proceso">Parametros:Sucursal</h3>
+				<a class="icon-database crea_boton" href="{% url 'parametros:suc_new' %}">Crear nuevo</a>
+
+			</div>
+			<div>
+				<table border="1" >
+					<thead>
+					 	<tr color="#:000066">
+					 		<th class="head_tab">Cód.</th>
+					 		<th class="head_tab">Nombre</th>
+					 		<th class="head_tab">Abreviat</th>
+					 		<th class="head_tab">Dirección</th>
+					 		<th class="head_tab">Ciudad</th>
+					 		<th class="head_tab">Provincia</th>
+					 		<th class="head_tab">País</th>
+					 		<th class="head_tab">Zip-cod</th>
+					 		<th class="head_tab">Status</th>
+					 		<th class="head_tab" colspan="3">Opción</th>
+					 	</tr>
+					</thead>
+					<tbody border="0">
+					 	{% if object_list %}
+					 	{% for var_sucfield in object_list %}
+					 	<tr>
+							<td class="columns_tab">{{ var_sucfield.id }} </td>
+							<td class="columns_tab">{{ var_sucfield.suc_nombres }} </td>
+							<td class="columns_tab">{{ var_sucfield.suc_abrevia }} </td>
+							<td class="columns_tab">{{ var_sucfield.suc_direcci }} </td>
+							<td class="columns_tab">{{ var_sucfield.suc_ciudads }} </td>
+							<td class="columns_tab">{{ var_sucfield.suc_estados }} </td>
+							<td class="columns_tab">{{ var_sucfield.suc_country }} </td>
+							<td class="columns_tab">{{ var_sucfield.suc_zipcodg }} </td>
+							<td class="columns_tab">{{ var_sucfield.suc_statreg }} </td>
+
+							<td class="columns_tab"><a class="icon-eye   botones" href="{% url 'parametros:suc_view'  var_sucfield.id %}"></a></td>
+							<td class="columns_tab"><a class="icon-edit  botones" href="{% url 'parametros:suc_edit'  var_sucfield.id %}"></a></td>
+							<td class="columns_tab"><a class="icon-trash botones" href="{% url 'parametros:suc_delet' var_sucfield.id %}"></a></td>
+						</tr>
+						{% endfor %}
+						{% else %}
+						<h4> No hay registros en Sucursales </h4>
+						{% endif %}
+						</>
+					</tbody>
+				</table>
+				<div class="page_content">
+					<ul class="pager_botons">
+						<li>
+							{% if page_obj.has_previous %}
+							<a class="icon-left-open pager_prev" href="?page={{page_obj.previous_page_number}}">Previous</a>
+							{% endif %}
+						</li>
+						<li>
+							{% if page_obj.has_next %}
+							<a class="pager_next" href="?page={{page_obj.next_page_number}}">Next <span class="icon-right-open"></span></a>
+							{% endif %}
+						</li>
+					</ul>
+			</div>
+		</div>
+{% endblock context %}

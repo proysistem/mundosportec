@@ -1,0 +1,30 @@
+{% extends 'base/base_inventarios.html' %}
+
+{% block title %} Consutal  Divisiones {% endblock title %}</title>
+
+			{% block context%}
+			<div class="crea_content">
+				<h3 class="crea_proceso">inventarios: Divisiones</h3>
+				<a class="icon-reply crea_boton" href="{% url 'inventarios:div_panel' %}">Volver</a>
+
+			</div>
+			<div>
+				<div>
+					<div class="form_content">
+							
+						<div class="form_titulo"><h1>Visualiza  Divisiones</h1></div>
+						<div class="form_esc">
+							<a class="icon-cancel" href="{% url 'inventarios:div_panel' %}"></a>
+						</div>
+						<div class="form_row"><div class="form_label">Código 	  </div><div class="form_widget">{{ object.div_idlinea }}</div></div>
+						<div class="form_row"><div class="form_label">Detalle     </div><div class="form_widget">{{ object.div_detalle }}</div></div>
+						<div class="form_row"><div class="form_label">Abreviatura </div><div class="form_widget">{{ object.div_abrevia }}</div></div>
+						<div class="form_row"><div class="form_label">Indicador   </div><div class="form_widget">{{ object.div_indicad }}</div></div>
+						<div class="form_row"><div class="form_label">Status      </div><div class="form_widget">{{ object.div_statreg }}</div></div>
+						<br><br>
+						<div ><a class="icon-reply crea_boton" href="{% url 'inventarios:div_panel' %}">  Ok   </a></div>
+						<br>
+					</div>
+				</div>
+			</div>
+		{% endblock context%}
