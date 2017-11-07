@@ -1,5 +1,30 @@
 from django import forms
-from .models import Producto, Existencia, Saldoxtalla, Division, Marca, Modelo, Color, Tabtalla
+from .models import Producto, Existencia, Saldoxtalla, Division, Marca, Modelo, Color, Tabtalla, Productkey
+
+class ProductkeyForm(forms.ModelForm):
+	class Meta:
+		model = Productkey
+#		exclude('prd_imgprod',)
+		fields = [
+				'pky_iddivis',
+				'pky_idmarca',
+				'pky_idmodel',
+				'pky_idcolor',
+		]
+		labels = {
+				'pky_iddivis': 'División',
+				'pky_idmarca': 'Marca',
+				'pky_idmodel': 'Modelo',
+				'pky_idcolor': 'Color',
+		}
+		widgets = {
+				'pky_iddivis': forms.Select(),
+				'pky_idmarca': forms.Select(),
+				'pky_idmodel': forms.Select(),
+				'pky_idcolor': forms.Select(),
+
+		}
+
 
 class ProductoForm(forms.ModelForm):
 	class Meta:
@@ -202,13 +227,16 @@ class TabtallaForm(forms.ModelForm):
 			'jgo_medid13':  forms.TextInput(attrs={"class": "columns_tab_tall"}),
 		}
 
-
 class ExistenciaForm(forms.ModelForm):
 	class Meta:
 		model = Existencia
 		fields = [	
 #			'exs_sucursal',
 			'exs_product',
+			'exs_detalle',
+			'exs_abrevia',
+			'exs_tpoprod',
+			'exs_tabtall',
 			'exs_idunida',
 			'exs_saldinc',
 			'exs_ingreso',
@@ -226,15 +254,21 @@ class ExistenciaForm(forms.ModelForm):
 			'exs_cosprom',
 			'exs_distrib',
 			'exs_mayoris',
-			'exs_detalle',
+			'exs_detalls',
 			'exs_publico',
 			'exs_special',
+			'exs_imgprod',
+			'exs_statreg',
 
 		]
 
 		labels = {	
 #			'exs_sucursal':   'Cód. de sucursal',
 			'exs_product':   'Cód. Producto',
+			'exs_detalle':   'Detalle',
+			'exs_abrevia':	 'Abreviatura',
+			'exs_tpoprod':   'Tipo de producto',
+			'exs_tabtall':   'Tabla de tallas',
 			'exs_idunida':   'Unid. De medida',
 			'exs_saldinc':   'Saldo inicial',
 			'exs_ingreso':   'Ingresos',
@@ -252,14 +286,20 @@ class ExistenciaForm(forms.ModelForm):
 			'exs_cosprom':   'Costo promedio Actual',
 			'exs_distrib':	 'Precio:Distribuidos',
 			'exs_mayoris':	 'Precio:Mayorista',
-			'exs_detalle':	 'Precio:Detallista',
+			'exs_detalls':	 'Precio:Detallista',
 			'exs_publico':   'Precio:Publico',
 			'exs_special':   'Precio:Especial',
+			'exs_imgprod':	 'Imagen del producto',
+			'exs_statreg':	 'Status del reg.',
 		}
 
 		widgets = {	
 #			'exs_sucursal':  forms.TextInput(),
 			'exs_product':  forms.TextInput(),
+			'exs_detalle':  forms.TextInput(),
+			'exs_abrevia':  forms.TextInput(),
+			'exs_tpoprod':  forms.Select(),
+			'exs_tabtall':  forms.Select(),
 			'exs_idunida':  forms.TextInput(),
 			'exs_saldinc':  forms.NumberInput(),
 			'exs_ingreso':  forms.NumberInput(),
@@ -277,9 +317,11 @@ class ExistenciaForm(forms.ModelForm):
 			'exs_cosprom':  forms.NumberInput(),
 			'exs_distrib':  forms.NumberInput(),
 			'exs_mayoris':	forms.NumberInput(),
-			'exs_detalle':	forms.NumberInput(),
+			'exs_detalls':	forms.NumberInput(),
 			'exs_publico':	forms.NumberInput(),
 			'exs_special':	forms.NumberInput(),
+#			'exs_imgprod':  forms.ImageInput(),
+#			'exs_statreg':  forms.BoleanInput(),
 		}
 
 class SaldoxtallaForm(forms.ModelForm):

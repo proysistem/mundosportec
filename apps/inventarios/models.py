@@ -84,6 +84,17 @@ class Color(models.Model):
  	def __str__(self):
  		return (self.col_detalle)
 
+class Productkey(models.Model):	
+ 	
+ 	pky_idsucur = models.ForeignKey(Sucursal)
+ 	pky_iddivis = models.ForeignKey(Division)
+ 	pky_idmarca = models.ForeignKey(Marca)
+ 	pky_idmodel = models.ForeignKey(Modelo)
+ 	pky_idcolor = models.ForeignKey(Color)
+
+ 	def __str__(self):
+ 		return "%s %s %s %s" % (self.pky_iddivis, self.pky_idmarca, self.pky_idmodel, self.pky_idcolor)
+
 
 #  O J O  en cap.9 curso DevCode, trato de imagenes
 class Producto(models.Model):	
@@ -106,8 +117,16 @@ class Producto(models.Model):
 class Existencia(models.Model):	
  	
 # 	exs_sucursa = models.ForeignKey(Sucursal, primary_key=True)
-# 	exs_product = models.ForeignKey(Producto, primary_key=True)
+# 	pky_iddivis = models.ForeignKey(Division)
+# 	pky_idmarca = models.ForeignKey(Marca)
+# 	pky_idmodel = models.ForeignKey(Modelo)
+# 	pky_idcolor = models.ForeignKey(Color)
+
  	exs_product = models.ForeignKey(Producto, primary_key=True) # 'Sucursal + Código del producto'
+ 	exs_detalle = models.CharField('Detalle  del Producto', max_length=45)
+ 	exs_abrevia = models.CharField('Abreviatura  del Producto', max_length=25)
+ 	exs_tpoprod = models.ForeignKey(Tipoproducto)
+ 	exs_tabtall = models.ForeignKey(Tabtalla, null=True, blank=True)
  	exs_idunida = models.ForeignKey(Unidad)
  	exs_saldinc = models.DecimalField('Saldo inicial', max_digits = 11, decimal_places = 4)
  	exs_ingreso = models.DecimalField('Ingresos', max_digits = 11, decimal_places = 4)
@@ -125,9 +144,11 @@ class Existencia(models.Model):
  	exs_cosprom = models.DecimalField('Costo promedio Actual', max_digits = 15, decimal_places = 4)
  	exs_distrib = models.DecimalField('Distribuidor', max_digits = 15, decimal_places = 4)
  	exs_mayoris = models.DecimalField('Mayorista', max_digits = 15, decimal_places = 4)
- 	exs_detalle = models.DecimalField('Detallista', max_digits = 15, decimal_places = 4)
+ 	exs_detalls = models.DecimalField('Detallista', max_digits = 15, decimal_places = 4)
  	exs_publico = models.DecimalField('Publico', max_digits = 15, decimal_places = 4)
  	exs_special = models.DecimalField('Especial', max_digits = 15, decimal_places = 4)
+ 	exs_imgprod = models.ImageField(upload_to = "productos")
+ 	exs_statreg = models.BooleanField('Status del Registro', default=True)
 
  	def __str__(self):
  		return (self.ext_dsponib)
@@ -137,7 +158,7 @@ class Saldoxtalla(models.Model):
 	
 # 	tex_sucursa = models.ForeignKey(Sucursal, primary_key=True)
 # 	tex_product = models.ForeignKey(Producto, primary_key=True)
- 	tex_product = models.OneToOneField(Existencia, verbose_name='Producto', primary_key=True)  #, 'Sucursal + Código del producto'
+ 	tex_product = models.OneToOneField(Existencia, verbose_name='Saldo x talla', primary_key=True)  #, 'Sucursal + Código del producto'
  	tex_inici01 = models.DecimalField('Cant. inici-01', max_digits = 11, decimal_places = 4)
  	tex_inici02 = models.DecimalField('Cant. inici-02', max_digits = 11, decimal_places = 4)
  	tex_inici03 = models.DecimalField('Cant. inici-03', max_digits = 11, decimal_places = 4)

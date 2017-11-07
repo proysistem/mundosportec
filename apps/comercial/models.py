@@ -37,7 +37,7 @@ class Proveedor(models.Model):
  	prv_telefon = models.CharField('Telefono', max_length=15)
  	prv_celular = models.CharField('Celular', max_length=15)
  	prv_correoe = models.EmailField('e-mail')
- 	prv_imgclte = models.ImageField(upload_to = "proveedores")
+ 	prv_imgprov = models.ImageField(upload_to = "proveedores")
  	prv_rgunico = models.IntegerField('Registro Unico')
  	prv_categor = models.ForeignKey(Categoria, null=True, blank=True)
 	
@@ -63,12 +63,12 @@ class Vendedor(models.Model):
 class Movinvent(models.Model):	
  	
  	mvi_fechmov = models.DateField('Fecha')
- 	mvi_tipomov = models.ForeignKey(Tipomovim)
  	mvi_motivos = models.ForeignKey(Motivo)
+ 	mvi_pedidos = models.IntegerField('Núm. de pedido', null=True, blank=True)
+ 	mvi_factura = models.IntegerField('Núm. de factrura', null=True, blank=True)
+ 	mvi_tipomov = models.ForeignKey(Tipomovim)
  	mvi_vendedo = models.ForeignKey(Vendedor)
  	mvi_cliente = models.ForeignKey(Cliente)
-# 	mvi_pedidos = models.ForeignKey(Pedido, null=True, blank=True)
-# 	mvi_factura = models.ForeignKey(Factura, null=True, blank=True)
  	mvi_sucursa = models.ForeignKey(Sucursal)
  	mvi_product = models.ForeignKey(Existencia)
  	mvi_unidade = models.ForeignKey(Unidad)
@@ -85,8 +85,6 @@ class Movinvent(models.Model):
  	mvi_talla11 = models.DecimalField('Talla 11', max_digits = 11, decimal_places = 2, null=True, blank=True)
  	mvi_talla12 = models.DecimalField('Talla 12', max_digits = 11, decimal_places = 2, null=True, blank=True)
  	mvi_talla13 = models.DecimalField('Talla 13', max_digits = 11, decimal_places = 2, null=True, blank=True)
- 	mvi_talla14 = models.DecimalField('Talla 14', max_digits = 11, decimal_places = 2, null=True, blank=True)
- 	mvi_talla15 = models.DecimalField('Talla 15', max_digits = 11, decimal_places = 2, null=True, blank=True)
  	mvi_kntidad = models.DecimalField('Cantidad Total', max_digits = 11, decimal_places = 4, null=True, blank=True)
  	mvi_precios = models.DecimalField('Precio', max_digits = 13, decimal_places = 4, null=True, blank=True)
  	mvi_desctos = models.DecimalField('Descuentos', max_digits = 11, decimal_places = 4, null=True, blank=True)

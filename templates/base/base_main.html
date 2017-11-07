@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+
+{% load staticfiles %}
+
+{% block css %}
+
+ 	<link rel="stylesheet" href="{% static 'css/superslides.css' %}">
+ 	<link rel="stylesheet" href="{% static 'css/style_main.css' %}">
+ 	<link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
+ 	<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+ 	<link rel="stylesheet" href="{% static 'css/header.css' %}">
+ 	<link rel="stylesheet" href="{% static 'css/fontello.css' %}">
+{% endblock css %}
+
+{% block content %}
+	<div class="container">
+		<div class="content">	
+			{% include 'header/menu_nav.html' %}
+			{% block context %}
+
+			
+			
+			{% endblock context %}	
+		</div>
+	</div> 
+{% endblock content %}
+
+{% block footer %} 
+		{% include 'footer/footer.html' %}
+{% endblock footer %}
+
+
+
+
+
+{% block js %}
+	<script src="js/menu.js"></script>
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.superslides.js"></script>
+{% endblock js %}

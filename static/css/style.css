@@ -73,6 +73,27 @@
 	{
 	left: 20px;
 	}
+.width_005 {width: 005%; background-color: red;}
+.width_010 {width: 010%; background-color: red;}
+.width_015 {width: 015%; background-color: red;}
+.width_020 {width: 020%; background-color: red;}
+.width_025 {width: 025%; background-color: red;}
+.width_030 {width: 030%; background-color: red;}
+.width_035 {width: 035%; background-color: red;}
+.width_040 {width: 040%; background-color: red;}
+.width_045 {width: 045%; background-color: green;}
+.width_050 {width: 050%; background-color: red;}
+.width_090 {width: 090%; background-color: red;}
+.width_095 {width: 095%; background-color: red;}
+.width_100 {width: 100%; background-color: red;}
+
+.align_tex_right {text-align: right;}
+.align_tex_letf {text-align: left;}
+.align_tex_center {text-align: center;}
+
+.align_itm_right {justify-content: flex-end;}
+.align_itm_letf {align-items: flex_start;}
+.align_itm_center {align-items: flex_center;}
 /*- - - - -  -  Contenedor de menu vertical - - -  - - - -*/
 
 aside
@@ -122,27 +143,26 @@ aside
 .menu
 	{
 	display: flex;
-	padding: 0;
 	list-style: none;
 	margin: 3px;
 	}
 .menus-link
 	{
-	background-color: #295641;
+	background-color: #737629;
 	border-radius: 0% 35% 0% 0%;
+ 	box-shadow:  	-0.1px -0.1px 0.2px rgba(255,255,255,0.7);
+ 	box-shadow:  	0.5px  0.5px 0.6px rgba(255,255,255,0.9);
 	display: block;
 	font-size: 1.2em;
 	justify-content: space-between;
-	padding: 5px;
- 	box-shadow:  	-0.1px -0.1px 0.2px rgba(255,255,255,0.7);
- 	box-shadow:  	0.5px  0.5px 0.6px rgba(255,255,255,0.9);
-  	padding: 10px 5% 0 5%; 
+  	padding: 4px;
+  	text-align: center; 
+  	width: 8%;
 	}
 .menus-link a
 	{
 	color: #fff;
 	text-align: center;
-
   	text-decoration: none;
 
 	}
@@ -194,6 +214,12 @@ aside
 	position: relative;
 	width: 90%;
 	}
+fieldset
+	{
+	display: flex;
+	width: 98%;
+	margin: auto;
+	}
 .form_titulo
 	{
 	margin: auto;
@@ -221,23 +247,35 @@ aside
 .form_row
 	{
 	display: flex;
+	width: 99%;
+	margin: auto;
+	}
+.form_row_all
+	{
+	display: flex;
+	justify-content: space-between;
+	width: 99%;
+	margin: auto;
 	}
 .form_label
 	{
-	display: block;
+/*	display: block;*/
 	width: 16%;
-	padding: 0 1% 0 3%;
+	padding: 0 2% 0 2%;
+	margin: 0 2px;
 	height: 1.5em;
 	box-decoration-break: clone;
 	}
 .form_widget
 	{
-	width: auto;
+	width: auto; 
 	font-size: 1em;
 	height: 1.2em;
 	border-radius: 2% 2% 2% 2%;
  	box-shadow:  	0.5px  0.5px 0.6px rgba(255,255,255,1);
  	box-shadow:  	-0.1px -0.1px 0.2px rgba(255,255,255,0.7);
+ 	margin: 0 3px;
+ 	padding: 2px 15px;
 	}
 .form_submit
 	{

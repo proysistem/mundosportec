@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
-from .models import Division, Marca, Modelo, Color, Tabtalla, Producto, Existencia, Saldoxtalla
-from .forms import DivisionForm, MarcaForm, ModeloForm, ColorForm, TabtallaForm, ProductoForm, ExistenciaForm,SaldoxtallaForm
+from .models import Division, Marca, Modelo, Color, Tabtalla, Producto, Existencia, Saldoxtalla, Productkey
+from .forms import DivisionForm, MarcaForm, ModeloForm, ColorForm, TabtallaForm, ProductoForm, ExistenciaForm, SaldoxtallaForm, ProductkeyForm
 #from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura
 #from apps.finanzas.models import Caja, Cajera, Movicaja, Moneda
 # {% extends 'base/base.html' %}
@@ -42,13 +42,26 @@ class DivDelet(DeleteView):
 	template_name = 'inventarios/Div_Delet.html'
 	success_url = reverse_lazy('inventarios:div_panel')
 
-# ========M A R C A S=========== #
 
 #class MrkSelect(ListView):
 #	"""Listado de Marca"""
 #	model = Marca
 #	template_name = 'inventarios/Prd_New.html'
 #	context_object_name = 'slc_marcas'   ****--->> falta terminar para select-list dinamicas
+
+class ProdkyLista(CreateView):
+	model = Productkey
+	form_class = ProductkeyForm
+	template_name = 'inventarios/Prd_Keys.html'
+	success_url = reverse_lazy('inventarios:prd_Keys')
+
+class Mrkkyselect(ListView):
+	model = Marca
+	template_name = 'inventarios/Prd_Select.html'
+	context_object_name = 'all_marcas'
+#	paginate_by = 10
+
+# ========M A R C A S=========== #
 
 class MrkLista(ListView):
 	"""Listado de Marca"""

@@ -1,0 +1,112 @@
+.banner_usaa
+	{
+	background: red;
+	position: relative;
+	width: 100%;
+	}
+.image_us{
+left:50%;
+min-height: 100vh;
+min-width: 100%;
+position: fixed;
+top:50%;
+transform: translateX(-50%)translateY(-50%);
+z-index: -1000;
+}
+.image_warr
+	{
+	display: block;
+	float: left;
+	size: 50%;
+	
+	}
+#video_content{
+
+}
+video{
+/*-webkit-filter:grayscale(100%);	
+filter:grayscale(100%);	*/
+left:50%;
+min-height: 100vh;
+min-width: 100%;
+position: fixed;
+top:50%;
+transform: translateX(-50%)translateY(-50%);
+z-index: -1000;
+}
+.banner_us .content_us
+	{
+	color: #fff;
+	left: 50%;
+	position: absolute;
+	top: 32%;
+	transform: translateX(-50%) translatey(-68%);
+	width: 100%;
+	}
+/*------------------------ Estilos responsive About ----------------------- */
+.main
+	{
+	margin: auto;
+	margin-top: 290px;
+	padding: 15px;
+	width: 98%;
+	}
+.info_columna_us
+	{
+	background-color: rgba(31,101,12,0.7);
+	color: #fff;
+	display: block;
+	height: 100%;
+	margin: 15px auto;
+	/*margin-top: 35px;*/	
+	padding: 15px;
+	width: 99%;
+    margin-bottom: 140px;
+	}
+.info_text_us
+	{
+	text-align: justify;
+	}
+@media(min-width: 480px){
+	.main_info_us
+	{
+	margin-top: 160px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	}
+	.info_columna_us
+	{
+	width: 49%;
+	}	
+	.banner_titulo_us
+	{	
+	font-size: 2.5em;
+	}
+}
+/*@media(min-width: 768px){
+	.info_columna_us
+	{
+	width: 32%;
+	}	
+	.banner_titulo_us
+	{	
+	font-size: 2.5em;
+	}
+}*/
+@media(min-width: 1024px){
+	.info_columna_us
+	{
+	width: 32%;
+	padding: 40px;
+	}
+	.info_titulo_us
+	{
+	font-size: 2.2em;
+	margin-bottom: 30px; 
+	}
+	.main_info_us
+	{
+	margin-top: 125px;
+	}
+}

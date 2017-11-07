@@ -1,0 +1,133 @@
+.content_contact
+	{ 
+	display: flex;
+	flex-wrap: wrap;
+	/*justify-content: space-between;*/
+	position: relative;
+ 	padding: 20px;
+ 	margin-top: 220px;
+	}
+.form_content
+	{
+	display: block;
+ 	width: 100%;
+	}
+.info_content
+	{
+ 	margin-top: 300px;
+	display: block;
+ 	width: 100%;
+	}
+.formulario, .contact_fields
+	{
+	background: rgba(251,251,158,0.5);
+	width: 500px;
+	max-width: 100%;
+	margin:  auto;
+	margin-bottom: 20px;
+	padding: 20px;
+	box-shadow: 0 0 20px 1px rgba(0,0,0,0.5);
+	}
+.contact_fields
+	{
+	min-width: 90%;
+	max-width: 100%;
+	margin: 1px  auto;
+	}
+.form_titulo
+	{
+	text-align: center;
+	margin-top: 0;
+	}	
+.form_input, .form_label, .form_submit, .form_textarea, .form_labelt, .contact_text
+	{
+	display: block;	
+	width: 100%;
+	font-size: 1.3em;
+	font-weight: bold;
+	}
+.form_input, .form_textarea, .contact_text
+	{
+	background: rgba(10,128,153,0.2);
+	/*border: 1px solid rgba(0,0,0,0.5);*/
+	padding: 07px 20px;
+	margin-bottom: 35px;
+	}
+.contact_text
+	{
+	margin-bottom: 5px;
+	}
+
+.form_input:focus
+	{
+	outline: none;
+	/*outline: 1px solid rgba(0,0,0,0.7); */
+	}
+.form_input:focus + .form_label{
+ 	margin-top: -105px;
+ 	color: #fff;
+	font-weight: bold;
+	}
+.form_textarea:focus + .form_labelt{
+ 	margin-top: -195px;
+ 	color: #fff;
+	font-weight: bold;
+	}	
+.form_label, .form_labelt
+	{
+	padding-left: 15px;
+	position: absolute;
+	margin-top: -65px;
+	z-index: -1;
+	transition: all 0.2s;
+	}
+.form_labelt
+	{
+	margin-top: -160px;
+	}
+.form_submit
+	{
+	background: rgba(83,153,171,0.6);
+	color:#fff;
+	padding: 10px 20px;
+	border: none;	
+	cursor: pointer;
+	}
+
+.footer_sociales [class^="icon-"]
+	{
+/*	display: flex;
+	justify-content: space-between;*/
+	background: #eee;	
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	line-height: 40px;
+	padding: 5px;
+	vertical-align: center;
+	font-size: 2.6em;
+	text-align: center;	
+	}
+/*--------------------- Campos definidos por JS----------------------*/	
+.fijar
+	{
+	background: rgba(10,128,153,0.5);
+	color: #fff;
+	padding: 0 20px;
+	width: auto;
+ 	margin-top: -105px;
+	}
+.fijart
+	{
+	background: rgba(10,128,153,0.5);
+	color: #fff;
+	padding: 0 20px;
+	width: auto;
+ 	margin-top: -195px;
+	}
+@media(min-width: 1024px){
+	.form_content, .info_content
+	{
+	width: 48%;
+	}
+}	

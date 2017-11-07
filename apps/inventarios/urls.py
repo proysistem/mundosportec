@@ -1,6 +1,6 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 #from django.conf.urls import url
-from .views import  PrdLista, PrdNuevo, PrdView, PrdEdita, PrdDelet, ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista, DivLista, DivNuevo, DivView, DivEdita, DivDelet, MrkLista, MrkNuevo, MrkView, MrkEdita, MrkDelet, ModLista, ModNuevo, ModView, ModEdita, ModDelet, ColLista, ColNuevo, ColView, ColEdita, ColDelet, TllLista, TllNuevo, TllView, TllEdita, TllDelet
+from .views import  PrdLista, PrdNuevo, PrdView, PrdEdita, PrdDelet, ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista, DivLista, DivNuevo, DivView, DivEdita, DivDelet, MrkLista, MrkNuevo, MrkView, MrkEdita, MrkDelet, ModLista, ModNuevo, ModView, ModEdita, ModDelet, ColLista, ColNuevo, ColView, ColEdita, ColDelet, TllLista, TllNuevo, TllView, TllEdita, TllDelet, Mrkkyselect, ProdkyLista
 #from django.conf import settings
 
 #from apps.parametros.views import  CliLista, PrvLista, VndLista, MviLista, PedLista, FacLista
@@ -45,13 +45,15 @@ urlpatterns = [
     url(r'^TllElimina/(?P<pk>\d+)/$',  TllDelet.as_view(), name='tll_delet'),
 
     url(r'^PrdPanel',                  PrdLista.as_view(), name='prd_panel'),
+    url(r'^PrdSelect/$',               Mrkkyselect.as_view(), name='prd_select'),
+    url(r'^PrdKeys/$',                 ProdkyLista.as_view(), name='prd_keys'),
     url(r'^PrdNuevo/$',                PrdNuevo.as_view(), name='prd_new'),
     url(r'^PrdConsulta/(?P<pk>\d+)/$', PrdView.as_view(),  name='prd_view'),
     url(r'^PrdEdita/(?P<pk>\d+)/$',    PrdEdita.as_view(), name='prd_edit'),
     url(r'^PrdElimina/(?P<pk>\d+)/$',  PrdDelet.as_view(), name='prd_delet'),
 
-#    url(r'^ExiPanel',                  ExiLista.as_view(), name='exi_panel'),
-#    url(r'^ExiNuevo/$',                ExiNuevo.as_view(), name='exi_new'),
+     url(r'^ExiPanel',                  ExiLista.as_view(), name='exi_panel'),
+     url(r'^ExiNuevo/$',                ExiNuevo.as_view(), name='exi_new'),
 #    url(r'^ExiConsulta/(?P<pk>\d+)/$', ExiView.as_view(),  name='exi_view'),
 #    url(r'^ExiEdita/(?P<pk>\d+)/$',    ExiEdita.as_view(), name='exi_edit'),
 #    url(r'^ExiElimina/(?P<pk>\d+)/$',  ExiDelet.as_view(), name='exi_delet'),

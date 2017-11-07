@@ -1,0 +1,23 @@
+		<header class="header">
+			<div class="content">
+				<img class="logo" src="static/images/logo01.png">
+				<span class="icon-menu" id="btn-menu"></span>
+				<nav class="nav" id="nav">
+					<ul id="menu">
+						<li><a href="index.php">Inicio</a></li>
+						<li><a href="aboutus.php">Nosotros</a></li>
+						<li><a href="services.php">Productos</a></li>
+						<li><a href="#">Show room</a>
+							<ul>
+								<li><a href="gallery.php">Galeria</a></li>
+								<li><a href="media.php">Videos</a></li>
+							</ul>
+						</li>
+						<li><a href="contact.php">Contacto</a></li>	
+					</ul><br><br><br>
+					<ul>
+						<li class="login-content"><a href="{% url 'inventarios:div_panel' %}"><span class="logear icon-user">  Login   </span></a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
