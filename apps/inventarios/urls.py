@@ -50,9 +50,9 @@ urlpatterns = [
     url(r'^TllEdita/(?P<pk>\d+)/$',    TllEdita.as_view(), name='tll_edit'),
     url(r'^TllElimina/(?P<pk>\d+)/$',  TllDelet.as_view(), name='tll_delet'),
 
-     url(r'^ExiPanel',                  ExiLista.as_view(), name='exi_panel'),
-#     url(r'^ExiNuevo/$',                ExiNuevo.as_view(), name='exi_new'),
-     url(r'^ExiNuevo/$',                ProdkyLista.as_view(), name='exi_new'),
+    url(r'^ExiPanel',                  ExiLista.as_view(), name='exi_panel'),
+    url(r'^ExiNuevo/$',                ExiNuevo.as_view(), name='exi_new'),
+     # url(r'^ExiNuevo/$',                ProdkyLista.as_view(), name='exi_new'),
 #    url(r'^ExiConsulta/(?P<pk>\d+)/$', ExiView.as_view(),  name='exi_view'),
 #    url(r'^ExiEdita/(?P<pk>\d+)/$',    ExiEdita.as_view(), name='exi_edit'),
 #    url(r'^ExiElimina/(?P<pk>\d+)/$',  ExiDelet.as_view(), name='exi_delet'),

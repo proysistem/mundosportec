@@ -9,5 +9,10 @@ admin.site.register(Division)
 admin.site.register(Marca)
 admin.site.register(Modelo)
 admin.site.register(Color)
-admin.site.register(Existencia)
+
+
+class ExistenciaAdmin(admin.ModelAdmin):
+    readonly_fields = ('exs_product', 'exs_detalle',)
+
+admin.site.register(Existencia, ExistenciaAdmin)
 admin.site.register(Saldoxtalla)

@@ -127,9 +127,9 @@ class Existencia(models.Model):
     pky_idmodel = models.ForeignKey(Modelo)
     pky_idcolor = models.ForeignKey(Color)
 
-    cod_product = models.CharField('Cód. Producto', max_length=13, editable=False, unique=True, db_index=True)
+    exs_product = models.CharField('Cód. Producto', max_length=13, editable=False, unique=True, db_index=True)
     # 'Sucursal + Código del producto'
-    exs_detalle = models.CharField('Detalle  del Producto', max_length=45)
+    exs_detalle = models.CharField('Detalle  del Producto', editable=False, max_length=45)
     exs_abrevia = models.CharField('Abreviatura  del Producto', max_length=25)
     exs_tpoprod = models.ForeignKey(Tipoproducto)
     exs_tabtall = models.ForeignKey(Tabtalla, null=True, blank=True)
@@ -153,20 +153,27 @@ class Existencia(models.Model):
     exs_detalls = models.DecimalField('Detallista', max_digits=15, decimal_places=4)
     exs_publico = models.DecimalField('Publico', max_digits=15, decimal_places=4)
     exs_special = models.DecimalField('Especial', max_digits=15, decimal_places=4)
-    exs_imgprod = models.ImageField(upload_to="productos")
+    exs_imgprod = models.ImageField(upload_to="productos", blank=True)
     exs_statreg = models.BooleanField('Status del Registro', default=True)
 
     def __str__(self):
-        return (self.ext_dsponib)
+        return (self.exs_product)
 
     def save(self, *args, **kwargs):
         if self.pky_sucursa and self.pky_iddivis and self.pky_idmarca and self.pky_idmodel and self.pky_idcolor:
-            self.exs_product = "{}{}{}{}{}".format(
-                self.pky_sucursa,  # 2
-                self.pky_iddivis,  # 2
-                self.pky_idmarca,  # 3
-                self.pky_idmodel,  # 3
-                self.pky_idcolor)  # 3
+            self.exs_product = "{0:02d}{1:02d}{2}{3}{4}".format(
+                self.pky_sucursa.pk,  # 2
+                self.pky_iddivis.pk,  # 2
+                self.pky_idmarca.pk,  # 3
+                self.pky_idmodel.pk,  # 3
+                self.pky_idcolor.pk   # 3
+            )
+            self.exs_detalle = "{} {} {} {}".format(
+                str(self.pky_iddivis.div_abrevia),  # 2
+                str(self.pky_idmarca.mrk_abrevia),  # 3
+                str(self.pky_idmodel.mod_abrevia),  # 3
+                str(self.pky_idcolor.col_abrevia)  # 3
+            )
         # TODO: Definir si amerita modificar los parámetros
         # TODO: Definir el max_length de CharField o poner TextField
         super(Existencia, self).save()

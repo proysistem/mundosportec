@@ -12,6 +12,7 @@ from .base import *
 #         'PORT': '5432',
 #     }
 # }
+INSTALLED_APPS += ('django_extensions',)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

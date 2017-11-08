@@ -1,35 +1,6 @@
 from django import forms
 from .models import Existencia, Saldoxtalla, Division, Marca, Modelo, Color, Tabtalla
 
-<<<<<<< HEAD
-class ProductkeyForm(forms.ModelForm):
-	class Meta:
-		model = Productkey
-#		exclude('prd_imgprod',)
-		fields = [
-				'pky_idsucur',
-				'pky_iddivis',
-				'pky_idmarca',
-				'pky_idmodel',
-				'pky_idcolor',
-		]
-		labels = {
-				'pky_idsucur': 'Sucursal',
-				'pky_iddivis': 'División',
-				'pky_idmarca': 'Marca',
-				'pky_idmodel': 'Modelo',
-				'pky_idcolor': 'Color',
-		}
-		widgets = {
-				'pky_idsucur': forms.Select(),
-				'pky_iddivis': forms.Select(),
-				'pky_idmarca': forms.Select(),
-				'pky_idmodel': forms.Select(),
-				'pky_idcolor': forms.Select(),
-
-		}
-=======
->>>>>>> 267096c5fefdd0568e7942242f8ccf49e055f6a7
 
 class DivisionForm(forms.ModelForm):
     class Meta:
@@ -209,7 +180,12 @@ class ExistenciaForm(forms.ModelForm):
         model = Existencia
         fields = [
 #           'exs_sucursal',
-            'exs_detalle',
+            "pky_sucursa",
+            "pky_iddivis",
+            "pky_idmarca",
+            "pky_idmodel",
+            "pky_idcolor",
+            # 'exs_detalle',
             'exs_abrevia',
             'exs_tpoprod',
             'exs_tabtall',
@@ -241,7 +217,7 @@ class ExistenciaForm(forms.ModelForm):
         labels = {
 #           'exs_sucursal':   'Cód. de sucursal',
             'exs_product':   'Cód. Producto',
-            'exs_detalle':   'Detalle',
+            # 'exs_detalle':   'Detalle',
             'exs_abrevia':   'Abreviatura',
             'exs_tpoprod':   'Tipo de producto',
             'exs_tabtall':   'Tabla de tallas',
@@ -272,11 +248,11 @@ class ExistenciaForm(forms.ModelForm):
         widgets = {
 #           'exs_sucursal':  forms.TextInput(),
             'exs_product':  forms.TextInput(),
-            'exs_detalle':  forms.TextInput(),
+            # 'exs_detalle':  forms.TextInput(),
             'exs_abrevia':  forms.TextInput(),
             'exs_tpoprod':  forms.Select(),
             'exs_tabtall':  forms.Select(),
-            'exs_idunida':  forms.TextInput(),
+            'exs_idunida':  forms.Select(),
             'exs_saldinc':  forms.NumberInput(),
             'exs_ingreso':  forms.NumberInput(),
             'exs_egresos':  forms.NumberInput(),
@@ -284,9 +260,9 @@ class ExistenciaForm(forms.ModelForm):
             'exs_comprom':  forms.NumberInput(),
             'exs_xconfir':  forms.NumberInput(),
             'exs_dsponib':  forms.NumberInput(),
-            'exs_feching':  forms.DateInput(),
-            'exs_fechegr':  forms.DateInput(),
-            'exs_fechinv':  forms.DateInput(),
+            'exs_feching':  forms.DateInput(attrs={"type": "date"}),
+            'exs_fechegr':  forms.DateInput(attrs={"type": "date"}),
+            'exs_fechinv':  forms.DateInput(attrs={"type": "date"}),
             'exs_costant':  forms.NumberInput(),
             'exs_dispant':  forms.NumberInput(),
             'exs_costact':  forms.NumberInput(),
@@ -296,7 +272,7 @@ class ExistenciaForm(forms.ModelForm):
             'exs_detalls':  forms.NumberInput(),
             'exs_publico':  forms.NumberInput(),
             'exs_special':  forms.NumberInput(),
-#           'exs_imgprod':  forms.ImageInput(),
+            'exs_imgprod':  forms.FileInput(),
 #           'exs_statreg':  forms.BoleanInput(),
         }
 

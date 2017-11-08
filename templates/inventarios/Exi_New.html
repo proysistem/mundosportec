@@ -5,7 +5,7 @@
 			{% block context%}
 			<div class="crea_content">
 				<h3 class="crea_proceso">Inventarios: Productos</h3>
-				<a class="icon-reply crea_boton" href="{% url 'inventarios:prd_panel' %}">Volver</a>
+				<a class="icon-reply crea_boton" href="{% url 'inventarios:exi_panel' %}">Volver</a>
 
 			</div>
 			<div>
@@ -13,28 +13,46 @@
 					<div class="form_content">
 						<div class="form_titulo"><h1>Visualiza Productos</h1></div>
 						<div class="form_esc">
-							<a class="icon-cancel" href="{% url 'inventarios:prd_panel' %}"></a>
+							<a class="icon-cancel" href="{% url 'inventarios:exi_panel' %}"></a>
 						</div>
 						{% if forms.error %}
 							<div class="form_errors" role="alert">
 								{{ form.error }}
 							</div>
 						{% endif %}
-						<div class="form_row"><div class="form_label"><label>Sucursal</label></div><div>{{form.pky_idsucur}}</div></div>
-						<div class="form_row"><div class="form_label"><label>Division</label></div><div>{{form.pky_iddivis}}</div></div>
-						<div class="form_row"><div class="form_label"><label>Marca   </label></div><div>{{form.pky_idmarca}}</div></div>
-						<div class="form_row"><div class="form_label"><label>Modelo  </label></div><div>{{form.pky_idmodel}}</div></div>
-						<div class="form_row"><div class="form_label"><label>Color   </label></div><div>{{form.pky_idcolor}}</div></div>
-						<hr><br>
-						{% if pky_idcolor %} {{	llave = pky_iddivis + pky_idmarca + pky_idmodel + pky_idcolor 
-						print llave }} 
-						{% endif %}
-						<div class="form_row"><div class="form_label">Código 	    </div><div class="form_widget">  </div></div>
-						<div class="form_row"><div class="form_label">Detalle       </div><div class="form_widget">  </div></div>
-						<div class="form_row"><div class="form_label">Abreviatura   </div><div class="form_widget">  </div></div>
-						<div class="form_row"><div class="form_label">Tipo/producto </div><div class="form_widget">  </div></div>
-						<div class="form_row"><div class="form_label">Talla         </div><div class="form_widget">  </div></div>
-						<div class="form_row"><div class="form_label">Status        </div><div class="form_widget">  </div></div>
+						{% for field in form %}
+							{% for error in field.errors %}
+								<strong>{{ field.label }}</strong>: {{ error }}<br>
+							{% endfor %}
+						{% endfor %}
+						{% for error in form.non_field_errors %}
+							<strong>{{ error }}</strong>
+						{% endfor %}
+						{% for field in form %}
+							<div class="form_row">
+								<div class="form_label">
+									<label>{{ field.label }}</label>
+								</div>
+							<div>{{ field }}</div>
+						</div>
+						{% endfor %}
+						{% comment %}
+							<div class="form_row"><div class="form_label"><label>Sucursal</label></div><div>{{form.pky_idsucur}}</div></div>
+							<div class="form_row"><div class="form_label"><label>Division</label></div><div>{{form.pky_iddivis}}</div></div>
+							<div class="form_row"><div class="form_label"><label>Marca   </label></div><div>{{form.pky_idmarca}}</div></div>
+							<div class="form_row"><div class="form_label"><label>Modelo  </label></div><div>{{form.pky_idmodel}}</div></div>
+							<div class="form_row"><div class="form_label"><label>Color   </label></div><div>{{form.pky_idcolor}}</div></div>
+							<hr><br>
+							{% if pky_idcolor %} {{	llave = pky_iddivis + pky_idmarca + pky_idmodel + pky_idcolor
+							print llave }}
+							{% endif %}
+							<div class="form_row"><div class="form_label">Código 	    </div><div class="form_widget">  </div></div>
+							<div class="form_row"><div class="form_label">Detalle       </div><div class="form_widget">  </div></div>
+							<div class="form_row"><div class="form_label">Abreviatura   </div><div class="form_widget">  </div></div>
+							<div class="form_row"><div class="form_label">Tipo/producto </div><div class="form_widget">  </div></div>
+							<div class="form_row"><div class="form_label">Talla         </div><div class="form_widget">  </div></div>
+							<div class="form_row"><div class="form_label">Status        </div><div class="form_widget">  </div></div>
+						{% endcomment %}
 						<br><br>
 						<div ><button class="icon-database form_submit" type="submit">  Guardar  </button></div>
 						<br>

@@ -49,15 +49,6 @@ class DivDelet(DeleteView):
 #   template_name = 'inventarios/Prd_New.html'
 #   context_object_name = 'slc_marcas'   ****--->> falta terminar para select-list dinamicas
 
-<<<<<<< HEAD
-class ProdkyLista(CreateView):
-	model = Productkey
-	form_class = ProductkeyForm
-	template_name = 'inventarios/Exi_New.html'
-	success_url = reverse_lazy('inventarios:exi_panel')
-=======
->>>>>>> 267096c5fefdd0568e7942242f8ccf49e055f6a7
-
 class Mrkkyselect(ListView):
     model = Marca
     template_name = 'inventarios/Prd_Select.html'

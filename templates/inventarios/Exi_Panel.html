@@ -33,7 +33,7 @@
 					 		<th class="head_tab">Tall.13</th>
 					 		<th class="head_tab" colspan="3">Opción</th>
 					 	</tr>
-					</thead> 
+					</thead>
 					<tbody border="0">
 					 	{% if object_list %}
 					 	{% for var_tllfield in object_list %}
@@ -55,10 +55,13 @@
 							<td class="columns_tab"> par10 </td>
 							<td class="columns_tab"> par11 </td>
 							<td class="columns_tab"> par12 </td>
-							<td class="columns_tab"> par13 </td> 
-							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:exi_panel'  var_exifield.id %}"></a></td>
-							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:exi_panel'  var_exifield.id %}"></a></td>
+							<td class="columns_tab"> par13 </td>
+							{% comment %}
+							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:exi_panel' var_exifield.id %}"></a></td>
+							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:exi_panel' var_exifield.id %}"></a></td>
 							<td class="columns_tab"><a class="icon-trash botones" href="{% url 'inventarios:exi_panel' var_exifield.id %}"></a></td>
+
+							{% endcomment %}
 						</tr>
 						{% endfor %}
 						{% else %}
