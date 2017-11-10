@@ -2,10 +2,16 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
 from .models import Division, Marca, Modelo, Color, Tabtalla, Existencia, Saldoxtalla
-from .forms import DivisionForm, MarcaForm, ModeloForm, ColorForm, TabtallaForm, ExistenciaForm, SaldoxtallaForm
+from .forms import (DivisionForm, MarcaForm, ModeloForm, ColorForm, TabtallaForm, ExistenciaForm,
+                    SaldoxtallaForm, ExistenciaEditForm)
 #from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura
 #from apps.finanzas.models import Caja, Cajera, Movicaja, Moneda
 # {% extends 'base/base.html' %}
+
+from django.contrib import messages
+
+from multi_form_view import MultiModelFormView
+
 
 # Create your views here.
 
@@ -109,6 +115,11 @@ class ModNuevo(CreateView):
     template_name = 'inventarios/Mod_New.html'
     success_url = reverse_lazy('inventarios:mod_panel')
 
+    def form_invalid(self, form):
+        messages.error(self.request, 'Hay un error en el formulario')
+        return super(ModNuevo, self).form_invalid(form)
+
+
 class ModEdita(UpdateView):
     """Listado de Modelos"""
     model = Modelo
@@ -205,25 +216,69 @@ class ExiLista(ListView):
     template_name = 'inventarios/Exi_Panel.html'
     paginate_by = 8
 
+
 class ExiView(DetailView):
     """Listado de Existencia"""
     template_name = 'inventarios/Exi_View.html'
     model = Existencia
+
 
 class ExiNuevo(CreateView):
     """Crear Existencia"""
     model = Existencia
     form_class = ExistenciaForm
     template_name = 'inventarios/Exi_New.html'
-    success_url = reverse_lazy('inventarios:exi_panel')
-    
+
+    def get_success_url(self):
+        return reverse_lazy('inventarios:exi_edit', kwargs={'pk': self.object.pk})
+
+
+class TablaTalla(MultiModelFormView):
+    """Generar Tabla de Tallas"""
+    model = Saldoxtalla
+    template_name = 'inventarios/tabla_talla.html'
+
+    def get_initial(self):
+        # import pdb; pdb.set_trace()
+        # return {"tex_product": }
+        return {}
+
+    def get_context_data(self, **kwargs):
+        context = super(TablaTalla, self).get_context_data(**kwargs)
+        context["saldoxtalla_form"] = SaldoxtallaForm()
+        # import pdb; pdb.set_trace()
+        return context
+
 
 class ExiEdita(UpdateView):
     """Listado de Existencias"""
     model = Existencia
-    form_class = ExistenciaForm
+    form_class = ExistenciaEditForm
     template_name = 'inventarios/Exi_Edit.html'
     success_url = reverse_lazy('inventarios:exi_panel')
+
+    def get_initial(self):
+        initial = {}
+        try:
+            sxt = Saldoxtalla.objects.get(tex_product=self.object)
+        except:
+            pass
+        else:
+            initial['tex_inici01'] = sxt.tex_inici01
+            initial['tex_inici02'] = sxt.tex_inici02
+            initial['tex_inici03'] = sxt.tex_inici03
+            initial['tex_inici04'] = sxt.tex_inici04
+            initial['tex_inici05'] = sxt.tex_inici05
+            initial['tex_inici06'] = sxt.tex_inici06
+            initial['tex_inici07'] = sxt.tex_inici07
+            initial['tex_inici08'] = sxt.tex_inici08
+            initial['tex_inici09'] = sxt.tex_inici09
+            initial['tex_inici10'] = sxt.tex_inici10
+            initial['tex_inici11'] = sxt.tex_inici11
+            initial['tex_inici12'] = sxt.tex_inici12
+            initial['tex_inici13'] = sxt.tex_inici13
+        return initial
+
 
 class ExiDelet(DeleteView):
     """Listado de Existencias"""

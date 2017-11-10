@@ -9,17 +9,37 @@
 
 			</div>
 			<div>
+				{% for message in messages %}
+					<strong>Mensaje:</strong> {{ message }}
+				{% endfor %}
 				<form method="POST" enctype="multipart">{% csrf_token %}
 					<div class="form_content">
 						<div class="form_titulo"><h1>Graba Modelos</h1></div>
 						<div class="form_esc">
 							<a class="icon-cancel" href="{% url 'inventarios:mod_panel' %}"></a>
 						</div>
+						{% if form.error %}
+							<div class="form_errors" role="alert">
+								{{ form.error }}
+							</div>
+						{% endif %}
+
 						{% if forms.error %}
 							<div class="form_errors" role="alert">
 								{{ form.error }}
 							</div>
 						{% endif %}
+						{% comment %}
+							#TODO: # Verificacion de errores
+						{% endcomment %}
+						{% for field in form %}
+							{% for error in field.errors %}
+								<strong>{{ field.label }}</strong>: {{ error }}<br>
+							{% endfor %}
+						{% endfor %}
+						{% for error in form.non_field_errors %}
+							<strong>{{ error }}</strong>
+						{% endfor %}
 						<div class="form_row"><div class="form_label"><label for="{{form.mod_idmarca.name}}">{{form.mod_idmarca.label}}</label></div><div>{{form.mod_idmarca}}</div></div>
 						<div class="form_row"><div class="form_label"><label for="{{form.mod_idmodel.name}}">{{form.mod_idmodel.label}}</label></div><div>{{form.mod_idmodel}}</div></div>
 						<div class="form_row"><div class="form_label"><label for="{{form.mod_detalle.name}}">{{form.mod_detalle.label}}</label></div><div>{{form.mod_detalle}}</div></div>

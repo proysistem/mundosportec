@@ -1,6 +1,6 @@
 {% extends 'base/base_inventarios.html' %}
 
-{% block title %} GFraba Productos {% endblock title %}</title>
+{% block title %} Graba Productos {% endblock title %}</title>
 
 			{% block context%}
 			<div class="crea_content">
@@ -48,166 +48,13 @@
 											  <div class="form_label"><label for="{{form.exs_idunida.name}}">{{form.exs_idunida.label}}</label></div><div class="form_widget">{{form.exs_idunida}}</div>
 											  <div class="form_label align_tex_right">{{form.exs_statreg.label}}</div> <div class="form_widget">{{form.exs_statreg}}</div>
 											  </div>
-							<table border="0" >
-							 	<tr color="#:000066">
-							 		<td class="head_tab"><div class="form_label"><label for="{{form.exs_tabtall.name}}">{{form.exs_tabtall.label}}</label></div></td>
-							 		<td class="form_widget head_tab">{{form.exs_tabtall }} </td>
-						{% comment %}
-									<td class="columns_tab">{{ form.jgo_medid01 }} </td>
-									<td class="columns_tab">{{ form.jgo_medid02 }} </td>
-									<td class="columns_tab">{{ form.jgo_medid03 }} </td>
-									<td class="columns_tab">{{ form.jgo_medid04 }} </td>
-									<td class="columns_tab">{{ form.jgo_medid05 }} </td>
-									<td class="columns_tab">{{ form.jgo_medid06 }} </td>
-									<td class="columns_tab">{{ form.jgo_medid07 }} </td>
-									<td class="columns_tab">{{ form.jgo_medid08 }} </td>
-									<td class="columns_tab">{{ form.jgo_medid09 }} </td>
-									<td class="columns_tab">{{ form.jgo_medid10 }} </td>
-									<td class="columns_tab">{{ form.jgo_medid11 }} </td>
-									<td class="columns_tab">{{ form.jgo_medid12 }} </td>
-									<td class="columns_tab">{{ form.jgo_medid13 }} </td>
-						{% endcomment %}
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">TOTALES</td>
-							 	</tr>
-							 	<tr color="#:000066">
-								 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_saldinc.name}}">{{form.exs_saldinc.label}}</label></div></td>
-									<td class="columns_tab">{{ form.tex_inici01 }} </td>
-									<td class="columns_tab">{{ form.tex_inici02 }} </td>
-									<td class="columns_tab">{{ form.tex_inici03 }} </td>
-									<td class="columns_tab">{{ form.tex_inici04 }} </td>
-									<td class="columns_tab">{{ form.tex_inici05 }} </td>
-									<td class="columns_tab">{{ form.tex_inici06 }} </td>
-									<td class="columns_tab">{{ form.tex_inici07 }} </td>
-									<td class="columns_tab">{{ form.tex_inici08 }} </td>
-									<td class="columns_tab">{{ form.tex_inici09 }} </td>
-									<td class="columns_tab">{{ form.tex_inici10 }} </td>
-									<td class="columns_tab">{{ form.tex_inici11 }} </td>
-									<td class="columns_tab">{{ form.tex_inici12 }} </td>
-									<td class="columns_tab">{{ form.tex_inici13 }} </td>
-									<td class="columns_tab"><div class="form_widget">{{form.exs_saldinc}}</div></td>
-							 	</tr>
-							 	<tr color="#:000066">
-														 
-								 	<td class="head_tab"  colspan="2"><div class="form_label"><label for="{{form.exs_ingreso.name}}">{{form.exs_ingreso.label}}</label></div></td>
-									<td class="columns_tab">{{ form.tex_ingre01 }} </td>
-									<td class="columns_tab">{{ form.tex_ingre02 }} </td>
-									<td class="columns_tab">{{ form.tex_ingre03 }} </td>
-									<td class="columns_tab">{{ form.tex_ingre04 }} </td>
-									<td class="columns_tab">{{ form.tex_ingre05 }} </td>
-									<td class="columns_tab">{{ form.tex_ingre06 }} </td>
-									<td class="columns_tab">{{ form.tex_ingre07 }} </td>
-									<td class="columns_tab">{{ form.tex_ingre08 }} </td>
-									<td class="columns_tab">{{ form.tex_ingre09 }} </td>
-									<td class="columns_tab">{{ form.tex_ingre10 }} </td>
-									<td class="columns_tab">{{ form.tex_ingre11 }} </td>
-									<td class="columns_tab">{{ form.tex_ingre12 }} </td>
-									<td class="columns_tab">{{ form.tex_ingre13 }} </td>
-									<td class="columns_tab"><div class="form_widget">{{form.exs_ingreso}}</div></div></td>
-							 	</tr>
-							 	<tr color="#:000066">
-								 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_egresos.name}}">{{form.exs_egresos.label}}</label></div></td>
-									<td class="columns_tab">{{ form.tex_egres01 }} </td>
-									<td class="columns_tab">{{ form.tex_egres02 }} </td>
-									<td class="columns_tab">{{ form.tex_egres03 }} </td>
-									<td class="columns_tab">{{ form.tex_egres04 }} </td>
-									<td class="columns_tab">{{ form.tex_egres05 }} </td>
-									<td class="columns_tab">{{ form.tex_egres06 }} </td>
-									<td class="columns_tab">{{ form.tex_egres07 }} </td>
-									<td class="columns_tab">{{ form.tex_egres08 }} </td>
-									<td class="columns_tab">{{ form.tex_egres09 }} </td>
-									<td class="columns_tab">{{ form.tex_egres10 }} </td>
-									<td class="columns_tab">{{ form.tex_egres11 }} </td>
-									<td class="columns_tab">{{ form.tex_egres12 }} </td>
-									<td class="columns_tab">{{ form.tex_egres13 }} </td>
-									<td class="columns_tab"><div class="form_widget">{{form.exs_egresos}}</div></td>
-							 	</tr>
-							 	<tr color="#:000066">
-								 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_saldact.name}}">{{form.exs_saldact.label}}</label></div></td>
-									<td class="columns_tab">{{ form.tex_actua01 }} </td>
-									<td class="columns_tab">{{ form.tex_actua02 }} </td>
-									<td class="columns_tab">{{ form.tex_actua03 }} </td>
-									<td class="columns_tab">{{ form.tex_actua04 }} </td>
-									<td class="columns_tab">{{ form.tex_actua05 }} </td>
-									<td class="columns_tab">{{ form.tex_actua06 }} </td>
-									<td class="columns_tab">{{ form.tex_actua07 }} </td>
-									<td class="columns_tab">{{ form.tex_actua08 }} </td>
-									<td class="columns_tab">{{ form.tex_actua09 }} </td>
-									<td class="columns_tab">{{ form.tex_actua10 }} </td>
-									<td class="columns_tab">{{ form.tex_actua11 }} </td>
-									<td class="columns_tab">{{ form.tex_actua12 }} </td>
-									<td class="columns_tab">{{ form.tex_actua13 }} </td>
-									<td class="columns_tab"><div class="form_widget">{{form.exs_saldact}}</div></td>
-							 	</tr>
-							 	<tr color="#:000066">
-								 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_comprom.name}}">{{form.exs_comprom.label}}</label></div></td>
-									<td class="columns_tab">{{ form.tex_compr01 }} </td>
-									<td class="columns_tab">{{ form.tex_compr02 }} </td>
-									<td class="columns_tab">{{ form.tex_compr03 }} </td>
-									<td class="columns_tab">{{ form.tex_compr04 }} </td>
-									<td class="columns_tab">{{ form.tex_compr05 }} </td>
-									<td class="columns_tab">{{ form.tex_compr06 }} </td>
-									<td class="columns_tab">{{ form.tex_compr07 }} </td>
-									<td class="columns_tab">{{ form.tex_compr08 }} </td>
-									<td class="columns_tab">{{ form.tex_compr09 }} </td>
-									<td class="columns_tab">{{ form.tex_compr10 }} </td>
-									<td class="columns_tab">{{ form.tex_compr11 }} </td>
-									<td class="columns_tab">{{ form.tex_compr12 }} </td>
-									<td class="columns_tab">{{ form.tex_compr13 }} </td>
-									<td class="columns_tab"><div class="form_widget">{{form.exs_comprom}}</div></td>
-							 	</tr>
-							 	<tr color="#:000066">
-								 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_xconfir.name}}">{{form.exs_xconfir.label}}</label></div></td>
-									<td class="columns_tab">{{ form.tex_xconf01 }} </td>
-									<td class="columns_tab">{{ form.tex_xconf02 }} </td>
-									<td class="columns_tab">{{ form.tex_xconf03 }} </td>
-									<td class="columns_tab">{{ form.tex_xconf04 }} </td>
-									<td class="columns_tab">{{ form.tex_xconf05 }} </td>
-									<td class="columns_tab">{{ form.tex_xconf06 }} </td>
-									<td class="columns_tab">{{ form.tex_xconf07 }} </td>
-									<td class="columns_tab">{{ form.tex_xconf08 }} </td>
-									<td class="columns_tab">{{ form.tex_xconf09 }} </td>
-									<td class="columns_tab">{{ form.tex_xconf10 }} </td>
-									<td class="columns_tab">{{ form.tex_xconf11 }} </td>
-									<td class="columns_tab">{{ form.tex_xconf12 }} </td>
-									<td class="columns_tab">{{ form.tex_xconf13 }} </td>
-									<td class="columns_tab"><div class="form_widget">{{form.exs_xconfir}}</div></td>
-							 	</tr>
-							 	<tr color="#:000066">
-								 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_dsponib.name}}">{{form.exs_dsponib.label}}</label></div></td>
-									<td class="columns_tab">{{ form.tex_dispo01 }} </td>
-									<td class="columns_tab">{{ form.tex_dispo02 }} </td>
-									<td class="columns_tab">{{ form.tex_dispo03 }} </td>
-									<td class="columns_tab">{{ form.tex_dispo04 }} </td>
-									<td class="columns_tab">{{ form.tex_dispo05 }} </td>
-									<td class="columns_tab">{{ form.tex_dispo06 }} </td>
-									<td class="columns_tab">{{ form.tex_dispo07 }} </td>
-									<td class="columns_tab">{{ form.tex_dispo08 }} </td>
-									<td class="columns_tab">{{ form.tex_dispo09 }} </td>
-									<td class="columns_tab">{{ form.tex_dispo10 }} </td>
-									<td class="columns_tab">{{ form.tex_dispo11 }} </td>
-									<td class="columns_tab">{{ form.tex_dispo12 }} </td>
-									<td class="columns_tab">{{ form.tex_dispo13 }} </td>
-									<td class="columns_tab"><div class="form_widget">{{form.exs_dsponib}}</div></td>
-							 	</tr>
+							<table id="tabla_talla">
 							</table>
 							<table border="0">
 						<tr><td class="form_label width_020">{{form.exs_feching.label}}</td> <td class="form_widget">{{form.exs_feching}}</td> <td colspan="2"><h2 CLASS="align_tex_center">P  R  E  C  I  O  S</h2></td> <td class="form_widget">{{form.exs_imgprod}}</td></tr>
 						<tr><td class="form_label width_020">{{form.exs_fechegr.label}}</td> <td class="form_widget">{{form.exs_fechegr}}</td> <td colspan="2"></td><td rowspan="6" class="form_label">{{form.exs_imgprod.label}}</td> </tr>
 						<tr><td class="form_label width_020">{{form.exs_fechinv.label}}</td> <td class="form_widget">{{form.exs_fechinv}}</td> <td class="form_label">{{form.exs_distrib.label}}</td><td class="form_widget">{{form.exs_distrib}}</td></tr>
-						<tr><td class="form_label width_020">{{form.exs_costant.label}}</td> <td class="form_widget">{{form.exs_costant}}</td> <td class="form_label">{{form.exs_mayoris.label}}</td><td class="form_widget">{{form.exs_mayoris}}</td></tr> 
+						<tr><td class="form_label width_020">{{form.exs_costant.label}}</td> <td class="form_widget">{{form.exs_costant}}</td> <td class="form_label">{{form.exs_mayoris.label}}</td><td class="form_widget">{{form.exs_mayoris}}</td></tr>
 						<tr><td class="form_label width_020">{{form.exs_dispant.label}}</td> <td class="form_widget">{{form.exs_dispant}}</td> <td class="form_label">{{form.exs_detalls.label}}</td><td class="form_widget">{{form.exs_detalls}}</td></tr>
 						<tr><td class="form_label width_020">{{form.exs_costact.label}}</td> <td class="form_widget">{{form.exs_costact}}</td> <td class="form_label">{{form.exs_publico.label}}</td><td class="form_widget">{{form.exs_publico}}</td></tr>
 						<tr><td class="form_label width_020">{{form.exs_cosprom.label}}</td> <td class="form_widget">{{form.exs_cosprom}}</td> <td class="form_label">{{form.exs_special.label}}</td><td class="form_widget">{{form.exs_special}}</td></tr>
@@ -220,3 +67,24 @@
 				</form>
 			</div>
 		{% endblock context%}
+
+{% block js %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	{% comment %}
+		<script type="text/javascript">
+
+			$(function(){
+				var select_modelo = $('#id_exs_idmodel')
+				select_modelo.change(function(e){
+					console.log(this.value);
+					var id_modelo = this.value;
+					var url = "/AppInvent/TablaTalla/" + id_modelo;
+					var jqxhr = $.ajax(url)
+						.success(function(tabla_str) {
+							$('#tabla_talla').html(tabla_str)
+						})
+				})
+			})
+		</script>
+	{% endcomment %}
+{% endblock js %}

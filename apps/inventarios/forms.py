@@ -90,7 +90,6 @@ class ModeloForm(forms.ModelForm):
         }
 
 
-
 class ColorForm(forms.ModelForm):
     class Meta:
         model = Color
@@ -174,6 +173,158 @@ class TabtallaForm(forms.ModelForm):
             'jgo_medid12':  forms.TextInput(attrs={"class": "columns_tab_tall"}),
             'jgo_medid13':  forms.TextInput(attrs={"class": "columns_tab_tall"}),
         }
+
+
+class ExistenciaEditForm(forms.ModelForm):
+
+    tex_inici01 = forms.DecimalField(required=False)
+    tex_inici02 = forms.DecimalField(required=False)
+    tex_inici03 = forms.DecimalField(required=False)
+    tex_inici04 = forms.DecimalField(required=False)
+    tex_inici05 = forms.DecimalField(required=False)
+    tex_inici06 = forms.DecimalField(required=False)
+    tex_inici07 = forms.DecimalField(required=False)
+    tex_inici08 = forms.DecimalField(required=False)
+    tex_inici09 = forms.DecimalField(required=False)
+    tex_inici10 = forms.DecimalField(required=False)
+    tex_inici11 = forms.DecimalField(required=False)
+    tex_inici12 = forms.DecimalField(required=False)
+    tex_inici13 = forms.DecimalField(required=False)
+
+    class Meta:
+        model = Existencia
+        fields = [
+            "exs_sucursa",
+            "exs_iddivis",
+            "exs_idmarca",
+            "exs_idmodel",
+            "exs_idcolor",
+            #'exs_product':
+            #'exs_detalle',
+            #'exs_abrevia',
+            'exs_tpoprod',
+            'exs_idunida',
+            #'exs_tabtall',
+            'exs_saldinc',
+            'exs_ingreso',
+            'exs_egresos',
+            'exs_saldact',
+            'exs_comprom',
+            'exs_xconfir',
+            'exs_dsponib',
+            'exs_feching',
+            'exs_fechegr',
+            'exs_fechinv',
+            'exs_costant',
+            'exs_dispant',
+            'exs_costact',
+            'exs_cosprom',
+            'exs_distrib',
+            'exs_mayoris',
+            'exs_detalls',
+            'exs_publico',
+            'exs_special',
+            'exs_imgprod',
+            'exs_statreg',
+
+        ]
+
+        labels = {
+            "exs_sucursa":   'Sucursal',
+            "exs_iddivis":   'Línea de productos',
+            "exs_idmarca":   'Marca',
+            "exs_idmodel":   'Modelo',
+            "exs_idcolor":   'Color',
+            # 'exs_product':   'Cód. Producto',
+            # 'exs_detalle':   'Detalle',
+            # 'exs_abrevia':   'Abreviatura',
+            'exs_tpoprod':   'Tipo de producto',
+            'exs_idunida':   'Unid. De medida',
+            #'exs_tabtall':   'Tab./Tallas ',
+            'exs_saldinc':   'Saldo.inicial',
+            'exs_ingreso':   'Ingresos',
+            'exs_egresos':   'Egresos',
+            'exs_saldact':   'Saldo.Actual',
+            'exs_comprom':   'S.Comprometido',
+            'exs_xconfir':   'Sldo.x/confirmar',
+            'exs_dsponib':   'Saldo.disponible',
+            'exs_feching':   'Fecha/últ.Ingreso',
+            'exs_fechegr':   'Fecha/últ.Egreso',
+            'exs_fechinv':   'Fecha de inventario',
+            'exs_costant':   'Costo.promedio.Anterior',
+            'exs_dispant':   'Disponible.Anterior',
+            'exs_costact':   'Costo Actual',
+            'exs_cosprom':   'Costo promed.Actual',
+            'exs_distrib':   'Precio:Distribuidos',
+            'exs_mayoris':   'Precio:Mayorista',
+            'exs_detalls':   'Precio:Detallista',
+            'exs_publico':   'Precio:Publico',
+            'exs_special':   'Precio:Especial',
+            'exs_imgprod':   'Imagen del producto',
+            'exs_statreg':   'Status del reg.',
+        }
+
+        widgets = {
+            "exs_sucursa":  forms.Select(),
+            "exs_iddivis":  forms.Select(),
+            "exs_idmarca":  forms.Select(),
+            "exs_idmodel":  forms.Select(),
+            "exs_idcolor":  forms.Select(),
+            # 'exs_product':   'Cód. Producto',
+            # 'exs_detalle':  forms.TextInput(),
+            # 'exs_abrevia':  forms.TextInput(),
+            'exs_tpoprod':  forms.Select(),
+            'exs_idunida':  forms.Select(),
+            #'exs_tabtall':  forms.TextInput(),
+            'exs_saldinc':  forms.NumberInput(),
+            'exs_ingreso':  forms.NumberInput(),
+            'exs_egresos':  forms.NumberInput(),
+            'exs_saldact':  forms.NumberInput(),
+            'exs_comprom':  forms.NumberInput(),
+            'exs_xconfir':  forms.NumberInput(),
+            'exs_dsponib':  forms.NumberInput(),
+            'exs_feching':  forms.DateInput(attrs={"type": "date"}),
+            'exs_fechegr':  forms.DateInput(attrs={"type": "date"}),
+            'exs_fechinv':  forms.DateInput(attrs={"type": "date"}),
+            'exs_costant':  forms.NumberInput(),
+            'exs_dispant':  forms.NumberInput(),
+            'exs_costact':  forms.NumberInput(),
+            'exs_cosprom':  forms.NumberInput(),
+            'exs_distrib':  forms.NumberInput(),
+            'exs_mayoris':  forms.NumberInput(),
+            'exs_detalls':  forms.NumberInput(),
+            'exs_publico':  forms.NumberInput(),
+            'exs_special':  forms.NumberInput(),
+            'exs_imgprod':  forms.FileInput(),
+            # 'exs_statreg':  forms.BoleanInput(),
+        }
+
+    def save(self, commit=True):
+        instance = super(ExistenciaEditForm, self).save(commit=False)
+        print("GUARDANDO")
+        sxt = Saldoxtalla(
+            tex_product=instance,
+            tex_inici01=self.cleaned_data['tex_inici01'],
+            tex_inici02=self.cleaned_data['tex_inici02'],
+            tex_inici03=self.cleaned_data['tex_inici03'],
+            tex_inici04=self.cleaned_data['tex_inici04'],
+            tex_inici05=self.cleaned_data['tex_inici05'],
+            tex_inici06=self.cleaned_data['tex_inici06'],
+            tex_inici07=self.cleaned_data['tex_inici07'],
+            tex_inici08=self.cleaned_data['tex_inici08'],
+            tex_inici09=self.cleaned_data['tex_inici09'],
+            tex_inici10=self.cleaned_data['tex_inici10'],
+            tex_inici11=self.cleaned_data['tex_inici11'],
+            tex_inici12=self.cleaned_data['tex_inici12'],
+            tex_inici13=self.cleaned_data['tex_inici13'],
+        )
+        sxt.save(commit)
+
+        if commit:
+            instance.save()
+        return instance
+
+
 
 class ExistenciaForm(forms.ModelForm):
     class Meta:
@@ -284,9 +435,8 @@ class ExistenciaForm(forms.ModelForm):
 #           'exs_statreg':  forms.BoleanInput(),
         }
 
+
 class SaldoxtallaForm(forms.ModelForm):
     class Meta:
         model = Saldoxtalla
-        fields = []
-
-
+        exclude = ['id']

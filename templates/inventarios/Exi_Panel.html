@@ -36,13 +36,13 @@
 					</thead>
 					<tbody border="0">
 					 	{% if object_list %}
-					 	{% for var_tllfield in object_list %}
+					 	{% for var_exifield in object_list %}
 					 	<tr>
-							<td class="columns_tab">{{ var_prdfield.exs_product }} </td>
-							<td class="columns_tab">{{ var_prdfield.exs_detalle }} </td>
-							<td class="columns_tab">{{ var_prdfield.exs_abrevia }} </td>
-							<td class="columns_tab">{{ var_prdfield.exs_tabtall }} </td>
-							<td class="columns_tab">{{ var_prdfield.exs_idunida }} </td>
+							<td class="columns_tab">{{ var_exifield.exs_product }} </td>
+							<td class="columns_tab">{{ var_exifield.exs_detalle }} </td>
+							<td class="columns_tab">{{ var_exifield.exs_abrevia }} </td>
+							<td class="columns_tab">{{ var_exifield.exs_tabtall }} </td>
+							<td class="columns_tab">{{ var_exifield.exs_idunida }} </td>
 							<td class="columns_tab"> par1  </td>
 							<td class="columns_tab"> par2  </td>
 							<td class="columns_tab"> par3  </td>
@@ -56,9 +56,9 @@
 							<td class="columns_tab"> par11 </td>
 							<td class="columns_tab"> par12 </td>
 							<td class="columns_tab"> par13 </td>
+							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:exi_edit' var_exifield.id %}"></a></td>
 							{% comment %}
 							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:exi_panel' var_exifield.id %}"></a></td>
-							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:exi_panel' var_exifield.id %}"></a></td>
 							<td class="columns_tab"><a class="icon-trash botones" href="{% url 'inventarios:exi_panel' var_exifield.id %}"></a></td>
 
 							{% endcomment %}

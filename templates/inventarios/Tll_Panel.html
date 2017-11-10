@@ -30,7 +30,7 @@
 					 		<th class="head_tab">Tall.13</th>
 					 		<th class="head_tab" colspan="3">Opción</th>
 					 	</tr>
-					</thead> 
+					</thead>
 					<tbody border="0">
 					 	{% if object_list %}
 					 	{% for var_tllfield in object_list %}
@@ -49,10 +49,10 @@
 							<td class="columns_tab">{{ var_tllfield.jgo_medid10 }} </td>
 							<td class="columns_tab">{{ var_tllfield.jgo_medid11 }} </td>
 							<td class="columns_tab">{{ var_tllfield.jgo_medid12 }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_medid13 }} </td> 
-							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:tll_view'  var_tllfield.id %}"></a></td>
-							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:tll_edit'  var_tllfield.id %}"></a></td>
-							<td class="columns_tab"><a class="icon-trash botones" href="{% url 'inventarios:tll_delet' var_tllfield.id %}"></a></td>
+							<td class="columns_tab">{{ var_tllfield.jgo_medid13 }} </td>
+							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:tll_view'  var_tllfield.pk %}"></a></td>
+							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:tll_edit'  var_tllfield.pk %}"></a></td>
+							<td class="columns_tab"><a class="icon-trash botones" href="{% url 'inventarios:tll_delet' var_tllfield.pk %}"></a></td>
 						</tr>
 						{% endfor %}
 						{% else %}

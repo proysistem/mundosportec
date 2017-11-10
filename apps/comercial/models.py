@@ -18,7 +18,7 @@ class Cliente(models.Model):
     clt_celular = models.CharField('Celular', max_length=15, blank=True)
     clt_correoe = models.EmailField('e-mail')
     clt_imgclte = models.ImageField(upload_to="clientes", blank=True)
-    clt_rgunico = models.IntegerField('Registro Unico', max_length=20, blank=True)
+    clt_rgunico = models.CharField('Registro Unico', max_length=20, blank=True)
     clt_categor = models.ForeignKey(Categoria, null=True, blank=True)
 
 
@@ -37,7 +37,7 @@ class Proveedor(models.Model):
     prv_celular = models.CharField('Celular', max_length=15)
     prv_correoe = models.EmailField('e-mail')
     prv_imgprov = models.ImageField(upload_to="proveedores", blank=True)
-    prv_rgunico = models.IntegerField('Registro Unico', max_length=20,, blank=True)
+    prv_rgunico = models.CharField('Registro Unico', max_length=20, blank=True)
     prv_categor = models.ForeignKey(Categoria, null=True, blank=True)
 
 
@@ -56,16 +56,17 @@ class Vendedor(models.Model):
     vnd_ncelula = models.CharField('Celular', max_length=15, blank=True)
     vnd_correoe = models.EmailField('e-mail')
     vnd_addrimg = models.ImageField(upload_to="vendedores", blank=True)
-    vnd_rgunico = models.IntegerField('Registro Unico' max_length=20, blank=True)
+    vnd_rgunico = models.CharField('Registro Unico', max_length=20, blank=True)
     vnd_categor = models.ForeignKey(Categoria, null=True, blank=True)
+
 
 class Movinvent(models.Model):
 
-    mvi_nummovi = models.IntegerField('Núm. de movimiento', editable=False, null=True, blank=True)
+    mvi_nummovi = models.IntegerField('Núm. de movimiento', editable=True, null=True, blank=True)
     mvi_fechmov = models.DateField('Fecha')
     mvi_motivos = models.ForeignKey(Motivo)
     mvi_pedidos = models.IntegerField('Núm. de pedido', null=True, blank=True)
-    mvi_factura = models.IntegerField('Núm. de factrura', null=True, blank=True)
+    mvi_factura = models.IntegerField('Núm. de factura', null=True, blank=True)
     mvi_tipomov = models.ForeignKey(Tipomovim)
     mvi_vendedo = models.ForeignKey(Vendedor)
     mvi_cliente = models.ForeignKey(Cliente)
@@ -92,18 +93,18 @@ class Movinvent(models.Model):
     mvi_deliver = models.DecimalField('Transporte', max_digits=11, decimal_places=4, null=True, blank=True)
     mvi_arancel = models.DecimalField('Aranceles', max_digits=11, decimal_places=4, null=True, blank=True)
     mvi_impuest = models.DecimalField('Impuestos IVA.', max_digits=11, decimal_places=4, null=True, blank=True)
+
     def __str__(self):
         return (self.mvi_nummovi)
 
     def save(self, *args, **kwargs):
-        if self.id ?????:  ##   SOLO POR LA PRIMERA VEZ, LUEGO  SEGUIR  GRABANDO EL LMISMO NUMERO A TODOS LOS REG. DE LA MISMA TRANSACCION
-            self.mvi_nummovi = "{0:0000007d}".format(
-                self.mvi_nummovi.pk,  # 2
-            )
+        # if self.id ?????:  ##   SOLO POR LA PRIMERA VEZ, LUEGO  SEGUIR  GRABANDO EL LMISMO NUMERO A TODOS LOS REG. DE LA MISMA TRANSACCION
+        #     self.mvi_nummovi = "{0:0000007d}".format(
+        #         self.mvi_nummovi.pk,  # 2
+        #     )
         # TODO: Definir si amerita modificar los parámetros
         # TODO: Definir el max_length de CharField o poner TextField
         super(Existencia, self).save()
-
 
 
 class Pedido(models.Model):
