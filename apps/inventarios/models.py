@@ -50,7 +50,7 @@ class Tabtalla(models.Model):
     jgo_medid13 = models.CharField('Talla-13', max_length=6, null=True, blank=True)
 
     def __str__(self):
-        return "%s %s" % (self.jgo_idtalla, self.jgo_divisio)
+        return (self.jgo_idtalla)
 
 
 class Marca(models.Model):
@@ -90,69 +90,37 @@ class Color(models.Model):
         return (self.col_detalle)
 
 
-class Productkey(models.Model):
-
-    pky_idsucur = models.ForeignKey(Sucursal)
-    pky_iddivis = models.ForeignKey(Division)
-    pky_idmarca = models.ForeignKey(Marca)
-    pky_idmodel = models.ForeignKey(Modelo)
-    pky_idcolor = models.ForeignKey(Color)
-
-    def __str__(self):
-        return "%s %s %s %s" % (self.pky_iddivis, self.pky_idmarca, self.pky_idmodel, self.pky_idcolor)
-
-
-# #  O J O  en cap.9 curso DevCode, trato de imagenes
-# class Producto(models.Model):
-#     #   prd_iddivis = models.ForeignKey(Division, primary_key=True)
-#     #   prd_idmarca = models.ForeignKey(Marca, primary_key=True)
-#     #   prd_idmodel = models.ForeignKey(Modelo, primary_key=True)
-#     #   prd_idcolor = models.ForeignKey(Color, primary_key=True)
-#     prd_product = models.CharField('Código del producto', max_length=20, primary_key=True)
-#     prd_detalle = models.CharField('Detalle  del Producto', max_length=45)
-#     prd_abrevia = models.CharField('Abreviatura  del Producto', max_length=25)
-#     prd_tpoprod = models.ForeignKey(Tipoproducto)
-#     prd_tabtall = models.ForeignKey(Tabtalla, null=True, blank=True)
-#     prd_imgprod = models.ImageField(upload_to="productos")
-#     prd_statreg = models.BooleanField('Status del Registro', default=True)
-
-#     def __str__(self):
-#         return (self.prd_detalle)
-
-
 class Existencia(models.Model):
-    pky_sucursa = models.ForeignKey(Sucursal)
-    pky_iddivis = models.ForeignKey(Division)
-    pky_idmarca = models.ForeignKey(Marca)
-    pky_idmodel = models.ForeignKey(Modelo)
-    pky_idcolor = models.ForeignKey(Color)
-
+    exs_sucursa = models.ForeignKey(Sucursal)
+    exs_iddivis = models.ForeignKey(Division)
+    exs_idmarca = models.ForeignKey(Marca)
+    exs_idmodel = models.ForeignKey(Modelo)
+    exs_idcolor = models.ForeignKey(Color)
     exs_product = models.CharField('Cód. Producto', max_length=13, editable=False, unique=True, db_index=True)
-    # 'Sucursal + Código del producto'
-    exs_detalle = models.CharField('Detalle  del Producto', editable=False, max_length=45)
-    exs_abrevia = models.CharField('Abreviatura  del Producto', max_length=25)
+    exs_detalle = models.CharField('Detalle del Producto', editable=False, max_length=45)
+    exs_abrevia = models.CharField('Abreviatura del Producto', editable=False, max_length=25)
     exs_tpoprod = models.ForeignKey(Tipoproducto)
-    exs_tabtall = models.ForeignKey(Tabtalla, null=True, blank=True)
+    exs_tabtall = models.CharField('Tabla de Tallas', editable=False, max_length=5)
     exs_idunida = models.ForeignKey(Unidad)
-    exs_saldinc = models.DecimalField('Saldo inicial', max_digits=11, decimal_places=4)
-    exs_ingreso = models.DecimalField('Ingresos', max_digits=11, decimal_places=4)
-    exs_egresos = models.DecimalField('Egresos', max_digits=11, decimal_places=4)
-    exs_saldact = models.DecimalField('Saldo Actual', max_digits=11, decimal_places=4)
-    exs_comprom = models.DecimalField('S.Compromet.(Ped. de Client)', max_digits=11, decimal_places=4)
-    exs_xconfir = models.DecimalField('S. x confirm.(Ped.a Proveed)', max_digits=11, decimal_places=4)
+    exs_saldinc = models.DecimalField('Saldo inicial', max_digits=11, decimal_places=4, blank=True)
+    exs_ingreso = models.DecimalField('Ingresos', max_digits=11, decimal_places=4, blank=True)
+    exs_egresos = models.DecimalField('Egresos', max_digits=11, decimal_places=4, blank=True)
+    exs_saldact = models.DecimalField('Saldo Actual', max_digits=11, decimal_places=4, blank=True)
+    exs_comprom = models.DecimalField('S.Compromet.(Ped. de Client)', max_digits=11, decimal_places=4, blank=True)
+    exs_xconfir = models.DecimalField('S. x confirm.(Ped.a Proveed)', max_digits=11, decimal_places=4, blank=True)
     exs_dsponib = models.DecimalField('Saldo disponible', max_digits=11, decimal_places=4)
-    exs_feching = models.DateTimeField('Fecha de ult. Ingreso', )
-    exs_fechegr = models.DateTimeField('Fecha Ult. Egreso', )
-    exs_fechinv = models.DateTimeField('Fecha de inventario', )
-    exs_costant = models.DecimalField('Costo promedio Anterior', max_digits=15, decimal_places=4)
-    exs_dispant = models.DecimalField('Disponible Anterior', max_digits=15, decimal_places=4)
-    exs_costact = models.DecimalField('Costo Actual', max_digits=15, decimal_places=4)
-    exs_cosprom = models.DecimalField('Costo promedio Actual', max_digits=15, decimal_places=4)
-    exs_distrib = models.DecimalField('Distribuidor', max_digits=15, decimal_places=4)
-    exs_mayoris = models.DecimalField('Mayorista', max_digits=15, decimal_places=4)
-    exs_detalls = models.DecimalField('Detallista', max_digits=15, decimal_places=4)
-    exs_publico = models.DecimalField('Publico', max_digits=15, decimal_places=4)
-    exs_special = models.DecimalField('Especial', max_digits=15, decimal_places=4)
+    exs_feching = models.DateTimeField('Fecha de ult. Ingreso', blank=True)
+    exs_fechegr = models.DateTimeField('Fecha Ult. Egreso', blank=True)
+    exs_fechinv = models.DateTimeField('Fecha de inventario', blank=True)
+    exs_costant = models.DecimalField('Costo promedio Anterior', max_digits=15, decimal_places=4, blank=True)
+    exs_dispant = models.DecimalField('Disponible Anterior', max_digits=15, decimal_places=4, blank=True)
+    exs_costact = models.DecimalField('Costo Actual', max_digits=15, decimal_places=4, blank=True)
+    exs_cosprom = models.DecimalField('Costo promedio Actual', max_digits=15, decimal_places=4, blank=True)
+    exs_distrib = models.DecimalField('Distribuidor', max_digits=15, decimal_places=4, blank=True)
+    exs_mayoris = models.DecimalField('Mayorista', max_digits=15, decimal_places=4, blank=True)
+    exs_detalls = models.DecimalField('Detallista', max_digits=15, decimal_places=4, blank=True)
+    exs_publico = models.DecimalField('Publico', max_digits=15, decimal_places=4, blank=True)
+    exs_special = models.DecimalField('Especial', max_digits=15, decimal_places=4, blank=True)
     exs_imgprod = models.ImageField(upload_to="productos", blank=True)
     exs_statreg = models.BooleanField('Status del Registro', default=True)
 
@@ -160,19 +128,28 @@ class Existencia(models.Model):
         return (self.exs_product)
 
     def save(self, *args, **kwargs):
-        if self.pky_sucursa and self.pky_iddivis and self.pky_idmarca and self.pky_idmodel and self.pky_idcolor:
+        if self.exs_sucursa and self.exs_iddivis and self.exs_idmarca and self.exs_idmodel and self.exs_idcolor:
             self.exs_product = "{0:02d}{1:02d}{2}{3}{4}".format(
-                self.pky_sucursa.pk,  # 2
-                self.pky_iddivis.pk,  # 2
-                self.pky_idmarca.pk,  # 3
-                self.pky_idmodel.pk,  # 3
-                self.pky_idcolor.pk   # 3
+                self.exs_sucursa.pk,  # 2
+                self.exs_iddivis.pk,  # 2
+                self.exs_idmarca.pk,  # 3
+                self.exs_idmodel.pk,  # 3
+                self.exs_idcolor.pk   # 3
             )
             self.exs_detalle = "{} {} {} {}".format(
-                str(self.pky_iddivis.div_abrevia),  # 2
-                str(self.pky_idmarca.mrk_abrevia),  # 3
-                str(self.pky_idmodel.mod_abrevia),  # 3
-                str(self.pky_idcolor.col_abrevia)  # 3
+                str(self.exs_iddivis.div_abrevia),  # 2
+                str(self.exs_idmarca.mrk_detalle),  # 3
+                str(self.exs_idmodel.mod_detalle),  # 3
+                str(self.exs_idcolor.col_detalle)   # 3
+            )
+            self.exs_abreria = "{} {} {} {}".format(
+                str(self.exs_iddivis.div_abrevia),  # 2
+                str(self.exs_idmarca.mrk_abrevia),  # 3
+                str(self.exs_idmodel.mod_abrevia),  # 3
+                str(self.exs_idcolor.col_abrevia)   # 3
+            )
+            self.exs_tabtall = "{}".format(
+                str(self.exs_idmodel.mod_tabtall)   # 2
             )
         # TODO: Definir si amerita modificar los parámetros
         # TODO: Definir el max_length de CharField o poner TextField
@@ -180,11 +157,7 @@ class Existencia(models.Model):
 
 
 class Saldoxtalla(models.Model):
-
-    #   tex_sucursa = models.ForeignKey(Sucursal, primary_key=True)
-    #   tex_product = models.ForeignKey(Producto, primary_key=True)
     tex_product = models.OneToOneField(Existencia, verbose_name='Saldo x talla', primary_key=True)
-    #  , 'Sucursal + Código del producto'
     tex_inici01 = models.DecimalField('Cant. inici-01', max_digits=11, decimal_places=4)
     tex_inici02 = models.DecimalField('Cant. inici-02', max_digits=11, decimal_places=4)
     tex_inici03 = models.DecimalField('Cant. inici-03', max_digits=11, decimal_places=4)

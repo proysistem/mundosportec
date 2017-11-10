@@ -43,7 +43,7 @@ class ClienteForm(forms.ModelForm):
 				'clt_frsname': forms.TextInput(),
 				'clt_midname': forms.TextInput(),
 				'clt_secmane': forms.TextInput(),
-				'clt_fechnac': forms.DateInput(),
+				'clt_fechnac': forms.DateInput(attrs={"type": "date"}),
 				'clt_direcci': forms.Select(),
 				'clt_ciudade': forms.Select(),
 				'clt_estados': forms.Select(),
@@ -102,7 +102,7 @@ class ProveedorForm(forms.ModelForm):
 				'prv_frsname': forms.TextInput(),
 				'prv_midname': forms.TextInput(),
 				'prv_secmane': forms.TextInput(),
-				'prv_fechnac': forms.DateInput(),
+				'prv_fechnac': forms.DateInput(attrs={"type": "date"}),
 				'prv_direcci': forms.Select(),
 				'prv_ciudade': forms.Select(),
 				'prv_estados': forms.Select(),
@@ -162,7 +162,7 @@ class VendedorForm(forms.ModelForm):
 				'vnd_frsname': forms.TextInput(),
 				'vnd_midname': forms.TextInput(),
 				'vnd_secmane': forms.TextInput(),
-				'vnd_fechnac': forms.DateInput(),
+				'vnd_fechnac': forms.DateInput(attrs={"type": "date"}),
 				'vnd_direcci': forms.Select(),
 				'vnd_ciudade': forms.Select(),
 				'vnd_estados': forms.Select(),
@@ -181,6 +181,7 @@ class MovinventForm(forms.ModelForm):
 		model = Movinvent
 		fields = [
 
+				'mvi_nummovi',
 				'mvi_fechmov',
 				'mvi_motivos',
 				'mvi_pedidos',
@@ -214,6 +215,7 @@ class MovinventForm(forms.ModelForm):
 		]
 
 		labels = {
+				'mvi_nummovi':  'Núm.movimiento',
 				'mvi_fechmov':  'Fecha',
 				'mvi_motivos':  'Motivo',
 				'mvi_pedidos':  'Núm.de pedido',
@@ -246,8 +248,9 @@ class MovinventForm(forms.ModelForm):
 				'mvi_impuest':  'Impuestos IVA',
 		}
 		widgets = {
-
-				'mvi_fechmov':   forms.DateInput(),
+ 
+ 				'mvi_nummovi':   forms.NumberInput(),
+				'mvi_fechmov':   forms.DateInput(attrs={"type": "date"}),
 				'mvi_motivos':   forms.Select(),
 				'mvi_pedidos':   forms.NumberInput(),
 				'mvi_factura':   forms.NumberInput(),
@@ -323,7 +326,7 @@ class PedidoForm(forms.ModelForm):
 
 				'Ped_motivos':   forms.Select(),
 				'ped_mvinven':   forms.Select(),
-				'ped_fechfac':   forms.DateInput(),
+				'ped_fechfac':   forms.DateInput(attrs={"type": "date"}),
 				'ped_cajanum':   forms.Select(),
 				'ped_cajeras':   forms.Select(),
 				'ped_cliente':   forms.Select(),
@@ -372,29 +375,29 @@ class FacturaForm(forms.ModelForm):
 				'fac_mvinven':  'Núm. de Movimiento',
 				'fac_fechfac':  'Fecha de Factura',
 				'fac_cajanum':  'Núm. de Caja',
-				'fac_cajeras':  'Cajera',
+				'fac_cajeras':  'Cajer@',
 				'fac_cliente':  'Cliente',
 				'fac_vendedo':  'Vendedor',
 				'fac_pedidos':  'Núm. de pedido',
 				'fac_monedas':  'Moneda',
 				'fac_cotizac':  'Cotización',
-				'fac_totitms':  'Total de items',
+				'fac_totitms':  'Items',
 				'fac_totvlor':  'Total Valor',
 				'fac_totdsct':  'Total Descuentos',
 				'fac_totrkrg':  'Totla de Recargos',
 				'fac_totflet':  'Total de Flete',
 				'fac_totaran':  'Total Aranceles',
 				'fac_tottaxs':  'Total IVA',
-				'fac_pgoefec':  'Pgo./Efectivo',
-				'fac_pgocheq':  'Pgo./Cheques',
-				'fac_pgotjcr':  'Pgo./T.Crédito',
-				'fac_pgocred':  'Credit.Personal',
-				'fac_otropgo':  'Pago otra forma',
+				'fac_pgoefec':  'Efectivo',
+				'fac_pgocheq':  'Cheques',
+				'fac_pgotjcr':  'Tarj./Crédito',
+				'fac_pgocred':  'Crédit.Personal',
+				'fac_otropgo':  'Otra forma',
 		}
 		widgets = {
 				#fac_idfactu':  NumberInput(),
 				'fac_mvinven':  forms.Select(),
-				'fac_fechfac':  forms.DateInput(),
+				'fac_fechfac':  forms.DateInput(attrs={"type": "date"}),
 				'fac_cajanum':  forms.Select(),
 				'fac_cajeras':  forms.Select(),
 				'fac_cliente':  forms.Select(),

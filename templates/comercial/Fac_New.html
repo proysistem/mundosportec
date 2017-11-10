@@ -25,76 +25,42 @@
 							<fieldset>
 								<div class="form_row_all">
 									<div class="width_010"><label for="{{form.fac_cliente.name}}">{{form.fac_cliente.label}}</label></div>
-									<div class="form_widget width_025">{{ form.fac_cliente }} </div>
-									<div class="width_030">&nbsp;</div>
-									<div class="form_row_all width_030">
-										<div class="width_015"><label for="{{form.fac_idfactu.name}}">{{form.fac_idfactu.label}}</label></div>
-										<div class="form_widget width_010">{{ form.fac_idfactu }} </div>
-									</div>
-								</div><br><br><hr>
+									<div class="form_widget width_025">{{ form.fac_cliente }}</div>
+									<div class="width_040">&nbsp;</div>
+									<div class="width_015 align_tex_right"><label for="{{form.fac_idfactu.name}}">{{form.fac_fechfac.label}}</label></div>
+									<div class="form_widget width_010">{{ form.fac_fechfac }} </div>
+								</div >
 								<div class="form_row_all">
 									<div class="width_010"><label for="{{form.fac_cliente.name}}">{{ form.fac_vendedo.label }}</label></div>
 									<div class="form_widget width_025">{{ form.fac_vendedo }} </div>
 									<div class="width_040">&nbsp;</div>
-									<div class="width_015 align_tex_right"><label for="{{form.fac_idfactu.name}}">{{form.fac_fechfac.label}}</label></div>
-									<div class="form_widget width_010">{{ form.fac_fechfac }} </div>
-								</div ><br><br><hr>
-								<div class="form_row_all">
-									<div class="width_070">&nbsp;</div>
-									<div class="width_015 align_tex_right"><label for="{{form.fac_idfactu.name}}">{{form.fac_fechfac.label}}</label></div>
-									<div class="form_widget width_010">{{ form.fac_fechfac }} </div>
-								</div><br><br><hr>
-								<div class="form_row align_itm_rigth">
-									<div width="70% ">&nbsp;</div>
-									<div class="form_label width_015 align_itm_rigth align_tex_right"><label for="{{form.fac_mvinven.name}}">{{form.fac_mvinven.label}}</label></div>
-									<div class="form_widget width_010">{{ form.fac_mvinven }} </div>
-								</div>
+									<div class="width_015 align_tex_right"><label for="{{form.fac_idfactu.name}}">{{form.fac_mvinven.label}}</label></div>
+									<div class="form_widget width_010">{{ form.fac_mvinven }}</div>
 							</fieldset>
-						</div>						<div>
-							<table border="1" class="width_100">
-								<tr>
-									<td class="columns_tab width_010"><label for="{{form.fac_cliente.name}}">{{form.fac_cliente.label}}</label></div>
-									<td class="columns_tab width_010">{{ form.fac_cliente }} </div>
-									<td class="width_010">&nbsp;</td>
-									<td class="columns_tab width_010"><label for="{{form.fac_idfactu.name}}">{{form.fac_idfactu.label}}</label></td>
-									<td class="columns_tab width_010">{{ form.fac_idfactu }} </td>
-								</tr>
-								<tr>
-									<td class="columns_tab"><label for="{{form.fac_vendedo.name}}">{{form.fac_vendedo.label}}</label></td>
-									<td class="columns_tab">{{ form.fac_vendedo }} </td>
-									<td width="70%"> </td>
-									<td class="columns_tab"><label for="{{form.fac_fechfac.name}}">{{form.fac_fechfac.label}}</label></td>
-									<td class="columns_tab">{{ form.fac_fechfac }} </td>
-								</tr>
-								<tr>
-									<td width="80%"> </td>
-									<td class="columns_tab"><label for="{{form.fac_mvinven.name}}">{{form.fac_mvinven.label}}</label></td>
-									<td class="columns_tab">{{ form.fac_mvinven }} </td>
-								</tr>
-							</table>
 						</div>
 <!--
 						<div class="form_row"><div class="form_label"><label for="{{form.jgo_divisio.name}}">{{form.fac_cliente.label}}</label></div><div>{{form.fac_cliente}}</div></div>
 						<div class="form_row"><div class="form_label"><label for="{{form.jgo_idtalla.name}}">{{form.fac_vendedo.label}}</label></div><div>{{form.fac_vendedo}}</div></div>
 =-->
 						<div>
-							<table border="1" >
-								<thead> 
-								 	<tr color="#:000066">
-								 		<th class="head_tab">Producto</th>
-								 		<th class="head_tab">Detalle</th>
-								 		<th class="head_tab">Cantidad</th>
-								 		<th class="head_tab">Und.</th>
-								 		<th class="head_tab">Precio</th>
-								 		<th class="head_tab">Dscto.</th>
-								 		<th class="head_tab">IVA</th>
-								 		<th class="head_tab">Valor</th>
+							<table border="0" >
+								<thead border="1"> 
+								 	<tr color="#:000066" class="width_100">
+								 		<th class="head_tab width_010">Producto</th>
+								 		<th class="head_tab width_025" colspan="3">Detalle</th>
+								 		<th class="head_tab width_010">Cantidad</th>
+								 		<th class="head_tab width_005">Und.</th>
+								 		<th class="head_tab width_010">Precio</th>
+								 		<th class="head_tab width_005">Dscto.</th>
+								 		<th class="head_tab width_005">IVA</th>
+								 		<th class="head_tab width_010">Valor</th>
 								 	</tr>
 								</thead>
-								<tbody border="0">
+								<tbody border="1">
 								 	<tr>
 										<td class="columns_tab">{{ form.mvi_product }} </td>
-										<td class="columns_tab">{{ form.prd_detalle }} </td>
+										<td class="columns_tab" colspan="3">{{ form.prd_detalle }} </td>
+						{% comment %}
 										<td class="columns_tab">{{ form.mvi_talla01 }} </td>
 										<td class="columns_tab">{{ form.mvi_talla02 }} </td>
 										<td class="columns_tab">{{ form.mvi_talla03 }} </td>
@@ -108,73 +74,90 @@
 										<td class="columns_tab">{{ form.mvi_talla11 }} </td>
 										<td class="columns_tab">{{ form.mvi_talla12 }} </td>
 										<td class="columns_tab">{{ form.mvi_talla13 }} </td>
-										<td class="columns_tab">{{ form.mvi_kntidad }} </td>
+									<td class="columns_tab">Tall-n</td>
+									<td class="columns_tab">Tall-n</td>
+									<td class="columns_tab">Tall-n</td>
+									<td class="columns_tab">Tall-n</td>
+									<td class="columns_tab">Tall-n</td>
+									<td class="columns_tab">Tall-n</td>
+									<td class="columns_tab">Tall-n</td>
+									<td class="columns_tab">Tall-n</td>
+									<td class="columns_tab">Tall-n</td>
+									<td class="columns_tab">Tall-n</td>
+									<td class="columns_tab">Tall-n</td>
+									<td class="columns_tab">Tall-n</td>
+									<td class="columns_tab">Tall-n</td>
+									<td class="columns_tab">TOTALES</td>
+						{% endcomment %}
+
+										<td class="columns_tab">{{ form.mvi_kntidad }} onChange="calculos(this.value);"</td>
 										<td class="columns_tab">{{ form.mvi_unidade }} </td>
 										<td class="columns_tab">{{ form.mvi_precios }} </td>
 										<td class="columns_tab">{{ form.mvi_desctos }} </td>
-<!--									<td class="columns_tab">{{ form.mvi_rcargos }} </td>
+						{% comment %}
+									<!--<td class="columns_tab">{{ form.mvi_rcargos }} </td>
 										<td class="columns_tab">{{ form.mvi_deliver }} </td>
 										<td class="columns_tab">{{ form.mvi_arancel }} </td>
--->
-										<td class="columns_tab">{{ form.mvi_impuest }} </td>
+									-->
 										<td class="columns_tab">{{ valor }} </td>
+						{% endcomment %}
+										<td class="columns_tab">{{ form.mvi_impuest }} </td>
+										<td class="columns_tab"><a href="{% url 'comercial:fac_new' %}">"{{ valor }} "</a></td>
 									</tr>
 								</tbody>
-							</table>
-							</table>
 								<tr>
 								</tr>
 								<tr>
 									<td class="columns_tab" colspan="2">Formas de pago:</td>
-									<td class="columns_tab"><label for="{{form.fac_pgoefec.name}}"></label></td>
+									<td class="columns_tab">{{form.fac_pgoefec.label}}</td>
 									<td class="columns_tab">{{ form.fac_pgoefec }} </td>
-									<td class="columns_tab">{{ form.fac_totitm }} </td>
-									<td class="columns_tab"><label for="{{form.fac_totitm.name}}"></label></td>
-									<td class="columns_tab" colspan="5"><label for="{{form.fac_totvlor.name}}"></label></td>
+									<td class="columns_tab">{{ form.fac_totitms }} </td>
+									<td class="columns_tab">{{form.fac_totitms.label}}</td>
+									<td class="columns_tab align_tex_right" colspan="3">{{form.fac_totvlor.label}}</td>
 									<td class="columns_tab">{{ form.fac_totvlor }} </td>
-								</tr>
+								</tr><br>
 								<tr>
 									<td class="columns_tab" colspan="2"></td>
-									<td class="columns_tab"><label for="{{form.fac_pgocheq.name}}"></label></td>
+									<td class="columns_tab">{{form.fac_pgocheq.label}}</td>
 									<td class="columns_tab">{{ form.fac_pgocheq }} </td>
 									<td class="columns_tab" colspan="2"></td>
-									<td class="columns_tab" colspan="5"><label for="{{form.fac_totdsct.name}}"></label></td>
+									<td class="columns_tab align_tex_right" colspan="3">{{form.fac_totdsct.label}}</td>
 									<td class="columns_tab">{{ form.fac_totdsct }} </td>
 								</tr>
 								<tr>
-									<td class="columns_tab"><label for="{{form.fac_monedas.name}}"></label>
+									<td class="columns_tab">{{form.fac_monedas.label}}</td>
 									<td class="columns_tab">{{ form.fac_monedas }} </td>
-									<td class="columns_tab"><label for="{{form.fac_pgotjcr.name}}"></label>
+									<td class="columns_tab">{{form.fac_pgotjcr.label}}</td>
 									<td class="columns_tab">{{ form.fac_pgotjcr }} </td>
 									<td class="columns_tab" colspan="2"></td>
-									<td class="columns_tab" colspan="5"><label for="{{form.fac_totrkrg.name}}"></label></td>
+									<td class="columns_tab align_tex_right" colspan="3">{{form.fac_totrkrg.label}}</td>
 									<td class="columns_tab">{{ form.fac_totrkrg }} </td>
 								</tr>
 								<tr>
-									<td class="columns_tab"><label for="{{form.fac_cotizac.name}}"></label>
+									<td class="columns_tab">{{form.fac_cotizac.label}}</td>
 									<td class="columns_tab">{{ form.fac_cotizac }} </td>
-									<td class="columns_tab"><label for="{{form.fac_pgocred.name}}"></label>
+									<td class="columns_tab">{{form.fac_pgocred.label}}</td>
 									<td class="columns_tab">{{ form.fac_pgocred }} </td>
 									<td class="columns_tab" colspan="2"></td>
-									<td class="columns_tab" colspan="5"><label for="{{form.fac_totaran.name}}"></label></td>
+									<td class="columns_tab align_tex_right" colspan="3">{{form.fac_totaran.label}}</td>
 									<td class="columns_tab">{{ form.fac_totaran }} </td>
 								</tr>
 								<tr>
-									<td class="columns_tab"><label for="{{form.fac_cajanum.name}}"></label>
+									<td class="columns_tab">{{form.fac_cajanum.label}}</td>
 									<td class="columns_tab">{{ form.fac_cajanum }} </td>
-									<td class="columns_tab"><label for="{{form.fac_otropgo.name}}"></label>
+									<td class="columns_tab">{{form.fac_otropgo.label}}</td>
 									<td class="columns_tab">{{ form.fac_otropgo }} </td>
 									<td class="columns_tab" colspan="2"></td>
-									<td class="columns_tab" colspan="5"><label for="{{form.fac_tottaxs.name}}"></label></td>
+									<td class="columns_tab align_tex_right" colspan="3">{{form.fac_tottaxs.label}}</td>
 									<td class="columns_tab">{{ form.fac_tottaxs }} </td>
 								</tr>
 								<tr>
-									<td class="columns_tab"><label for="{{form.fac_cajeras.name}}"></label>
+									<td class="columns_tab">{{form.fac_cajeras.label}}</td>
 									<td class="columns_tab">{{ form.fac_cajeras }} </td>
 									<td class="columns_tab"><label>TOTAL </label>
 									<td class="columns_tab">{{ form.totpago }} </td>
 									<td class="columns_tab" colspan="2"></td>
-									<td class="columns_tab" colspan="5"><label>Totala a pagar</label></td>
+									<td class="columns_tab align_tex_right" colspan="3"><label>Totala a pagar</labed>
 									<td class="columns_tab">{{ form.grantotal }} </td>
 								</tr>
 								<tr>

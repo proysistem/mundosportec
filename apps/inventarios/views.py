@@ -216,6 +216,7 @@ class ExiNuevo(CreateView):
     form_class = ExistenciaForm
     template_name = 'inventarios/Exi_New.html'
     success_url = reverse_lazy('inventarios:exi_panel')
+    
 
 class ExiEdita(UpdateView):
     """Listado de Existencias"""

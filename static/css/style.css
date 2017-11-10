@@ -30,7 +30,7 @@
 .head_tab  			/* cabacera de las tablas */
 	{
 	background: linear-gradient(#510909, #881F1F, #510909); /* Standard syntax */
-	padding: 5px 10px;
+	padding: 5px 5px;
 	}
 .columns_tab   /*  Clumnas para los datos, en las tablas   */
 	{
@@ -39,7 +39,7 @@
 	}
 .columns_tab_tall   /*  Clumnas para los datos, en las tablas   */
 	{
-	width: 50px;
+	width: 45px;
 	padding: 5px 10px;
 	font-size: 1em;
 	}

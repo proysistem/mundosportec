@@ -36,7 +36,8 @@ class Ciudad(models.Model):
     ciu_abrevia = models.CharField("Abreviatura", max_length=10)
 
     def __str__(self):
-        return "%s %s %s" % (self.ciu_estados, self.ciu_country, self.ciu_nombres)
+        return "%s" % (self.ciu_nombres)
+    #return "%s %s %s" % (self.ciu_estados, self.ciu_country, self.ciu_nombres)
 
 class Zipcodigo(models.Model):
 
@@ -46,7 +47,7 @@ class Zipcodigo(models.Model):
     zip_country = models.ForeignKey(Pais)
 
     def __str__(self):
-        return "%s %s" % (self.zip_idciuda, self.zip_idzipco)
+        return "%s" % (self.zip_idzipco)
 
 
 
@@ -63,7 +64,7 @@ class Sucursal(models.Model):
 
 
     def __str__(self):
-        return "%s %s %s" % (self.suc_nombres, self.suc_ciudads, self.suc_direcci)
+        return "%s" % (self.suc_nombres)
 
 class Categoria(models.Model):
     ktg_detalle = models.CharField('Detalle', max_length=15)

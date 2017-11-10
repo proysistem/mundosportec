@@ -27,7 +27,10 @@ SECRET_KEY = '#z62lq-_3^7k=hsu*8^z3es$19#w-^f@rutgp$jg*)cfily)8s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '45.55.223.175',
+    '.mundosportec.com',
+]
 
 
 # Application definition
@@ -39,7 +42,7 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites'
+    # 'django.contrib.sites'
 ]
 
 LOCAL_APPS = [
