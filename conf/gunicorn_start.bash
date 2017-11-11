@@ -29,3 +29,4 @@ exec /home/$USER/.virtualenvs/$NAME/bin/gunicorn mundosport.wsgi:application \
   --workers $NUM_WORKERS \
   --user=$USER \
   --bind=unix:$SOCKFILE
+  --settings=mundosport.settings.production
