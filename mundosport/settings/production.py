@@ -5,7 +5,7 @@ from .base import *
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mundosportdb',
+        'NAME': 'mundosportec',
         'USER': 'admin',
         'PASSWORD': 'admin',
         'HOST': 'localhost',
@@ -13,7 +13,7 @@ DATABASES = {
     }
 }
 
-
+DEBUG = False
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
