@@ -2,7 +2,7 @@
 
 USER=pro                                           # the user to run as
 NAME="mundosportec"                                   # Name of the application
-DJANGODIR=/home/$USER/webapps/$NAME/src           # Django project directory
+DJANGODIR=/home/$USER/webapps/$NAME/           # Django project directory
 SOCKFILE=/home/$USER/webapps/$NAME/gunicorn.sock  # we will communicte using this unix socket
 NUM_WORKERS=1                                     # how many worker processes should Gunicorn spawn
 
