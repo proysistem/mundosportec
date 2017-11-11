@@ -15,7 +15,7 @@ echo "Starting $NAME as `whoami`"
 # Activate the virtual environment
 cd $DJANGODIR
 source /home/$USER/.virtualenvs/$NAME/bin/activate
-# export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export DJANGO_SETTINGS_MODULE=mundosport.settings.production
 # export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 
 # Create the run directory if it doesn't exist
@@ -29,4 +29,3 @@ exec /home/$USER/.virtualenvs/$NAME/bin/gunicorn mundosport.wsgi:application \
   --workers $NUM_WORKERS \
   --user=$USER \
   --bind=unix:$SOCKFILE
-  --settings=mundosport.settings.production
