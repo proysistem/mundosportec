@@ -24,7 +24,7 @@ test -d $RUNDIR || mkdir -p $RUNDIR
 
 # Start your Django Unicorn
 # Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
-exec /home/$USER/.virtualenvs/$NAME/bin/gunicorn $NAME.wsgi:application \
+exec /home/$USER/.virtualenvs/$NAME/bin/gunicorn mundosport.wsgi:application \
   --name $NAME \
   --workers $NUM_WORKERS \
   --user=$USER \
