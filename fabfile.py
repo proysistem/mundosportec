@@ -26,8 +26,8 @@ def upgrade():
         run('git pull')
         with prefix(env.activate):
             run('pip install -r requirement/production.txt')
-            run('python manage.py migrate')
-            run('python manage.py collectstatic -l --noinput')
+            run('python manage.py migrate --settings=mundosport.settings.production')
+            run('python manage.py collectstatic -l --noinput --settings=mundosport.settings.production')
         sudo("supervisorctl restart %s" % env.project)
 
 
