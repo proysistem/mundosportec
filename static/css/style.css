@@ -30,18 +30,31 @@
 .head_tab  			/* cabacera de las tablas */
 	{
 	background: linear-gradient(#510909, #881F1F, #510909); /* Standard syntax */
-	padding: 5px 5px;
+	padding: 5px auto;
+	text-align: center;
+	}
+.head_tab_tall  			/* cabacera de las tablas */
+	{
+	background: linear-gradient(#510909, #881F1F, #110903); /* Standard syntax */
+	padding: 5px 10px 5px 10px;
+	text-align: center;
+	max-width: auto; 
+	min-width: 50px;
 	}
 .columns_tab   /*  Clumnas para los datos, en las tablas   */
 	{
 	background: linear-gradient(#2B383A,#142224); /* Standard syntax */
-	padding: 5px;
+	padding: 5px auto;
+	color: #fff;
 	}
 .columns_tab_tall   /*  Clumnas para los datos, en las tablas   */
 	{
-	width: 45px;
-	padding: 5px 10px;
-	font-size: 1em;
+	background: linear-gradient(#2B383A,#142224); /* Standard syntax */
+	max-width: 65px;
+	min-width: 60px;
+	padding: 5px 0;
+	color:   #fff;
+	text-align: right;
 	}
 .page_content
 	{
@@ -73,19 +86,21 @@
 	{
 	left: 20px;
 	}
-.width_005 {width: 005%; background-color: red;}
-.width_010 {width: 010%; background-color: red;}
-.width_015 {width: 015%; background-color: red;}
-.width_020 {width: 020%; background-color: red;}
-.width_025 {width: 025%; background-color: red;}
-.width_030 {width: 030%; background-color: red;}
-.width_035 {width: 035%; background-color: red;}
-.width_040 {width: 040%; background-color: red;}
-.width_045 {width: 045%; background-color: green;}
-.width_050 {width: 050%; background-color: red;}
-.width_090 {width: 090%; background-color: red;}
-.width_095 {width: 095%; background-color: red;}
-.width_100 {width: 100%; background-color: red;}
+.width_003 {width: 003%;}
+.width_005 {width: 005%;}
+.width_010 {width: 010%;}
+.width_015 {width: 015%;}
+.width_020 {width: 020%;}
+.width_025 {width: 025%;}
+.width_030 {width: 030%;}
+.width_035 {width: 035%;}
+.width_040 {width: 040%;}
+.width_045 {width: 045%;}
+.width_050 {width: 050%;}
+.width_090 {width: 090%;}
+.width_095 {width: 095%;}
+.width_099 {width: 099%;}
+.width_100 {width: 100%;}
 
 .align_tex_right {text-align: right;}
 .align_tex_letf {text-align: left;}
@@ -94,6 +109,15 @@
 .align_itm_right {justify-content: flex-end;}
 .align_itm_letf {align-items: flex_start;}
 .align_itm_center {align-items: flex_center;}
+
+.color_6D7969
+	{
+/*	background: linear-gradient(#6D7969, #6D9969); opacity: 0.8; /* Standard syntax */
+	background-color: rgba(109,121,105, 0.2);
+	border-bottom: 1px solid rgba(109,121,105, 0.9);
+	border-left: 1px solid rgba(109,121,105, 0.9);
+	padding: 0 20px 0 5px;
+	}
 /*- - - - -  -  Contenedor de menu vertical - - -  - - - -*/
 
 aside

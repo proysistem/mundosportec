@@ -215,6 +215,27 @@ class ExiLista(ListView):
     model = Existencia
     template_name = 'inventarios/Exi_Panel.html'
     paginate_by = 8
+    def get_initial(self):
+        initial = {}
+        try:
+            sxt = Saldoxtalla.objects.get(tex_product=self.object)
+        except:
+            pass
+        else:
+            initial['tex_inici01'] = sxt.tex_inici01
+            initial['tex_inici02'] = sxt.tex_inici02
+            initial['tex_inici03'] = sxt.tex_inici03
+            initial['tex_inici04'] = sxt.tex_inici04
+            initial['tex_inici05'] = sxt.tex_inici05
+            initial['tex_inici06'] = sxt.tex_inici06
+            initial['tex_inici07'] = sxt.tex_inici07
+            initial['tex_inici08'] = sxt.tex_inici08
+            initial['tex_inici09'] = sxt.tex_inici09
+            initial['tex_inici10'] = sxt.tex_inici10
+            initial['tex_inici11'] = sxt.tex_inici11
+            initial['tex_inici12'] = sxt.tex_inici12
+            initial['tex_inici13'] = sxt.tex_inici13
+        return initial
 
 
 class ExiView(DetailView):

@@ -1,17 +1,17 @@
 {% extends 'base/base_inventarios.html' %}
 
-{% block title %} Visualiza Existencias {% endblock title %}</title>
+{% block title %} Visualiza Productos {% endblock title %}</title>
 
 			{% block context%}
 			<div class="crea_content">
-				<h3 class="crea_proceso">Inventarios:  Existencias</h3>
+				<h3 class="crea_proceso">Inventarios: Productos</h3>
 				<a class="icon-reply crea_boton" href="{% url 'inventarios:exi_panel' %}">Volver</a>
 
 			</div>
 			<div>
-				<div>
+				<form method="POST">
 					<div class="form_content">
-						<div class="form_titulo"><h1>Visualiza Tabla de Tallas</h1></div>
+						<div class="form_titulo"><h1>Visualiza Productos</h1></div>
 						<div class="form_esc">
 							<a class="icon-cancel" href="{% url 'inventarios:exi_panel' %}"></a>
 						</div>
@@ -20,238 +20,240 @@
 								{{ form.error }}
 							</div>
 						{% endif %}
-						<div class="form_row"><div class="form_label">Sucursal :</div><div>{{object.exs_sucursal}}</div></div>
-						<div class="form_row"><div class="form_label">Producto :</div><div>{{object.exs_product}}</div></div>
-						<div class="form_row"><div class="form_label">Unidad :  </div><div>{{object.exs_idunida}}</div></div>
-						<div>
-							<table border="1" >
-								<thead>
-								 	<tr color="#:000066">
-								 		<th class="head_tab">Tabla de Tallas</th>
-										<td class="head_tab">{{ Producto.object.prd_tabtall }}</td>
-								 		<th class="head_tab">{{ Tabtalla.object.jgo_medid01 }}</th>
-								 		<th class="head_tab">{{ Tabtalla.object.jgo_medid02 }}</th>
-								 		<th class="head_tab">{{ Tabtalla.object.jgo_medid03 }}</th>
-								 		<th class="head_tab">{{ Tabtalla.object.jgo_medid04 }}</th>
-								 		<th class="head_tab">{{ Tabtalla.object.jgo_medid05 }}</th>
-								 		<th class="head_tab">{{ Tabtalla.object.jgo_medid06 }}</th>
-								 		<th class="head_tab">{{ Tabtalla.object.jgo_medid07 }}</th>
-								 		<th class="head_tab">{{ Tabtalla.object.jgo_medid08 }}</th>
-								 		<th class="head_tab">{{ Tabtalla.object.jgo_medid09 }}</th>
-								 		<th class="head_tab">{{ Tabtalla.object.jgo_medid10 }}</th>
-								 		<th class="head_tab">{{ Tabtalla.object.jgo_medid11 }}</th>
-								 		<th class="head_tab">{{ Tabtalla.object.jgo_medid12 }}</th>
-								 		<th class="head_tab">{{ Tabtalla.object.jgo_medid13 }}</th>
-								 		<th class="head_tab">TOTAL/RUBRO</th>
-								 	</tr>
-								</thead>
-								<tbody border="0">
-								 	<tr>
-								 		<th class="head_tab">Saldo Iniicial</th>
-								 		<th class="head_tab"> .: </th>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_inici01 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_inici02 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_inici03 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_inici04 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_inici05 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_inici06 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_inici07 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_inici08 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_inici09 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_inici10 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_inici11 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_inici12 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_inici13 }} </td>
-										<td class="columns_tab">{{  .object.exs_saldinc }} </td>
-									</tr>
+						{% for field in form %}
+							{% for error in field.errors %}
+								<strong>{{ field.label }}</strong>: {{ error }}<br>
+							{% endfor %}
+						{% endfor %}
+						{% for error in form.non_field_errors %}
+							<strong>{{ error }}</strong>
+						{% endfor %}
+				<div>
+				<div class="form_row"><div class="form_label">Sucursal :</div><div class=" color_6D7969">{{object.exs_sucursa}}</div></div>
+				<div class="form_row"><div class="form_label">Producto :</div><div class=" color_6D7969">{{object.exs_product}}</div><div class="form_label"> Detalle :</div><div class=" color_6D7969">{{object.exs_detalle}}</div></div>
+				<div class="form_row"><div class="form_label">Unidad :  </div><div class=" color_6D7969">{{object.exs_idunida}}</div></div>
+				</div>
 
-									<tr>
-								 		<th class="head_tab">Ingresos</th>
-								 		<th class="head_tab"> .: </th>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_ingre01 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_ingre02 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_ingre03 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_ingre04 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_ingre05 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_ingre06 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_ingre07 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_ingre08 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_ingre09 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_ingre10 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_ingre11 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_ingre12 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_ingre13 }} </td>
-										<td class="columns_tab">{{  .object.exs_ingreso }} </td>
-									</tr> 
+						<table border="0" class="width_100">
+						 	<tr color="#:000066" class="width_99">
+						 		<td class="head_tab"><div class=""><label for="">Tab./Talla</label></div></td>
+						 		<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.get_shortcode }} </td>
+								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid01 | default:'-'}} </td>
+								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid02 | default:'-'}} </td>
+								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid03 | default:'-'}} </td>
+								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid04 | default:'-'}} </td>
+								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid05 | default:'-'}} </td>
+								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid06 | default:'-'}} </td>
+								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid07 | default:'-'}} </td>
+								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid08 | default:'-'}} </td>
+								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid09 | default:'-'}} </td>
+								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid10 | default:'-'}} </td>
+								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid11 | default:'-'}} </td>
+								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid12 | default:'-'}} </td>
+								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid13 | default:'-'}} </td>
 
-								 	<tr>
-								 		<th class="head_tab">Egresos</th>
-								 		<th class="head_tab"> .: </th>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_egres01 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_egres02 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_egres03 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_egres04 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_egres05 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_egres06 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_egres07 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_egres08 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_egres09 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_egres10 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_egres11 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_egres12 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_egres13 }} </td>
-										<td class="columns_tab">{{  .object.exs_egresos }} </td>
-									</tr>
+								<td class="head_tab width_005 ">TOTALES</td>
+						 	</tr>
+						 	<tr color="#:000066">
+							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_saldinc.name}}">Saldo.inicial</label></div></td>
+								<td class="columns_tab_tall">
+									{% if object.exs_idmodel.mod_tabtall.jgo_medid01 %}
+										{{object.tex_inici01 }}
+									{% endif %}
+								</td>
 
-								 	<tr>
-								 		<th class="head_tab">Saldo Actual</th>
-								 		<th class="head_tab"> .: </th>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_actua01 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_actua02 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_actua03 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_actua04 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_actua05 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_actua06 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_actua07 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_actua08 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_actua09 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_actua10 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_actua11 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_actua12 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_actua13 }} </td>
-										<td class="columns_tab">{{  .object.exs_saldact }} </td>
-									</tr>
+								<td class="columns_tab_tall">
+									{% if object.exs_idmodel.mod_tabtall.jgo_medid02 %}
+										{{object.tex_inici02 }}
+									{% endif %}
+								</td>
 
-								 	<tr>
-								 		<th class="head_tab">S.Comprom.(Ped.Clte)</th>
-								 		<th class="head_tab"> .: </th>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_compr01 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_compr02 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_compr03 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_compr04 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_compr05 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_compr06 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_compr07 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_compr08 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_compr09 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_compr10 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_compr11 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_compr12 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_compr13 }} </td>
-										<td class="columns_tab">{{  .object.exs_comprom }} </td>
-									</tr>
+								<td class="columns_tab_tall">
+									{% if object.exs_idmodel.mod_tabtall.jgo_medid03 %}
+										{{object.tex_inici03 }}
+									{% endif %}
+								</td>
 
-								 	<tr>
-								 		<th class="head_tab">S.xConf.(Ped.a Prov.)</th>
-								 		<th class="head_tab"> .: </th>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_xconf01 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_xconf02 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_xconf03 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_xconf04 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_xconf05 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_xconf06 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_xconf07 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_xconf08 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_xconf09 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_xconf10 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_xconf11 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_xconf12 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_xconf13 }} </td>
-										<td class="columns_tab">{{  .object.exs_xconfir }} </td>
-									</tr>
+								<td class="columns_tab_tall">
+									{% if object.exs_idmodel.mod_tabtall.jgo_medid04 %}
+										{{object.tex_inici04 }}
+									{% endif %}
+								</td>
 
-								 	<tr>
-								 		<th class="head_tab">Saldo Disponible</th>
-								 		<th class="head_tab"> .: </th>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_dispo01 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_dispo02 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_dispo03 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_dispo04 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_dispo05 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_dispo06 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_dispo07 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_dispo08 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_dispo09 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_dispo10 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_dispo11 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_dispo12 }} </td>
-										<td class="columns_tab">{{ Saldoxtalla.object.tex_dispo13 }} </td>
-										<td class="columns_tab">{{  .object.exs_dsponib }} </td>
-									</tr>
+								<td class="columns_tab_tall">
+									{% if object.exs_idmodel.mod_tabtall.jgo_medid05 %}
+										{{object.tex_inici05 }}
+									{% endif %}
+								</td>
 
-								 	<tr>
-								 		<th class="head_tab"    colspan="02">Fecha de último Ingreso</th>
-										<td class="columns_tab" colspan="03">{{ Existencia.object.exs_feching }} </td>
-										<td class="columns_tab" colspan="11"></td>
-									</tr>
+								<td class="columns_tab_tall">
+									{% if object.exs_idmodel.mod_tabtall.jgo_medid06 %}
+										{{object.tex_inici06 }}
+									{% endif %}
+								</td>
 
-								 	<tr>
-								 		<th class="head_tab"    colspan="02">Fecha de último Egreso</th>
-										<td class="columns_tab" colspan="03">{{ Existencia.object.exs_fechegr }} </td>
-										<td class="columns_tab" colspan="11"></td>
-									</tr>
+								<td class="columns_tab_tall">
+									{% if object.exs_idmodel.mod_tabtall.jgo_medid07 %}
+										{{object.tex_inici07 }}
+									{% endif %}
+								</td>
 
-								 	<tr>
-								 		<th class="head_tab"    colspan="02">>Fecha de Inventario</th>
-										<td class="columns_tab" colspan="03">{{ Existencia.object.exs_fechinv }} </td>
-										<td class="columns_tab" colspan="11"></td>
-									</tr>
+								<td class="columns_tab_tall">
+									{% if object.exs_idmodel.mod_tabtall.jgo_medid08 %}
+										{{object.tex_inici08 }}
+									{% endif %}
+								</td>
 
-								 	<tr>
-								 		<th class="head_tab"    colspan="02">>Costo Pormedio Anterior</th>
-										<td class="columns_tab" colspan="03">{{ Existencia.object.exs_costant }} </td>
-										<td class="columns_tab" colspan="11"></td>
-									</tr>
+								<td class="columns_tab_tall">
+									{% if object.exs_idmodel.mod_tabtall.jgo_medid09 %}
+										{{object.tex_inici09 }}
+									{% endif %}
+								</td>
 
-								 	<tr>
-								 		<th class="head_tab"    colspan="02">>Saldo Disponib.Anteriorle</th>
-										<td class="columns_tab" colspan="03">{{ Existencia.object.exs_dispant }} </td>
-										<td class="columns_tab" colspan="11"></td>
-									</tr>
+								<td class="columns_tab_tall">
+									{% if object.exs_idmodel.mod_tabtall.jgo_medid10 %}
+										{{object.tex_inici10 }}
+									{% endif %}
+								</td>
 
-								 	<tr>
-								 		<th class="head_tab"    colspan="02">>Costo Actual</th>
-										<td class="columns_tab" colspan="03">{{ Existencia.object.exs_costact }} </td>
-										<td class="columns_tab" colspan="11"></td>
-									</tr>
+								<td class="columns_tab_tall">
+									{% if object.exs_idmodel.mod_tabtall.jgo_medid11 %}
+										{{object.tex_inici11 }}
+									{% endif %}
+								</td>
 
-								 	<tr>
-								 		<th class="head_tab"    colspan="02">>Costo Promedio Actual</th>
-										<td class="columns_tab" colspan="03">{{ Existencia.object.exs_cosprom }} </td>
-										<td class="columns_tab" colspan="11"></td>
-									</tr>
+								<td class="columns_tab_tall">
+									{% if object.exs_idmodel.mod_tabtall.jgo_medid12 %}
+										{{object.tex_inici12 }}
+									{% endif %}
+								</td>
 
-								 	<tr>
-<!--										
-								 		<th class="head_tab">Saldo Disponible</th>
-								 		<th class="head_tab"> .: </th>
-										<td class="columns_tab">{{ Existencia.object.exs_distrib }} </td>
-								 		<th class="head_tab">Saldo Disponible</th>
-								 		<th class="head_tab"> .: </th>
-										<td class="columns_tab">{{ Existencia.object.exs_mayoris }} </td>
-								 		<th class="head_tab">Saldo Disponible</th>
-								 		<th class="head_tab"> .: </th>
-										<td class="columns_tab">{{ Existencia.object.exs_detalle }} </td>
-								 		<th class="head_tab">Saldo Disponible</th>
-								 		<th class="head_tab"> .: </th>
-										<td class="columns_tab">{{ Existencia.object.exs_publico }} </td>
-								 		<th class="head_tab">Saldo Disponible</th>
-								 		<th class="head_tab"> .: </th>
-										<td class="columns_tab">{{ Existencia.object.exs_special }} </td>
--->
-									</tr>
+								<td class="columns_tab_tall">
+									{% if object.exs_idmodel.mod_tabtall.jgo_medid13 %}
+										{{object.tex_inici13 }}
+									{% endif %}
+								</td>
 
+								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_saldinc | default:'0.00'}}</div></td>
+						 	</tr>
+						 	<tr color="#:000066">
 
+							 	<td class="head_tab"  colspan="2"><div class="form_label"><label for="{{form.exs_ingreso.name}}">Ingresos</label></div></td>
+								<td class="columns_tab_tall width_005">{{ object.tex_ingre01 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.tex_ingre02 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.tex_ingre03 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.tex_ingre04 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.tex_ingre05 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.tex_ingre06 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.tex_ingre07 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.tex_ingre08 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.tex_ingre09 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.tex_ingre10 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.tex_ingre11 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.tex_ingre12 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.tex_ingre13 }} </td>
+								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_ingreso | default:'0.00'}}</div></div></td>
+						 	</tr>
+						 	<tr color="#:000066">
+							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_egresos.name}}">Egresos</label></div></td>
+								<td class="columns_tab_tall width_005">{{ form.tex_egres01 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_egres02 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_egres03 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_egres04 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_egres05 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_egres06 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_egres07 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_egres08 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_egres09 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_egres10 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_egres11 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_egres12 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_egres13 }} </td>
+								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_egresos | default:'0.00'}}</div></td>
+						 	</tr>
+						 	<tr color="#:000066">
+							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_saldact.name}}">Saldo.Actual</label></div></td>
+								<td class="columns_tab_tall width_005">{{ form.tex_actua01 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_actua02 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_actua03 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_actua04 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_actua05 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_actua06 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_actua07 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_actua08 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_actua09 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_actua10 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_actua11 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_actua12 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_actua13 }} </td>
+								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_saldact | default:'0.00'}}</div></td>
+						 	</tr>
+						 	<tr color="#:000066">
+							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_comprom.name}}">S.Comprometido</label></div></td>
+								<td class="columns_tab_tall width_005">{{ form.tex_compr01 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_compr02 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_compr03 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_compr04 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_compr05 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_compr06 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_compr07 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_compr08 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_compr09 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_compr10 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_compr11 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_compr12 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_compr13 }} </td>
+								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_comprom | default:'0.00'}}</div></td>
+						 	</tr>
+						 	<tr color="#:000066">
+							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_xconfir.name}}">Sldo.x/confirmar</label></div></td>
+								<td class="columns_tab_tall width_005">{{ form.tex_xconf01 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_xconf02 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_xconf03 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_xconf04 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_xconf05 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_xconf06 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_xconf07 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_xconf08 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_xconf09 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_xconf10 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_xconf11 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_xconf12 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_xconf13 }} </td>
+								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_xconfir | default:'0.00'}}</div></td>
+						 	</tr>
+						 	<tr color="#:000066">
+							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_dsponib.name}}">Saldo.disponible</label></div></td>
+								<td class="columns_tab_tall width_005">{{ form.tex_dispo01 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_dispo02 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_dispo03 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_dispo04 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_dispo05 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_dispo06 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_dispo07 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_dispo08 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_dispo09 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_dispo10 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_dispo11 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_dispo12 }} </td>
+								<td class="columns_tab_tall width_005">{{ form.tex_dispo13 }} </td>
+								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_dsponib | default:'0.00'}}</div></td>
+						 	</tr>
+						</table>
+						<table border="1" class="width_100">
+						<tr><td class="form_label width_020">Fecha/últ.Ingres</td> <td class="form_widget align_tex_right">{{object.exs_feching | default:'0.00'}}</td> <td colspan="2"><h2 CLASS="align_tex_center">P  R  E  C  I  O  S</h2></td> <td   class="form_widget">{{object.exs_imgprod}}</td></tr>
+						<tr><td class="form_label width_020">Fecha/últ.Egreso</td> <td class="form_widget align_tex_right">{{object.exs_fechegr | default:'0.00'}}</td> <td colspan="2"></td><td rowspan="6" class="form_label">iamgen</td> </tr>
+						<tr><td class="form_label width_020">Fecha de invent.</td> <td class="form_widget align_tex_right">{{object.exs_fechinv | default:'0.00'}}</td> <td class="form_label">Precio:Distribuidor</td><td class="form_widget align_tex_right">{{ object.exs_distrib | default:'0.00'}}</td></tr>
+						<tr><td class="form_label width_020">Costo.promedio  </td> <td class="form_widget align_tex_right">{{object.exs_costant | default:'0.00'}}</td> <td class="form_label">Precio:Mayorista   </td><td class="form_widget align_tex_right">{{ object.exs_mayoris | default:'0.00'}}</td></tr>
+						<tr><td class="form_label width_020">Disponible.Ant. </td> <td class="form_widget align_tex_right">{{object.exs_dispant | default:'0.00'}}</td> <td class="form_label">Precio:Detallista  </td><td class="form_widget align_tex_right">{{ object.exs_detalls | default:'0.00'}}</td></tr>
+						<tr><td class="form_label width_020">Costo Actual    </td> <td class="form_widget align_tex_right">{{object.exs_costact | default:'0.00'}}</td> <td class="form_label">Precio:Publico     </td><td class="form_widget align_tex_right">{{ object.exs_publico | default:'0.00'}}</td></tr>
+						<tr><td class="form_label width_020">Cost.promed.Act.</td> <td class="form_widget align_tex_right">{{object.exs_cosprom | default:'0.00'}}</td> <td class="form_label">Precio:Especial    </td><td class="form_widget align_tex_right">{{ object.exs_special | default:'0.00'}}</td></tr>
 
-
-
-								</tbody>
 							</table>
-						</div>
-						<br><br>
-						<div ><a class="icon-reply crea_boton" href=" {% url 'inventarios:tll_panel' %} ">  Ok   </a></div>
+						<br>
+						<div ><a class="icon-reply crea_boton" href=" {% url 'inventarios:exi_panel' %} ">  Ok   </a></div>
 						<br>
 					</div>
-				</div>
+				</form>
 			</div>
 		{% endblock context%}

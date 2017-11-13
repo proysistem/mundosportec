@@ -14,10 +14,18 @@
 					<thead>
 					 	<tr color="#:000066">
 							<th class="head_tab">Producto</th>
-							<th class="head_tab">Detalle</th>
-							<th class="head_tab">Abreviatura</th>
+							<th class="head_tab">Detalle del producto</th>
 							<th class="head_tab">Tabla</th>
 					 		<th class="head_tab">Unidad</th>
+							<th class="head_tab">Precio-vnta. publico</th>
+					 		<th class="head_tab">Saldo Inicial</th>
+					 		<th class="head_tab">Saldo Ingresos</th>
+					 		<th class="head_tab">Saldo Egresos</th>
+					 		<th class="head_tab">Saldo Actual</th>
+					 		<th class="head_tab">Saldo Comprom.</th>
+					 		<th class="head_tab">Saldo x Confirm.</th>
+					 		<th class="head_tab">Saldo Disponible</th>
+					 		{% comment %}
 					 		<th class="head_tab">Tall.01</th>
 					 		<th class="head_tab">Tall.02</th>
 					 		<th class="head_tab">Tall.03</th>
@@ -31,6 +39,7 @@
 					 		<th class="head_tab">Tall.11</th>
 					 		<th class="head_tab">Tall.12</th>
 					 		<th class="head_tab">Tall.13</th>
+					 		{% endcomment%}
 					 		<th class="head_tab" colspan="3">Opción</th>
 					 	</tr>
 					</thead>
@@ -40,25 +49,20 @@
 					 	<tr>
 							<td class="columns_tab">{{ var_exifield.exs_product }} </td>
 							<td class="columns_tab">{{ var_exifield.exs_detalle }} </td>
-							<td class="columns_tab">{{ var_exifield.exs_abrevia }} </td>
 							<td class="columns_tab">{{ var_exifield.exs_tabtall }} </td>
 							<td class="columns_tab">{{ var_exifield.exs_idunida }} </td>
-							<td class="columns_tab"> par1  </td>
-							<td class="columns_tab"> par2  </td>
-							<td class="columns_tab"> par3  </td>
-							<td class="columns_tab"> par4  </td>
-							<td class="columns_tab"> par5  </td>
-							<td class="columns_tab"> par6  </td>
-							<td class="columns_tab"> par7  </td>
-							<td class="columns_tab"> par8  </td>
-							<td class="columns_tab"> par9  </td>
-							<td class="columns_tab"> par10 </td>
-							<td class="columns_tab"> par11 </td>
-							<td class="columns_tab"> par12 </td>
-							<td class="columns_tab"> par13 </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_publico | default:'0.00' }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_saldinc | default:'0.00' }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_ingreso | default:'0.00' }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_egresos | default:'0.00' }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_saldact | default:'0.00' }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_comprom | default:'0.00' }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_xconfir | default:'0.00' }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_dsponib | default:'0.00' }} </td>
+
+							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:exi_view' var_exifield.id %}"></a></td>
 							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:exi_edit' var_exifield.id %}"></a></td>
 							{% comment %}
-							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:exi_panel' var_exifield.id %}"></a></td>
 							<td class="columns_tab"><a class="icon-trash botones" href="{% url 'inventarios:exi_panel' var_exifield.id %}"></a></td>
 
 							{% endcomment %}

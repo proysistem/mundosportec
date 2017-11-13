@@ -14,13 +14,6 @@ from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista,
 #from apps.parametros.views import  CjaLista, CjrLista, McjLista, MdaLista
 #SucNuevo, SucView, SucEdita, SucDelet
 urlpatterns = [
-
-#    url(r'^PrdPanel',                  PrdLista.as_view(), name='prd_panel'),
-#    url(r'^PrdNuevo/$',                PrdNuevo.as_view(), name='prd_new'),
-#    url(r'^PrdConsulta/(?P<pk>\d+)/$', PrdView.as_view(),  name='prd_view'),
-#    url(r'^PrdEdita/(?P<pk>\d+)/$',    PrdEdita.as_view(), name='prd_edit'),
-#    url(r'^PrdElimina/(?P<pk>\d+)/$',  PrdDelet.as_view(), name='prd_delet'),
-
     url(r'^DivPanel',                  DivLista.as_view(), name='div_panel'),
     url(r'^DivNuevo/$',                DivNuevo.as_view(), name='div_new'),
     url(r'^DivConsulta/(?P<pk>\d+)/$', DivView.as_view(),  name='div_view'),
@@ -56,7 +49,7 @@ urlpatterns = [
     url(r'^ExiEdita/(?P<pk>\d+)/$',    ExiEdita.as_view(), name='exi_edit'),
     url(r'^TablaTalla/(?P<model>\d+)/$',  TablaTalla.as_view(), name='tabla_talla'),
      # url(r'^ExiNuevo/$',                ProdkyLista.as_view(), name='exi_new'),
-#    url(r'^ExiConsulta/(?P<pk>\d+)/$', ExiView.as_view(),  name='exi_view'),
+    url(r'^ExiConsulta/(?P<pk>\d+)/$', ExiView.as_view(),  name='exi_view'),
 #    url(r'^ExiElimina/(?P<pk>\d+)/$',  ExiDelet.as_view(), name='exi_delet'),
 
 #    url(r'^SxtPanel',                  SxtLista.as_view(), name='sxt_panel'),

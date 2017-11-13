@@ -254,7 +254,7 @@ class ExistenciaEditForm(forms.ModelForm):
             'exs_costant':   'Costo.promedio.Anterior',
             'exs_dispant':   'Disponible.Anterior',
             'exs_costact':   'Costo Actual',
-            'exs_cosprom':   'Costo promed.Actual',
+            'exs_cosprom':   'Cost.promed.Actual',
             'exs_distrib':   'Precio:Distribuidos',
             'exs_mayoris':   'Precio:Mayorista',
             'exs_detalls':   'Precio:Detallista',
@@ -263,7 +263,6 @@ class ExistenciaEditForm(forms.ModelForm):
             'exs_imgprod':   'Imagen del producto',
             'exs_statreg':   'Status del reg.',
         }
-
         widgets = {
             "exs_sucursa":  forms.Select(),
             "exs_iddivis":  forms.Select(),

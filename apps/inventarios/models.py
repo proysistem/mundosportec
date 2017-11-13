@@ -280,11 +280,94 @@ class Saldoxtalla(models.Model):
             (self.tex_inici12 or 0) +
             (self.tex_inici13 or 0)
         )
-
+        self.tex_product.exs_ingreso = (
+            (self.tex_ingre01 or 0) +
+            (self.tex_ingre02 or 0) +
+            (self.tex_ingre03 or 0) +
+            (self.tex_ingre04 or 0) +
+            (self.tex_ingre05 or 0) +
+            (self.tex_ingre06 or 0) +
+            (self.tex_ingre07 or 0) +
+            (self.tex_ingre08 or 0) +
+            (self.tex_ingre09 or 0) +
+            (self.tex_ingre10 or 0) +
+            (self.tex_ingre11 or 0) +
+            (self.tex_ingre12 or 0) +
+            (self.tex_ingre13 or 0)
+        )
+        self.tex_product.exs_egresos = (
+            (self.tex_egres01 or 0) +
+            (self.tex_egres02 or 0) +
+            (self.tex_egres03 or 0) +
+            (self.tex_egres04 or 0) +
+            (self.tex_egres05 or 0) +
+            (self.tex_egres06 or 0) +
+            (self.tex_egres07 or 0) +
+            (self.tex_egres08 or 0) +
+            (self.tex_egres09 or 0) +
+            (self.tex_egres10 or 0) +
+            (self.tex_egres11 or 0) +
+            (self.tex_egres12 or 0) +
+            (self.tex_egres13 or 0)
+        )
+        self.tex_product.exs_comprom = (
+            (self.tex_compr01 or 0) +
+            (self.tex_compr02 or 0) +
+            (self.tex_compr03 or 0) +
+            (self.tex_compr04 or 0) +
+            (self.tex_compr05 or 0) +
+            (self.tex_compr06 or 0) +
+            (self.tex_compr07 or 0) +
+            (self.tex_compr08 or 0) +
+            (self.tex_compr09 or 0) +
+            (self.tex_compr10 or 0) +
+            (self.tex_compr11 or 0) +
+            (self.tex_compr12 or 0) +
+            (self.tex_compr13 or 0)
+        )
+        self.tex_product.exs_xconfir = (
+            (self.tex_xconf01 or 0) +
+            (self.tex_xconf02 or 0) +
+            (self.tex_xconf03 or 0) +
+            (self.tex_xconf04 or 0) +
+            (self.tex_xconf05 or 0) +
+            (self.tex_xconf06 or 0) +
+            (self.tex_xconf07 or 0) +
+            (self.tex_xconf08 or 0) +
+            (self.tex_xconf09 or 0) +
+            (self.tex_xconf10 or 0) +
+            (self.tex_xconf11 or 0) +
+            (self.tex_xconf12 or 0) +
+            (self.tex_xconf13 or 0)
+        )
+        self.tex_product.exs_saldact = (
+            (self.tex_inici01 or 0) + (self.tex_ingre01 or 0) - (self.tex_egres01 or 0) +
+            (self.tex_inici02 or 0) + (self.tex_ingre02 or 0) - (self.tex_egres02 or 0) +
+            (self.tex_inici03 or 0) + (self.tex_ingre03 or 0) - (self.tex_egres03 or 0) +
+            (self.tex_inici04 or 0) + (self.tex_ingre04 or 0) - (self.tex_egres04 or 0) +
+            (self.tex_inici05 or 0) + (self.tex_ingre05 or 0) - (self.tex_egres05 or 0) +
+            (self.tex_inici06 or 0) + (self.tex_ingre06 or 0) - (self.tex_egres06 or 0) +
+            (self.tex_inici07 or 0) + (self.tex_ingre07 or 0) - (self.tex_egres07 or 0) +
+            (self.tex_inici08 or 0) + (self.tex_ingre08 or 0) - (self.tex_egres08 or 0) +
+            (self.tex_inici09 or 0) + (self.tex_ingre09 or 0) - (self.tex_egres09 or 0) +
+            (self.tex_inici10 or 0) + (self.tex_ingre10 or 0) - (self.tex_egres10 or 0) +
+            (self.tex_inici11 or 0) + (self.tex_ingre11 or 0) - (self.tex_egres11 or 0) +
+            (self.tex_inici12 or 0) + (self.tex_ingre12 or 0) - (self.tex_egres12 or 0) +
+            (self.tex_inici13 or 0) + (self.tex_ingre13 or 0) - (self.tex_egres13 or 0)
+        )
+        self.tex_product.exs_dsponib = (
+            (self.tex_inici01 or 0) + (self.tex_ingre01 or 0) - (self.tex_egres01 or 0) - (self.tex_compr01 or 0) +
+            (self.tex_inici02 or 0) + (self.tex_ingre02 or 0) - (self.tex_egres02 or 0) - (self.tex_compr02 or 0) +
+            (self.tex_inici03 or 0) + (self.tex_ingre03 or 0) - (self.tex_egres03 or 0) - (self.tex_compr03 or 0) +
+            (self.tex_inici04 or 0) + (self.tex_ingre04 or 0) - (self.tex_egres04 or 0) - (self.tex_compr04 or 0) +
+            (self.tex_inici05 or 0) + (self.tex_ingre05 or 0) - (self.tex_egres05 or 0) - (self.tex_compr05 or 0) +
+            (self.tex_inici06 or 0) + (self.tex_ingre06 or 0) - (self.tex_egres06 or 0) - (self.tex_compr06 or 0) +
+            (self.tex_inici07 or 0) + (self.tex_ingre07 or 0) - (self.tex_egres07 or 0) - (self.tex_compr07 or 0) +
+            (self.tex_inici08 or 0) + (self.tex_ingre08 or 0) - (self.tex_egres08 or 0) - (self.tex_compr08 or 0) +
+            (self.tex_inici09 or 0) + (self.tex_ingre09 or 0) - (self.tex_egres09 or 0) - (self.tex_compr09 or 0) +
+            (self.tex_inici10 or 0) + (self.tex_ingre10 or 0) - (self.tex_egres10 or 0) - (self.tex_compr10 or 0) +
+            (self.tex_inici11 or 0) + (self.tex_ingre11 or 0) - (self.tex_egres11 or 0) - (self.tex_compr11 or 0) +
+            (self.tex_inici12 or 0) + (self.tex_ingre12 or 0) - (self.tex_egres12 or 0) - (self.tex_compr12 or 0) +
+            (self.tex_inici13 or 0) + (self.tex_ingre13 or 0) - (self.tex_egres13 or 0) - (self.tex_compr13 or 0)
+        )
         self.tex_product.save()
-        # self.tex_product.exs_ingreso =
-        # self.tex_product.exs_egresos
-        # self.tex_product.exs_saldact
-        # self.tex_product.exs_comprom
-        # self.tex_product.exs_xconfir
-        # self.tex_product.exs_dsponib
