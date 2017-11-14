@@ -37,7 +37,7 @@
 						<table border="0" class="width_100">
 						 	<tr color="#:000066" class="width_99">
 						 		<td class="head_tab"><div class=""><label for="">Tab./Talla</label></div></td>
-						 		<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.get_shortcode }} </td>
+						 		<td class="head_tab_tall">{{ object.exs_tabtall }} </td>
 								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid01 | default:'-'}} </td>
 								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid02 | default:'-'}} </td>
 								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid03 | default:'-'}} </td>
@@ -58,79 +58,79 @@
 							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_saldinc.name}}">Saldo.inicial</label></div></td>
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid01 %}
-										{{object.tex_inici01 }}
+										{{object.saldoxtalla.tex_inici01|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid02 %}
-										{{object.tex_inici02 }}
+										{{object.saldoxtalla.tex_inici02|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid03 %}
-										{{object.tex_inici03 }}
+										{{object.saldoxtalla.tex_inici03|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid04 %}
-										{{object.tex_inici04 }}
+										{{object.saldoxtalla.tex_inici04|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid05 %}
-										{{object.tex_inici05 }}
+										{{object.saldoxtalla.tex_inici05|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid06 %}
-										{{object.tex_inici06 }}
+										{{object.saldoxtalla.tex_inici06|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid07 %}
-										{{object.tex_inici07 }}
+										{{object.saldoxtalla.tex_inici07|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid08 %}
-										{{object.tex_inici08 }}
+										{{object.saldoxtalla.tex_inici08|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid09 %}
-										{{object.tex_inici09 }}
+										{{object.saldoxtalla.tex_inici09|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid10 %}
-										{{object.tex_inici10 }}
+										{{object.saldoxtalla.tex_inici10|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid11 %}
-										{{object.tex_inici11 }}
+										{{object.saldoxtalla.tex_inici11|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid12 %}
-										{{object.tex_inici12 }}
+										{{object.saldoxtalla.tex_inici12|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid13 %}
-										{{object.tex_inici13 }}
+										{{object.saldoxtalla.tex_inici13|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
@@ -173,19 +173,19 @@
 						 	</tr>
 						 	<tr color="#:000066">
 							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_saldact.name}}">Saldo.Actual</label></div></td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua01 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua02 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua03 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua04 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua05 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua06 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua07 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua08 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua09 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua10 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua11 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua12 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua13 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_actua01 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_actua02 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_actua03 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_actua04 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_actua05 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_actua06 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_actua07 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_actua08 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_actua09 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_actua10 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_actua11 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_actua12 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_actua13 }} </td>
 								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_saldact | default:'0.00'}}</div></td>
 						 	</tr>
 						 	<tr color="#:000066">
