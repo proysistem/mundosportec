@@ -1,7 +1,6 @@
 # coding=utf-8
-
-# from datetime import datetime
-# from os.path import isfile
+from datetime import datetime
+from os.path import isfile
 
 from fabric.api import sudo, run, env, cd, local, settings, prefix, task
 
@@ -31,19 +30,19 @@ def upgrade():
         sudo("supervisorctl restart %s" % env.project)
 
 
-# @task
-# def backup():
-#     now = datetime.now()
-#     file_name = 'cacperu_%s.out' % now.strftime("%Y-%m-%d_%Hh")  # :%M:%S
+@task
+def backup():
+    now = datetime.now()
+    file_name = 'mundosportec_%s.out' % now.strftime("%Y-%m-%d_%Hh")  # :%M:%S
 
-#     if not isfile('/home/guido/%s' % file_name):
-#         # Genera el respaldo
-#         with cd('~'):
-#             run('sudo -u postgres pg_dumpall > %s' % file_name)
-#         # Descarga el archivo
-#         local('scp pytel@server.cacperu.com:%s /home/guido/' % file_name)
-#     # Ejecuta el respaldo
-#     local('sudo -u postgres psql -f /home/guido/%s' % file_name)
+    if not isfile('/home/pro/backups/%s' % file_name):
+        # Genera el respaldo
+        with cd('~/backups'):
+            sudo('sudo -u postgres pg_dump mundosportec > %s' % file_name)
+        # Descarga el archivo
+        # local('scp pytel@server.cacperu.com:%s /home/pro/' % file_name)
+    # Ejecuta el respaldo
+    # local('sudo -u postgres psql -f /home/pro/%s' % file_name)
 
 
 # @task

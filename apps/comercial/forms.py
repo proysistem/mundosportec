@@ -1,5 +1,6 @@
 from django import forms
 from .models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura
+from django.utils.timezone import localtime, now
 
 
 class ClienteForm(forms.ModelForm):
@@ -53,7 +54,7 @@ class ClienteForm(forms.ModelForm):
                 'clt_telefon': forms.NumberInput(),
                 'clt_celular': forms.NumberInput(),
                 'clt_correoe': forms.EmailInput(),
-#               'clt_imgclte': forms.NumberInput(),
+                # 'clt_imgclte': forms.NumberInput(),
                 'clt_rgunico': forms.TextInput(),
                 'clt_categor': forms.Select(),
                 }
@@ -113,7 +114,7 @@ class ProveedorForm(forms.ModelForm):
                 'prv_telefon': forms.NumberInput(),
                 'prv_celular': forms.NumberInput(),
                 'prv_correoe': forms.EmailInput(),
-#               'prv_imgprov': forms.NumberInput(),
+                # 'prv_imgprov': forms.NumberInput(),
                 'prv_rgunico': forms.TextInput(),
                 'prv_categor': forms.Select(),
         }
@@ -173,12 +174,14 @@ class VendedorForm(forms.ModelForm):
                 'vnd_telefon': forms.NumberInput(),
                 'vnd_ncelula': forms.NumberInput(),
                 'vnd_correoe': forms.EmailInput(),
-#               'vnd_addrimg': forms.NumberInput(),
+                # 'vnd_addrimg': forms.NumberInput(),
                 'vnd_rgunico': forms.TextInput(),
                 'vnd_categor': forms.Select(),
                 }
 
+
 class MovinventForm(forms.ModelForm):
+
     class Meta:
         model = Movinvent
         fields = [
@@ -298,7 +301,7 @@ class PedidoForm(forms.ModelForm):
                 'ped_cajeras',
                 'ped_cliente',
                 'ped_vendedo',
-#               'ped_factura',
+                # 'ped_factura',
                 'ped_totitms',
                 'ped_totvlor',
                 'ped_totdsct',
@@ -316,7 +319,7 @@ class PedidoForm(forms.ModelForm):
                 'ped_cajeras':  'Tipo/Movimiento',
                 'ped_cliente':  'Vendedor',
                 'ped_vendedo':  'Cliente',
-#               'ped_factura':  'Sucursal',
+                # 'ped_factura':  'Sucursal',
                 'ped_totitms':  'Producto',
                 'ped_totvlor':  'Unidad',
                 'ped_totdsct':  'Talla 01',
@@ -334,7 +337,7 @@ class PedidoForm(forms.ModelForm):
                 'ped_cajeras':   forms.Select(),
                 'ped_cliente':   forms.Select(),
                 'ped_vendedo':   forms.Select(),
-#               'ped_factura':   forms.Select(),
+                # 'ped_factura':   forms.Select(),
                 'ped_totitms':   forms.NumberInput(),
                 'ped_totvlor':   forms.NumberInput(),
                 'ped_totdsct':   forms.NumberInput(),
@@ -346,11 +349,15 @@ class PedidoForm(forms.ModelForm):
 
 
 class FacturaForm(forms.ModelForm):
+    fac_fechfac = forms.DateField(initial=localtime(now()).date())
+    # TODO:
+    # - Create Inline form form with these fields:
+    #   Product, Detail (? is this writable?), Quantity, Unit, Price, Discount, IVA, Value
+
     class Meta:
         model = Factura
         fields = [
                 'fac_idfactu',
-                'fac_mvinven',
                 'fac_fechfac',
                 'fac_cajanum',
                 'fac_cajeras',
@@ -376,7 +383,6 @@ class FacturaForm(forms.ModelForm):
         labels = {
 
                 'fac_idfactu':  'Núm. de Factura',
-                'fac_mvinven':  'Núm. de Movimiento',
                 'fac_fechfac':  'Fecha de Factura',
                 'fac_cajanum':  'Núm. de Caja',
                 'fac_cajeras':  'Cajer@',
@@ -399,8 +405,7 @@ class FacturaForm(forms.ModelForm):
                 'fac_otropgo':  'Otra forma',
         }
         widgets = {
-                #fac_idfactu':  NumberInput(),
-                'fac_mvinven':  forms.Select(),
+                # fac_idfactu':  NumberInput(),
                 'fac_fechfac':  forms.DateInput(attrs={"type": "date"}),
                 'fac_cajanum':  forms.Select(),
                 'fac_cajeras':  forms.Select(),
@@ -422,4 +427,3 @@ class FacturaForm(forms.ModelForm):
                 'fac_pgocred':  forms.NumberInput(),
                 'fac_otropgo':  forms.NumberInput(),
         }
-
