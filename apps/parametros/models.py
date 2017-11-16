@@ -81,3 +81,14 @@ class Motivo(models.Model):
 
     mot_detalle = models.CharField('Detalle', max_length=20)
     mot_abrevia = models.CharField('Abreviatura', max_length=10)
+
+
+class Controlador(models.Model):
+    ctl_idcontr = models.CharField('Cód. del control de secuencia',max_length=3, primary_key=True)
+    ctl_detalle = models.CharField('Detalle que documento  controla', max_length=20)
+    ctl_abrevia = models.CharField('Abreviatura', max_length=10)
+    ctl_secuenc = models.IntegerField('Secuencia del documento', )
+
+    def __str__(self):
+        return "%s" % (self.suc_nombres)
+

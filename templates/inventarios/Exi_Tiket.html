@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+
+{% block title %} Tikets para  Productos {% endblock title %}</title>
+
+		{% block context%}
+			<table>
+				<tr>
+					<td>{{object.exs_sucursa}}</td>
+				</tr>
+				<tr>
+					<td>{{object.exs_iddivic}}</td>
+				</tr>
+				<tr>
+					<td>{{object.exs_idmarca}}</td>
+				</tr>
+				<tr>
+					<td>{{object.exs_idmodel}}</td>
+				</tr>
+				<tr>
+					<td>{{object.exs_idcolor}}</td>
+				</tr>
+				<tr>
+					<td>{{object.exs_codigo de barra}}</td>
+				</tr>
+				<tr>
+					<td>{{object.exs_product}}-{{object.exs_tabtall}}</td>
+				</tr>
+			</table>
+		{% endblock context%}

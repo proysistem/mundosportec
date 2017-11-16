@@ -1,0 +1,60 @@
+
+
+
+{% extends 'base/base.html' %}
+
+{% block title %} Graba Facturas {% endblock title %}</title>
+
+		{% block context%}
+
+		<section>
+			<article>
+				<div>
+					<div>Feactura: </div> <div> fac_numfacr</div>
+				</div>
+				<div>
+					<div>Fecha : </div> <div> fac_fechmov</div>
+				</div>
+				<div>
+					<div>Cliente : </div> <div> fac_cliente</div>
+				</div>
+			</article>
+		</section>
+		<section>
+			<article>
+				<div>
+					<div>producto </div> <div> cantid.</div><div> Preecio</div><div>IVA</div><div> Total</div>
+				</div>
+				<div>
+					<div>mvi_product </div> <div>mvi_kntidad</div><div>mvi_precios</div><div>mvi_impuest</div><div>wrk_totales</div>
+				</div>
+			</article>
+		</section>
+		<section>
+			<article>
+				<div>
+					<div>Forma/pago</div> <div>fac_pgoefec</div><div>fac_totitms</div><div>Total.valores</div><div>fac_totvlor</div>
+				</div>
+				<div>
+					<div>&quote;</div> <div>fac_pgocheq</div><div>&quote;</div><div>Total.dscto</div><div>fac_totdsct</div>
+				</div>
+				<div>
+					<div>&quote;</div> <div>fac_pgotjcr</div><div>&quote;</div><div>Total.Recargos</div><div>fac_totrkrg</div>
+				</div>
+				<div>
+				<div>
+					<div>&quote;</div> <div>fac_pgotjcr</div><div>&quote;</div><div>Total.Aranceles</div><div>fac_totaran</div>
+				</div>
+				<div>
+				<div>
+					<div>&quote;</div> <div>fac_pgocred</div><div>&quote;</div><div>Total.IVA</div><div>fac_tottaxs</div>
+				</div>
+				<div>
+				<div>
+					<div>&quote;</div> <div>wrk_totpgdo</div><div>&quote;</div><div>Total.a Pagar</div><div>wrk_totapag</div>
+				</div>
+			</article>
+		</section>
+
+
+		{% endblock context%}
