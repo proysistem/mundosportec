@@ -51,14 +51,14 @@
 							<td class="columns_tab">{{ var_exifield.exs_detalle }} </td>
 							<td class="columns_tab">{{ var_exifield.exs_tabtall }} </td>
 							<td class="columns_tab">{{ var_exifield.exs_idunida }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_publico | default:'0.00' }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_saldinc | default:'0.00' }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_ingreso | default:'0.00' }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_egresos | default:'0.00' }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_saldact | default:'0.00' }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_comprom | default:'0.00' }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_xconfir | default:'0.00' }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_dsponib | default:'0.00' }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_publico|default:0|stringformat:"0.2f" }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_saldinc|default:0|stringformat:"0.2f" }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_ingreso|default:0|stringformat:"0.2f" }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_egresos|default:0|stringformat:"0.2f" }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_saldact|default:0|stringformat:"0.2f" }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_comprom|default:0|stringformat:"0.2f" }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_xconfir|default:0|stringformat:"0.2f" }} </td>
+							<td class="columns_tab align_tex_right">{{ var_exifield.exs_dsponib|default:0|stringformat:"0.2f" }} </td>
 
 							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:exi_view' var_exifield.id %}"></a></td>
 							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:exi_edit' var_exifield.id %}"></a></td>
