@@ -37,7 +37,7 @@
 						<table border="0" class="width_100">
 						 	<tr color="#:000066" class="width_99">
 						 		<td class="head_tab"><div class=""><label for="">Tab./Talla</label></div></td>
-						 		<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.get_shortcode }} </td>
+						 		<td class="head_tab_tall">{{ object.exs_tabtall }} </td>
 								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid01 | default:'-'}} </td>
 								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid02 | default:'-'}} </td>
 								<td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid03 | default:'-'}} </td>
@@ -58,79 +58,79 @@
 							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_saldinc.name}}">Saldo.inicial</label></div></td>
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid01 %}
-										{{object.tex_inici01 }}
+										{{object.saldoxtalla.tex_inici01|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid02 %}
-										{{object.tex_inici02 }}
+										{{object.saldoxtalla.tex_inici02|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid03 %}
-										{{object.tex_inici03 }}
+										{{object.saldoxtalla.tex_inici03|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid04 %}
-										{{object.tex_inici04 }}
+										{{object.saldoxtalla.tex_inici04|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid05 %}
-										{{object.tex_inici05 }}
+										{{object.saldoxtalla.tex_inici05|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid06 %}
-										{{object.tex_inici06 }}
+										{{object.saldoxtalla.tex_inici06|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid07 %}
-										{{object.tex_inici07 }}
+										{{object.saldoxtalla.tex_inici07|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid08 %}
-										{{object.tex_inici08 }}
+										{{object.saldoxtalla.tex_inici08|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid09 %}
-										{{object.tex_inici09 }}
+										{{object.saldoxtalla.tex_inici09|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid10 %}
-										{{object.tex_inici10 }}
+										{{object.saldoxtalla.tex_inici10|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid11 %}
-										{{object.tex_inici11 }}
+										{{object.saldoxtalla.tex_inici11|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid12 %}
-										{{object.tex_inici12 }}
+										{{object.saldoxtalla.tex_inici12|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
 								<td class="columns_tab_tall">
 									{% if object.exs_idmodel.mod_tabtall.jgo_medid13 %}
-										{{object.tex_inici13 }}
+										{{object.saldoxtalla.tex_inici13|default:0|stringformat:"0.2f" }}
 									{% endif %}
 								</td>
 
@@ -139,111 +139,111 @@
 						 	<tr color="#:000066">
 
 							 	<td class="head_tab"  colspan="2"><div class="form_label"><label for="{{form.exs_ingreso.name}}">Ingresos</label></div></td>
-								<td class="columns_tab_tall width_005">{{ object.tex_ingre01 }} </td>
-								<td class="columns_tab_tall width_005">{{ object.tex_ingre02 }} </td>
-								<td class="columns_tab_tall width_005">{{ object.tex_ingre03 }} </td>
-								<td class="columns_tab_tall width_005">{{ object.tex_ingre04 }} </td>
-								<td class="columns_tab_tall width_005">{{ object.tex_ingre05 }} </td>
-								<td class="columns_tab_tall width_005">{{ object.tex_ingre06 }} </td>
-								<td class="columns_tab_tall width_005">{{ object.tex_ingre07 }} </td>
-								<td class="columns_tab_tall width_005">{{ object.tex_ingre08 }} </td>
-								<td class="columns_tab_tall width_005">{{ object.tex_ingre09 }} </td>
-								<td class="columns_tab_tall width_005">{{ object.tex_ingre10 }} </td>
-								<td class="columns_tab_tall width_005">{{ object.tex_ingre11 }} </td>
-								<td class="columns_tab_tall width_005">{{ object.tex_ingre12 }} </td>
-								<td class="columns_tab_tall width_005">{{ object.tex_ingre13 }} </td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre01|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre02|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre03|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre04|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre05|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre06|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre07|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre08|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre09|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre10|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre11|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre12|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre13|default:0|stringformat:"0.2f" }}</td>
 								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_ingreso | default:'0.00'}}</div></div></td>
 						 	</tr>
 						 	<tr color="#:000066">
 							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_egresos.name}}">Egresos</label></div></td>
-								<td class="columns_tab_tall width_005">{{ form.tex_egres01 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_egres02 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_egres03 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_egres04 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_egres05 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_egres06 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_egres07 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_egres08 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_egres09 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_egres10 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_egres11 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_egres12 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_egres13 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres01|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres02|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres03|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres04|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres05|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres06|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres07|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres08|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres09|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres10|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres11|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres12|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres13|default:0|stringformat:"0.2f" }} </td>
 								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_egresos | default:'0.00'}}</div></td>
 						 	</tr>
 						 	<tr color="#:000066">
 							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_saldact.name}}">Saldo.Actual</label></div></td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua01 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua02 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua03 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua04 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua05 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua06 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua07 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua08 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua09 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua10 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua11 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua12 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_actua13 }} </td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua01|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua02|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua03|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua04|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua05|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua06|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua07|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua08|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua09|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua10|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua11|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua12|default:0|stringformat:"0.2f" }}</td>
+								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua13|default:0|stringformat:"0.2f" }}</td>
 								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_saldact | default:'0.00'}}</div></td>
 						 	</tr>
 						 	<tr color="#:000066">
 							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_comprom.name}}">S.Comprometido</label></div></td>
-								<td class="columns_tab_tall width_005">{{ form.tex_compr01 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_compr02 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_compr03 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_compr04 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_compr05 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_compr06 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_compr07 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_compr08 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_compr09 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_compr10 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_compr11 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_compr12 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_compr13 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr01|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr02|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr03|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr04|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr05|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr06|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr07|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr08|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr09|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr10|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr11|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr12|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr13|default:0|stringformat:"0.2f" }} </td>
 								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_comprom | default:'0.00'}}</div></td>
 						 	</tr>
 						 	<tr color="#:000066">
 							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_xconfir.name}}">Sldo.x/confirmar</label></div></td>
-								<td class="columns_tab_tall width_005">{{ form.tex_xconf01 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_xconf02 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_xconf03 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_xconf04 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_xconf05 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_xconf06 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_xconf07 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_xconf08 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_xconf09 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_xconf10 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_xconf11 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_xconf12 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_xconf13 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf01|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf02|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf03|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf04|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf05|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf06|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf07|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf08|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf09|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf10|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf11|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf12|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf13|default:0|stringformat:"0.2f" }} </td>
 								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_xconfir | default:'0.00'}}</div></td>
 						 	</tr>
 						 	<tr color="#:000066">
 							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_dsponib.name}}">Saldo.disponible</label></div></td>
-								<td class="columns_tab_tall width_005">{{ form.tex_dispo01 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_dispo02 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_dispo03 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_dispo04 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_dispo05 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_dispo06 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_dispo07 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_dispo08 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_dispo09 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_dispo10 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_dispo11 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_dispo12 }} </td>
-								<td class="columns_tab_tall width_005">{{ form.tex_dispo13 }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo01|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo02|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo03|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo04|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo05|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo06|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo07|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo08|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo09|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo10|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo11|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo12|default:0|stringformat:"0.2f" }} </td>
+								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo13|default:0|stringformat:"0.2f" }} </td>
 								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_dsponib | default:'0.00'}}</div></td>
 						 	</tr>
 						</table>
-						<table border="1" class="width_100">
-						<tr><td class="form_label width_020">Fecha/últ.Ingres</td> <td class="form_widget align_tex_right">{{object.exs_feching | default:'0.00'}}</td> <td colspan="2"><h2 CLASS="align_tex_center">P  R  E  C  I  O  S</h2></td> <td   class="form_widget">{{object.exs_imgprod}}</td></tr>
-						<tr><td class="form_label width_020">Fecha/últ.Egreso</td> <td class="form_widget align_tex_right">{{object.exs_fechegr | default:'0.00'}}</td> <td colspan="2"></td><td rowspan="6" class="form_label">iamgen</td> </tr>
-						<tr><td class="form_label width_020">Fecha de invent.</td> <td class="form_widget align_tex_right">{{object.exs_fechinv | default:'0.00'}}</td> <td class="form_label">Precio:Distribuidor</td><td class="form_widget align_tex_right">{{ object.exs_distrib | default:'0.00'}}</td></tr>
+						<table border="0" class="width_100">
+						<tr><td class="form_label width_020">Fecha/últ.Ingres</td> <td class="form_widget align_tex_right">{{object.exs_feching 				}}</td> <td colspan="2"><h2 CLASS="align_tex_center">P  R  E  C  I  O  S</h2></td> <td   class="form_widget">{{object.exs_imgprod}}</td></tr>
+						<tr><td class="form_label width_020">Fecha/últ.Egreso</td> <td class="form_widget align_tex_right">{{object.exs_fechegr 				}}</td> <td colspan="2"></td><td rowspan="6" class="form_label">iamgen</td> </tr>
+						<tr><td class="form_label width_020">Fecha de invent.</td> <td class="form_widget align_tex_right">{{object.exs_fechinv 				}}</td> <td class="form_label">Precio:Distribuidor</td><td class="form_widget align_tex_right">{{ object.exs_distrib | default:'0.00'}}</td></tr>
 						<tr><td class="form_label width_020">Costo.promedio  </td> <td class="form_widget align_tex_right">{{object.exs_costant | default:'0.00'}}</td> <td class="form_label">Precio:Mayorista   </td><td class="form_widget align_tex_right">{{ object.exs_mayoris | default:'0.00'}}</td></tr>
 						<tr><td class="form_label width_020">Disponible.Ant. </td> <td class="form_widget align_tex_right">{{object.exs_dispant | default:'0.00'}}</td> <td class="form_label">Precio:Detallista  </td><td class="form_widget align_tex_right">{{ object.exs_detalls | default:'0.00'}}</td></tr>
 						<tr><td class="form_label width_020">Costo Actual    </td> <td class="form_widget align_tex_right">{{object.exs_costact | default:'0.00'}}</td> <td class="form_label">Precio:Publico     </td><td class="form_widget align_tex_right">{{ object.exs_publico | default:'0.00'}}</td></tr>

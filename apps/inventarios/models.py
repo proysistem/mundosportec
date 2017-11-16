@@ -370,4 +370,20 @@ class Saldoxtalla(models.Model):
             (self.tex_inici12 or 0) + (self.tex_ingre12 or 0) - (self.tex_egres12 or 0) - (self.tex_compr12 or 0) +
             (self.tex_inici13 or 0) + (self.tex_ingre13 or 0) - (self.tex_egres13 or 0) - (self.tex_compr13 or 0)
         )
+
         self.tex_product.save()
+
+    def calc_saldact_tall(self):
+        for talla in range(1, 14):
+            yield (
+                (getattr(self, "tex_inici{0:02d}".format(talla)) or 0) +
+                (getattr(self, "tex_ingre{0:02d}".format(talla)) or 0) -
+                (getattr(self, "tex_egres{0:02d}".format(talla)) or 0)
+            )
+
+    def calc_saldisp_tall(self):
+        for index, talla in enumerate(self.calc_saldact_tall(), start=1):
+            yield (
+                talla -
+                (getattr(self, "tex_compr{0:02d}".format(index)) or 0)
+            )

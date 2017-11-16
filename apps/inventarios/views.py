@@ -215,6 +215,7 @@ class ExiLista(ListView):
     model = Existencia
     template_name = 'inventarios/Exi_Panel.html'
     paginate_by = 8
+
     def get_initial(self):
         initial = {}
         try:
@@ -242,6 +243,8 @@ class ExiView(DetailView):
     """Listado de Existencia"""
     template_name = 'inventarios/Exi_View.html'
     model = Existencia
+    queryset = Existencia.objects.select_related('saldoxtalla', 'exs_sucursa', 'exs_idmodel', 'exs_idmodel', 'exs_iddivis', 'exs_idmodel')
+    # TODO: VER CANT. QUERIES
 
 
 class ExiNuevo(CreateView):
@@ -298,6 +301,45 @@ class ExiEdita(UpdateView):
             initial['tex_inici11'] = sxt.tex_inici11
             initial['tex_inici12'] = sxt.tex_inici12
             initial['tex_inici13'] = sxt.tex_inici13
+            initial['tex_ingre01'] = sxt.tex_ingre01
+            initial['tex_ingre02'] = sxt.tex_ingre02
+            initial['tex_ingre03'] = sxt.tex_ingre03
+            initial['tex_ingre04'] = sxt.tex_ingre04
+            initial['tex_ingre05'] = sxt.tex_ingre05
+            initial['tex_ingre06'] = sxt.tex_ingre06
+            initial['tex_ingre07'] = sxt.tex_ingre07
+            initial['tex_ingre08'] = sxt.tex_ingre08
+            initial['tex_ingre09'] = sxt.tex_ingre09
+            initial['tex_ingre10'] = sxt.tex_ingre10
+            initial['tex_ingre11'] = sxt.tex_ingre11
+            initial['tex_ingre12'] = sxt.tex_ingre12
+            initial['tex_ingre13'] = sxt.tex_ingre13
+            initial['tex_egres01'] = sxt.tex_egres01
+            initial['tex_egres02'] = sxt.tex_egres02
+            initial['tex_egres03'] = sxt.tex_egres03
+            initial['tex_egres04'] = sxt.tex_egres04
+            initial['tex_egres05'] = sxt.tex_egres05
+            initial['tex_egres06'] = sxt.tex_egres06
+            initial['tex_egres07'] = sxt.tex_egres07
+            initial['tex_egres08'] = sxt.tex_egres08
+            initial['tex_egres09'] = sxt.tex_egres09
+            initial['tex_egres10'] = sxt.tex_egres10
+            initial['tex_egres11'] = sxt.tex_egres11
+            initial['tex_egres12'] = sxt.tex_egres12
+            initial['tex_egres13'] = sxt.tex_egres13
+            initial['tex_compr01'] = sxt.tex_compr01
+            initial['tex_compr02'] = sxt.tex_compr02
+            initial['tex_compr03'] = sxt.tex_compr03
+            initial['tex_compr04'] = sxt.tex_compr04
+            initial['tex_compr05'] = sxt.tex_compr05
+            initial['tex_compr06'] = sxt.tex_compr06
+            initial['tex_compr07'] = sxt.tex_compr07
+            initial['tex_compr08'] = sxt.tex_compr08
+            initial['tex_compr09'] = sxt.tex_compr09
+            initial['tex_compr10'] = sxt.tex_compr10
+            initial['tex_compr11'] = sxt.tex_compr11
+            initial['tex_compr12'] = sxt.tex_compr12
+            initial['tex_compr13'] = sxt.tex_compr13
         return initial
 
 

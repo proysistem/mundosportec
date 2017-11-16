@@ -1,8 +1,9 @@
 from django.db import models
 
+
 class TimeStampModel(models.Model):
     fch_creacion = models.DateTimeField(auto_now_add=True)
-    fch_modifica = models.DateTimeField(auto_now = True)
+    fch_modifica = models.DateTimeField(auto_now=True)
 
     class Meta:
         abstract = True
@@ -37,7 +38,8 @@ class Ciudad(models.Model):
 
     def __str__(self):
         return "%s" % (self.ciu_nombres)
-    #return "%s %s %s" % (self.ciu_estados, self.ciu_country, self.ciu_nombres)
+        # return "%s %s %s" % (self.ciu_estados, self.ciu_country, self.ciu_nombres)
+
 
 class Zipcodigo(models.Model):
 
@@ -48,7 +50,6 @@ class Zipcodigo(models.Model):
 
     def __str__(self):
         return "%s" % (self.zip_idzipco)
-
 
 
 class Sucursal(models.Model):
@@ -62,9 +63,9 @@ class Sucursal(models.Model):
     suc_zipcodg = models.ForeignKey(Zipcodigo)
     suc_statreg = models.CharField("Status del Registro", max_length=1)
 
-
     def __str__(self):
         return "%s" % (self.suc_nombres)
+
 
 class Categoria(models.Model):
     ktg_detalle = models.CharField('Detalle', max_length=15)

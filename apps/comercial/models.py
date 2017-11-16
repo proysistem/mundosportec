@@ -2,6 +2,7 @@ from django.db import models
 from apps.finanzas.models import Cajera, Caja, Moneda
 from apps.inventarios.models import Existencia, Unidad
 from apps.parametros.models import Pais, Provincia, Ciudad, Zipcodigo, Sucursal, Tipomovim, Motivo, Categoria
+from django.utils import timezone
 
 
 class Cliente(models.Model):
@@ -20,6 +21,9 @@ class Cliente(models.Model):
     clt_imgclte = models.ImageField(upload_to="clientes", blank=True)
     clt_rgunico = models.CharField('Registro Unico', max_length=20, blank=True)
     clt_categor = models.ForeignKey(Categoria, null=True, blank=True)
+
+    def __str__(self):
+        return self.clt_frsname
 
 
 class Proveedor(models.Model):
@@ -59,20 +63,24 @@ class Vendedor(models.Model):
     vnd_rgunico = models.CharField('Registro Unico', max_length=20, blank=True)
     vnd_categor = models.ForeignKey(Categoria, null=True, blank=True)
 
+    def __str__(self):
+        return self.vnd_frsname
+
 
 class Movinvent(models.Model):
+    mvi_nummovi = models.AutoField('Núm. de movimiento', primary_key=True)
+    mvi_factura = models.ForeignKey('Factura', verbose_name='Núm. de factura', null=True, blank=True)
 
-    mvi_nummovi = models.IntegerField('Núm. de movimiento', editable=True, null=True, blank=True)
     mvi_fechmov = models.DateField('Fecha')
     mvi_motivos = models.ForeignKey(Motivo)
     mvi_pedidos = models.IntegerField('Núm. de pedido', null=True, blank=True)
-    mvi_factura = models.IntegerField('Núm. de factura', null=True, blank=True)
     mvi_tipomov = models.ForeignKey(Tipomovim)
     mvi_vendedo = models.ForeignKey(Vendedor)
     mvi_cliente = models.ForeignKey(Cliente)
     mvi_sucursa = models.ForeignKey(Sucursal)
     mvi_product = models.ForeignKey(Existencia)
     mvi_unidade = models.ForeignKey(Unidad)
+
     mvi_talla01 = models.DecimalField('Talla 01', max_digits=11, decimal_places=2, null=True, blank=True)
     mvi_talla02 = models.DecimalField('Talla 02', max_digits=11, decimal_places=2, null=True, blank=True)
     mvi_talla03 = models.DecimalField('Talla 03', max_digits=11, decimal_places=2, null=True, blank=True)
@@ -86,6 +94,7 @@ class Movinvent(models.Model):
     mvi_talla11 = models.DecimalField('Talla 11', max_digits=11, decimal_places=2, null=True, blank=True)
     mvi_talla12 = models.DecimalField('Talla 12', max_digits=11, decimal_places=2, null=True, blank=True)
     mvi_talla13 = models.DecimalField('Talla 13', max_digits=11, decimal_places=2, null=True, blank=True)
+
     mvi_kntidad = models.DecimalField('Cantidad Total', max_digits=11, decimal_places=4, null=True, blank=True)
     mvi_precios = models.DecimalField('Precio', max_digits=13, decimal_places=4, null=True, blank=True)
     mvi_desctos = models.DecimalField('Descuentos', max_digits=11, decimal_places=4, null=True, blank=True)
@@ -127,10 +136,9 @@ class Pedido(models.Model):
 
 
 class Factura(models.Model):
-
-    fac_idfactu = models.IntegerField('Núm. de Factura')
-    fac_mvinven = models.ForeignKey(Movinvent)
-    fac_fechfac = models.DateField('fecha de la factura', )
+    fac_idfactu = models.AutoField('Núm. de Factura', primary_key=True)
+    # fac_mvinven = models.ForeignKey(Movinvent)
+    fac_fechfac = models.DateField('Fecha de la factura', default=timezone.now)
     fac_cajanum = models.ForeignKey(Caja)
     fac_cajeras = models.ForeignKey(Cajera)
     fac_cliente = models.ForeignKey(Cliente)
@@ -150,3 +158,11 @@ class Factura(models.Model):
     fac_pgotjcr = models.DecimalField('T./Crédito', max_digits=15, decimal_places=4, null=True, blank=True)
     fac_pgocred = models.DecimalField('Crédito personal', max_digits=15, decimal_places=4, null=True, blank=True)
     fac_otropgo = models.DecimalField('Internet (Paypal)', max_digits=15, decimal_places=4, null=True, blank=True)
+
+
+# TODO: Adecuar campos correctos finales antes de crear migraciones
+# class Controlador(models.Model):
+#     ctl_idcontr = models.CharField('Cód. del control de secuencia', primary_key=True)
+#     ctl_detalle = models.CharField('Detalle que  controla', max_length=20)
+#     ctl_abrevia = models.CharField('Abreviatura', max_length=10)
+#     ctl_secuenc = models.IntegerField('Secuencia del documento', )

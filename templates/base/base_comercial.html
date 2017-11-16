@@ -11,18 +11,18 @@
 {% block content %}
 	<div class="container">
 		{% include 'base/aside.html' %}
-		<div class="content">	
+		<div class="content">
 			{% include 'comercial/nav_comercial.html' %}
 			{% block context%}
 
-			
-			
-			{% endblock context%}	
+
+
+			{% endblock context%}
 		</div>
-	</div> 
+	</div>
 {% endblock content %}
 
-{% block footer %} 
+{% block footer %}
 		{% include 'footer/footer.html' %}
 {% endblock footer %}
 
@@ -31,5 +31,5 @@
 
 
 {% block js %}
-	<script src="{% static 'js/xx.js' %}"></script>
+	<script src="{% static 'js/custom.js' %}"></script>
 {% endblock js %}

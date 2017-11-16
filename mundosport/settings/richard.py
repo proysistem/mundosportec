@@ -19,9 +19,6 @@ if DEBUG:
     else:
         INSTALLED_APPS += ('django_extensions', )
 
-MIDDLEWARE += [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-]
 
 DATABASES = {
    'default': {

@@ -1,6 +1,6 @@
 from django import forms
 from .models import Existencia, Saldoxtalla, Division, Marca, Modelo, Color, Tabtalla
-
+from django.utils.timezone import localtime, now
 
 class DivisionForm(forms.ModelForm):
     class Meta:
@@ -190,6 +190,45 @@ class ExistenciaEditForm(forms.ModelForm):
     tex_inici11 = forms.DecimalField(required=False)
     tex_inici12 = forms.DecimalField(required=False)
     tex_inici13 = forms.DecimalField(required=False)
+    tex_ingre01 = forms.DecimalField(required=False)
+    tex_ingre02 = forms.DecimalField(required=False)
+    tex_ingre03 = forms.DecimalField(required=False)
+    tex_ingre04 = forms.DecimalField(required=False)
+    tex_ingre05 = forms.DecimalField(required=False)
+    tex_ingre06 = forms.DecimalField(required=False)
+    tex_ingre07 = forms.DecimalField(required=False)
+    tex_ingre08 = forms.DecimalField(required=False)
+    tex_ingre09 = forms.DecimalField(required=False)
+    tex_ingre10 = forms.DecimalField(required=False)
+    tex_ingre11 = forms.DecimalField(required=False)
+    tex_ingre12 = forms.DecimalField(required=False)
+    tex_ingre13 = forms.DecimalField(required=False)
+    tex_egres01 = forms.DecimalField(required=False)
+    tex_egres02 = forms.DecimalField(required=False)
+    tex_egres03 = forms.DecimalField(required=False)
+    tex_egres04 = forms.DecimalField(required=False)
+    tex_egres05 = forms.DecimalField(required=False)
+    tex_egres06 = forms.DecimalField(required=False)
+    tex_egres07 = forms.DecimalField(required=False)
+    tex_egres08 = forms.DecimalField(required=False)
+    tex_egres09 = forms.DecimalField(required=False)
+    tex_egres10 = forms.DecimalField(required=False)
+    tex_egres11 = forms.DecimalField(required=False)
+    tex_egres12 = forms.DecimalField(required=False)
+    tex_egres13 = forms.DecimalField(required=False)
+    tex_compr01 = forms.DecimalField(required=False)
+    tex_compr02 = forms.DecimalField(required=False)
+    tex_compr03 = forms.DecimalField(required=False)
+    tex_compr04 = forms.DecimalField(required=False)
+    tex_compr05 = forms.DecimalField(required=False)
+    tex_compr06 = forms.DecimalField(required=False)
+    tex_compr07 = forms.DecimalField(required=False)
+    tex_compr08 = forms.DecimalField(required=False)
+    tex_compr09 = forms.DecimalField(required=False)
+    tex_compr10 = forms.DecimalField(required=False)
+    tex_compr11 = forms.DecimalField(required=False)
+    tex_compr12 = forms.DecimalField(required=False)
+    tex_compr13 = forms.DecimalField(required=False)
 
     class Meta:
         model = Existencia
@@ -264,6 +303,7 @@ class ExistenciaEditForm(forms.ModelForm):
             'exs_statreg':   'Status del reg.',
         }
         widgets = {
+            "tex_ingre01":  forms.NumberInput(attrs={"disabled": "disabled"}),
             "exs_sucursa":  forms.Select(),
             "exs_iddivis":  forms.Select(),
             "exs_idmarca":  forms.Select(),
@@ -275,16 +315,16 @@ class ExistenciaEditForm(forms.ModelForm):
             'exs_tpoprod':  forms.Select(),
             'exs_idunida':  forms.Select(),
             #'exs_tabtall':  forms.TextInput(),
-            'exs_saldinc':  forms.NumberInput(),
-            'exs_ingreso':  forms.NumberInput(),
-            'exs_egresos':  forms.NumberInput(),
-            'exs_saldact':  forms.NumberInput(),
-            'exs_comprom':  forms.NumberInput(),
-            'exs_xconfir':  forms.NumberInput(),
-            'exs_dsponib':  forms.NumberInput(),
-            'exs_feching':  forms.DateInput(attrs={"type": "date"}),
-            'exs_fechegr':  forms.DateInput(attrs={"type": "date"}),
-            'exs_fechinv':  forms.DateInput(attrs={"type": "date"}),
+            'exs_saldinc':  forms.NumberInput(attrs={"disabled": "disabled"}),
+            'exs_ingreso':  forms.NumberInput(attrs={"disabled": "disabled"}),
+            'exs_egresos':  forms.NumberInput(attrs={"disabled": "disabled"}),
+            'exs_saldact':  forms.NumberInput(attrs={"disabled": "disabled"}),
+            'exs_comprom':  forms.NumberInput(attrs={"disabled": "disabled"}),
+            'exs_xconfir':  forms.NumberInput(attrs={"disabled": "disabled"}),
+            'exs_dsponib':  forms.NumberInput(attrs={"disabled": "disabled"}),
+#            'exs_feching':  forms.DateInput(attrs={"type": "date"}),
+#            'exs_fechegr':  forms.DateInput(attrs={"type": "date"}),
+#            'exs_fechinv':  forms.DateInput(attrs={"type": "date"}),
             'exs_costant':  forms.NumberInput(),
             'exs_dispant':  forms.NumberInput(),
             'exs_costact':  forms.NumberInput(),
@@ -294,13 +334,12 @@ class ExistenciaEditForm(forms.ModelForm):
             'exs_detalls':  forms.NumberInput(),
             'exs_publico':  forms.NumberInput(),
             'exs_special':  forms.NumberInput(),
-            'exs_imgprod':  forms.FileInput(),
+            'exs_imgprod':  forms.ClearableFileInput(),
             # 'exs_statreg':  forms.BoleanInput(),
         }
 
     def save(self, commit=True):
         instance = super(ExistenciaEditForm, self).save(commit=False)
-        print("GUARDANDO")
         sxt = Saldoxtalla(
             tex_product=instance,
             tex_inici01=self.cleaned_data['tex_inici01'],
@@ -316,6 +355,48 @@ class ExistenciaEditForm(forms.ModelForm):
             tex_inici11=self.cleaned_data['tex_inici11'],
             tex_inici12=self.cleaned_data['tex_inici12'],
             tex_inici13=self.cleaned_data['tex_inici13'],
+
+            tex_ingre01=self.cleaned_data['tex_ingre01'],
+            tex_ingre02=self.cleaned_data['tex_ingre02'],
+            tex_ingre03=self.cleaned_data['tex_ingre03'],
+            tex_ingre04=self.cleaned_data['tex_ingre04'],
+            tex_ingre05=self.cleaned_data['tex_ingre05'],
+            tex_ingre06=self.cleaned_data['tex_ingre06'],
+            tex_ingre07=self.cleaned_data['tex_ingre07'],
+            tex_ingre08=self.cleaned_data['tex_ingre08'],
+            tex_ingre09=self.cleaned_data['tex_ingre09'],
+            tex_ingre10=self.cleaned_data['tex_ingre10'],
+            tex_ingre11=self.cleaned_data['tex_ingre11'],
+            tex_ingre12=self.cleaned_data['tex_ingre12'],
+            tex_ingre13=self.cleaned_data['tex_ingre13'],
+
+            tex_egres01=self.cleaned_data['tex_egres01'],
+            tex_egres02=self.cleaned_data['tex_egres02'],
+            tex_egres03=self.cleaned_data['tex_egres03'],
+            tex_egres04=self.cleaned_data['tex_egres04'],
+            tex_egres05=self.cleaned_data['tex_egres05'],
+            tex_egres06=self.cleaned_data['tex_egres06'],
+            tex_egres07=self.cleaned_data['tex_egres07'],
+            tex_egres08=self.cleaned_data['tex_egres08'],
+            tex_egres09=self.cleaned_data['tex_egres09'],
+            tex_egres10=self.cleaned_data['tex_egres10'],
+            tex_egres11=self.cleaned_data['tex_egres11'],
+            tex_egres12=self.cleaned_data['tex_egres12'],
+            tex_egres13=self.cleaned_data['tex_egres13'],
+
+            tex_compr01=self.cleaned_data['tex_compr01'],
+            tex_compr02=self.cleaned_data['tex_compr02'],
+            tex_compr03=self.cleaned_data['tex_compr03'],
+            tex_compr04=self.cleaned_data['tex_compr04'],
+            tex_compr05=self.cleaned_data['tex_compr05'],
+            tex_compr06=self.cleaned_data['tex_compr06'],
+            tex_compr07=self.cleaned_data['tex_compr07'],
+            tex_compr08=self.cleaned_data['tex_compr08'],
+            tex_compr09=self.cleaned_data['tex_compr09'],
+            tex_compr10=self.cleaned_data['tex_compr10'],
+            tex_compr11=self.cleaned_data['tex_compr11'],
+            tex_compr12=self.cleaned_data['tex_compr12'],
+            tex_compr13=self.cleaned_data['tex_compr13']
         )
         sxt.save(commit)
 
@@ -324,8 +405,10 @@ class ExistenciaEditForm(forms.ModelForm):
         return instance
 
 
-
 class ExistenciaForm(forms.ModelForm):
+    exs_feching = forms.DateField(initial=localtime(now()).date())
+    exs_fechegr = forms.DateField(initial=localtime(now()).date())
+    exs_fechinv = forms.DateField(initial=localtime(now()).date())
     class Meta:
         model = Existencia
         fields = [
@@ -418,9 +501,9 @@ class ExistenciaForm(forms.ModelForm):
             'exs_comprom':  forms.NumberInput(),
             'exs_xconfir':  forms.NumberInput(),
             'exs_dsponib':  forms.NumberInput(),
-            'exs_feching':  forms.DateInput(attrs={"type": "date"}),
-            'exs_fechegr':  forms.DateInput(attrs={"type": "date"}),
-            'exs_fechinv':  forms.DateInput(attrs={"type": "date"}),
+#            'exs_feching':  forms.DateInput(attrs={"type": "date"}),
+#            'exs_fechegr':  forms.DateInput(attrs={"type": "date"}),
+#            'exs_fechinv':  forms.DateInput(attrs={"type": "date"}),
             'exs_costant':  forms.NumberInput(),
             'exs_dispant':  forms.NumberInput(),
             'exs_costact':  forms.NumberInput(),
