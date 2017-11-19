@@ -102,4 +102,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATE_INPUT_FORMATS = [
+    '%y-%m-%d'  # '25/10/2006', '25/10/06'
+]
+
 AUTH_USER_MODEL = 'users.User'

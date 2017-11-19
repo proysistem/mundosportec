@@ -263,6 +263,12 @@ class Saldoxtalla(models.Model):
         return str(self.tex_product)
 
     def save(self, *args, **kwargs):
+        for index, saldotalla in enumerate(self.calc_saldact_tall(), start=1):
+            setattr(self, "tex_actua{0:02d}".format(index), saldotalla)
+
+        for index, saldotalla in enumerate(self.calc_saldisp_tall(), start=1):
+            setattr(self, "tex_dispo{0:02d}".format(index), saldotalla)
+
         super(Saldoxtalla, self).save()
 
         self.tex_product.exs_saldinc = (

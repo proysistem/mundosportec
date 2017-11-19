@@ -180,13 +180,27 @@ class VendedorForm(forms.ModelForm):
                 }
 
 
+class MovinventInlineForm(forms.ModelForm):
+    """ Formulario de MovInvent para Factura """
+    # TODO:
+    # - Create Inline form form with these fields:
+    #   Product, Detail (? is this writable?), Quantity, Unit, Price, Discount, IVA, Value
+    mvi_product = forms.CharField(label='Producto')
+    mvi_kntidad = forms.DecimalField(label="Cantidad", decimal_places=2)
+
+    class Meta:
+        model = Movinvent
+        fields = [
+            'mvi_product',
+            'mvi_kntidad'
+        ]
+
+
 class MovinventForm(forms.ModelForm):
 
     class Meta:
         model = Movinvent
         fields = [
-
-                'mvi_nummovi',
                 'mvi_fechmov',
                 'mvi_motivos',
                 'mvi_pedidos',
@@ -194,7 +208,6 @@ class MovinventForm(forms.ModelForm):
                 'mvi_tipomov',
                 'mvi_vendedo',
                 'mvi_cliente',
-                'mvi_sucursa',
                 'mvi_product',
                 'mvi_unidade',
                 'mvi_talla01',
@@ -220,7 +233,6 @@ class MovinventForm(forms.ModelForm):
         ]
 
         labels = {
-                'mvi_nummovi':  'Núm.movimiento',
                 'mvi_fechmov':  'Fecha',
                 'mvi_motivos':  'Motivo',
                 'mvi_pedidos':  'Núm.de pedido',
@@ -228,7 +240,6 @@ class MovinventForm(forms.ModelForm):
                 'mvi_tipomov':  'Tipo/Movimiento',
                 'mvi_vendedo':  'Vendedor',
                 'mvi_cliente':  'Cliente',
-                'mvi_sucursa':  'Sucursal',
                 'mvi_product':  'Producto',
                 'mvi_unidade':  'Unidad',
                 'mvi_talla01':  'Talla 01',
@@ -253,8 +264,6 @@ class MovinventForm(forms.ModelForm):
                 'mvi_impuest':  'Impuestos IVA',
         }
         widgets = {
-
-                'mvi_nummovi':   forms.NumberInput(),
                 'mvi_fechmov':   forms.DateInput(attrs={"type": "date"}),
                 'mvi_motivos':   forms.Select(),
                 'mvi_pedidos':   forms.NumberInput(),
@@ -262,7 +271,6 @@ class MovinventForm(forms.ModelForm):
                 'mvi_tipomov':   forms.Select(),
                 'mvi_vendedo':   forms.Select(),
                 'mvi_cliente':   forms.Select(),
-                'mvi_sucursa':   forms.Select(),
                 'mvi_product':   forms.Select(),
                 'mvi_unidade':   forms.Select(),
                 'mvi_talla01':   forms.TextInput(),
@@ -285,7 +293,6 @@ class MovinventForm(forms.ModelForm):
                 'mvi_deliver':   forms.NumberInput(),
                 'mvi_arancel':   forms.NumberInput(),
                 'mvi_impuest':   forms.NumberInput(),
-
         }
 
 
@@ -350,9 +357,6 @@ class PedidoForm(forms.ModelForm):
 
 class FacturaForm(forms.ModelForm):
     fac_fechfac = forms.DateField(initial=localtime(now()).date())
-    # TODO:
-    # - Create Inline form form with these fields:
-    #   Product, Detail (? is this writable?), Quantity, Unit, Price, Discount, IVA, Value
 
     class Meta:
         model = Factura

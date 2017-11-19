@@ -85,11 +85,10 @@ class Motivo(models.Model):
 
 
 class Controlador(models.Model):
-    ctl_idcontr = models.CharField('Cód. del control de secuencia',max_length=3, primary_key=True)
+    ctl_idcontr = models.CharField('Cód. del control de secuencia', max_length=3, primary_key=True)
     ctl_detalle = models.CharField('Detalle que documento  controla', max_length=20)
     ctl_abrevia = models.CharField('Abreviatura', max_length=10)
     ctl_secuenc = models.IntegerField('Secuencia del documento', )
 
     def __str__(self):
-        return "%s" % (self.suc_nombres)
-
+        return "%s" % (self.ctl_secuenc)
