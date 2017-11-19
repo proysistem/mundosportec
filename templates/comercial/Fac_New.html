@@ -43,11 +43,12 @@
 						<div class="form_row"><div class="form_label"><label for="{{form.jgo_idtalla.name}}">{{form.fac_vendedo.label}}</label></div><div>{{form.fac_vendedo}}</div></div>
 =-->
 						<div>
+							<button type="button" id="insertar_movimiento">+ Movimiento</button>
 							<table border="0" >
 								<thead border="1">
 								 	<tr color="#:000066" class="width_100">
 								 		<th class="head_tab width_010">Producto</th>
-								 		<th class="head_tab width_025" colspan="3">Detalle del producto</th>
+								 		<th class="head_tab width_025">Detalle del producto</th>
 								 		<th class="head_tab width_010">Cantidad</th>
 								 		<th class="head_tab width_005">Und.</th>
 								 		<th class="head_tab width_010">Precio</th>
@@ -57,16 +58,31 @@
 								 	</tr>
 								</thead>
 								<tbody border="1">
-									{% for movimiento_form in movimientos %}
-										<tr>
-											{% for field in movimiento_form %}
-											<td>
-												{{ field }}
-											</td>
-											{% endfor %}
-										</tr>
-									{% endfor %}
-								 	<tr>
+									{% comment %}
+										{% for movimiento_form in movimientos %}
+											<tr>
+												<td>
+													{{ movimiento_form.mvi_product }}
+												</td>
+												<td class="forloop.index">
+													Descripción
+												</td>
+												<td>
+													{{ movimiento_form.mvi_kntidad }}
+												</td>
+												<td>
+													Unidad
+												</td>
+												<td>
+													Precio
+												</td>
+												<td>
+													{{ movimiento_form.delete }}
+												</td>
+											</tr>
+										{% endfor %}
+									{% endcomment %}
+									<tr>
 										<td class="columns_tab">{{ form.mvi_product }} </td>
 										<td class="columns_tab" colspan="3">{{ form.prd_detalle }} </td>
 						{% comment %}
@@ -180,3 +196,12 @@
 				</form>
 			</div>
 		{% endblock context%}
+
+{% block js %}
+	{{ block.super }}
+	<script type="text/javascript">
+		$('#insertar_movimiento').click(function(e){
+			var cod_producto = prompt("Ingrese código de producto");
+		})
+	</script>
+{% endblock js %}

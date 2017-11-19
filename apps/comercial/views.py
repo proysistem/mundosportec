@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura
-from apps.comercial.forms import ClienteForm, ProveedorForm, VendedorForm, MovinventForm, PedidoForm, FacturaForm
+from apps.comercial.forms import ClienteForm, ProveedorForm, VendedorForm, MovinventInlineForm, MovinventForm, PedidoForm, FacturaForm
 from django.db import transaction
 from django.forms import inlineformset_factory
 
@@ -226,7 +226,7 @@ class FacNuevo(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(FacNuevo, self).get_context_data(**kwargs)
-        MovinventFormset = inlineformset_factory(Factura, Movinvent, form=MovinventForm, extra=2)
+        MovinventFormset = inlineformset_factory(Factura, Movinvent, form=MovinventInlineForm, extra=1)
 
         if self.request.POST:
             context['movimientos'] = MovinventFormset(self.request.POST, queryset=Movinvent.objects.select_related())

@@ -1,6 +1,8 @@
 from django import forms
 from .models import Existencia, Saldoxtalla, Division, Marca, Modelo, Color, Tabtalla
 from django.utils.timezone import localtime, now
+from decimal import Decimal
+
 
 class DivisionForm(forms.ModelForm):
     class Meta:
@@ -72,7 +74,7 @@ class ModeloForm(forms.ModelForm):
         ]
 
         labels = {
-            'mod_idmodel':   'Código', #attrs={"class": "form_label"}
+            'mod_idmodel':   'Código',  # attrs={"class": "form_label"}
             'mod_idmarca':   'Marca',
             'mod_detalle':   'Detalle',
             'mod_abrevia':   'Abreviatura',
@@ -81,12 +83,12 @@ class ModeloForm(forms.ModelForm):
         }
 
         widgets = {
-            'mod_idmodel':  forms.TextInput(attrs={"class": "form_widget"}),
+            'mod_idmodel':  forms.TextInput(attrs={"class": "form_widget", 'pattern': '[0-9]+'}),
             'mod_idmarca':  forms.Select(attrs={"class": "form_widget"}),
             'mod_detalle':  forms.TextInput(attrs={"class": "form_widget"}),
             'mod_abrevia':  forms.TextInput(attrs={"class": "form_widget"}),
             'mod_tabtall':  forms.Select(attrs={"class": "form_widget"}),
-#           'mod_statreg':  forms.TextInput(),
+            # 'mod_statreg':  forms.TextInput(),
         }
 
 
@@ -229,6 +231,24 @@ class ExistenciaEditForm(forms.ModelForm):
     tex_compr11 = forms.DecimalField(required=False)
     tex_compr12 = forms.DecimalField(required=False)
     tex_compr13 = forms.DecimalField(required=False)
+    exs_saldinc = forms.DecimalField(
+        label="Saldo.inicial",
+        required=False,
+        decimal_places=2,
+        max_digits=8,
+        widget=forms.NumberInput(
+            attrs={
+                "disabled": "disabled",
+                "step": "0.01"
+            }),)
+
+    # field = forms.DecimalField(label="Etiqueta", widget=)
+
+    def __init__(self, *args, **kwargs):
+        if 'instance' in kwargs:
+            kwargs['instance'].exs_saldinc = kwargs['instance'].exs_saldinc.quantize(Decimal('0.01'))
+            # TODO: Quantize all Decimal Fields
+        super(ExistenciaEditForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Existencia
@@ -315,16 +335,16 @@ class ExistenciaEditForm(forms.ModelForm):
             'exs_tpoprod':  forms.Select(),
             'exs_idunida':  forms.Select(),
             #'exs_tabtall':  forms.TextInput(),
-            'exs_saldinc':  forms.NumberInput(attrs={"disabled": "disabled"}),
+            'exs_saldinc':  forms.NumberInput(attrs={"disabled": "disabled", "step": "0.01"}),
             'exs_ingreso':  forms.NumberInput(attrs={"disabled": "disabled"}),
             'exs_egresos':  forms.NumberInput(attrs={"disabled": "disabled"}),
             'exs_saldact':  forms.NumberInput(attrs={"disabled": "disabled"}),
             'exs_comprom':  forms.NumberInput(attrs={"disabled": "disabled"}),
             'exs_xconfir':  forms.NumberInput(attrs={"disabled": "disabled"}),
             'exs_dsponib':  forms.NumberInput(attrs={"disabled": "disabled"}),
-#            'exs_feching':  forms.DateInput(attrs={"type": "date"}),
-#            'exs_fechegr':  forms.DateInput(attrs={"type": "date"}),
-#            'exs_fechinv':  forms.DateInput(attrs={"type": "date"}),
+            'exs_feching':  forms.DateInput(attrs={"disabled": "disabled"}),
+            'exs_fechegr':  forms.DateInput(attrs={"disabled": "disabled"}),
+            'exs_fechinv':  forms.DateInput(attrs={"disabled": "disabled"}),
             'exs_costant':  forms.NumberInput(),
             'exs_dispant':  forms.NumberInput(),
             'exs_costact':  forms.NumberInput(),
@@ -406,9 +426,19 @@ class ExistenciaEditForm(forms.ModelForm):
 
 
 class ExistenciaForm(forms.ModelForm):
-    exs_feching = forms.DateField(initial=localtime(now()).date())
-    exs_fechegr = forms.DateField(initial=localtime(now()).date())
-    exs_fechinv = forms.DateField(initial=localtime(now()).date())
+    exs_feching = forms.DateField(
+        initial=localtime(now()).date(),
+        widget=forms.DateInput(attrs={"type": "date"}, format='%Y-%m-%d',)
+    )
+    exs_fechegr = forms.DateField(
+        initial=localtime(now()).date(),
+
+        widget=forms.DateInput(attrs={"type": "date"}, format='%Y-%m-%d',)
+    )
+    exs_fechinv = forms.DateField(
+        initial=localtime(now()).date(),
+        widget=forms.DateInput(attrs={"type": "date"}, format='%Y-%m-%d',)
+    )
     class Meta:
         model = Existencia
         fields = [
