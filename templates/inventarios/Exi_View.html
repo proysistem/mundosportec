@@ -134,7 +134,7 @@
 									{% endif %}
 								</td>
 
-								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_saldinc | default:'0.00'}}</div></td>
+								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_saldinc | default:'0.00'|stringformat:"0.2f"}}</div></td>
 						 	</tr>
 						 	<tr color="#:000066">
 
@@ -152,7 +152,7 @@
 								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre11|default:0|stringformat:"0.2f" }}</td>
 								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre12|default:0|stringformat:"0.2f" }}</td>
 								<td class="columns_tab_tall">{{object.saldoxtalla.tex_ingre13|default:0|stringformat:"0.2f" }}</td>
-								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_ingreso | default:'0.00'}}</div></div></td>
+								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_ingreso | default:'0.00'|stringformat:"0.2f"}}</div></div></td>
 						 	</tr>
 						 	<tr color="#:000066">
 							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_egresos.name}}">Egresos</label></div></td>
@@ -169,7 +169,7 @@
 								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres11|default:0|stringformat:"0.2f" }} </td>
 								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres12|default:0|stringformat:"0.2f" }} </td>
 								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_egres13|default:0|stringformat:"0.2f" }} </td>
-								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_egresos | default:'0.00'}}</div></td>
+								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_egresos | default:'0.00'|stringformat:"0.2f"}}</div></td>
 						 	</tr>
 						 	<tr color="#:000066">
 							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_saldact.name}}">Saldo.Actual</label></div></td>
@@ -186,7 +186,7 @@
 								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua11|default:0|stringformat:"0.2f" }}</td>
 								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua12|default:0|stringformat:"0.2f" }}</td>
 								<td class="columns_tab_tall">{{object.saldoxtalla.tex_actua13|default:0|stringformat:"0.2f" }}</td>
-								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_saldact | default:'0.00'}}</div></td>
+								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_saldact | default:'0.00'|stringformat:"0.2f"}}</div></td>
 						 	</tr>
 						 	<tr color="#:000066">
 							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_comprom.name}}">S.Comprometido</label></div></td>
@@ -203,7 +203,7 @@
 								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr11|default:0|stringformat:"0.2f" }} </td>
 								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr12|default:0|stringformat:"0.2f" }} </td>
 								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_compr13|default:0|stringformat:"0.2f" }} </td>
-								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_comprom | default:'0.00'}}</div></td>
+								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_comprom | default:'0.00'|stringformat:"0.2f"}}</div></td>
 						 	</tr>
 						 	<tr color="#:000066">
 							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_xconfir.name}}">Sldo.x/confirmar</label></div></td>
@@ -220,7 +220,7 @@
 								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf11|default:0|stringformat:"0.2f" }} </td>
 								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf12|default:0|stringformat:"0.2f" }} </td>
 								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_xconf13|default:0|stringformat:"0.2f" }} </td>
-								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_xconfir | default:'0.00'}}</div></td>
+								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_xconfir | default:'0.00'|stringformat:"0.2f"}}</div></td>
 						 	</tr>
 						 	<tr color="#:000066">
 							 	<td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_dsponib.name}}">Saldo.disponible</label></div></td>
@@ -237,17 +237,17 @@
 								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo11|default:0|stringformat:"0.2f" }} </td>
 								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo12|default:0|stringformat:"0.2f" }} </td>
 								<td class="columns_tab_tall width_005">{{ object.saldoxtalla.tex_dispo13|default:0|stringformat:"0.2f" }} </td>
-								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_dsponib | default:'0.00'}}</div></td>
+								<td class="columns_tab"><div class="form_widget align_tex_right">{{object.exs_dsponib | default:'0.00'|stringformat:"0.2f"}}</div></td>
 						 	</tr>
 						</table>
 						<table border="0" class="width_100">
 						<tr><td class="form_label width_020">Fecha/últ.Ingres</td> <td class="form_widget align_tex_right">{{object.exs_feching 				}}</td> <td colspan="2"><h2 CLASS="align_tex_center">P  R  E  C  I  O  S</h2></td> <td   class="form_widget">{{object.exs_imgprod}}</td></tr>
 						<tr><td class="form_label width_020">Fecha/últ.Egreso</td> <td class="form_widget align_tex_right">{{object.exs_fechegr 				}}</td> <td colspan="2"></td><td rowspan="6" class="form_label">iamgen</td> </tr>
 						<tr><td class="form_label width_020">Fecha de invent.</td> <td class="form_widget align_tex_right">{{object.exs_fechinv 				}}</td> <td class="form_label">Precio:Distribuidor</td><td class="form_widget align_tex_right">{{ object.exs_distrib | default:'0.00'}}</td></tr>
-						<tr><td class="form_label width_020">Costo.promedio  </td> <td class="form_widget align_tex_right">{{object.exs_costant | default:'0.00'}}</td> <td class="form_label">Precio:Mayorista   </td><td class="form_widget align_tex_right">{{ object.exs_mayoris | default:'0.00'}}</td></tr>
-						<tr><td class="form_label width_020">Disponible.Ant. </td> <td class="form_widget align_tex_right">{{object.exs_dispant | default:'0.00'}}</td> <td class="form_label">Precio:Detallista  </td><td class="form_widget align_tex_right">{{ object.exs_detalls | default:'0.00'}}</td></tr>
-						<tr><td class="form_label width_020">Costo Actual    </td> <td class="form_widget align_tex_right">{{object.exs_costact | default:'0.00'}}</td> <td class="form_label">Precio:Publico     </td><td class="form_widget align_tex_right">{{ object.exs_publico | default:'0.00'}}</td></tr>
-						<tr><td class="form_label width_020">Cost.promed.Act.</td> <td class="form_widget align_tex_right">{{object.exs_cosprom | default:'0.00'}}</td> <td class="form_label">Precio:Especial    </td><td class="form_widget align_tex_right">{{ object.exs_special | default:'0.00'}}</td></tr>
+						<tr><td class="form_label width_020">Costo.promedio  </td> <td class="form_widget align_tex_right">{{object.exs_costant | default:'0.00'|stringformat:"0.2f"}}</td> <td class="form_label">Precio:Mayorista   </td><td class="form_widget align_tex_right">{{ object.exs_mayoris | default:'0.00'|stringformat:"0.2f"}}</td></tr>
+						<tr><td class="form_label width_020">Disponible.Ant. </td> <td class="form_widget align_tex_right">{{object.exs_dispant | default:'0.00'|stringformat:"0.2f"}}</td> <td class="form_label">Precio:Detallista  </td><td class="form_widget align_tex_right">{{ object.exs_detalls | default:'0.00'|stringformat:"0.2f"}}</td></tr>
+						<tr><td class="form_label width_020">Costo Actual    </td> <td class="form_widget align_tex_right">{{object.exs_costact | default:'0.00'|stringformat:"0.2f"}}</td> <td class="form_label">Precio:Publico     </td><td class="form_widget align_tex_right">{{ object.exs_publico | default:'0.00'|stringformat:"0.2f"}}</td></tr>
+						<tr><td class="form_label width_020">Cost.promed.Act.</td> <td class="form_widget align_tex_right">{{object.exs_cosprom | default:'0.00'|stringformat:"0.2f"}}</td> <td class="form_label">Precio:Especial    </td><td class="form_widget align_tex_right">{{ object.exs_special | default:'0.00'|stringformat:"0.2f"}}</td></tr>
 
 							</table>
 						<br>
