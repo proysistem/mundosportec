@@ -20,12 +20,15 @@ class DivLista(ListView):
     """Listado de Division"""
     model = Division
     template_name = 'inventarios/Div_Panel.html'
-    paginate_by = 8
+    ordering = ['pk']
+    paginate_by = 15
+
 
 class DivView(DetailView):
     """Listado de Division"""
     template_name = 'inventarios/Div_View.html'
     model = Division
+
 
 class DivNuevo(CreateView):
     """Crear Division"""
@@ -34,12 +37,14 @@ class DivNuevo(CreateView):
     template_name = 'inventarios/Div_New.html'
     success_url = reverse_lazy('inventarios:div_panel')
 
+
 class DivEdita(UpdateView):
     """Listado de Divisions"""
     model = Division
     form_class = DivisionForm
     template_name = 'inventarios/Div_Edit.html'
     success_url = reverse_lazy('inventarios:div_panel')
+
 
 class DivDelet(DeleteView):
     """Listado de Divisions"""
@@ -49,11 +54,13 @@ class DivDelet(DeleteView):
     success_url = reverse_lazy('inventarios:div_panel')
 
 
+
 #class MrkSelect(ListView):
 #   """Listado de Marca"""
 #   model = Marca
 #   template_name = 'inventarios/Prd_New.html'
 #   context_object_name = 'slc_marcas'   ****--->> falta terminar para select-list dinamicas
+
 
 class Mrkkyselect(ListView):
     model = Marca
@@ -63,16 +70,19 @@ class Mrkkyselect(ListView):
 
 # ========M A R C A S=========== #
 
+
 class MrkLista(ListView):
     """Listado de Marca"""
     model = Marca
     template_name = 'inventarios/Mrk_Panel.html'
-    paginate_by = 8
+    ordering = ['pk']
+    paginate_by = 15
 
 class MrkView(DetailView):
     """Listado de Marca"""
     template_name = 'inventarios/Mrk_View.html'
     model = Marca
+
 
 class MrkNuevo(CreateView):
     """Crear Marca"""
@@ -81,12 +91,14 @@ class MrkNuevo(CreateView):
     template_name = 'inventarios/Mrk_New.html'
     success_url = reverse_lazy('inventarios:mrk_panel')
 
+
 class MrkEdita(UpdateView):
     """Listado de Marcas"""
     model = Marca
     form_class = MarcaForm
     template_name = 'inventarios/Mrk_Edit.html'
     success_url = reverse_lazy('inventarios:mrk_panel')
+
 
 class MrkDelet(DeleteView):
     """Listado de Marcas"""
@@ -97,16 +109,20 @@ class MrkDelet(DeleteView):
 
     # ========M O  D  E  L  O  S=========== #
 
+
 class ModLista(ListView):
     """Listado de Modelo"""
     model = Modelo
     template_name = 'inventarios/Mod_Panel.html'
-    paginate_by = 8
+    ordering = ['pk']
+    paginate_by = 15
+
 
 class ModView(DetailView):
     """Listado de Modelo"""
     template_name = 'inventarios/Mod_View.html'
     model = Modelo
+
 
 class ModNuevo(CreateView):
     """Crear Modelo"""
@@ -127,6 +143,7 @@ class ModEdita(UpdateView):
     template_name = 'inventarios/Mod_Edit.html'
     success_url = reverse_lazy('inventarios:mod_panel')
 
+
 class ModDelet(DeleteView):
     """Listado de Modelos"""
     model = Modelo
@@ -136,16 +153,20 @@ class ModDelet(DeleteView):
 
 # ======== C   O   L  O  R  E  S=========== #
 
+
 class ColLista(ListView):
     """Listado de Color"""
     model = Color
     template_name = 'inventarios/Col_Panel.html'
-    paginate_by = 8
+    ordering = ['pk']
+    paginate_by = 15
+
 
 class ColView(DetailView):
     """Listado de Color"""
     template_name = 'inventarios/Col_View.html'
     model = Color
+
 
 class ColNuevo(CreateView):
     """Crear Color"""
@@ -154,12 +175,14 @@ class ColNuevo(CreateView):
     template_name = 'inventarios/Col_New.html'
     success_url = reverse_lazy('inventarios:col_panel')
 
+
 class ColEdita(UpdateView):
     """Listado de Colors"""
     model = Color
     form_class = ColorForm
     template_name = 'inventarios/Col_Edit.html'
     success_url = reverse_lazy('inventarios:col_panel')
+
 
 class ColDelet(DeleteView):
     """Listado de Colors"""
@@ -175,7 +198,8 @@ class TllLista(ListView):
     """Listado de Tabtalla"""
     model = Tabtalla
     template_name = 'inventarios/Tll_Panel.html'
-    paginate_by = 8
+    ordering = ['pk']
+    paginate_by = 15
 
 
 class TllView(DetailView):
@@ -214,6 +238,7 @@ class ExiLista(ListView):
     """Listado de Existencia"""
     model = Existencia
     template_name = 'inventarios/Exi_Panel.html'
+    ordering = ['pk']
     paginate_by = 8
 
     def get_initial(self):
@@ -357,7 +382,7 @@ class SxtLista(ListView):
     """Listado de Saldoxtalla"""
     model = Saldoxtalla
     template_name = 'inventarios/Sxt_Panel.html'
-    paginate_by = 8
+    paginate_by = 12
 
 class SxtView(DetailView):
     """Listado de Saldoxtalla"""
