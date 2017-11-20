@@ -55,9 +55,8 @@ class MarcaForm(forms.ModelForm):
             'mrk_detalle':  forms.TextInput(),
             'mrk_abrevia':  forms.TextInput(),
             'mrk_indicad':  forms.TextInput(),
-#           'mrk_statreg':  forms.TextInput(),
+            # mrk_statreg':  forms.TextInput(),
         }
-
 
 
 class ModeloForm(forms.ModelForm):
@@ -84,6 +83,7 @@ class ModeloForm(forms.ModelForm):
 
         widgets = {
             'mod_idmodel':  forms.TextInput(attrs={"class": "form_widget", 'pattern': '[0-9]+'}),
+            # TODO: Hacer validación de id modelo a nivel de servidor.
             'mod_idmarca':  forms.Select(attrs={"class": "form_widget"}),
             'mod_detalle':  forms.TextInput(attrs={"class": "form_widget"}),
             'mod_abrevia':  forms.TextInput(attrs={"class": "form_widget"}),
@@ -117,7 +117,7 @@ class ColorForm(forms.ModelForm):
             'col_detalle':  forms.TextInput(attrs={"class": "form_widget"}),
             'col_abrevia':  forms.TextInput(attrs={"class": "form_widget"}),
             'col_indicad':  forms.TextInput(attrs={"class": "form_widget"}),
-#           'col_statreg':  forms.TextInput(),
+            # 'col_statreg':  forms.TextInput(),
         }
 
 
