@@ -244,11 +244,11 @@ class ExistenciaEditForm(forms.ModelForm):
 
     # field = forms.DecimalField(label="Etiqueta", widget=)
 
-    def __init__(self, *args, **kwargs):
-        if 'instance' in kwargs:
-            kwargs['instance'].exs_saldinc = kwargs['instance'].exs_saldinc.quantize(Decimal('0.01'))
-            # TODO: Quantize all Decimal Fields
-        super(ExistenciaEditForm, self).__init__(*args, **kwargs)
+#    def __init__(self, *args, **kwargs):
+#        if 'instance' in kwargs:
+#            kwargs['instance'].exs_saldinc = kwargs['instance'].exs_saldinc.quantize(Decimal('0.01'))
+#            # TODO: Quantize all Decimal Fields
+#        super(ExistenciaEditForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Existencia
