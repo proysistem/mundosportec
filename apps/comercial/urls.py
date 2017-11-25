@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 from apps.comercial.views import CliLista, CliNuevo, CliView, CliEdita, CliDelet, PrvLista, PrvNuevo, PrvView, PrvEdita, PrvDelet, VndLista, VndNuevo, VndView, VndEdita, VndDelet, MviLista, MviNuevo, MviView, MviEdita, MviDelet, PedLista, PedNuevo, PedView, PedEdita, PedDelet, FacLista, FacNuevo, FacView, FacEdita, FacDelet
+from apps.inventarios.views import PopExist
 urlpatterns = [
     url(r'^CliPanel',                  CliLista.as_view(), name='cli_panel'),
     url(r'^CliNuevo/$',                CliNuevo.as_view(), name='cli_new'),
@@ -25,6 +26,7 @@ urlpatterns = [
     url(r'^MviEdita/(?P<pk>\d+)/$',    MviEdita.as_view(), name='mvi_edit'),
     url(r'^MviElimina/(?P<pk>\d+)/$',  MviDelet.as_view(), name='mvi_delet'),
 
+    url(r'^PopProdc',                  PopExist.as_view(), name='pop_exist'),
     url(r'^PedPanel',                  PedLista.as_view(), name='ped_panel'),
     url(r'^PedNuevo/$',                PedNuevo.as_view(), name='ped_new'),
     url(r'^PedConsulta/(?P<pk>\d+)/$', PedView.as_view(),  name='ped_view'),

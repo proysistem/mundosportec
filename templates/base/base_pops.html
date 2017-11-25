@@ -8,11 +8,10 @@
  	<link rel="stylesheet" href="{% static 'css/fontello.css' %}">
 {% endblock css %}
 
+
 {% block content %}
-	<div class="container">
-		{% include 'base/aside.html' %}
-		<div class="content">
-			{% include 'comercial/nav_comercial.html' %}
+	<div class="content">
+		<div class="content_pop">
 			{% block context%}
 
 
@@ -23,17 +22,4 @@
 {% endblock content %}
 
 {% block footer %}
-		{% include 'footer/footer.html' %}
 {% endblock footer %}
-
-
-{% block js %}
-	<script src="{% static 'js/custom.js' %}"></script>
-
-	<script
-	  src="https://code.jquery.com/jquery-2.2.4.min.js"
-	  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-	  crossorigin="anonymous">
-    </script>
-
-{% endblock js %}

@@ -67,13 +67,24 @@ class Vendedor(models.Model):
         return self.vnd_frsname
 
 
+class Pedido(models.Model):
+    ped_npedido = models.AutoField('Núm. de Pedido', primary_key=True)
+    Ped_motivos = models.ForeignKey(Motivo)
+    ped_fechped = models.DateField('Fecha de pedido', )
+    ped_cliente = models.ForeignKey(Cliente)
+    ped_vendedo = models.ForeignKey(Vendedor, null=True, blank=True)
+
+    def __str__(self):
+        return (self.ped_npedido)
+
+
 class Movinvent(models.Model):
     mvi_nummovi = models.AutoField('Núm. de movimiento', primary_key=True)
-    mvi_factura = models.ForeignKey('Factura', verbose_name='Núm. de factura', null=True, blank=True)
+    mvi_npedido = models.ForeignKey('Pedido', verbose_name='Núm. de pedido', null=True, blank=True)
+#   mvi_factura = models.ForeignKey('Factura', verbose_name='Núm. de factura', null=True, blank=True)
 
     mvi_fechmov = models.DateField('Fecha')
     mvi_motivos = models.ForeignKey(Motivo)
-    mvi_pedidos = models.IntegerField('Núm. de pedido', null=True, blank=True)
     mvi_tipomov = models.CharField("Tipo de movimiento", max_length=1)
     mvi_vendedo = models.ForeignKey(Vendedor)
     mvi_cliente = models.ForeignKey(Cliente)
@@ -115,35 +126,16 @@ class Movinvent(models.Model):
         super(Existencia, self).save()
 
 
-class Pedido(models.Model):
-
-    Ped_motivos = models.ForeignKey(Motivo)
-    ped_mvinven = models.ForeignKey(Movinvent)
-    ped_fechfac = models.DateField('Fecha de pedido', )
-    ped_cajanum = models.ForeignKey(Caja, null=True, blank=True)
-    ped_cajeras = models.ForeignKey(Cajera, null=True, blank=True)
-    ped_cliente = models.ForeignKey(Cliente)
-    ped_vendedo = models.ForeignKey(Vendedor, null=True, blank=True)
-#   ped_factura = models.ForeignKey(Factura, null=True, blank=True)
-    ped_totitms = models.DecimalField('Total de items', max_digits=15, decimal_places=2, null=True, blank=True)
-    ped_totvlor = models.DecimalField('Total del valor', max_digits=15, decimal_places=2, null=True, blank=True)
-    ped_totdsct = models.DecimalField('Total de descuentos', max_digits=15, decimal_places=2, null=True, blank=True)
-    ped_totrkrg = models.DecimalField('Total de regaregos', max_digits=15, decimal_places=2, null=True, blank=True)
-    ped_totflet = models.DecimalField('Total por deliver (transporte)', max_digits=15, decimal_places=2, null=True, blank=True)
-    ped_totaran = models.DecimalField('Total aranceles', max_digits=15, decimal_places=2, null=True, blank=True)
-    ped_tottaxs = models.DecimalField('Total taxes', max_digits=15, decimal_places=2, null=True, blank=True)
-
-
 class Factura(models.Model):
     fac_idfactu = models.AutoField('Núm. de Factura', primary_key=True)
-    # fac_mvinven = models.ForeignKey(Movinvent)
+    fac_nummovi = models.ForeignKey(Movinvent, verbose_name='Núm. de Movimiento', null=True, blank=True)
     fac_fechfac = models.DateField('Fecha de la factura', default=timezone.now)
-    fac_cajanum = models.ForeignKey(Caja)
-    fac_cajeras = models.ForeignKey(Cajera)
-    fac_cliente = models.ForeignKey(Cliente)
-    fac_vendedo = models.ForeignKey(Vendedor)
-    fac_pedidos = models.ForeignKey(Pedido)
-    fac_monedas = models.ForeignKey(Moneda)
+    fac_cajanum = models.ForeignKey(Caja, verbose_name='Núm. de caja', null=True, blank=True)
+    fac_cajeras = models.ForeignKey(Cajera, verbose_name='Cód. de Cajera', null=True, blank=True)
+    fac_cliente = models.ForeignKey(Cliente, verbose_name='Cód. de Cliente', null=True, blank=True)
+    fac_vendedo = models.ForeignKey(Vendedor, verbose_name='Cód. de Vendedor', null=True, blank=True)
+    fac_pedidos = models.ForeignKey(Pedido, verbose_name='Núm. de Pedido', null=True, blank=True)
+    fac_monedas = models.ForeignKey(Moneda, verbose_name='Núm. de Moneda', null=True, blank=True)
     fac_cotizac = models.DecimalField('Cotización', max_digits=9, decimal_places=2, null=True, blank=True)
     fac_totitms = models.DecimalField('Total de items', max_digits=15, decimal_places=2, null=True, blank=True)
     fac_totvlor = models.DecimalField('Total del valor', max_digits=15, decimal_places=2, null=True, blank=True)
@@ -157,6 +149,9 @@ class Factura(models.Model):
     fac_pgotjcr = models.DecimalField('T./Crédito', max_digits=15, decimal_places=2, null=True, blank=True)
     fac_pgocred = models.DecimalField('Crédito personal', max_digits=15, decimal_places=2, null=True, blank=True)
     fac_otropgo = models.DecimalField('Internet (Paypal)', max_digits=15, decimal_places=2, null=True, blank=True)
+
+    def __str__(self):
+        return (self.fac_idfactu)
 
 
 # TODO: Adecuar campos correctos finales antes de crear migraciones

@@ -9,16 +9,16 @@ admin.site.register(Pedido)
 admin.site.register(Movinvent)
 
 
-class MovinventInlineAdmin(admin.TabularInline):
-    model = Movinvent
+# class MovinventInlineAdmin(admin.TabularInline):
+#     model = Movinvent
 
 
-class FacturaAdmin(admin.ModelAdmin):
-    '''
-        Admin View for Factura
-    '''
-    inlines = [
-        MovinventInlineAdmin,
-    ]
+# class FacturaAdmin(admin.ModelAdmin):
+#    '''
+#        Admin View for Factura
+#    '''
+#     inlines = [
+#         MovinventInlineAdmin,
+#     ]
 
-admin.site.register(Factura, FacturaAdmin)
+# admin.site.register(Factura, FacturaAdmin)

@@ -185,6 +185,34 @@ class PedNuevo(CreateView):
     template_name = 'comercial/Ped_New.html'
     success_url = reverse_lazy('comercial:ped_panel')
 
+    def get_context_data(self, **kwargs):
+        context = super(PedNuevo, self).get_context_data(**kwargs)
+        MovinventFormset = inlineformset_factory(Pedido, Movinvent, form=MovinventInlineForm, extra=1)
+
+        if self.request.POST:
+            context['movimientos'] = MovinventFormset(self.request.POST, queryset=Movinvent.objects.select_related())
+        else:
+            # TODO: Hay un problema de 0n queries, debido a la generación de múltiples formset con mismo queryset, probablemente
+            #       Probé con select_related sin éxito aún.
+            context['movimientos'] = MovinventFormset(queryset=Movinvent.objects.select_related("mvi_cliente"))
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        movimientos = context['movimientos']
+        with transaction.atomic():
+            self.object = form.save()
+
+            if movimientos.is_valid():
+                # TODO: Validate per form in formset
+                #       Although, formset.is_valid do this.
+                # for form in movimientos:
+                #     if form.is_valid():
+                #         form.
+                movimientos.instance = self.object
+                movimientos.save()
+        return super(PedNuevo, self).form_valid(form)
+
 
 class PedEdita(UpdateView):
     """Modifica Pedidos"""
@@ -224,33 +252,33 @@ class FacNuevo(CreateView):
     template_name = 'comercial/Fac_New.html'
     success_url = reverse_lazy('comercial:fac_panel')
 
-    def get_context_data(self, **kwargs):
-        context = super(FacNuevo, self).get_context_data(**kwargs)
-        MovinventFormset = inlineformset_factory(Factura, Movinvent, form=MovinventInlineForm, extra=1)
+#    def get_context_data(self, **kwargs):
+#        context = super(FacNuevo, self).get_context_data(**kwargs)
+#        MovinventFormset = inlineformset_factory(Factura, Movinvent, form=MovinventInlineForm, extra=1)
+#
+#        if self.request.POST:
+#            context['movimientos'] = MovinventFormset(self.request.POST, queryset=Movinvent.objects.select_related())
+#        else:
+#            # TODO: Hay un problema de 0n queries, debido a la generación de múltiples formset con mismo queryset, probablemente
+#            #       Probé con select_related sin éxito aún.
+#            context['movimientos'] = MovinventFormset(queryset=Movinvent.objects.select_related("mvi_cliente"))
+#        return context
 
-        if self.request.POST:
-            context['movimientos'] = MovinventFormset(self.request.POST, queryset=Movinvent.objects.select_related())
-        else:
-            # TODO: Hay un problema de 0n queries, debido a la generación de múltiples formset con mismo queryset, probablemente
-            #       Probé con select_related sin éxito aún.
-            context['movimientos'] = MovinventFormset(queryset=Movinvent.objects.select_related("mvi_cliente"))
-        return context
+#    def form_valid(self, form):
+#        context = self.get_context_data()
+#        movimientos = context['movimientos']
+#        with transaction.atomic():
+#            self.object = form.save()
 
-    def form_valid(self, form):
-        context = self.get_context_data()
-        movimientos = context['movimientos']
-        with transaction.atomic():
-            self.object = form.save()
-
-            if movimientos.is_valid():
+#            if movimientos.is_valid():
                 # TODO: Validate per form in formset
                 #       Although, formset.is_valid do this.
                 # for form in movimientos:
                 #     if form.is_valid():
                 #         form.
-                movimientos.instance = self.object
-                movimientos.save()
-        return super(FacNuevo, self).form_valid(form)
+#                movimientos.instance = self.object
+#                movimientos.save()
+#        return super(FacNuevo, self).form_valid(form)
 
 
 class FacEdita(UpdateView):

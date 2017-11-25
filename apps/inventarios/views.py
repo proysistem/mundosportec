@@ -1,4 +1,4 @@
-from django.shortcuts import render
+#from django.shortcuts import render
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
 from .models import Division, Marca, Modelo, Color, Tabtalla, Existencia, Saldoxtalla
@@ -54,7 +54,6 @@ class DivDelet(DeleteView):
     success_url = reverse_lazy('inventarios:div_panel')
 
 
-
 #class MrkSelect(ListView):
 #   """Listado de Marca"""
 #   model = Marca
@@ -77,6 +76,7 @@ class MrkLista(ListView):
     template_name = 'inventarios/Mrk_Panel.html'
     ordering = ['pk']
     paginate_by = 15
+
 
 class MrkView(DetailView):
     """Listado de Marca"""
@@ -190,7 +190,6 @@ class ColDelet(DeleteView):
     form_class = ColorForm
     template_name = 'inventarios/Col_Delet.html'
     success_url = reverse_lazy('inventarios:col_panel')
-
 # ======== T  A  B  T  A  L  L  A  S  =========== #
 
 
@@ -233,6 +232,15 @@ class TllDelet(DeleteView):
 
 
 # ======== E  X  I  S  T  E  N  C  I  A  S =========== #
+
+class PopExist(ListView):
+    """Listado de Existencia"""
+    model = Existencia
+    template_name = 'comercial/Pop_Exis.html'
+    ordering = ['pk']
+    context_object_name = 'productos'
+    paginate_by = 8
+
 
 class ExiLista(ListView):
     """Listado de Existencia"""
@@ -378,16 +386,19 @@ class ExiDelet(DeleteView):
 
 # ======== SALDOS X TALLAS =========== #
 
+
 class SxtLista(ListView):
     """Listado de Saldoxtalla"""
     model = Saldoxtalla
     template_name = 'inventarios/Sxt_Panel.html'
     paginate_by = 12
 
+
 class SxtView(DetailView):
     """Listado de Saldoxtalla"""
     template_name = 'inventarios/Sxt_View.html'
     model = Saldoxtalla
+
 
 class SxtNuevo(CreateView):
     """Crear Saldoxtalla"""
@@ -396,12 +407,14 @@ class SxtNuevo(CreateView):
     template_name = 'inventarios/Sxt_New.html'
     success_url = reverse_lazy('inventarios:sxt_panel')
 
+
 class SxtEdita(UpdateView):
     """Listado de Saldoxtallas"""
     model = Saldoxtalla
     form_class = SaldoxtallaForm
     template_name = 'inventarios/Sxt_Edit.html'
     success_url = reverse_lazy('inventarios:sxt_panel')
+
 
 class SxtDelet(DeleteView):
     """Listado de Saldoxtallas"""
