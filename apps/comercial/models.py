@@ -69,7 +69,7 @@ class Vendedor(models.Model):
 
 class Pedido(models.Model):
     ped_npedido = models.AutoField('Núm. de Pedido', primary_key=True)
-    Ped_motivos = models.ForeignKey(Motivo)
+    ped_motivos = models.ForeignKey(Motivo)
     ped_fechped = models.DateField('Fecha de pedido', )
     ped_cliente = models.ForeignKey(Cliente)
     ped_vendedo = models.ForeignKey(Vendedor, null=True, blank=True)
@@ -128,13 +128,12 @@ class Movinvent(models.Model):
 
 class Factura(models.Model):
     fac_idfactu = models.AutoField('Núm. de Factura', primary_key=True)
-    fac_nummovi = models.ForeignKey(Movinvent, verbose_name='Núm. de Movimiento', null=True, blank=True)
+    fac_npedido = models.ForeignKey(Pedido, verbose_name='Núm. de Pedido', null=True, blank=True)
     fac_fechfac = models.DateField('Fecha de la factura', default=timezone.now)
     fac_cajanum = models.ForeignKey(Caja, verbose_name='Núm. de caja', null=True, blank=True)
     fac_cajeras = models.ForeignKey(Cajera, verbose_name='Cód. de Cajera', null=True, blank=True)
     fac_cliente = models.ForeignKey(Cliente, verbose_name='Cód. de Cliente', null=True, blank=True)
     fac_vendedo = models.ForeignKey(Vendedor, verbose_name='Cód. de Vendedor', null=True, blank=True)
-    fac_pedidos = models.ForeignKey(Pedido, verbose_name='Núm. de Pedido', null=True, blank=True)
     fac_monedas = models.ForeignKey(Moneda, verbose_name='Núm. de Moneda', null=True, blank=True)
     fac_cotizac = models.DecimalField('Cotización', max_digits=9, decimal_places=2, null=True, blank=True)
     fac_totitms = models.DecimalField('Total de items', max_digits=15, decimal_places=2, null=True, blank=True)

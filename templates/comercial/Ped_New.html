@@ -1,16 +1,17 @@
 {% extends 'base/base_comercial.html' %}
 
 {% block title %} Graba Pedidos {% endblock title %}</title>
+{% block css %}
+	{{ block.super }}
+	<style type="text/css">
+		td input{
+			width: 100%;
+			max-width: 100%;
+		}
+	</style>
+{% endblock css %}
 {% block super %}
-<script type="text/javascript"></script>
-<script Language="JavaScript">
-    function popsaldo(){
-        window.open("{% url 'comercial:pop_exist' %}","directories=no, menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=680,width=1420");
-        }
-    function popsaldoaa(){
-        window.alert('ojote');
-        }
-</script>
+
 {% endblock %}
 
 			{% block context%}
@@ -46,6 +47,8 @@
 									<div class="width_015"><label for="{{form.ped_npedido.name}}">{{form.ped_npedido.label}}</label></div>
 									<div class="form_widget width_010">{{ form.ped_npedido }}</div>
 								</div>
+
+								<button type="button" id="nuevo_movimiento">+ Movimiento</button>
 							</fieldset>
 						</div>
 						<div>
@@ -62,48 +65,17 @@
 								 		<th class="head_tab width_010">Valor</th>
 								 	</tr>
 								</thead>
-								<tbody border="1">
-									<tr>
-									</td>
-										<td class="columns_tab width_010"> <input name="pop_pedProd" name="pop_pedProd" required onclick="popsaldo()"/></td>
-										<td class="columns_tab width_025"> <input name="pop_pedDtll" disabled="disabled"></td>
-										<td class="columns_tab width_010"> <input name="pop_pedUnid" disabled="disabled"></td>
-										<td class="columns_tab width_005"> <input name="pop_kntidad"></td>
-										<td class="columns_tab width_010"> <input name="pop_pedPrc4"></td>
-										<td class="columns_tab width_005"> <input name="pop_dscuent" disabled="disabled"></td>
-										<td class="columns_tab width_005"> <input name="pop_impuest" disabled="disabled"></td>
-										<td class="columns_tab width_010"> <input name="pop_valores" disabled="disabled"></td>
-										<td class="columns_tab"> <input name="pop_pedTbtl" type="hidden"></td>
-						{% comment %}
-										<td class="columns_tab" name="pop_pedDtll">{{ form.prd_detalle }} </td>
-										<td class="columns_tab">{{ form.mvi_talla01 }} </td>
-										<td class="columns_tab">{{ form.mvi_talla02 }} </td>
-										<td class="columns_tab">{{ form.mvi_talla03 }} </td>
-										<td class="columns_tab">{{ form.mvi_talla04 }} </td>
-										<td class="columns_tab">{{ form.mvi_talla05 }} </td>
-										<td class="columns_tab">{{ form.mvi_talla06 }} </td>
-										<td class="columns_tab">{{ form.mvi_talla07 }} </td>
-										<td class="columns_tab">{{ form.mvi_talla08 }} </td>
-										<td class="columns_tab">{{ form.mvi_talla09 }} </td>
-										<td class="columns_tab">{{ form.mvi_talla10 }} </td>
-										<td class="columns_tab">{{ form.mvi_talla11 }} </td>
-										<td class="columns_tab">{{ form.mvi_talla12 }} </td>
-										<td class="columns_tab">{{ form.mvi_talla13 }} </td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">Tall-n</td>
-									<td class="columns_tab">TOTALES</td>
-						{% endcomment %}
+								<tbody border="1" id="movimientos">
+									<tr id="template">
+										<td class="columns_tab width_010"> <input name="pop_pedProd[__index__]" required /></td>
+										<td class="columns_tab width_025"> <input name="pop_pedDtll[__index__]" disabled="disabled"></td>
+										<td class="columns_tab width_005"> <input name="pop_kntidad[__index__]" type="number" step="0.01"></td>
+										<td class="columns_tab width_010"> <input name="pop_pedUnid[__index__]" disabled="disabled"></td>
+										<td class="columns_tab width_010"> <input name="pop_pedPrc4[__index__]" type="number" step="0.01" ></td>
+										<td class="columns_tab width_005"> <input name="pop_dscuent[__index__]" disabled="disabled"></td>
+										<td class="columns_tab width_005"> <input name="pop_impuest[__index__]" disabled="disabled"></td>
+										<td class="columns_tab width_010"> <input name="pop_valores[__index__]" type="number" step="0.01" disabled="disabled"></td>
+										<td class="columns_tab"> <input name="pop_pedTbtl[__index__]" type="hidden"></td>
 									</tr>
 								</tbody>
 								<tr>
@@ -133,14 +105,65 @@
 				</form>
 			</div>
 		{% endblock context%}
-{% comment %}
-{% block js %}
-	{{ block.super }}
-	<script type="text/javascript">
-		$('#insertar_movimiento').click(function(e){
-			var cod_producto = prompt("Ingrese código de producto");
-		})
-	</script>
-{% endblock js %}
 
-{% endcomment %}
+		{% block js %}
+			{{ block.super }}
+
+			<script type="text/javascript">
+				function popsaldo(id){
+					CURRENT_ID = id;
+					window.open("{% url 'comercial:pop_exist' %}", "_blank", "directories=no, menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=680,width=1600");
+				}
+				function popsaldoaa(){
+					window.alert('ojote');
+				}
+				function pedirTallas() {
+					alert("Pedir Tallas");
+				}
+				function calcularValor() {
+					cantidad = document.form_pedidos['pop_kntidad[' + CURRENT_ID +']'].value;
+					precio = document.form_pedidos['pop_pedPrc4[' + CURRENT_ID +']'].value;
+					document.form_pedidos['pop_valores[' + CURRENT_ID +']'].value = cantidad * precio;
+				}
+				function actualizar(pedProd, pedDtll, pedTbtl, pedUnid, pedPrc4){
+					document.form_pedidos['pop_pedProd['+ CURRENT_ID+']'].value = pedProd;
+					document.form_pedidos['pop_pedDtll['+ CURRENT_ID+']'].value = pedDtll;
+					if (pedTbtl){
+						pedirTallas();
+						document.form_pedidos['pop_kntidad['+ CURRENT_ID+']'].disabled = true;
+					} else {
+						document.form_pedidos['pop_kntidad['+ CURRENT_ID+']'].disabled = false;
+						document.form_pedidos['pop_pedTbtl['+ CURRENT_ID+']'].value = pedTbtl;
+					}
+					document.form_pedidos['pop_pedUnid['+ CURRENT_ID+']'].value = pedUnid;
+					document.form_pedidos['pop_pedPrc4['+ CURRENT_ID+']'].value = pedPrc4;
+					document.form_pedidos['pop_kntidad['+ CURRENT_ID+']'].onkeyup = calcularValor;
+					document.form_pedidos['pop_pedPrc4['+ CURRENT_ID+']'].onkeyup = calcularValor;
+
+				}
+			</script>
+
+			<script type="text/javascript">
+				$(function(){
+					var template = $('#template')[0].outerHTML;
+					$('#template').remove()
+					var getLength = function(){
+						return $('#movimientos tr').length;
+					}
+					var anadir = function(){
+						var item_num = getLength();
+						var html = template.replace(/__index__/g, item_num);
+						var $html = $(html);
+						$html.attr('id', "mov_" + item_num)
+						$html.find('input[name^="pop_pedProd"]').click(function() {
+							popsaldo(item_num);
+						})
+						$('#movimientos').append($html);
+					}
+					$('#nuevo_movimiento').click(anadir);
+					anadir();
+				})
+			</script>
+
+		{% endblock js %}
+

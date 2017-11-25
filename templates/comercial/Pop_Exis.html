@@ -5,12 +5,8 @@
 {% block super %}
 
     <script>
-        function datos(a,b,c,d,e){
-            opener.document.form_pedidos.pop_pedProd.value=a;
-            opener.document.form_pedidos.pop_pedDtll.value=b;
-            opener.document.form_pedidos.pop_pedTbtl.value=c;
-            opener.document.form_pedidos.pop_pedUnid.value=d;
-            opener.document.form_pedidos.pop_pedPrc4.value=e;
+        function datos(pedProd, pedDtll, pedTbtl, pedUnid, pedPrc4){
+            opener.actualizar(pedProd, pedDtll, pedTbtl, pedUnid, pedPrc4);
             window.close();
         }
         function Close() {
@@ -58,7 +54,7 @@
                  <form method="POST" onkeydown="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_ContentPlaceMain_btnBuscar&#39;)">{% csrf_token %}
 
                 {% endcomment %}
-               <form method="POST" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_ContentPlaceMain_btnBuscar&#39;)">{% csrf_token %}
+               <form method="POST">{% csrf_token %}
                     <table border="1" >
                         <thead>
                             <tr color="#:000066">
@@ -95,7 +91,7 @@
                         <tbody border="0">
                             {% if productos %}
                             {% for var_exifield in productos %}
-                                <tr OnMouseOver="Resaltar_On(this);" OnMouseOut="Resaltar_Off(this);" OnClick="datos('{{ var_exifield.exs_product }}','{{ var_exifield.exs_detalle }}','{{ var_exifield.exs_tabtall }}','{{ var_exifield.exs_idunida }}','{{ var_exifield.exs_publico }}');">
+                                <tr OnMouseOver="Resaltar_On(this);" OnMouseOut="Resaltar_Off(this);" OnClick="datos('{{ var_exifield.exs_product }}','{{ var_exifield.exs_detalle }}', {% if var_exifield.exs_tabtall is None %}null{% else %}'{{ var_exifield.exs_tabtall }}'{% endif %} ,'{{ var_exifield.exs_idunida }}',{{ var_exifield.exs_publico|default:0|stringformat:'0.2f' }});">
                                     <td>{{ var_exifield.exs_product }} </td>
                                     <td>{{ var_exifield.exs_detalle }} </td>
                                     <td>{{ var_exifield.exs_tabtall }} </td>

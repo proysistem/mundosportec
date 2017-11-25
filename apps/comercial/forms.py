@@ -300,13 +300,13 @@ class PedidoForm(forms.ModelForm):
     class Meta:
         model = Pedido
         fields = [
-                'Ped_motivos',
+                'ped_motivos',
                 'ped_fechped',
                 'ped_cliente',
                 'ped_vendedo',
         ]
         labels = {
-                'Ped_motivos': 'Motivo del pedido',
+                'ped_motivos': 'Motivo del pedido',
                 'ped_fechped': 'Fecha',
                 'ped_cliente': 'Cliente ',
                 'ped_vendedo': 'Vendedor',
@@ -330,7 +330,7 @@ class FacturaForm(forms.ModelForm):
                 'fac_cajeras',
                 'fac_cliente',
                 'fac_vendedo',
-                'fac_pedidos',
+                'fac_npedido',
                 'fac_monedas',
                 'fac_cotizac',
                 'fac_totitms',
@@ -355,7 +355,7 @@ class FacturaForm(forms.ModelForm):
                 'fac_cajeras':  'Cajer@',
                 'fac_cliente':  'Cliente ',
                 'fac_vendedo':  'Vendedor',
-                'fac_pedidos':  'Núm. de pedido',
+                'fac_npedido':  'Núm. de pedido',
                 'fac_monedas':  'Moneda',
                 'fac_cotizac':  'Cotización',
                 'fac_totitms':  'Items',
@@ -378,7 +378,7 @@ class FacturaForm(forms.ModelForm):
                 'fac_cajeras':  forms.Select(),
                 'fac_cliente':  forms.Select(),
                 'fac_vendedo':  forms.Select(),
-                'fac_pedidos':  forms.Select(),
+                'fac_npedido':  forms.Select(),
                 'fac_monedas':  forms.Select(),
                 'fac_cotizac':  forms.NumberInput(),
                 'fac_totitms':  forms.NumberInput(),

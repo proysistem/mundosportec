@@ -239,6 +239,7 @@ class PopExist(ListView):
     ordering = ['pk']
     context_object_name = 'productos'
     paginate_by = 8
+    queryset = Existencia.objects.filter(exs_saldact__gt=0.00)
 
 
 class ExiLista(ListView):

@@ -1,5 +1,6 @@
 from django.db import models
 from apps.parametros.models import Sucursal
+from django.core.exceptions import ValidationError
 
 
 class Tipoproducto(models.Model):
@@ -103,7 +104,7 @@ class Existencia(models.Model):
     exs_detalle = models.CharField('Detalle del Producto', editable=False, max_length=45)
     exs_abrevia = models.CharField('Abreviatura del Producto', editable=False, max_length=25)
     exs_tpoprod = models.ForeignKey(Tipoproducto)
-    exs_tabtall = models.CharField('Tabla de Tallas', editable=False, max_length=5)
+    exs_tabtall = models.CharField('Tabla de Tallas', editable=False, max_length=5, null=True)
     exs_idunida = models.ForeignKey(Unidad)
     exs_saldinc = models.DecimalField('Saldo inicial', max_digits=11, decimal_places=4, blank=True, null=True)
     exs_ingreso = models.DecimalField('Ingresos', max_digits=11, decimal_places=4, blank=True, null=True)
@@ -130,15 +131,28 @@ class Existencia(models.Model):
     def __str__(self):
         return self.exs_product
 
+    def generate_id(self):
+        product_id = "{0:02d}{1:02d}{2}{3}{4}".format(
+            self.exs_sucursa.pk,  # 2
+            self.exs_iddivis.pk,  # 2
+            self.exs_idmarca.pk,  # 3
+            self.exs_idmodel.pk,  # 3
+            self.exs_idcolor.pk   # 3
+        )
+        self._id = product_id
+        return product_id
+
+    def clean(self):
+        super(Existencia, self).clean()
+        queryset = Existencia.objects.filter(exs_product=self.generate_id())
+        if self.pk:
+            queryset = queryset.exclude(pk=self.pk)
+        if queryset.exists():
+            raise ValidationError("Ya existe un producto similar.")
+
     def save(self, *args, **kwargs):
         if self.exs_sucursa and self.exs_iddivis and self.exs_idmarca and self.exs_idmodel and self.exs_idcolor:
-            self.exs_product = "{0:02d}{1:02d}{2}{3}{4}".format(
-                self.exs_sucursa.pk,  # 2
-                self.exs_iddivis.pk,  # 2
-                self.exs_idmarca.pk,  # 3
-                self.exs_idmodel.pk,  # 3
-                self.exs_idcolor.pk   # 3
-            )
+            self.exs_product = self._id
             self.exs_detalle = "{} {} {} {}".format(
                 str(self.exs_iddivis.div_abrevia),  # 2
                 str(self.exs_idmarca.mrk_detalle),  # 3
@@ -152,8 +166,8 @@ class Existencia(models.Model):
                 str(self.exs_idcolor.col_abrevia)   # 3
             )
             self.exs_tabtall = "{}".format(
-                str(self.exs_idmodel.mod_tabtall)   # 2
-            )
+                str(self.exs_idmodel.mod_tabtall)  # 2
+            ) if self.exs_idmodel.mod_tabtall else None
         # TODO: Definir si amerita modificar los parámetros
         # TODO: Definir el max_length de CharField o poner TextField
         super(Existencia, self).save()

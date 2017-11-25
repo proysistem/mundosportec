@@ -197,6 +197,10 @@ class PedNuevo(CreateView):
             context['movimientos'] = MovinventFormset(queryset=Movinvent.objects.select_related("mvi_cliente"))
         return context
 
+    def form_invalid(self, form):
+        # import pdb; pdb.set_trace()
+        return super(PedNuevo, self).form_invalid(form)
+
     def form_valid(self, form):
         context = self.get_context_data()
         movimientos = context['movimientos']
