@@ -1,6 +1,7 @@
 from django.conf.urls import include, url
 from apps.comercial.views import CliLista, CliNuevo, CliView, CliEdita, CliDelet, PrvLista, PrvNuevo, PrvView, PrvEdita, PrvDelet, VndLista, VndNuevo, VndView, VndEdita, VndDelet, MviLista, MviNuevo, MviView, MviEdita, MviDelet, PedLista, PedNuevo, PedView, PedEdita, PedDelet, FacLista, FacNuevo, FacView, FacEdita, FacDelet
 from apps.inventarios.views import PopExist
+
 urlpatterns = [
     url(r'^CliPanel',                  CliLista.as_view(), name='cli_panel'),
     url(r'^CliNuevo/$',                CliNuevo.as_view(), name='cli_new'),

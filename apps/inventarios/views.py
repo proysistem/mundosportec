@@ -12,7 +12,6 @@ from django.contrib import messages
 
 from multi_form_view import MultiModelFormView
 
-
 # Create your views here.
 
 

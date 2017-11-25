@@ -48,12 +48,7 @@
 								</div>
 							</fieldset>
 						</div>
-<!--
-						<div class="form_row"><div class="form_label"><label for="{{form.jgo_divisio.name}}">{{form.fac_cliente.label}}</label></div><div>{{form.fac_cliente}}</div></div>
-						<div class="form_row"><div class="form_label"><label for="{{form.jgo_idtalla.name}}">{{form.fac_vendedo.label}}</label></div><div>{{form.fac_vendedo}}</div></div>
-=-->
 						<div>
-							<button type="button" id="insertar_movimiento">+ Movimiento</button>
 							<table border="0" >
 								<thead border="1">
 								 	<tr color="#:000066" class="width_100">
@@ -68,37 +63,17 @@
 								 	</tr>
 								</thead>
 								<tbody border="1">
-									{% comment %}
-										{% for movimiento_form in movimientos %}
-											<tr>
-												<td>
-													{{ movimiento_form.mvi_product }}
-												</td>
-												<td class="forloop.index">
-													Descripción
-												</td>
-												<td>
-													{{ movimiento_form.mvi_kntidad }}
-												</td>
-												<td>
-													Unidad
-												</td>
-												<td>
-													Precio
-												</td>
-												<td>
-													{{ movimiento_form.delete }}
-												</td>
-											</tr>
-										{% endfor %}
-									{% endcomment %}
 									<tr>
 									</td>
-										<td class="columns_tab"> <input name="pop_pedProd" name="pop_pedProd" required onclick="popsaldo()"/></td>
-										<td class="columns_tab"> <input name="pop_pedDtll" disabled="disabled"></td>
-										<td class="columns_tab"> <input name="pop_pedTbtl" disabled="disabled"></td>
-										<td class="columns_tab"> <input name="pop_pedUnid" disabled="disabled"></td>
-										<td class="columns_tab"> <input name="pop_pedPrc4"></td>
+										<td class="columns_tab width_010"> <input name="pop_pedProd" name="pop_pedProd" required onclick="popsaldo()"/></td>
+										<td class="columns_tab width_025"> <input name="pop_pedDtll" disabled="disabled"></td>
+										<td class="columns_tab width_010"> <input name="pop_pedUnid" disabled="disabled"></td>
+										<td class="columns_tab width_005"> <input name="pop_kntidad"></td>
+										<td class="columns_tab width_010"> <input name="pop_pedPrc4"></td>
+										<td class="columns_tab width_005"> <input name="pop_dscuent" disabled="disabled"></td>
+										<td class="columns_tab width_005"> <input name="pop_impuest" disabled="disabled"></td>
+										<td class="columns_tab width_010"> <input name="pop_valores" disabled="disabled"></td>
+										<td class="columns_tab"> <input name="pop_pedTbtl" type="hidden"></td>
 						{% comment %}
 										<td class="columns_tab" name="pop_pedDtll">{{ form.prd_detalle }} </td>
 										<td class="columns_tab">{{ form.mvi_talla01 }} </td>
@@ -129,28 +104,14 @@
 									<td class="columns_tab">Tall-n</td>
 									<td class="columns_tab">TOTALES</td>
 						{% endcomment %}
-
-										<td class="columns_tab">{{ form.mvi_kntidad }} </td>
-										<td class="columns_tab">{{ form.mvi_unidade }} </td>
-										<td class="columns_tab">{{ form.mvi_precios }} </td>
-										<td class="columns_tab">{{ form.mvi_desctos }} </td>
-						{% comment %}
-									<!--<td class="columns_tab">{{ form.mvi_rcargos }} </td>
-										<td class="columns_tab">{{ form.mvi_deliver }} </td>
-										<td class="columns_tab">{{ form.mvi_arancel }} </td>
-									-->
-										<td class="columns_tab">{{ valor }} </td>
-						{% endcomment %}
-										<td class="columns_tab">{{ form.mvi_impuest }} </td>
-										<td class="columns_tab"><a href="{% url 'comercial:fac_new' %}">"{{ valor }} "</a></td>
 									</tr>
 								</tbody>
 								<tr>
 								</tr>
 								<tr>
 									<td class="columns_tab">{{form.fac_cajeras.label}}</td>
+									<td class="columns_tab align_tex_right"><label>Total de Itms </label>
 									<td class="columns_tab">{{ form.fac_cajeras }} </td>
-									<td class="columns_tab"><label>TOTAL </label>
 									<td class="columns_tab">{{ form.totpago }} </td>
 									<td class="columns_tab" colspan="2"></td>
 									<td class="columns_tab align_tex_right"><label>Totala a pagar</labed>

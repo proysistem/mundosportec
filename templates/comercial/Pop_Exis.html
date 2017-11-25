@@ -95,7 +95,7 @@
                         <tbody border="0">
                             {% if productos %}
                             {% for var_exifield in productos %}
-                                <tr OnMouseOver="Resaltar_On(this);" OnMouseOut="Resaltar_Off(this);" OnClick=datos"('{{ var_exifield.exs_product }}','{{ var_exifield.exs_detalle }}','{{ var_exifield.exs_tabtall }}','{{ var_exifield.exs_idunida }}','{{ var_exifield.exs_publico }}');">
+                                <tr OnMouseOver="Resaltar_On(this);" OnMouseOut="Resaltar_Off(this);" OnClick="datos('{{ var_exifield.exs_product }}','{{ var_exifield.exs_detalle }}','{{ var_exifield.exs_tabtall }}','{{ var_exifield.exs_idunida }}','{{ var_exifield.exs_publico }}');">
                                     <td>{{ var_exifield.exs_product }} </td>
                                     <td>{{ var_exifield.exs_detalle }} </td>
                                     <td>{{ var_exifield.exs_tabtall }} </td>
