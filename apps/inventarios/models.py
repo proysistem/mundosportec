@@ -104,7 +104,7 @@ class Existencia(models.Model):
     exs_detalle = models.CharField('Detalle del Producto', editable=False, max_length=45)
     exs_abrevia = models.CharField('Abreviatura del Producto', editable=False, max_length=25)
     exs_tpoprod = models.ForeignKey(Tipoproducto)
-    exs_tabtall = models.CharField('Tabla de Tallas', editable=False, max_length=5, null=True)
+    exs_tabtall = models.CharField('Tabla de Tallas', editable=False, max_length=5, blank=True, null=True)
     exs_idunida = models.ForeignKey(Unidad)
     exs_saldinc = models.DecimalField('Saldo inicial', max_digits=11, decimal_places=4, blank=True, null=True)
     exs_ingreso = models.DecimalField('Ingresos', max_digits=11, decimal_places=4, blank=True, null=True)
@@ -167,7 +167,7 @@ class Existencia(models.Model):
             )
             self.exs_tabtall = "{}".format(
                 str(self.exs_idmodel.mod_tabtall)  # 2
-            ) if self.exs_idmodel.mod_tabtall else None
+            ) if self.exs_idmodel.mod_tabtall else 'X'
         # TODO: Definir si amerita modificar los parámetros
         # TODO: Definir el max_length de CharField o poner TextField
         super(Existencia, self).save()

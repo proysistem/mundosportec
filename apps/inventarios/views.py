@@ -280,6 +280,14 @@ class ExiView(DetailView):
     # TODO: VER CANT. QUERIES
 
 
+class PopTalla(DetailView):
+    """Listado de Existencia"""
+    template_name = 'comercial/Pop_Tallas.html'
+    model = Existencia
+    queryset = Existencia.objects.select_related('saldoxtalla', 'exs_sucursa', 'exs_idmodel', 'exs_idmodel', 'exs_iddivis', 'exs_idmodel')
+    # TODO: VER CANT. QUERIES
+
+
 class ExiNuevo(CreateView):
     """Crear Existencia"""
     model = Existencia

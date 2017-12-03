@@ -73,6 +73,8 @@ class Pedido(models.Model):
     ped_fechped = models.DateField('Fecha de pedido', )
     ped_cliente = models.ForeignKey(Cliente)
     ped_vendedo = models.ForeignKey(Vendedor, null=True, blank=True)
+    ped_statreg = models.CharField('Status del Registro', max_length=1, default=1)
+    # 1=En proceso, 2=Facturada, 7=Anulada, 9=Eliminada
 
     def __str__(self):
         return (self.ped_npedido)
@@ -81,7 +83,6 @@ class Pedido(models.Model):
 class Movinvent(models.Model):
     mvi_nummovi = models.AutoField('Núm. de movimiento', primary_key=True)
     mvi_npedido = models.ForeignKey('Pedido', verbose_name='Núm. de pedido', null=True, blank=True)
-#   mvi_factura = models.ForeignKey('Factura', verbose_name='Núm. de factura', null=True, blank=True)
 
     mvi_fechmov = models.DateField('Fecha')
     mvi_motivos = models.ForeignKey(Motivo)

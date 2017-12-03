@@ -1,19 +1,6 @@
 {% extends 'base/base_comercial.html' %}
 
 {% block title %} Graba Pedidos {% endblock title %}</title>
-{% block css %}
-	{{ block.super }}
-	<style type="text/css">
-		td input{
-			width: 100%;
-			max-width: 100%;
-		}
-	</style>
-{% endblock css %}
-{% block super %}
-
-{% endblock %}
-
 			{% block context%}
 			<div class="crea_content">
 				<h3 class="crea_proceso">Comercial:  Facturación</h3>
@@ -29,6 +16,7 @@
 							</div>
 						</div>
 						{% comment %}
+						<td class="columns_tab width_010"> <input name="pop_pedProd" required id="cod_product" onclick="popsaldo()" onblur="poptallas()"/></td>
 						<div class="form_row"><div class="form_label"><label for="{{form.mvi_motivos.name}}">{{form.mvi_motivos.label}}</label></div><div>{{form.mvi_motivos}}</div></div>
 						{% endcomment %}
 						<div>
@@ -47,16 +35,14 @@
 									<div class="width_015"><label for="{{form.ped_npedido.name}}">{{form.ped_npedido.label}}</label></div>
 									<div class="form_widget width_010">{{ form.ped_npedido }}</div>
 								</div>
-
-								<button type="button" id="nuevo_movimiento">+ Movimiento</button>
 							</fieldset>
 						</div>
 						<div>
-							<table border="0" >
+							<table border="0" class="width_100">
 								<thead border="1">
-								 	<tr color="#:000066" class="width_100">
-								 		<th class="head_tab width_010">Producto</th>
-								 		<th class="head_tab width_025">Detalle del producto</th>
+								 	<tr color="#:000066">
+								 		<th class="head_tab width_015">Producto</th>
+								 		<th class="head_tab width_040">Detalle del producto</th>
 								 		<th class="head_tab width_010">Cantidad</th>
 								 		<th class="head_tab width_005">Und.</th>
 								 		<th class="head_tab width_010">Precio</th>
@@ -66,16 +52,34 @@
 								 	</tr>
 								</thead>
 								<tbody border="1" id="movimientos">
-									<tr id="template">
-										<td class="columns_tab width_010"> <input name="pop_pedProd[__index__]" required /></td>
-										<td class="columns_tab width_025"> <input name="pop_pedDtll[__index__]" disabled="disabled"></td>
-										<td class="columns_tab width_005"> <input name="pop_kntidad[__index__]" type="number" step="0.01"></td>
-										<td class="columns_tab width_010"> <input name="pop_pedUnid[__index__]" disabled="disabled"></td>
-										<td class="columns_tab width_010"> <input name="pop_pedPrc4[__index__]" type="number" step="0.01" ></td>
-										<td class="columns_tab width_005"> <input name="pop_dscuent[__index__]" disabled="disabled"></td>
-										<td class="columns_tab width_005"> <input name="pop_impuest[__index__]" disabled="disabled"></td>
-										<td class="columns_tab width_010"> <input name="pop_valores[__index__]" type="number" step="0.01" disabled="disabled"></td>
-										<td class="columns_tab"> <input name="pop_pedTbtl[__index__]" type="hidden"></td>
+									<tr>
+										pk=<input name="pop_pedKyPr" type="text" id="inp_pedKyPr" value=" ">
+										tab=<input name="pop_pedTbtl" type="text" id="tabtallas" value="0">
+
+										<input name="frm_kntid01" type="number">
+										<input name="frm_kntid02" type="number">
+										<input name="frm_kntid03" type="number">
+										<input name="frm_kntid04" type="number">
+										<input name="frm_kntid05" type="number">
+										<input name="frm_kntid06" type="number">
+										<input name="frm_kntid07" type="number">
+										<input name="frm_kntid08" type="number">
+										<input name="frm_kntid09" type="number">
+										<input name="frm_kntid10" type="number">
+										<input name="frm_kntid11" type="number">
+										<input name="frm_kntid12" type="number">
+										<input name="frm_kntid13" type="number">
+									</tr>
+									<tr id="templates">
+
+										<td class="columns_tab width_015"> <input name="pop_pedProd" required id="inp_product"/></td>
+										<td class="columns_tab width_040"> <input name="pop_pedDtll" disabled="disabled"></td>
+										<td class="columns_tab width_010"> <input name="pop_kntidad" id="inp_kntidad" type="number" step="0.01" pattern="[0-9]" onChange="verificar()" /></td>
+										<td class="columns_tab width_005"> <input name="pop_pedUnid" disabled="disabled"></td>
+										<td class="columns_tab width_010"> <input class="align_tex_right" name="pop_pedPrc4" disabled="disabled"></td>
+										<td class="columns_tab width_005"> <input class="align_tex_right" name="pop_dscuent" disabled="disabled"></td>
+										<td class="columns_tab width_005"> <input class="align_tex_right" name="pop_impuest" disabled="disabled"></td>
+										<td class="columns_tab width_010"> <input class="align_tex_right" name="pop_valores" type="number" step="0.01" disabled="disabled"></td>
 									</tr>
 								</tbody>
 								<tr>
@@ -93,7 +97,8 @@
 								</tr>
 							</table>
 						</div>
-						<br>{% if forms.error %}
+						<br>
+						{% if forms.error %}
 							<div class="form_errors" role="alert">
 								{{ form.error }}
 							</div>
@@ -107,62 +112,34 @@
 		{% endblock context%}
 
 		{% block js %}
-			{{ block.super }}
 
-			<script type="text/javascript">
-				function popsaldo(id){
-					CURRENT_ID = id;
-					window.open("{% url 'comercial:pop_exist' %}", "_blank", "directories=no, menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=680,width=1600");
-				}
-				function popsaldoaa(){
-					window.alert('ojote');
-				}
-				function pedirTallas() {
-					alert("Pedir Tallas");
-				}
-				function calcularValor() {
-					cantidad = document.form_pedidos['pop_kntidad[' + CURRENT_ID +']'].value;
-					precio = document.form_pedidos['pop_pedPrc4[' + CURRENT_ID +']'].value;
-					document.form_pedidos['pop_valores[' + CURRENT_ID +']'].value = cantidad * precio;
-				}
-				function actualizar(pedProd, pedDtll, pedTbtl, pedUnid, pedPrc4){
-					document.form_pedidos['pop_pedProd['+ CURRENT_ID+']'].value = pedProd;
-					document.form_pedidos['pop_pedDtll['+ CURRENT_ID+']'].value = pedDtll;
-					if (pedTbtl){
-						pedirTallas();
-						document.form_pedidos['pop_kntidad['+ CURRENT_ID+']'].disabled = true;
-					} else {
-						document.form_pedidos['pop_kntidad['+ CURRENT_ID+']'].disabled = false;
-						document.form_pedidos['pop_pedTbtl['+ CURRENT_ID+']'].value = pedTbtl;
-					}
-					document.form_pedidos['pop_pedUnid['+ CURRENT_ID+']'].value = pedUnid;
-					document.form_pedidos['pop_pedPrc4['+ CURRENT_ID+']'].value = pedPrc4;
-					document.form_pedidos['pop_kntidad['+ CURRENT_ID+']'].onkeyup = calcularValor;
-					document.form_pedidos['pop_pedPrc4['+ CURRENT_ID+']'].onkeyup = calcularValor;
+			<script type="text/javascript" >
 
-				}
-			</script>
+				var pop_callprd = document.getElementById("inp_product");
+					pop_callprd.addEventListener("click", function(){
+					document.form_pedidos['pop_kntidad'].disabled = false;
+					window.open("{% url 'comercial:pop_exist' %}", "prd_winpops", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=520,width=1180,left=210,top=200")}, false);
 
-			<script type="text/javascript">
-				$(function(){
-					var template = $('#template')[0].outerHTML;
-					$('#template').remove()
-					var getLength = function(){
-						return $('#movimientos tr').length;
-					}
-					var anadir = function(){
-						var item_num = getLength();
-						var html = template.replace(/__index__/g, item_num);
-						var $html = $(html);
-						$html.attr('id', "mov_" + item_num)
-						$html.find('input[name^="pop_pedProd"]').click(function() {
-							popsaldo(item_num);
-						})
-						$('#movimientos').append($html);
-					}
-					$('#nuevo_movimiento').click(anadir);
-					anadir();
-				})
+				var inp_keyprod = 0;
+				var pop_calltll = document.getElementById("inp_kntidad");
+					pop_calltll.addEventListener("click", function(){
+				var inp_keyprod = document.form_pedidos['pop_pedKyPr'].value;
+				var inp_tabtlla = document.form_pedidos['pop_pedTbtl'].value;
+				if (inp_tabtlla != "X"){
+					document.form_pedidos['pop_kntidad'].disabled = true;
+					window.open("{% url 'inventarios:pop_talla' pk=5 %}", "pop_dtallas", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=200,width=920,left=380,top=450");
+					}else{ alert("Este producto no tiene tallas");}
+				}, false);
+
+				function verificar(){
+					inp_tabtlla = document.form_pedidos['pop_pedTbtl'].value;
+					if (inp_tabtlla != "X"){
+						alert("Este producto tiene tallas");
+						document.form_pedidos['pop_kntidad'].value = 0.00;
+						document.form_pedidos['pop_kntidad'].disabled = true;
+						window.open("{% url 'inventarios:pop_talla' pk=7 %}", "pop_dtallas", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=200,width=920,left=380,top=450");
+						};
+					};
 			</script>
 
 		{% endblock js %}

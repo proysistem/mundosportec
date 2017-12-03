@@ -1,0 +1,209 @@
+{% extends 'base/base_pops.html' %}
+
+{% block title %} Venta por tallas {% endblock title %}</title>
+
+{% block context %}
+            <br />
+            <form method="POST">{% csrf_token %}
+                <div class="form_content">
+                    <div>
+                        <div class="form_row"><div class="form_label">Sucursal :</div><div class=" color_6D7969">{{object.exs_sucursa}}</div></div>
+                        <div class="form_row"><div class="form_label">Producto :</div><div class=" color_6D7969">{{object.exs_product}}</div><div class="form_label"> Detalle :</div><div class=" color_6D7969">{{object.exs_detalle}}</div></div>
+                    </div>
+                    <table border="0" class="width_100">
+                        <thead>
+                            <tr color="#:000066" class="width_99">
+                                <td class="head_tab"><div class=""><label for="">Tab./Talla</label></div></td>
+                                <td class="head_tab_tall">{{ object.exs_tabtall }} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid01 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid02 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid03 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid04 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid05 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid06 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid07 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid08 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid09 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid10 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid11 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid12 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid13 | default:'-'}} </td>
+                                <td class="head_tab width_005 ">TOTALES</td>
+                            </tr>
+                        </thead>
+                        <tbody border="0">
+                            <tr  id="lst_changes" onchange="calculatotal()">
+                                <td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_saldinc.name}}">Saldo.Actual</label></div></td>
+                                <td>
+                                    {% if object.saldoxtalla.tex_actua01 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid01" name="frm_kntid01" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua01|default:7|stringformat:'0.2f' }}"></div>
+                                    {% else %}
+                                        <div class="columns_tab_disab"><input id="ids_kntid01" name="frm_kntid01" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua01|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.saldoxtalla.tex_actua02 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid02" name="frm_kntid02" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua02|default:0|stringformat:'0.2f' }}"></div>
+                                    {% else %}
+                                        <div class="columns_tab_disab"><input id="ids_kntid02" name="frm_kntid02" type="number" pattern="[0-9]"  placeholder="{{object.saldoxtalla.tex_actua02|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
+                                   {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.saldoxtalla.tex_actua03 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid03" name="frm_kntid03" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua03|default:0|stringformat:'0.2f' }}"></div>
+                                    {% else %}
+                                        <div class="columns_tab_disab"><input id="ids_kntid03" name="frm_kntid03" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua03|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.saldoxtalla.tex_actua04 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid04" name="frm_kntid04" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua04|default:0|stringformat:'0.2f' }}"></div>
+                                    {% else %}
+                                        <div class="columns_tab_disab"><input id="ids_kntid04" name="frm_kntid04" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua04|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.saldoxtalla.tex_actua05 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid05" name="fym_kntid05" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua05|default:0|stringformat:'0.2f' }}"></div>
+                                    {% else %}
+                                        <div class="columns_tab_disab"><input id="ids_kntid05" name="fym_kntid05" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua05|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.saldoxtalla.tex_actua06 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid06" name="frm_kntid06" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua06|default:0|stringformat:'0.2f' }}"></div>
+                                    {% else %}
+                                        <div class="columns_tab_disab"><input id="ids_kntid06" name="frm_kntid06" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua06|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.saldoxtalla.tex_actua07 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid07" name="frm_kntid07" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua07|default:0|stringformat:'0.2f' }}"></div>
+                                    {% else %}
+                                        <div class="columns_tab_disab"><input id="ids_kntid07" name="frm_kntid07" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua07|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.saldoxtalla.tex_actua08 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid08" name="frm_kntid08" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua08|default:0|stringformat:'0.2f' }}"></div>
+                                    {% else %}
+                                        <div class="columns_tab_disab"><input id="ids_kntid08" name="frm_kntid08" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua08|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.saldoxtalla.tex_actua09 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid09" name="frm_kntid09" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua09|default:0|stringformat:'0.2f' }}"></div>
+                                    {% else %}
+                                        <div class="columns_tab_disab"><input id="ids_kntid09" name="frm_kntid09" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua09|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.saldoxtalla.tex_actua10 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid10" name="frm_kntid10" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua10|default:0|stringformat:'0.2f' }}"></div>
+                                    {% else %}
+                                        <div class="columns_tab_disab"><input id="ids_kntid10" name="frm_kntid10" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua10|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.saldoxtalla.tex_actua11 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid11" name="frm_kntid11" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua11|default:0|stringformat:'0.2f' }}"></div>
+                                    {% else %}
+                                        <div class="columns_tab_disab"><input id="ids_kntid11" name="frm_kntid11" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua11|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.saldoxtalla.tex_actua12 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid12" name="frm_kntid12" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua12|default:0|stringformat:'0.2f' }}"></div>
+                                    {% else %}
+                                        <div class="columns_tab_disab"><input id="ids_kntid12" name="frm_kntid12" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua12|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.saldoxtalla.tex_actua13 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid13" name="frm_kntid13" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua13|default:0|stringformat:'0.2f' }}"></div>
+                                    {% else %}
+                                        <div class="columns_tab_disab"><input id="ids_kntid13" name="frm_kntid13" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua13|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="columns_tab_tall"><input id="ids_valores" name="pop_kntidad" type="text"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+            <br>
+            {% comment %}
+            <div><button class="icon-reply form_submit" type="button" id="btn_botclik" onclick="calculatotal(); datos('knt_xtlla01','knt_xtlla02','knt_xtlla03','knt_xtlla04','knt_xtlla05','knt_xtlla06','knt_xtlla07','knt_xtlla08','knt_xtlla09','knt_xtlla10','knt_xtlla11','knt_xtlla12','knt_xtlla13','knt_tottall');"> Continuar  </button></div>
+            {% endcomment %}
+            <div><button class="icon-reply form_submit" type="button" id="btn_botclik" onclick="calculatotal(); datos(01,02,03,04,05,06,07,08,09,10,11,12,13,54);"> Continuar  </button></div>
+            <br>
+           <br>
+{% endblock context %}
+
+{% block js %}
+
+    <script type="text/javascript">
+
+        var lst_onchang = document.getElementById("lst_changes");
+            lst_onchang.addEventListener("changeeeeeeeee", function(){calculatotal;}, false);
+
+        var lst_clickbt = document.getElementById("btn_botclik");
+            lst_clickbt.addEventListener("clickxxxxxxxxxx", function(){calculatotal; datossssss(knt_tottall);}, false);
+
+
+        function calculatotal(){
+            var knt_tottall=0;
+            var knt_xtlla01=document.getElementById('ids_kntid01').value;
+            var knt_xtlla02=document.getElementById('ids_kntid02').value;
+            var knt_xtlla03=document.getElementById('ids_kntid03').value;
+            var knt_xtlla04=document.getElementById('ids_kntid04').value;
+            var knt_xtlla05=document.getElementById('ids_kntid05').value;
+            var knt_xtlla06=document.getElementById('ids_kntid06').value;
+            var knt_xtlla07=document.getElementById('ids_kntid07').value;
+            var knt_xtlla08=document.getElementById('ids_kntid08').value;
+            var knt_xtlla09=document.getElementById('ids_kntid09').value;
+            var knt_xtlla10=document.getElementById('ids_kntid10').value;
+            var knt_xtlla11=document.getElementById('ids_kntid11').value;
+            var knt_xtlla12=document.getElementById('ids_kntid12').value;
+            var knt_xtlla13=document.getElementById('ids_kntid13').value;
+            knt_tottall=Number(knt_xtlla01)+Number(knt_xtlla02)+Number(knt_xtlla03)+Number(knt_xtlla04)+Number(knt_xtlla05)+Number(knt_xtlla06)+Number(knt_xtlla07)+Number(knt_xtlla08)+Number(knt_xtlla09)+Number(knt_xtlla10)+Number(knt_xtlla11)+Number(knt_xtlla12)+Number(knt_xtlla13);
+            document.getElementById('ids_valores').value=knt_tottall;
+            }
+
+        function datoszzzz(){
+            window.close();
+            }
+
+        function datos(kntid01,kntid02,kntid03,kntid04,kntid05,kntid06,kntid07,kntid08,kntid09,kntid10,kntid11,kntid12,kntid13,tottall){
+            opener.document.form_pedidos.frm_kntid01.value=kntid01;
+            opener.document.form_pedidos.frm_kntid02.value=kntid02;
+            opener.document.form_pedidos.frm_kntid03.value=kntid03;
+            opener.document.form_pedidos.frm_kntid04.value=kntid04;
+            opener.document.form_pedidos.frm_kntid05.value=kntid05;
+            opener.document.form_pedidos.frm_kntid06.value=kntid06;
+            opener.document.form_pedidos.frm_kntid07.value=kntid07;
+            opener.document.form_pedidos.frm_kntid08.value=kntid08;
+            opener.document.form_pedidos.frm_kntid09.value=kntid09;
+            opener.document.form_pedidos.frm_kntid10.value=kntid10;
+            opener.document.form_pedidos.frm_kntid11.value=kntid11;
+            opener.document.form_pedidos.frm_kntid12.value=kntid12;
+            opener.document.form_pedidos.frm_kntid13.value=kntid13;
+            opener.document.form_pedidos.pop_kntidad.value=tottall;
+            window.close();
+            }
+    </script>
+{% endblock js %}
