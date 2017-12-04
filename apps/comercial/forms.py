@@ -1,6 +1,7 @@
 from django import forms
 from .models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura
 from django.utils.timezone import localtime, now
+from apps.inventarios.models import Existencia
 
 
 class ClienteForm(forms.ModelForm):
@@ -187,12 +188,45 @@ class MovinventInlineForm(forms.ModelForm):
     #   Product, Detail (? is this writable?), Quantity, Unit, Price, Discount, IVA, Value
     mvi_product = forms.CharField(label='Producto')
     mvi_kntidad = forms.DecimalField(label="Cantidad", decimal_places=2)
+    mvi_talla01 = forms.DecimalField(label="Cant. Talla 01", decimal_places=2)
+    mvi_talla02 = forms.DecimalField(label="Cant. Talla 02", decimal_places=2)
+    mvi_talla03 = forms.DecimalField(label="Cant. Talla 03", decimal_places=2)
+    mvi_talla04 = forms.DecimalField(label="Cant. Talla 04", decimal_places=2)
+    mvi_talla05 = forms.DecimalField(label="Cant. Talla 05", decimal_places=2)
+    mvi_talla06 = forms.DecimalField(label="Cant. Talla 06", decimal_places=2)
+    mvi_talla07 = forms.DecimalField(label="Cant. Talla 07", decimal_places=2)
+    mvi_talla08 = forms.DecimalField(label="Cant. Talla 08", decimal_places=2)
+    mvi_talla09 = forms.DecimalField(label="Cant. Talla 09", decimal_places=2)
+    mvi_talla10 = forms.DecimalField(label="Cant. Talla 10", decimal_places=2)
+    mvi_talla11 = forms.DecimalField(label="Cant. Talla 11", decimal_places=2)
+    mvi_talla12 = forms.DecimalField(label="Cant. Talla 12", decimal_places=2)
+    mvi_talla13 = forms.DecimalField(label="Cant. Talla 13", decimal_places=2)
+
+    def clean_mvi_product(self):
+        cod_producto = self.cleaned_data['mvi_product']
+        try:
+            return Existencia.objects.get(exs_product=cod_producto)
+        except Existencia.DoesNotExist:
+            raise forms.ValidationError(u"No existe el código de proucto {}".format(cod_producto))
 
     class Meta:
         model = Movinvent
         fields = [
             'mvi_product',
-            'mvi_kntidad'
+            'mvi_kntidad',
+            'mvi_talla01',
+            'mvi_talla02',
+            'mvi_talla03',
+            'mvi_talla04',
+            'mvi_talla05',
+            'mvi_talla06',
+            'mvi_talla07',
+            'mvi_talla08',
+            'mvi_talla09',
+            'mvi_talla10',
+            'mvi_talla11',
+            'mvi_talla12',
+            'mvi_talla13',
         ]
 
 
@@ -203,7 +237,6 @@ class MovinventForm(forms.ModelForm):
         fields = [
                 'mvi_npedido',
                 'mvi_fechmov',
-                'mvi_motivos',
                 'mvi_tipomov',
                 'mvi_vendedo',
                 'mvi_cliente',
@@ -235,7 +268,6 @@ class MovinventForm(forms.ModelForm):
 
                 'mvi_npedido': 'Núm. de pedido',
                 'mvi_fechmov': 'Fecha',
-                'mvi_motivos': 'Motivo',
                 'mvi_tipomov': 'Tpo.movimiento',
                 'mvi_vendedo': 'Vendedor',
                 'mvi_cliente': 'Cliente',
@@ -265,7 +297,6 @@ class MovinventForm(forms.ModelForm):
         widgets = {
                 'mvi_npedido': forms.NumberInput(),
                 'mvi_fechmov': forms.DateInput(),
-                'mvi_motivos': forms.Select(),
                 'mvi_tipomov': forms.Select(),
                 'mvi_vendedo': forms.Select(),
                 'mvi_cliente': forms.Select(),
@@ -300,13 +331,13 @@ class PedidoForm(forms.ModelForm):
     class Meta:
         model = Pedido
         fields = [
-                'ped_motivos',
+                # 'ped_tipomov',
                 'ped_fechped',
                 'ped_cliente',
                 'ped_vendedo',
         ]
         labels = {
-                'ped_motivos': 'Motivo del pedido',
+                # 'ped_tipomov': 'Tipo de Movimiento',
                 'ped_fechped': 'Fecha',
                 'ped_cliente': 'Cliente ',
                 'ped_vendedo': 'Vendedor',

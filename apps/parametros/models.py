@@ -72,16 +72,16 @@ class Categoria(models.Model):
     ktg_abrevia = models.CharField('Abreviatura', max_length=7)
 
 
-class Tipomovim(models.Model):
+# class Tipomovim(models.Model):
 
-    tmv_detalle = models.CharField('Detalle', max_length=15)
-    tmv_abrevia = models.CharField('Abreviatura', max_length=10)
+#     tmv_detalle = models.CharField('Detalle', max_length=15)
+#     tmv_abrevia = models.CharField('Abreviatura', max_length=10)
 
 
-class Motivo(models.Model):
+# class Motivo(models.Model):
 
-    mot_detalle = models.CharField('Detalle', max_length=20)
-    mot_abrevia = models.CharField('Abreviatura', max_length=10)
+#     mot_detalle = models.CharField('Detalle', max_length=20)
+#     mot_abrevia = models.CharField('Abreviatura', max_length=10)
 
 
 class Controlador(models.Model):

@@ -16,7 +16,7 @@
 							</div>
 						</div>
 						{% comment %}
-						<td class="columns_tab width_010"> <input name="pop_pedProd" required id="cod_product" onclick="popsaldo()" onblur="poptallas()"/></td>
+						<td class="columns_tab width_010"> <input name="mvi_product" required id="cod_product" onclick="popsaldo()" onblur="poptallas()"/></td>
 						<div class="form_row"><div class="form_label"><label for="{{form.mvi_motivos.name}}">{{form.mvi_motivos.label}}</label></div><div>{{form.mvi_motivos}}</div></div>
 						{% endcomment %}
 						<div>
@@ -56,25 +56,25 @@
 										pk=<input name="pop_pedKyPr" type="text" id="inp_pedKyPr" value=" ">
 										tab=<input name="pop_pedTbtl" type="text" id="tabtallas" value="0">
 
-										<input name="frm_kntid01" type="number">
-										<input name="frm_kntid02" type="number">
-										<input name="frm_kntid03" type="number">
-										<input name="frm_kntid04" type="number">
-										<input name="frm_kntid05" type="number">
-										<input name="frm_kntid06" type="number">
-										<input name="frm_kntid07" type="number">
-										<input name="frm_kntid08" type="number">
-										<input name="frm_kntid09" type="number">
-										<input name="frm_kntid10" type="number">
-										<input name="frm_kntid11" type="number">
-										<input name="frm_kntid12" type="number">
-										<input name="frm_kntid13" type="number">
+										<input name="mvi_talla01" type="number">
+										<input name="mvi_talla02" type="number">
+										<input name="mvi_talla03" type="number">
+										<input name="mvi_talla04" type="number">
+										<input name="mvi_talla05" type="number">
+										<input name="mvi_talla06" type="number">
+										<input name="mvi_talla07" type="number">
+										<input name="mvi_talla08" type="number">
+										<input name="mvi_talla09" type="number">
+										<input name="mvi_talla10" type="number">
+										<input name="mvi_talla11" type="number">
+										<input name="mvi_talla12" type="number">
+										<input name="mvi_talla13" type="number">
 									</tr>
 									<tr id="templates">
 
-										<td class="columns_tab width_015"> <input name="pop_pedProd" required id="inp_product"/></td>
+										<td class="columns_tab width_015"> <input name="mvi_product" required id="inp_product"/></td>
 										<td class="columns_tab width_040"> <input name="pop_pedDtll" disabled="disabled"></td>
-										<td class="columns_tab width_010"> <input name="pop_kntidad" id="inp_kntidad" type="number" step="0.01" pattern="[0-9]" onChange="verificar()" /></td>
+										<td class="columns_tab width_010"> <input name="mvi_kntidad" id="inp_kntidad" type="number" step="0.01" pattern="[0-9]" onChange="verificar()" /></td>
 										<td class="columns_tab width_005"> <input name="pop_pedUnid" disabled="disabled"></td>
 										<td class="columns_tab width_010"> <input class="align_tex_right" name="pop_pedPrc4" disabled="disabled"></td>
 										<td class="columns_tab width_005"> <input class="align_tex_right" name="pop_dscuent" disabled="disabled"></td>
@@ -117,7 +117,7 @@
 
 				var pop_callprd = document.getElementById("inp_product");
 					pop_callprd.addEventListener("click", function(){
-					document.form_pedidos['pop_kntidad'].disabled = false;
+					document.form_pedidos['mvi_kntidad'].disabled = false;
 					window.open("{% url 'comercial:pop_exist' %}", "prd_winpops", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=520,width=1180,left=210,top=200")}, false);
 
 				var inp_keyprod = 0;
@@ -126,8 +126,11 @@
 				var inp_keyprod = document.form_pedidos['pop_pedKyPr'].value;
 				var inp_tabtlla = document.form_pedidos['pop_pedTbtl'].value;
 				if (inp_tabtlla != "X"){
-					document.form_pedidos['pop_kntidad'].disabled = true;
-					window.open("{% url 'inventarios:pop_talla' pk=5 %}", "pop_dtallas", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=200,width=920,left=380,top=450");
+					document.form_pedidos['mvi_kntidad'].disabled = true;
+					console.log("inp_keyprod:", inp_keyprod);
+					var url = "{% url 'inventarios:pop_talla' pk=987654321 %}".replace('987654321', inp_keyprod);
+
+					window.open(url, "pop_dtallas", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=200,width=920,left=380,top=450");
 					}else{ alert("Este producto no tiene tallas");}
 				}, false);
 
@@ -135,8 +138,8 @@
 					inp_tabtlla = document.form_pedidos['pop_pedTbtl'].value;
 					if (inp_tabtlla != "X"){
 						alert("Este producto tiene tallas");
-						document.form_pedidos['pop_kntidad'].value = 0.00;
-						document.form_pedidos['pop_kntidad'].disabled = true;
+						document.form_pedidos['mvi_kntidad'].value = 0.00;
+						document.form_pedidos['mvi_kntidad'].disabled = true;
 						window.open("{% url 'inventarios:pop_talla' pk=7 %}", "pop_dtallas", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=200,width=920,left=380,top=450");
 						};
 					};

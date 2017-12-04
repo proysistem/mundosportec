@@ -1,4 +1,5 @@
 Django==1.11.5
+django-model-utils==3.0.0
 django-multi-form-view==2.0.0
 virtualenv==15.1.0
 olefile==0.44

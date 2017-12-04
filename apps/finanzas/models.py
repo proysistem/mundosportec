@@ -1,5 +1,6 @@
 from django.db import models
-from apps.parametros.models import Pais, Provincia, Ciudad, Zipcodigo, Sucursal, Motivo, Tipomovim, Categoria
+from apps.parametros.models import Pais, Provincia, Ciudad, Zipcodigo, Sucursal, Categoria
+from apps.parametros.choices import TIPO_MOV_CHOICES
 
 
 class Moneda(models.Model):
@@ -72,8 +73,7 @@ class Movicaja(models.Model):
     mcj_cajeras = models.ForeignKey(Cajera)
     mcj_monedas = models.ForeignKey(Moneda)
     mcj_cotizac = models.DecimalField('Cotización', max_digits=11, decimal_places=4)
-    mcj_tipomov = models.ForeignKey(Tipomovim)
-    mcj_motivos = models.ForeignKey(Motivo)
+    mcj_tipomov = models.PositiveIntegerField("Tipo de movimiento", choices=TIPO_MOV_CHOICES)
     mcj_numdocu = models.IntegerField('Documento origen')
     mcj_valcash = models.DecimalField('Cash', max_digits=15, decimal_places=4, null=True, blank=True)
     mcj_valcheq = models.DecimalField('Cheque', max_digits=15, decimal_places=4, null=True, blank=True)

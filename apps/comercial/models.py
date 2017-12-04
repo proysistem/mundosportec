@@ -1,7 +1,8 @@
 from django.db import models
 from apps.finanzas.models import Cajera, Caja, Moneda
 from apps.inventarios.models import Existencia, Unidad
-from apps.parametros.models import Pais, Provincia, Ciudad, Zipcodigo, Sucursal, Tipomovim, Motivo, Categoria
+from apps.parametros.models import Pais, Provincia, Ciudad, Zipcodigo, Sucursal, Categoria
+from apps.parametros.choices import TIPO_MOV_CHOICES
 from django.utils import timezone
 
 
@@ -69,7 +70,7 @@ class Vendedor(models.Model):
 
 class Pedido(models.Model):
     ped_npedido = models.AutoField('Núm. de Pedido', primary_key=True)
-    ped_motivos = models.ForeignKey(Motivo)
+    ped_tipomov = models.PositiveIntegerField("Tipo de movimiento", choices=TIPO_MOV_CHOICES, default=TIPO_MOV_CHOICES.EGRESO)
     ped_fechped = models.DateField('Fecha de pedido', )
     ped_cliente = models.ForeignKey(Cliente)
     ped_vendedo = models.ForeignKey(Vendedor, null=True, blank=True)
@@ -77,7 +78,7 @@ class Pedido(models.Model):
     # 1=En proceso, 2=Facturada, 7=Anulada, 9=Eliminada
 
     def __str__(self):
-        return (self.ped_npedido)
+        return str(self.ped_npedido)
 
 
 class Movinvent(models.Model):
@@ -85,8 +86,7 @@ class Movinvent(models.Model):
     mvi_npedido = models.ForeignKey('Pedido', verbose_name='Núm. de pedido', null=True, blank=True)
 
     mvi_fechmov = models.DateField('Fecha')
-    mvi_motivos = models.ForeignKey(Motivo)
-    mvi_tipomov = models.CharField("Tipo de movimiento", max_length=1)
+    mvi_tipomov = models.PositiveIntegerField("Tipo de movimiento", choices=TIPO_MOV_CHOICES)
     mvi_vendedo = models.ForeignKey(Vendedor)
     mvi_cliente = models.ForeignKey(Cliente)
     mvi_product = models.ForeignKey(Existencia)
@@ -115,7 +115,7 @@ class Movinvent(models.Model):
     mvi_impuest = models.DecimalField('Impuestos IVA.', max_digits=11, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
-        return (self.mvi_nummovi)
+        return str(self.mvi_nummovi)
 
     def save(self, *args, **kwargs):
         # if self.id ?????:  ##   SOLO POR LA PRIMERA VEZ, LUEGO  SEGUIR  GRABANDO EL LMISMO NUMERO A TODOS LOS REG. DE LA MISMA TRANSACCION
@@ -124,7 +124,7 @@ class Movinvent(models.Model):
         #     )
         # TODO: Definir si amerita modificar los parámetros
         # TODO: Definir el max_length de CharField o poner TextField
-        super(Existencia, self).save()
+        super(Movinvent, self).save()
 
 
 class Factura(models.Model):
