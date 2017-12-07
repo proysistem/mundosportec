@@ -183,7 +183,9 @@ class PedNuevo(CreateView):
     model = Pedido
     form_class = PedidoForm
     template_name = 'comercial/Ped_New.html'
-    success_url = reverse_lazy('comercial:ped_edit')
+
+    def get_success_url(self):
+        return reverse_lazy('comercial:ped_edit', kwargs={"pk": self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super(PedNuevo, self).get_context_data(**kwargs)
@@ -195,7 +197,6 @@ class PedNuevo(CreateView):
             context['nuevo_mov'] = MovinventInlineForm()
             # TODO: Hay un problema de 0n queries, debido a la generación de múltiples formset con mismo queryset, probablemente
             #       Probé con select_related sin éxito aún.
-            context['movimientos'] = self.object.movinvent_set.all()
         return context
 
     # def post(self, request, *args, **kwargs):
@@ -244,7 +245,6 @@ class PedEdita(UpdateView):
     model = Pedido
     form_class = PedidoForm
     template_name = 'comercial/Ped_Edit.html'
-    success_url = reverse_lazy('comercial:ped_edit')
 
     def get_success_url(self):
         return reverse_lazy('comercial:ped_edit', kwargs={"pk": self.object.pk})
@@ -263,7 +263,7 @@ class PedEdita(UpdateView):
         return context
 
     def form_invalid(self, form):
-        import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
         return super(PedEdita, self).form_invalid(form)
 
     def form_valid(self, form):

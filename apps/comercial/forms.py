@@ -201,6 +201,12 @@ class MovinventInlineForm(forms.ModelForm):
     mvi_talla11 = forms.DecimalField(label="Cant. Talla 11", decimal_places=2)
     mvi_talla12 = forms.DecimalField(label="Cant. Talla 12", decimal_places=2)
     mvi_talla13 = forms.DecimalField(label="Cant. Talla 13", decimal_places=2)
+    mvi_precios = forms.DecimalField(label="Precio", decimal_places=2)
+    mvi_desctos = forms.DecimalField(label="Descentto", decimal_places=2)
+    mvi_rcargos = forms.DecimalField(label="Recargo", decimal_places=2)
+    mvi_deliver = forms.DecimalField(label="Transporte", decimal_places=2)
+    mvi_arancel = forms.DecimalField(label="Arancel", decimal_places=2)
+    mvi_impuest = forms.DecimalField(label="Impuesto", decimal_places=2)
 
     def clean_mvi_product(self):
         cod_producto = self.cleaned_data['mvi_product']
@@ -227,6 +233,12 @@ class MovinventInlineForm(forms.ModelForm):
             'mvi_talla11',
             'mvi_talla12',
             'mvi_talla13',
+            'mvi_precios',
+            'mvi_desctos',
+            'mvi_rcargos',
+            'mvi_deliver',
+            'mvi_arancel',
+            'mvi_impuest',
         ]
 
 

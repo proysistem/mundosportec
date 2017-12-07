@@ -9,8 +9,8 @@
             opener.document.form_pedidos.mvi_product.value=pedProd;
             opener.document.form_pedidos.pop_pedDtll.value=pedDtll;
             opener.document.form_pedidos.pop_pedTbtl.value=pedTbtl;
-            opener.document.form_pedidos.pop_pedUnid.value=pedUnid;
-            opener.document.form_pedidos.pop_pedPrc4.value=pedPrc4;
+            opener.document.form_pedidos.mvi_unidade.value=pedUnid;
+            opener.document.form_pedidos.mvi_precios.value=pedPrc4;
             opener.document.form_pedidos.pop_pedKyPr.value=pedKeys;
             window.close();
         }
@@ -85,7 +85,7 @@
                     <tbody border="0">
                         {% if productos %}
                         {% for var_exifield in productos %}
-                            <tr id="elemento" OnMouseOver="Resaltar_On(this);" OnMouseOut="Resaltar_Off(this);" OnClick="datos('{{ var_exifield.exs_product }}','{{ var_exifield.exs_detalle }}','{{ var_exifield.exs_tabtall }}','{{ var_exifield.exs_idunida }}','{{ var_exifield.exs_publico }}','{{ var_exifield.pk }}');">
+                            <tr id="elemento" OnMouseOver="Resaltar_On(this);" OnMouseOut="Resaltar_Off(this);" OnClick="datos('{{ var_exifield.exs_product }}','{{ var_exifield.exs_detalle }}','{{ var_exifield.exs_tabtall }}','{{ var_exifield.exs_idunida }}','{{ var_exifield.exs_publico|default:0|stringformat:"0.2f" }}','{{ var_exifield.pk }}');">
                                 <td>{{ var_exifield.exs_product }} </td>
                                 <td>{{ var_exifield.exs_detalle }} </td>
                                 <td>{{ var_exifield.exs_tabtall }} </td>

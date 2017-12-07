@@ -9,6 +9,9 @@
                     <div>
                         <div class="form_row"><div class="form_label">Sucursal :</div><div class=" color_6D7969">{{object.exs_sucursa}}</div></div>
                         <div class="form_row"><div class="form_label">Producto :</div><div class=" color_6D7969">{{object.exs_product}}</div><div class="form_label"> Detalle :</div><div class=" color_6D7969">{{object.exs_detalle}}</div></div>
+                        <input type="text" name="ids_publico" name="{{ object.exs_publico }}|default:0|stringformat:"0.2f" }}">
+                        <td>{{ var_exifield.exs_publico</td>
+
                     </div>
                     <table border="0" class="width_100">
                         <thead>
@@ -138,7 +141,7 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <div class="columns_tab_tall"><input id="ids_valores" name="pop_kntidad" type="text"></div>
+                                    <div class="columns_tab_tall"><input id="ids_kntidad" name="pop_kntidad" type="text"></div>
                                 </td>
                             </tr>
                         </tbody>
@@ -167,6 +170,7 @@
             lst_clickbt.addEventListener("clickxxxxxxxxxx", function(){calculatotal; datossssss(knt_tottall);}, false);
 
         var knt_tottall,
+            jsw_sbtotal,
             knt_xtlla01,
             knt_xtlla02,
             knt_xtlla03,
@@ -197,8 +201,10 @@
             knt_xtlla11=document.getElementById('ids_kntid11').value || 0;
             knt_xtlla12=document.getElementById('ids_kntid12').value || 0;
             knt_xtlla13=document.getElementById('ids_kntid13').value || 0;
+            jsw_prcpubl={{ object.exs_publico }} || 0;
             knt_tottall=Number(knt_xtlla01)+Number(knt_xtlla02)+Number(knt_xtlla03)+Number(knt_xtlla04)+Number(knt_xtlla05)+Number(knt_xtlla06)+Number(knt_xtlla07)+Number(knt_xtlla08)+Number(knt_xtlla09)+Number(knt_xtlla10)+Number(knt_xtlla11)+Number(knt_xtlla12)+Number(knt_xtlla13);
-            document.getElementById('ids_valores').value=knt_tottall;
+            document.getElementById('ids_kntidad').value=knt_tottall;
+            jsw_sbtotal=knt_tottall * jsw_prcpubl;
         }
 
         function datoszzzz(){
@@ -220,6 +226,8 @@
             opener.document.form_pedidos.mvi_talla12.value=knt_xtlla12;
             opener.document.form_pedidos.mvi_talla13.value=knt_xtlla13;
             opener.document.form_pedidos.mvi_kntidad.value=knt_tottall;
+            opener.document.form_pedidos.pop_valores.value=jsw_sbtotal;
+            opener.document.getElementById('inp_desctos').focus();
             window.close();
             }
     </script>

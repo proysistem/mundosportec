@@ -154,8 +154,8 @@ class Existencia(models.Model):
         if self.exs_sucursa and self.exs_iddivis and self.exs_idmarca and self.exs_idmodel and self.exs_idcolor:
             self.exs_product = self._id
             self.exs_detalle = "{} {} {} {}".format(
-                str(self.exs_iddivis.div_abrevia),  # 2
                 str(self.exs_idmarca.mrk_detalle),  # 3
+                str(self.exs_iddivis.div_abrevia),  # 2
                 str(self.exs_idmodel.mod_detalle),  # 3
                 str(self.exs_idcolor.col_detalle)   # 3
             )

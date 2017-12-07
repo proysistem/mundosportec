@@ -11,6 +11,43 @@
 					<div class="form_content">
 						<div>
 							<div class="form_titulo"><h1> Grabar Pedidos </h1></div>
+							{% if form.errors %}
+
+								<div class="form_errors" role="alert">
+									{{ form.errors }}
+								</div>
+
+							{% endif %}
+
+							{% for field in form %}
+								{% for error in field.errors %}
+									<strong>{{ field.label }}</strong>: {{ error }}<br>
+								{% endfor %}
+							{% endfor %}
+
+							{% for error in form.non_field_errors %}
+								<strong>{{ error }}</strong>
+							{% endfor %}
+
+
+							{% if nuevo_mov.errors %}
+
+								<div class="form_errors" role="alert">
+									{{ nuevo_mov.errors }}
+								</div>
+
+							{% endif %}
+
+							{% for field in nuevo_mov %}
+								{% for error in field.errors %}
+									<strong>{{ field.label }}</strong>: {{ error }}<br>
+								{% endfor %}
+							{% endfor %}
+
+							{% for error in nuevo_mov.non_field_errors %}
+								<strong>{{ error }}</strong>
+							{% endfor %}
+
 							<div class="form_esc">
 								<a class="icon-cancel" href="{% url 'comercial:fac_panel' %}"></a>
 							</div>
@@ -47,39 +84,45 @@
 								 		<th class="head_tab width_005">Und.</th>
 								 		<th class="head_tab width_010">Precio</th>
 								 		<th class="head_tab width_005">Dscto.</th>
-								 		<th class="head_tab width_005">IVA</th>
+								 		<th class="head_tab width_005">IVA(%)</th>
 								 		<th class="head_tab width_010">Valor</th>
+								 		<th class="head_tab width_010">@</th>
 								 	</tr>
 								</thead>
 								<tbody border="1" id="movimientos">
 									<tr>
-										pk=<input name="pop_pedKyPr" type="text" id="inp_pedKyPr" value=" ">
-										tab=<input name="pop_pedTbtl" type="text" id="tabtallas" value="0">
+										<input name="pop_pedKyPr" type="hidden" id="inp_pedKyPr" value=" ">
+										<input name="pop_pedTbtl" type="hidden" id="inp_tabtall" value=" ">
+										<input name="mvi_desctos" type="hidden" id="inp_desctos" value="0">
+										<input name="mvi_rcargos" type="hidden" id="inp_rcargos" value="0">
+										<input name="mvi_deliver" type="hidden" id="inp_deliver" value="0">
+										<input name="mvi_arancel" type="hidden" id="inp_arancel" value="0">
+										<input name="mvi_impuest" type="hidden" id="inp_impuest" value="0">
 
-										<input name="mvi_talla01" type="number">
-										<input name="mvi_talla02" type="number">
-										<input name="mvi_talla03" type="number">
-										<input name="mvi_talla04" type="number">
-										<input name="mvi_talla05" type="number">
-										<input name="mvi_talla06" type="number">
-										<input name="mvi_talla07" type="number">
-										<input name="mvi_talla08" type="number">
-										<input name="mvi_talla09" type="number">
-										<input name="mvi_talla10" type="number">
-										<input name="mvi_talla11" type="number">
-										<input name="mvi_talla12" type="number">
-										<input name="mvi_talla13" type="number">
+										<input name="mvi_talla01" type="hidden">
+										<input name="mvi_talla02" type="hidden">
+										<input name="mvi_talla03" type="hidden">
+										<input name="mvi_talla04" type="hidden">
+										<input name="mvi_talla05" type="hidden">
+										<input name="mvi_talla06" type="hidden">
+										<input name="mvi_talla07" type="hidden">
+										<input name="mvi_talla08" type="hidden">
+										<input name="mvi_talla09" type="hidden">
+										<input name="mvi_talla10" type="hidden">
+										<input name="mvi_talla11" type="hidden">
+										<input name="mvi_talla12" type="hidden">
+										<input name="mvi_talla13" type="hidden">
 									</tr>
 									<tr id="templates">
-
-										<td class="columns_tab width_015"> <input name="mvi_product" required id="inp_product"/></td>
+										<td class="columns_tab width_015"> <input name="mvi_product" id="inp_product" required autocomplete="off" /></td>
 										<td class="columns_tab width_040"> <input name="pop_pedDtll" disabled="disabled"></td>
-										<td class="columns_tab width_010"> <input name="mvi_kntidad" id="inp_kntidad" type="number" step="0.01" pattern="[0-9]" onChange="verificar()" /></td>
-										<td class="columns_tab width_005"> <input name="pop_pedUnid" disabled="disabled"></td>
-										<td class="columns_tab width_010"> <input class="align_tex_right" name="pop_pedPrc4" disabled="disabled"></td>
-										<td class="columns_tab width_005"> <input class="align_tex_right" name="pop_dscuent" disabled="disabled"></td>
-										<td class="columns_tab width_005"> <input class="align_tex_right" name="pop_impuest" disabled="disabled"></td>
-										<td class="columns_tab width_010"> <input class="align_tex_right" name="pop_valores" type="number" step="0.01" disabled="disabled"></td>
+										<td class="columns_tab width_010"> <input name="mvi_kntidad" id="inp_kntidad" class="align_tex_right"  required type="number" step="0.01" pattern="[0-9]" autocomplete="off" disabled="disabled" /></td>
+										<td class="columns_tab width_005"> <input name="mvi_unidade" disabled="disabled"></td>
+										<td class="columns_tab width_010"> <input class="align_tex_right" name="mvi_precios" id="inp_precios" type="number"></td>
+										<td class="columns_tab width_005"> <input class="align_tex_right" name="mvi_desctos" id="inp_desctos" disabled="disabled" value="0.00"></td>
+										<td class="columns_tab width_005"> <input class="align_tex_right" name="mvi_impuest" readonly="readonly" value="12.00"></td>
+										<td class="columns_tab width_010"> <input class="align_tex_right" name="pop_valores" type="number" step="0.01" readonly="readonly"></td>
+										<td><div class=""><button class="icon-basket iconos" type="submit"></button></div></td>
 									</tr>
 								</tbody>
 								<tr>
@@ -90,7 +133,7 @@
 									<td class="columns_tab">{{ form.fac_cajeras }} </td>
 									<td class="columns_tab">{{ form.totpago }} </td>
 									<td class="columns_tab" colspan="2"></td>
-									<td class="columns_tab align_tex_right"><label>Totala a pagar</labed>
+									<td class="columns_tab align_tex_right"><label>Total a pagar</labed>
 									<td class="columns_tab">{{ form.grantotal }} </td>
 								</tr>
 								<tr>
@@ -103,8 +146,7 @@
 								{{ form.error }}
 							</div>
 						{% endif %}
-
-						<div ><button class="icon-database form_submit" type="submit">  Guardar  </button></div>
+						<div ><a class="icon-cc-visa crea_boton" href="{% url 'comercial:fac_new' %}">  Pagar   </a></div>
 						<br>
 					</div>
 				</form>
@@ -116,34 +158,120 @@
 			<script type="text/javascript" >
 
 				var pop_callprd = document.getElementById("inp_product");
+				if(pop_callprd.addEventListener){
 					pop_callprd.addEventListener("click", function(){
 					document.form_pedidos['mvi_kntidad'].disabled = false;
-					window.open("{% url 'comercial:pop_exist' %}", "prd_winpops", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=520,width=1180,left=210,top=200")}, false);
+					document.getElementById('inp_kntidad').focus();
+					window.open("{% url 'comercial:pop_exist' %}", "prd_winpops", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=520,width=1180,left=210,top=200");
+					}, false);
+					}
 
-				var inp_keyprod = 0;
-				var pop_calltll = document.getElementById("inp_kntidad");
-					pop_calltll.addEventListener("click", function(){
-				var inp_keyprod = document.form_pedidos['pop_pedKyPr'].value;
-				var inp_tabtlla = document.form_pedidos['pop_pedTbtl'].value;
-				if (inp_tabtlla != "X"){
-					document.form_pedidos['mvi_kntidad'].disabled = true;
-					console.log("inp_keyprod:", inp_keyprod);
-					var url = "{% url 'inventarios:pop_talla' pk=987654321 %}".replace('987654321', inp_keyprod);
+				var lst_calltll = document.getElementById("inp_kntidad");
+				if(lst_calltll.addEventListener){
+					var jsw_tabtlla = document.getElementById("inp_tabtall").value;
+					var jsw_kntidad = document.getElementById("inp_kntidad").value || 0;
+					lst_calltll.addEventListener("submit", function(){
+						var jsw_keyprod = document.form_pedidos['pop_pedKyPr'].value;
+						if (jsw_kntidad < 1){
+							if (jsw_tabtlla != "X"){
+								var url = "{% url 'inventarios:pop_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
+								poptalla(url);
+								}
+							else{
+								alert("Falta Cantidad..!!");
+								};
+							};
+						},
+					lst_calltll.addEventListener("click", function(){
+						var jsw_keyprod = document.form_pedidos['pop_pedKyPr'].value;
+						if (jsw_tabtlla != "X"){
+							var url = "{% url 'inventarios:pop_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
+							poptalla(url);
+							}
+						else{
+							alert("Este producto no tiene tallas");
+							};
+						},
+					lst_calltll.addEventListener("change", function(){
+						var jsw_tabtlla = document.form_pedidos('pop_pedTbtl').value;
+						var jsw_keyprod = document.form_pedidos['pop_pedKyPr'].value;
+						alert(" cantidad y talla", jsw_tabtlla);
+						if (jsw_tabtlla != "X"){
+							alert("Este producto tiene tallas: ", jsw_tabtlla);
+							var url = "{% url 'inventarios:pop_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
+							poptalla(url);
+							}
+						else{
+							calcula();
+							}
+						},
+					false)));}
 
+				// Calculo de usbtotal por cambio en el precio
+				var lst_callprc = document.getElementById("inp_precios");
+				if(pop_callprc.addEventListener){
+					pop_callprc.addEventListener("change", function(){calcula()}, false);
+					}
+
+				function calcula(){
+					document.form_pedidos['mvi_kntidad'].readOnly = true;
+					document.form_pedidos['inp_precios'].disabled = false;
+					document.form_pedidos['inp_desctos'].disabled = false;
+
+					jsw_cantida = document.form_pedidos('mvi_kntidad').value || 0.00;
+					jsw_precios = document.form_pedidos('mvi_precios').value || 0.00;
+					document.form_pedidos('pop_valores').value = jsw_cantida * jsw_precios;
+					document.form_pedidos('mvi_precios').value = jsw_precios;
+					alert("calcule");
+					}
+
+				function poptalla(url){
+					document.form_pedidos['mvi_kntidad'].readOnly = true;
+					document.form_pedidos['inp_precios'].disabled = false;
+					document.form_pedidos['inp_desctos'].disabled = false;
 					window.open(url, "pop_dtallas", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=200,width=920,left=380,top=450");
-					}else{ alert("Este producto no tiene tallas");}
+					}
+
+			</script>
+{% comment %}
+
+
+
+
+				var jsw_keyprod = 0;
+				var lst_calltll = document.getElementById("inp_kntidad");
+					lst_calltll.addEventListener("click || submit", function(){
+				var jsw_keyprod = document.form_pedidos['pop_pedKyPr'].value;
+				var jsw_tabtlla = document.form_pedidos['pop_pedTbtl'].value;
+				if (jsw_tabtlla != "X"){
+				 		document.form_pedidos['mvi_kntidad'].readOnly = true;
+					var url = "{% url 'inventarios:pop_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
+					poptalla(url);
+					}
+				else{
+					alert("Este producto no tiene tallas");
+					};
+				document.getElementById('inp_desctos').focus();
 				}, false);
 
-				function verificar(){
-					inp_tabtlla = document.form_pedidos['pop_pedTbtl'].value;
-					if (inp_tabtlla != "X"){
-						alert("Este producto tiene tallas");
-						document.form_pedidos['mvi_kntidad'].value = 0.00;
-						document.form_pedidos['mvi_kntidad'].disabled = true;
-						window.open("{% url 'inventarios:pop_talla' pk=7 %}", "pop_dtallas", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=200,width=920,left=380,top=450");
-						};
-					};
-			</script>
 
+
+				//Valida por enter en cada venta en curso, si cantida=0 pide tallas si america
+				var lst_calltll = document.getElementById("inp_kntidad");
+					lst_calltll.addEventListener("submit", function(){
+				var jsw_keyprod = document.form_pedidos['pop_pedKyPr'].value;
+				var jsw_tabtlla = document.form_pedidos['pop_pedTbtl'].value;
+				var jsw_kntidad = document.form_pedidos['mvi_kntidad'].value;
+				if (jsw_tabtlla != "X" && jsw_kntidad < 1){
+					document.form_pedidos['mvi_kntidad'].readOnly = true;
+					var url = "{% url 'inventarios:pop_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
+					poptalla(url);
+					}
+				else{
+					alert("Digite la cantidad");
+					};
+				document.getElementById('inp_desctos').focus();
+				}, false);
+{% endcomment %}
 		{% endblock js %}
 
