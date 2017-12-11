@@ -1,0 +1,81 @@
+{% extends 'base/base_print.html' %}
+
+{% block title %} Panel de Exixtencias {% endblock title %}</title>
+
+{% block context %}
+
+			<div class="align_tex_center">
+				<h3>Inventarios:  Existencias</h3>
+			</div>
+			<div>
+				<table border="1" >
+					<thead>
+					 	<tr>
+							<th>Producto</th>
+							<th>Detalle del producto</th>
+					 		<th>Unid.</th>
+							<th>Tbla</th>
+					 		<th>Tall.01</th>
+					 		<th>Tall.02</th>
+					 		<th>Tall.03</th>
+					 		<th>Tall.04</th>
+					 		<th>Tall.05</th>
+					 		<th>Tall.06</th>
+					 		<th>Tall.07</th>
+					 		<th>Tall.08</th>
+					 		<th>Tall.09</th>
+					 		<th>Tall.10</th>
+					 		<th>Tall.11</th>
+					 		<th>Tall.12</th>
+					 		<th>Tall.13</th>
+					 		<th>Saldo Actual</th>
+							<th>Precio-vnta. publico</th>
+					 	</tr>
+					</thead>
+					<tbody border="0">
+					 	{% if object_list %}
+					 	{% for var_exifield in object_list %}
+					 	<tr>
+							<td>{{ var_exifield.exs_product }} </td>
+							<td>{{ var_exifield.exs_detalle }} </td>
+							<td>{{ var_exifield.exs_idunida }} </td>
+							<td>{{ var_exifield.exs_tabtall }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua01|default:0|stringformat:"0.2f" }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua02|default:0|stringformat:"0.2f" }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua03|default:0|stringformat:"0.2f" }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua04|default:0|stringformat:"0.2f" }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua05|default:0|stringformat:"0.2f" }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua06|default:0|stringformat:"0.2f" }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua07|default:0|stringformat:"0.2f" }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua08|default:0|stringformat:"0.2f" }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua09|default:0|stringformat:"0.2f" }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua10|default:0|stringformat:"0.2f" }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua11|default:0|stringformat:"0.2f" }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua12|default:0|stringformat:"0.2f" }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua13|default:0|stringformat:"0.2f" }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_saldact|default:0|stringformat:"0.2f" }} </td>
+							<td class="align_tex_right">{{ var_exifield.exs_publico|default:0|stringformat:"0.2f" }} </td>
+						</tr>
+						{% endfor %}
+						{% else %}
+						<h4> No hay registros en Existencias </h4>
+						{% endif %}
+						<br/>
+					</tbody>
+				</table>
+				<div class="page_content">
+					<ul class="pager_botons">
+						<li>
+							{% if page_obj.has_previous %}
+							<a class="icon-left-open pager_prev" href="?page={{page_obj.previous_page_number}}">Previous</a>
+							{% endif %}
+						</li>
+						<li>
+							{% if page_obj.has_next %}
+							<a class="pager_next" href="?page={{page_obj.next_page_number}}">Next <span class="icon-right-open"></span></a>
+							{% endif %}
+						</li>
+					</ul>
+				</div>
+			</div>
+{% endblock context %}

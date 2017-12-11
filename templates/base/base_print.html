@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+
+{% load staticfiles %}
+
+{% block css %}
+ 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+ 	<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+ 	<link rel="stylesheet" href="{% static 'css/fontello.css' %}">
+{% endblock css %}
+
+{% block content %}
+			{% block context%}
+
+
+			{% endblock context%}
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}
+
+{% block js %}
+{% endblock js %}

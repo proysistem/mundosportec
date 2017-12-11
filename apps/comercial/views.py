@@ -263,7 +263,6 @@ class PedEdita(UpdateView):
         return context
 
     def form_invalid(self, form):
-        #import pdb; pdb.set_trace()
         return super(PedEdita, self).form_invalid(form)
 
     def form_valid(self, form):
@@ -372,6 +371,13 @@ class FacLista(ListView):
     paginate_by = 8
 
 
+class FacPrint(ListView):
+    """Listado de Facturas"""
+    model = Factura
+    template_name = 'comercial/Ped_New.html'
+    paginate_by = 8
+
+
 class FacView(DetailView):
     """Visualiza reg. Factura"""
     template_name = 'comercial/Fac_View.html'
@@ -379,39 +385,11 @@ class FacView(DetailView):
 
 
 class FacNuevo(CreateView):
-    """Crear Factura"""
-    model = Factura
-    form_class = FacturaForm
+    """Crear Cliente"""
+    model = Cliente
+    form_class = ClienteForm
     template_name = 'comercial/Fac_New.html'
     success_url = reverse_lazy('comercial:fac_panel')
-
-#    def get_context_data(self, **kwargs):
-#        context = super(FacNuevo, self).get_context_data(**kwargs)
-#        MovinventFormset = inlineformset_factory(Factura, Movinvent, form=MovinventInlineForm, extra=1)
-#
-#        if self.request.POST:
-#            context['movimientos'] = MovinventFormset(self.request.POST, queryset=Movinvent.objects.select_related())
-#        else:
-#            # TODO: Hay un problema de 0n queries, debido a la generación de múltiples formset con mismo queryset, probablemente
-#            #       Probé con select_related sin éxito aún.
-#            context['movimientos'] = MovinventFormset(queryset=Movinvent.objects.select_related("mvi_cliente"))
-#        return context
-
-#    def form_valid(self, form):
-#        context = self.get_context_data()
-#        movimientos = context['movimientos']
-#        with transaction.atomic():
-#            self.object = form.save()
-
-#            if movimientos.is_valid():
-                # TODO: Validate per form in formset
-                #       Although, formset.is_valid do this.
-                # for form in movimientos:
-                #     if form.is_valid():
-                #         form.
-#                movimientos.instance = self.object
-#                movimientos.save()
-#        return super(FacNuevo, self).form_valid(form)
 
 
 class FacEdita(UpdateView):

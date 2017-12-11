@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 #from django.conf.urls import url
-from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista,
+from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista, ExiPrint,
                     DivLista, DivNuevo, DivView, DivEdita, DivDelet, MrkLista,
                     MrkNuevo, MrkView, MrkEdita, MrkDelet, ModLista, ModNuevo,
                     ModView, ModEdita, ModDelet, ColLista, ColNuevo, ColView,
@@ -46,6 +46,7 @@ urlpatterns = [
     url(r'^TllPopup/(?P<pk>\d+)/$',    PopTalla.as_view(), name='pop_talla'),
 
     url(r'^ExiPanel',                  ExiLista.as_view(), name='exi_panel'),
+    url(r'^ExiPrint',                  ExiPrint.as_view(), name='exi_print'),
     url(r'^ExiNuevo/$',                ExiNuevo.as_view(), name='exi_new'),
     url(r'^ExiEdita/(?P<pk>\d+)/$',    ExiEdita.as_view(), name='exi_edit'),
     url(r'^TablaTalla/(?P<model>\d+)/$',  TablaTalla.as_view(), name='tabla_talla'),

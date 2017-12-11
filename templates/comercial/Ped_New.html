@@ -93,11 +93,9 @@
 									<tr>
 										<input name="pop_pedKyPr" type="hidden" id="inp_pedKyPr" value=" ">
 										<input name="pop_pedTbtl" type="hidden" id="inp_tabtall" value=" ">
-										<input name="mvi_desctos" type="hidden" id="inp_desctos" value="0">
 										<input name="mvi_rcargos" type="hidden" id="inp_rcargos" value="0">
 										<input name="mvi_deliver" type="hidden" id="inp_deliver" value="0">
 										<input name="mvi_arancel" type="hidden" id="inp_arancel" value="0">
-										<input name="mvi_impuest" type="hidden" id="inp_impuest" value="0">
 
 										<input name="mvi_talla01" type="hidden">
 										<input name="mvi_talla02" type="hidden">
@@ -121,7 +119,7 @@
 										<td class="columns_tab width_010"> <input class="align_tex_right" name="mvi_precios" id="inp_precios" type="number"></td>
 										<td class="columns_tab width_005"> <input class="align_tex_right" name="mvi_desctos" id="inp_desctos" disabled="disabled" value="0.00"></td>
 										<td class="columns_tab width_005"> <input class="align_tex_right" name="mvi_impuest" readonly="readonly" value="12.00"></td>
-										<td class="columns_tab width_010"> <input class="align_tex_right" name="pop_valores" type="number" step="0.01" readonly="readonly"></td>
+										<td class="columns_tab width_010"> <input class="align_tex_right" name="pop_valores" stringformat:'0.2f' type="number" step="0.01" readonly="readonly"></td>
 										<td><div class=""><button class="icon-basket iconos" type="submit"></button></div></td>
 									</tr>
 								</tbody>
@@ -159,9 +157,14 @@
 
 				var pop_callprd = document.getElementById("inp_product");
 				if(pop_callprd.addEventListener){
+					jsw_ctrlprd = document.getElementById('inp_kntidad').disabled;
 					pop_callprd.addEventListener("click", function(){
-					document.form_pedidos['mvi_kntidad'].disabled = false;
-					document.getElementById('inp_kntidad').focus();
+					if (jsw_ctrlprd){
+						document.getElementById('inp_kntidad').disabled = false;
+						document.getElementById('inp_kntidad').focus();
+						}
+					document.form_pedidos['mvi_kntidad'].value="";
+					document.getElementById("inp_tabtall").value="";
 					window.open("{% url 'comercial:pop_exist' %}", "prd_winpops", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=520,width=1180,left=210,top=200");
 					}, false);
 					}
@@ -183,19 +186,21 @@
 							};
 						},
 					lst_calltll.addEventListener("click", function(){
+						var jsw_tabtlla = document.getElementById("inp_tabtall").value;
 						var jsw_keyprod = document.form_pedidos['pop_pedKyPr'].value;
 						if (jsw_tabtlla != "X"){
 							var url = "{% url 'inventarios:pop_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
 							poptalla(url);
 							}
 						else{
+							document.form_pedidos['inp_precios'].disabled = false;
+							document.form_pedidos['inp_desctos'].disabled = false;
 							alert("Este producto no tiene tallas");
 							};
 						},
 					lst_calltll.addEventListener("change", function(){
-						var jsw_tabtlla = document.form_pedidos('pop_pedTbtl').value;
-						var jsw_keyprod = document.form_pedidos['pop_pedKyPr'].value;
-						alert(" cantidad y talla", jsw_tabtlla);
+						jsw_tabtlla = document.form_pedidos["pop_pedTbtl"].value;
+						jsw_keyprod = document.form_pedidos["pop_pedKyPr"].value;
 						if (jsw_tabtlla != "X"){
 							alert("Este producto tiene tallas: ", jsw_tabtlla);
 							var url = "{% url 'inventarios:pop_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
@@ -205,7 +210,8 @@
 							calcula();
 							}
 						},
-					false)));}
+					false)));
+					}
 
 				// Calculo de usbtotal por cambio en el precio
 				var lst_callprc = document.getElementById("inp_precios");
@@ -214,64 +220,19 @@
 					}
 
 				function calcula(){
-					document.form_pedidos['mvi_kntidad'].readOnly = true;
-					document.form_pedidos['inp_precios'].disabled = false;
-					document.form_pedidos['inp_desctos'].disabled = false;
-
-					jsw_cantida = document.form_pedidos('mvi_kntidad').value || 0.00;
-					jsw_precios = document.form_pedidos('mvi_precios').value || 0.00;
-					document.form_pedidos('pop_valores').value = jsw_cantida * jsw_precios;
-					document.form_pedidos('mvi_precios').value = jsw_precios;
-					alert("calcule");
+					var jsw_cantida = document.form_pedidos['mvi_kntidad'].value || 0.00;
+					var jsw_precios = document.form_pedidos['mvi_precios'].value || 0.00;
+					document.form_pedidos['pop_valores'].value = (jsw_cantida * jsw_precios) || 0.00;
+					document.form_pedidos['mvi_precios'].value = jsw_precios;
 					}
 
 				function poptalla(url){
-					document.form_pedidos['mvi_kntidad'].readOnly = true;
 					document.form_pedidos['inp_precios'].disabled = false;
 					document.form_pedidos['inp_desctos'].disabled = false;
 					window.open(url, "pop_dtallas", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=200,width=920,left=380,top=450");
 					}
 
 			</script>
-{% comment %}
 
-
-
-
-				var jsw_keyprod = 0;
-				var lst_calltll = document.getElementById("inp_kntidad");
-					lst_calltll.addEventListener("click || submit", function(){
-				var jsw_keyprod = document.form_pedidos['pop_pedKyPr'].value;
-				var jsw_tabtlla = document.form_pedidos['pop_pedTbtl'].value;
-				if (jsw_tabtlla != "X"){
-				 		document.form_pedidos['mvi_kntidad'].readOnly = true;
-					var url = "{% url 'inventarios:pop_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
-					poptalla(url);
-					}
-				else{
-					alert("Este producto no tiene tallas");
-					};
-				document.getElementById('inp_desctos').focus();
-				}, false);
-
-
-
-				//Valida por enter en cada venta en curso, si cantida=0 pide tallas si america
-				var lst_calltll = document.getElementById("inp_kntidad");
-					lst_calltll.addEventListener("submit", function(){
-				var jsw_keyprod = document.form_pedidos['pop_pedKyPr'].value;
-				var jsw_tabtlla = document.form_pedidos['pop_pedTbtl'].value;
-				var jsw_kntidad = document.form_pedidos['mvi_kntidad'].value;
-				if (jsw_tabtlla != "X" && jsw_kntidad < 1){
-					document.form_pedidos['mvi_kntidad'].readOnly = true;
-					var url = "{% url 'inventarios:pop_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
-					poptalla(url);
-					}
-				else{
-					alert("Digite la cantidad");
-					};
-				document.getElementById('inp_desctos').focus();
-				}, false);
-{% endcomment %}
 		{% endblock js %}
 

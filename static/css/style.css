@@ -167,6 +167,10 @@
 	color: #fff;
 	margin: 0 0 0 5px;
 	}
+.iconos:hover, .iconos:focus
+	{
+	background-color: red;
+	}
 /*- - - - -  -  Contenedor de menu vertical - - -  - - - -*/
 
 aside

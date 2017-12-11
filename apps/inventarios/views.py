@@ -242,6 +242,37 @@ class PopExist(ListView):
     queryset = Existencia.objects.filter(exs_saldact__gt=0.00)
 
 
+class ExiPrint(ListView):
+    """Reporte de Existencia"""
+    model = Existencia
+    template_name = 'inventarios/Exi_Print.html'
+    ordering = ['exs_product', 'exs_tabtall']
+    context_object_name = 'productos'
+    paginate_by = 54
+    queryset = Existencia.objects.filter(exs_saldact__gt=0.00)
+
+    def get_initial(self):
+        tll_actual = {}
+        try:
+            sxt = Saldoxtalla.objects.get(tex_product=self.object)
+        except:
+            pass
+        else:
+            tll_actual['tex_actua01'] = sxt.tex_actua01
+            tll_actual['tex_actua02'] = sxt.tex_actua02
+            tll_actual['tex_actua03'] = sxt.tex_actua03
+            tll_actual['tex_actua04'] = sxt.tex_actua04
+            tll_actual['tex_actua05'] = sxt.tex_actua05
+            tll_actual['tex_actua06'] = sxt.tex_actua06
+            tll_actual['tex_actua07'] = sxt.tex_actua07
+            tll_actual['tex_actua08'] = sxt.tex_actua08
+            tll_actual['tex_actua09'] = sxt.tex_actua09
+            tll_actual['tex_actua10'] = sxt.tex_actua10
+            tll_actual['tex_actua11'] = sxt.tex_actua11
+            tll_actual['tex_actua12'] = sxt.tex_actua12
+            tll_actual['tex_actua13'] = sxt.tex_actua13
+        return tll_actual
+
 class ExiLista(ListView):
     """Listado de Existencia"""
     model = Existencia

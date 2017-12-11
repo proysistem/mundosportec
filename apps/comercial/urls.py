@@ -1,5 +1,5 @@
 from django.conf.urls import include, url
-from apps.comercial.views import CliLista, CliNuevo, CliView, CliEdita, CliDelet, PrvLista, PrvNuevo, PrvView, PrvEdita, PrvDelet, VndLista, VndNuevo, VndView, VndEdita, VndDelet, MviLista, MviNuevo, MviView, MviEdita, MviDelet, PedLista, PedNuevo, PedView, PedEdita, PedDelet, FacLista, FacNuevo, FacView, FacEdita, FacDelet
+from apps.comercial.views import CliLista, CliNuevo, CliView, CliEdita, CliDelet, PrvLista, PrvNuevo, PrvView, PrvEdita, PrvDelet, VndLista, VndNuevo, VndView, VndEdita, VndDelet, MviLista, MviNuevo, MviView, MviEdita, MviDelet, PedLista, PedNuevo, PedView, PedEdita, PedDelet, FacLista, FacPrint, FacNuevo, FacView, FacEdita, FacDelet
 from apps.inventarios.views import PopExist
 
 urlpatterns = [
@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^FacConsulta/(?P<pk>\d+)/$', FacView.as_view(),  name='fac_view'),
     url(r'^FacEdita/(?P<pk>\d+)/$',    FacEdita.as_view(), name='fac_edit'),
     url(r'^FacElimina/(?P<pk>\d+)/$',  FacDelet.as_view(), name='fac_delet'),
+    url(r'^FacPrint/(?P<pk>\d+)/$',    FacPrint.as_view(), name='fac_print'),
 
 ]
 
