@@ -4,78 +4,109 @@
 
 {% block context %}
 
-			<div class="align_tex_center">
-				<h3>Inventarios:  Existencias</h3>
-			</div>
-			<div>
-				<table border="1" >
-					<thead>
-					 	<tr>
-							<th>Producto</th>
-							<th>Detalle del producto</th>
-					 		<th>Unid.</th>
-							<th>Tbla</th>
-					 		<th>Tall.01</th>
-					 		<th>Tall.02</th>
-					 		<th>Tall.03</th>
-					 		<th>Tall.04</th>
-					 		<th>Tall.05</th>
-					 		<th>Tall.06</th>
-					 		<th>Tall.07</th>
-					 		<th>Tall.08</th>
-					 		<th>Tall.09</th>
-					 		<th>Tall.10</th>
-					 		<th>Tall.11</th>
-					 		<th>Tall.12</th>
-					 		<th>Tall.13</th>
-					 		<th>Saldo Actual</th>
-							<th>Precio-vnta. publico</th>
-					 	</tr>
-					</thead>
-					<tbody border="0">
-					 	{% if object_list %}
-					 	{% for var_exifield in object_list %}
-					 	<tr>
-							<td>{{ var_exifield.exs_product }} </td>
-							<td>{{ var_exifield.exs_detalle }} </td>
-							<td>{{ var_exifield.exs_idunida }} </td>
-							<td>{{ var_exifield.exs_tabtall }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua01|default:0|stringformat:"0.2f" }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua02|default:0|stringformat:"0.2f" }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua03|default:0|stringformat:"0.2f" }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua04|default:0|stringformat:"0.2f" }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua05|default:0|stringformat:"0.2f" }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua06|default:0|stringformat:"0.2f" }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua07|default:0|stringformat:"0.2f" }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua08|default:0|stringformat:"0.2f" }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua09|default:0|stringformat:"0.2f" }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua10|default:0|stringformat:"0.2f" }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua11|default:0|stringformat:"0.2f" }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua12|default:0|stringformat:"0.2f" }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_saldact.tex_actua13|default:0|stringformat:"0.2f" }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_saldact|default:0|stringformat:"0.2f" }} </td>
-							<td class="align_tex_right">{{ var_exifield.exs_publico|default:0|stringformat:"0.2f" }} </td>
-						</tr>
-						{% endfor %}
-						{% else %}
-						<h4> No hay registros en Existencias </h4>
-						{% endif %}
-						<br/>
-					</tbody>
-				</table>
-				<div class="page_content">
-					<ul class="pager_botons">
-						<li>
-							{% if page_obj.has_previous %}
-							<a class="icon-left-open pager_prev" href="?page={{page_obj.previous_page_number}}">Previous</a>
-							{% endif %}
-						</li>
-						<li>
-							{% if page_obj.has_next %}
-							<a class="pager_next" href="?page={{page_obj.next_page_number}}">Next <span class="icon-right-open"></span></a>
-							{% endif %}
-						</li>
-					</ul>
-				</div>
-			</div>
+<div class="align_tex_center">
+	<h3>Inventarios:  Existencias</h3>
+</div>
+<div>
+	<table border="1" >
+		<thead>
+			<tr>
+				<th>Producto</th>
+				<th>Detalle del producto</th>
+				<th>Unid.</th>
+				<th>Tbla</th>
+				<th class="w_talla">Tall.01</th>
+				<th class="w_talla">Tall.02</th>
+				<th class="w_talla">Tall.03</th>
+				<th class="w_talla">Tall.04</th>
+				<th class="w_talla">Tall.05</th>
+				<th class="w_talla">Tall.06</th>
+				<th class="w_talla">Tall.07</th>
+				<th class="w_talla">Tall.08</th>
+				<th class="w_talla">Tall.09</th>
+				<th class="w_talla">Tall.10</th>
+				<th class="w_talla">Tall.11</th>
+				<th class="w_talla">Tall.12</th>
+				<th class="w_talla">Tall.13</th>
+				<th>Saldo Actual</th>
+				<th>Precio-vnta. publico</th>
+			</tr>
+		</thead>
+		<tbody border="0">
+			{% if productos %}
+			{% for var_exifield in productos %}
+			<tr>
+				<td>{{ var_exifield.exs_product }} </td>
+				<td>{{ var_exifield.exs_detalle }} </td>
+				<td>{{ var_exifield.exs_idunida }} </td>
+				<td>{{ var_exifield.exs_tabtall|default:"-" }} </td>
+				<td class="align_tex_right" colspan="13">
+					<table border="0">
+						<thead>
+							<tr>
+								<th class="w_talla">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid01 }}</th>
+								<th class="w_talla">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid02 }}</th>
+								<th class="w_talla">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid03 }}</th>
+								<th class="w_talla">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid04 }}</th>
+								<th class="w_talla">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid05 }}</th>
+								<th class="w_talla">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid06 }}</th>
+								<th class="w_talla">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid07 }}</th>
+								<th class="w_talla">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid08 }}</th>
+								<th class="w_talla">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid09 }}</th>
+								<th class="w_talla">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid10 }}</th>
+								<th class="w_talla">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid11 }}</th>
+								<th class="w_talla">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid12 }}</th>
+								<th class="w_talla">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid13 }}</th>
+							</tr>
+						</thead>
+						<tbody border="1">
+							<tr>
+								<td class="align_tex_right w_talla">{{ var_exifield.saldoxtalla.tex_actua01|default:0|stringformat:"0.2f" }} </td>
+								<td class="align_tex_right w_talla">{{ var_exifield.saldoxtalla.tex_actua02|default:0|stringformat:"0.2f" }} </td>
+								<td class="align_tex_right w_talla">{{ var_exifield.saldoxtalla.tex_actua03|default:0|stringformat:"0.2f" }} </td>
+								<td class="align_tex_right w_talla">{{ var_exifield.saldoxtalla.tex_actua04|default:0|stringformat:"0.2f" }} </td>
+								<td class="align_tex_right w_talla">{{ var_exifield.saldoxtalla.tex_actua05|default:0|stringformat:"0.2f" }} </td>
+								<td class="align_tex_right w_talla">{{ var_exifield.saldoxtalla.tex_actua06|default:0|stringformat:"0.2f" }} </td>
+								<td class="align_tex_right w_talla">{{ var_exifield.saldoxtalla.tex_actua07|default:0|stringformat:"0.2f" }} </td>
+								<td class="align_tex_right w_talla">{{ var_exifield.saldoxtalla.tex_actua08|default:0|stringformat:"0.2f" }} </td>
+								<td class="align_tex_right w_talla">{{ var_exifield.saldoxtalla.tex_actua09|default:0|stringformat:"0.2f" }} </td>
+								<td class="align_tex_right w_talla">{{ var_exifield.saldoxtalla.tex_actua10|default:0|stringformat:"0.2f" }} </td>
+								<td class="align_tex_right w_talla">{{ var_exifield.saldoxtalla.tex_actua11|default:0|stringformat:"0.2f" }} </td>
+								<td class="align_tex_right w_talla">{{ var_exifield.saldoxtalla.tex_actua12|default:0|stringformat:"0.2f" }} </td>
+								<td class="align_tex_right w_talla">{{ var_exifield.saldoxtalla.tex_actua13|default:0|stringformat:"0.2f" }} </td>
+
+							</tr>
+						</tbody>
+					</table>
+				</td>
+				<td class="align_tex_right">{{ var_exifield.exs_saldact|default:0|stringformat:"0.2f" }} </td>
+				<td class="align_tex_right">{{ var_exifield.exs_publico|default:0|stringformat:"0.2f" }} </td>
+			</tr>
+			{% endfor %}
+			<tr>
+				<td align="right" colspan="17">Total</td>
+				<td align="right">{{ totaldesaldos|default:0|stringformat:"0.2f" }}</td>
+				<td></td>
+			</tr>
+			{% else %}
+			<h4> No hay registros en Existencias </h4>
+			{% endif %}
+			<br/>
+		</tbody>
+	</table>
+	<div class="page_content">
+		<ul class="pager_botons">
+			<li>
+				{% if page_obj.has_previous %}
+				<a class="icon-left-open pager_prev" href="?page={{page_obj.previous_page_number}}">Previous</a>
+				{% endif %}
+			</li>
+			<li>
+				{% if page_obj.has_next %}
+				<a class="pager_next" href="?page={{page_obj.next_page_number}}">Next <span class="icon-right-open"></span></a>
+				{% endif %}
+			</li>
+		</ul>
+	</div>
+</div>
 {% endblock context %}

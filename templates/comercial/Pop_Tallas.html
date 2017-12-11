@@ -39,7 +39,7 @@
                                 <td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_saldinc.name}}">Saldo.Actual</label></div></td>
                                 <td>
                                     {% if object.saldoxtalla.tex_actua01 %}
-                                        <div class="columns_tab_tall"><input id="ids_kntid01" name="mvi_talla01" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua01|default:7|stringformat:'0.2f' }}" max="{{object.saldoxtalla.tex_actua01|default:0|stringformat:'0.2f' }}" min="0"></div>
+                                        <div class="columns_tab_tall"><input id="ids_kntid01" name="mvi_talla01" type="number" pattern="[0-9]" step="1" placeholder="{{object.saldoxtalla.tex_actua01|default:7|stringformat:'0.2f' }}" max="{{object.saldoxtalla.tex_actua01|default:0|stringformat:'0.2f' }}" min="0"></div>
                                     {% else %}
                                         <div class="columns_tab_disab"><input id="ids_kntid01" name="mvi_talla01" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua01|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
                                     {% endif %}
@@ -47,7 +47,7 @@
 
                                 <td>
                                     {% if object.saldoxtalla.tex_actua02 %}
-                                        <div class="columns_tab_tall"><input id="ids_kntid02" name="mvi_talla02" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua02|default:0|stringformat:'0.2f' }}" max="{{object.saldoxtalla.tex_actua02|default:0|stringformat:'0.2f' }}" min="0"></div>
+                                        <div class="columns_tab_tall"><input id="ids_kntid02" name="mvi_talla02" type="number" pattern="[0-9]" step="1" placeholder="{{object.saldoxtalla.tex_actua02|default:0|stringformat:'0.2f' }}" max="{{object.saldoxtalla.tex_actua02|default:0|stringformat:'0.2f' }}" min="0"></div>
                                     {% else %}
                                         <div class="columns_tab_disab"><input id="ids_kntid02" name="mvi_talla02" type="number" pattern="[0-9]"  placeholder="{{object.saldoxtalla.tex_actua02|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
                                    {% endif %}
@@ -55,7 +55,7 @@
 
                                 <td>
                                     {% if object.saldoxtalla.tex_actua03 %}
-                                        <div class="columns_tab_tall"><input id="ids_kntid03" name="mvi_talla03" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua03|default:0|stringformat:'0.2f' }}"></div>
+                                        <div class="columns_tab_tall"><input id="ids_kntid03" name="mvi_talla03" type="number" pattern="[0-9]" step="1" placeholder="{{object.saldoxtalla.tex_actua03|default:0|stringformat:'0.2f' }}"></div>
                                     {% else %}
                                         <div class="columns_tab_disab"><input id="ids_kntid03" name="mvi_talla03" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua03|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
                                     {% endif %}
@@ -63,7 +63,7 @@
 
                                 <td>
                                     {% if object.saldoxtalla.tex_actua04 %}
-                                        <div class="columns_tab_tall"><input id="ids_kntid04" name="mvi_talla04" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua04|default:0|stringformat:'0.2f' }}"></div>
+                                        <div class="columns_tab_tall"><input id="ids_kntid04" name="mvi_talla04" type="number" pattern="[0-9]" step="1" placeholder="{{object.saldoxtalla.tex_actua04|default:0|stringformat:'0.2f' }}"></div>
                                     {% else %}
                                         <div class="columns_tab_disab"><input id="ids_kntid04" name="mvi_talla04" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua04|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
                                     {% endif %}
@@ -71,7 +71,7 @@
 
                                 <td>
                                     {% if object.saldoxtalla.tex_actua05 %}
-                                        <div class="columns_tab_tall"><input id="ids_kntid05" name="fym_kntid05" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua05|default:0|stringformat:'0.2f' }}"></div>
+                                        <div class="columns_tab_tall"><input id="ids_kntid05" name="fym_kntid05" type="number" pattern="[0-9]" step="1" placeholder="{{object.saldoxtalla.tex_actua05|default:0|stringformat:'0.2f' }}"></div>
                                     {% else %}
                                         <div class="columns_tab_disab"><input id="ids_kntid05" name="fym_kntid05" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua05|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
                                     {% endif %}
@@ -79,7 +79,7 @@
 
                                 <td>
                                     {% if object.saldoxtalla.tex_actua06 %}
-                                        <div class="columns_tab_tall"><input id="ids_kntid06" name="mvi_talla06" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua06|default:0|stringformat:'0.2f' }}"></div>
+                                        <div class="columns_tab_tall"><input id="ids_kntid06" name="mvi_talla06" type="number" pattern="[0-9]" step="1" placeholder="{{object.saldoxtalla.tex_actua06|default:0|stringformat:'0.2f' }}"></div>
                                     {% else %}
                                         <div class="columns_tab_disab"><input id="ids_kntid06" name="mvi_talla06" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua06|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
                                     {% endif %}
@@ -87,7 +87,7 @@
 
                                 <td>
                                     {% if object.saldoxtalla.tex_actua07 %}
-                                        <div class="columns_tab_tall"><input id="ids_kntid07" name="mvi_talla07" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua07|default:0|stringformat:'0.2f' }}"></div>
+                                        <div class="columns_tab_tall"><input id="ids_kntid07" name="mvi_talla07" type="number" pattern="[0-9]" step="1" placeholder="{{object.saldoxtalla.tex_actua07|default:0|stringformat:'0.2f' }}"></div>
                                     {% else %}
                                         <div class="columns_tab_disab"><input id="ids_kntid07" name="mvi_talla07" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua07|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
                                     {% endif %}
@@ -95,7 +95,7 @@
 
                                 <td>
                                     {% if object.saldoxtalla.tex_actua08 %}
-                                        <div class="columns_tab_tall"><input id="ids_kntid08" name="mvi_talla08" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua08|default:0|stringformat:'0.2f' }}"></div>
+                                        <div class="columns_tab_tall"><input id="ids_kntid08" name="mvi_talla08" type="number" pattern="[0-9]" step="1" placeholder="{{object.saldoxtalla.tex_actua08|default:0|stringformat:'0.2f' }}"></div>
                                     {% else %}
                                         <div class="columns_tab_disab"><input id="ids_kntid08" name="mvi_talla08" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua08|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
                                     {% endif %}
@@ -103,7 +103,7 @@
 
                                 <td>
                                     {% if object.saldoxtalla.tex_actua09 %}
-                                        <div class="columns_tab_tall"><input id="ids_kntid09" name="mvi_talla09" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua09|default:0|stringformat:'0.2f' }}"></div>
+                                        <div class="columns_tab_tall"><input id="ids_kntid09" name="mvi_talla09" type="number" pattern="[0-9]" step="1" placeholder="{{object.saldoxtalla.tex_actua09|default:0|stringformat:'0.2f' }}"></div>
                                     {% else %}
                                         <div class="columns_tab_disab"><input id="ids_kntid09" name="mvi_talla09" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua09|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
                                     {% endif %}
@@ -111,7 +111,7 @@
 
                                 <td>
                                     {% if object.saldoxtalla.tex_actua10 %}
-                                        <div class="columns_tab_tall"><input id="ids_kntid10" name="mvi_talla10" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua10|default:0|stringformat:'0.2f' }}"></div>
+                                        <div class="columns_tab_tall"><input id="ids_kntid10" name="mvi_talla10" type="number" pattern="[0-9]" step="1" placeholder="{{object.saldoxtalla.tex_actua10|default:0|stringformat:'0.2f' }}"></div>
                                     {% else %}
                                         <div class="columns_tab_disab"><input id="ids_kntid10" name="mvi_talla10" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua10|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
                                     {% endif %}
@@ -119,7 +119,7 @@
 
                                 <td>
                                     {% if object.saldoxtalla.tex_actua11 %}
-                                        <div class="columns_tab_tall"><input id="ids_kntid11" name="mvi_talla11" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua11|default:0|stringformat:'0.2f' }}"></div>
+                                        <div class="columns_tab_tall"><input id="ids_kntid11" name="mvi_talla11" type="number" pattern="[0-9]" step="1" placeholder="{{object.saldoxtalla.tex_actua11|default:0|stringformat:'0.2f' }}"></div>
                                     {% else %}
                                         <div class="columns_tab_disab"><input id="ids_kntid11" name="mvi_talla11" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua11|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
                                     {% endif %}
@@ -127,7 +127,7 @@
 
                                 <td>
                                     {% if object.saldoxtalla.tex_actua12 %}
-                                        <div class="columns_tab_tall"><input id="ids_kntid12" name="mvi_talla12" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua12|default:0|stringformat:'0.2f' }}"></div>
+                                        <div class="columns_tab_tall"><input id="ids_kntid12" name="mvi_talla12" type="number" pattern="[0-9]" step="1" placeholder="{{object.saldoxtalla.tex_actua12|default:0|stringformat:'0.2f' }}"></div>
                                     {% else %}
                                         <div class="columns_tab_disab"><input id="ids_kntid12" name="mvi_talla12" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua12|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
                                     {% endif %}
@@ -135,7 +135,7 @@
 
                                 <td>
                                     {% if object.saldoxtalla.tex_actua13 %}
-                                        <div class="columns_tab_tall"><input id="ids_kntid13" name="mvi_talla13" type="number" pattern="[0-9]" step="0.01" placeholder="{{object.saldoxtalla.tex_actua13|default:0|stringformat:'0.2f' }}"></div>
+                                        <div class="columns_tab_tall"><input id="ids_kntid13" name="mvi_talla13" type="number" pattern="[0-9]" step="1" placeholder="{{object.saldoxtalla.tex_actua13|default:0|stringformat:'0.2f' }}"></div>
                                     {% else %}
                                         <div class="columns_tab_disab"><input id="ids_kntid13" name="mvi_talla13" type="number" pattern="[0-9]" placeholder="{{object.saldoxtalla.tex_actua13|default:0|stringformat:'0.2f' }}" disabled="disabled" value="0"></div>
                                     {% endif %}
@@ -201,7 +201,7 @@
             knt_xtlla11=document.getElementById('ids_kntid11').value || 0;
             knt_xtlla12=document.getElementById('ids_kntid12').value || 0;
             knt_xtlla13=document.getElementById('ids_kntid13').value || 0;
-            jsw_prcpubl={{ object.exs_publico }} || 0;
+            jsw_prcpubl={{ object.exs_publico|default:'0'}};
             knt_tottall=Number(knt_xtlla01)+Number(knt_xtlla02)+Number(knt_xtlla03)+Number(knt_xtlla04)+Number(knt_xtlla05)+Number(knt_xtlla06)+Number(knt_xtlla07)+Number(knt_xtlla08)+Number(knt_xtlla09)+Number(knt_xtlla10)+Number(knt_xtlla11)+Number(knt_xtlla12)+Number(knt_xtlla13);
             document.getElementById('ids_kntidad').value=knt_tottall;
             jsw_sbtotal=knt_tottall * jsw_prcpubl;
@@ -227,8 +227,8 @@
             opener.document.form_pedidos.mvi_talla13.value=knt_xtlla13;
             opener.document.form_pedidos.mvi_kntidad.value=knt_tottall;
             opener.document.form_pedidos.pop_valores.value=jsw_sbtotal;
-            opener.document.getElementById('inp_desctos').disabled=false;
-            opener.document.getElementById('inp_desctos').focus();
+            // opener.document.getElementById('inp_desctos').disabled=false;
+            // opener.document.getElementById('inp_desctos').focus();
             window.close();
             }
     </script>

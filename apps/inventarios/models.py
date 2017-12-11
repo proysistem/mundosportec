@@ -152,7 +152,7 @@ class Existencia(models.Model):
 
     def save(self, *args, **kwargs):
         if self.exs_sucursa and self.exs_iddivis and self.exs_idmarca and self.exs_idmodel and self.exs_idcolor:
-            self.exs_product = self._id
+            self.exs_product = getattr(self, '_id', self.generate_id())
             self.exs_detalle = "{} {} {} {}".format(
                 str(self.exs_idmarca.mrk_detalle),  # 3
                 str(self.exs_iddivis.div_abrevia),  # 2

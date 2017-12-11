@@ -1,6 +1,8 @@
 #from django.shortcuts import render
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
+from django.db.models import Sum
+
 from .models import Division, Marca, Modelo, Color, Tabtalla, Existencia, Saldoxtalla
 from .forms import (DivisionForm, MarcaForm, ModeloForm, ColorForm, TabtallaForm, ExistenciaForm,
                     SaldoxtallaForm, ExistenciaEditForm)
@@ -248,8 +250,16 @@ class ExiPrint(ListView):
     template_name = 'inventarios/Exi_Print.html'
     ordering = ['exs_product', 'exs_tabtall']
     context_object_name = 'productos'
-    paginate_by = 54
-    queryset = Existencia.objects.filter(exs_saldact__gt=0.00)
+    # paginate_by = 54
+    # queryset = Existencia.objects.filter(exs_saldact__gte=0.00)
+
+    def get_queryset(self):
+        return Existencia.objects.select_related('exs_idunida', 'saldoxtalla')
+
+    def get_context_data(self, **kwargs):
+        context = super(ExiPrint, self).get_context_data(**kwargs)
+        context['totaldesaldos'] = self.get_queryset().aggregate(totaldesaldos=Sum('exs_saldact'))['totaldesaldos']
+        return context
 
     def get_initial(self):
         tll_actual = {}
@@ -272,6 +282,7 @@ class ExiPrint(ListView):
             tll_actual['tex_actua12'] = sxt.tex_actua12
             tll_actual['tex_actua13'] = sxt.tex_actua13
         return tll_actual
+
 
 class ExiLista(ListView):
     """Listado de Existencia"""

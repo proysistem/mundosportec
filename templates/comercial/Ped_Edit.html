@@ -104,7 +104,7 @@
 											<td class="columns_tab width_010"> <input class="align_tex_right" value='{{ movimiento.mvi_precios|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
 											<td class="columns_tab width_005"> <input class="align_tex_right" value='{{ movimiento.mvi_desctos|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
 											<td class="columns_tab width_005"> <input class="align_tex_right" value='{{ movimiento.mvi_impuest|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
-											<td class="columns_tab width_010"> <input class="align_tex_right" value='{{ tot_valitem|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
+											<td class="columns_tab width_010"> <input class="align_tex_right" value='{{ movimiento.subtotal|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
 											<td class="columns_tab"><a class="icon-trash iconos" href="{% url 'comercial:ped_delet' movimiento.mvi_nummovi %}"></a></td>
 										</tr>
 									{% endfor %}
@@ -130,9 +130,9 @@
 									</tr>
 									<tr id="templates">
 										<td class="columns_tab width_015"> <input name="mvi_product" id="inp_product" required autocomplete="off" /></td>
-										<td class="columns_tab width_040"> <input name="pop_pedDtll" disabled="disabled"></td>
+										<td class="columns_tab width_040"> <input name="pop_pedDtll" readonly></td>
 										<td class="columns_tab width_010"> <input name="mvi_kntidad" id="inp_kntidad" class="align_tex_right"  required type="number" step="0.01" pattern="[0-9]" autocomplete="off" disabled="disabled" /></td>
-										<td class="columns_tab width_005"> <input name="mvi_unidade" disabled="disabled"></td>
+										<td class="columns_tab width_005"> <input name="mvi_unidade" readonly></td>
 										<td class="columns_tab width_010"> <input class="align_tex_right" name="mvi_precios" id="inp_precios" type="number"></td>
 										<td class="columns_tab width_005"> <input class="align_tex_right" name="mvi_desctos" id="inp_desctos" disabled="disabled" value="0.00"></td>
 										<td class="columns_tab width_005"> <input class="align_tex_right" name="mvi_impuest" readonly="readonly" value="12.00"></td>
@@ -149,7 +149,7 @@
 									<td class="columns_tab">{{ form.totpago }} </td>
 									<td class="columns_tab" colspan="2"></td>
 									<td class="columns_tab align_tex_right"><label>Total a pagar</labed>
-									<td class="columns_tab">{{ form.grantotal }} </td>
+									<td class="columns_tab align_tex_right">{{ total }} </td>
 								</tr>
 								<tr>
 								</tr>
@@ -260,9 +260,9 @@
 
 				// Calculo de usbtotal por cambio en el precio
 				var lst_callprc = document.getElementById("inp_precios");
-				if(pop_callprc.addEventListener){
-					pop_callprc.addEventListener("change", function(){calcula()}, false);
-					}
+				if(lst_callprc.addEventListener){
+					lst_callprc.addEventListener("change", function(){calcula()}, false);
+				}
 
 				function calcula(){
 					var jsw_cantida = document.form_pedidos['mvi_kntidad'].value || 0.00;

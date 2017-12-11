@@ -125,6 +125,14 @@ class Movinvent(models.Model):
         # TODO: Definir si amerita modificar los parámetros
         # TODO: Definir el max_length de CharField o poner TextField
         super(Movinvent, self).save()
+        # import pdb; pdb.set_trace()
+        saldos = self.mvi_product.saldoxtalla
+        for num_talla in range(1, 14):
+            egr_actual = getattr(saldos, "tex_egres{0:02d}".format(num_talla)) or 0
+            egr_nuevo = egr_actual + getattr(self, "mvi_talla{0:02d}".format(num_talla)) or 0
+            print(egr_nuevo)
+            setattr(saldos, "tex_egres{0:02d}".format(num_talla), egr_nuevo)
+        saldos.save()
 
 
 class Factura(models.Model):

@@ -3,6 +3,7 @@ from django.views.generic import CreateView, DetailView, UpdateView, DeleteView,
 from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura
 from apps.comercial.forms import ClienteForm, ProveedorForm, VendedorForm, MovinventInlineForm, MovinventForm, PedidoForm, FacturaForm
 from django.db import transaction
+from django.db.models import F, Prefetch
 from django.forms import inlineformset_factory
 
 # Create your views here.
@@ -246,6 +247,11 @@ class PedEdita(UpdateView):
     form_class = PedidoForm
     template_name = 'comercial/Ped_Edit.html'
 
+    def get_queryset(self):
+        return Pedido.objects.prefetch_related(Prefetch(
+            'movinvent_set', queryset=Movinvent.objects.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'))))
+
     def get_success_url(self):
         return reverse_lazy('comercial:ped_edit', kwargs={"pk": self.object.pk})
 
@@ -259,7 +265,13 @@ class PedEdita(UpdateView):
             context['nuevo_mov'] = MovinventInlineForm()
             # TODO: Hay un problema de 0n queries, debido a la generación de múltiples formset con mismo queryset, probablemente
             #       Probé con select_related sin éxito aún.
-            context['movimientos'] = self.object.movinvent_set.all()
+            movimientos = self.object.movinvent_set.all()
+            total = 0
+            for movimiento in movimientos:
+                total += movimiento.subtotal
+
+            context['movimientos'] = movimientos
+            context['total'] = total
         return context
 
     def form_invalid(self, form):
