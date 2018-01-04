@@ -141,6 +141,7 @@
 										<td><div class=""><button class="icon-basket iconos" type="submit"></button></div></td>
 									</tr>
 								</tbody>
+								{% comment %}
 								<tfoot onchange="sum_frmapgo()">
 									<tr class="totales">
 										<td colspan="2">
@@ -273,6 +274,10 @@
 										</td>
 									</tr>
 								</tfoot>
+								{% endcomment %}
+								<tr><td><br></td></tr>
+								<tr><td colspan="16"><a class="icon-reply crea_boton" href="{% url 'comercial:fac_new' %}">P a g a r</a></td></tr>
+
 							</table>
 						</div>
 						{% if forms.error %}
