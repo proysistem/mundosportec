@@ -62,7 +62,7 @@
 .icon-wrench:before { content: '\e804'; } /* '' */
 .icon-search:before { content: '\e805'; } /* '' */
 .icon-mail:before { content: '\e806'; } /* '' */
-.icon-user:before { content: '\e807'; } /* '' */
+.icon-user:before { content: '\e807'; text-decoration: none;} /* '' */
 .icon-videocam:before { content: '\e808'; } /* '' */
 .icon-camera:before { content: '\e809'; } /* '' */
 .icon-th-list:before { content: '\e80a'; } /* '' */
@@ -80,6 +80,3 @@
 .icon-reply:before { content: '\e816'; text-decoration: none; color: #fff; } /* '' */
 .icon-right-open:before { content: '\f006'; } /* '' */
 .icon-left-open:before { content: '\f007'; } /* '' */
-.icon-money:before { content: '\e800'; } /* '' */
-.icon-cc-visa:before { content: '\f1f0'; } /* '' */
-.icon-cc-paypal:before { content: '\f1f4'; } /* '' */

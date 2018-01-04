@@ -1,0 +1,29 @@
+{% extends 'base/base_print.html' %}
+
+{% block title %} Reporte de Pedidos {% endblock title %}</title>
+
+{% block context %}
+
+<div class="align_tex_center">
+	<h3>Comercial: Pedidos</h3>
+</div>
+<div>
+<div>
+              <p>{{ Table }}</p>
+</div>
+    				<div class="page_content">
+					<ul class="pager_botons">
+						<li>
+							{% if page_obj.has_previous %}
+							<a class="icon-left-open pager_prev" href="?page={{page_obj.previous_page_number}}">Previous</a>
+							{% endif %}
+						</li>
+						<li>
+							{% if page_obj.has_next %}
+							<a class="pager_next" href="?page={{page_obj.next_page_number}}">Next <span class="icon-right-open"></span></a>
+							{% endif %}
+						</li>
+					</ul>
+				</div>
+			</div>
+{% endblock context %}

@@ -1,5 +1,10 @@
 from django.conf.urls import include, url
-from apps.comercial.views import CliLista, CliNuevo, CliView, CliEdita, CliDelet, PrvLista, PrvNuevo, PrvView, PrvEdita, PrvDelet, VndLista, VndNuevo, VndView, VndEdita, VndDelet, MviLista, MviNuevo, MviView, MviEdita, MviDelet, PedLista, PedNuevo, PedView, PedEdita, PedDelet, FacLista, FacPrint, FacNuevo, FacView, FacEdita, FacDelet
+from apps.comercial.views import (CliLista, CliNuevo, CliView, CliEdita, CliDelet,
+                                  PrvLista, PrvNuevo, PrvView, PrvEdita, PrvDelet,
+                                  VndLista, VndNuevo, VndView, VndEdita, VndDelet,
+                                  MviLista, MviNuevo, MviView, MviEdita, MviDelet,
+                                  PedLista, PedNuevo, PedView, PedEdita, PedDelet, PedRepor,
+                                  FacLista, FacPrint, FacNuevo, FacView, FacEdita, FacPaid, FacDelet)
 from apps.inventarios.views import PopExist
 
 urlpatterns = [
@@ -30,12 +35,14 @@ urlpatterns = [
     url(r'^PopProdc',                  PopExist.as_view(), name='pop_exist'),
     url(r'^PedPanel',                  PedLista.as_view(), name='ped_panel'),
     url(r'^PedNuevo/$',                PedNuevo.as_view(), name='ped_new'),
+    url(r'^PedRepor',                  PedRepor.as_view(), name='ped_repor'),
     url(r'^PedConsulta/(?P<pk>\d+)/$', PedView.as_view(),  name='ped_view'),
     url(r'^PedEdita/(?P<pk>\d+)/$',    PedEdita.as_view(), name='ped_edit'),
     url(r'^PedElimina/(?P<pk>\d+)/$',  PedDelet.as_view(), name='ped_delet'),
 
     url(r'^FacPanel',                  FacLista.as_view(), name='fac_panel'),
     url(r'^FacNuevo/$',                FacNuevo.as_view(), name='fac_new'),
+    url(r'^FacPaid/(?P<pk>\d+)/$',     FacPaid.as_view(), name='fac_paid'),
     url(r'^FacConsulta/(?P<pk>\d+)/$', FacView.as_view(),  name='fac_view'),
     url(r'^FacEdita/(?P<pk>\d+)/$',    FacEdita.as_view(), name='fac_edit'),
     url(r'^FacElimina/(?P<pk>\d+)/$',  FacDelet.as_view(), name='fac_delet'),

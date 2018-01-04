@@ -4,13 +4,14 @@
 			{% block context%}
 			<div class="crea_content">
 				<h3 class="crea_proceso">Comercial:  Facturación</h3>
-				<a class="icon-reply crea_boton" href="{% url 'comercial:fac_panel' %}">Volver</a>
+				<a class="icon-reply crea_boton" href="{% url 'comercial:ped_new' %}">Volver</a>
 			</div>
 			<div>
 				<form name="form_pedidos" method="POST" enctype="multipart">{% csrf_token %}
 					<div class="form_content">
 						<div>
-							<div class="form_titulo"><h1> Grabar Pedidos </h1></div>
+							<div class="form_titulo"><h1> Actualizar Pedidos </h1></div>
+
 							{% if form.errors %}
 
 								<div class="form_errors" role="alert">
@@ -48,8 +49,11 @@
 								<strong>{{ error }}</strong>
 							{% endfor %}
 
+
+
+
 							<div class="form_esc">
-								<a class="icon-cancel" href="{% url 'comercial:fac_panel' %}"></a>
+								<a class="icon-cancel" href="{% url 'comercial:ped_new' %}"></a>
 							</div>
 						</div>
 						{% comment %}
@@ -60,7 +64,7 @@
 							<fieldset>
 								<div class="form_row_all">
 									<div class="width_010"><label for="{{form.ped_cliente.name}}">{{form.ped_cliente.label}}</label></div>
-									<div class="form_widget width_025">{{ form.ped_cliente }}</div>
+									<div class="form_widget width_025">{{ form.ped_cliente }} </div>
 									<div class="width_040">&nbsp;</div>
 									<div class="width_015"><label for="{{form.ped_fechped.name}}">{{form.ped_fechped.label}}</label></div>
 									<div class="form_widget width_010">{{ form.ped_fechped }} </div>
@@ -84,12 +88,26 @@
 								 		<th class="head_tab width_005">Und.</th>
 								 		<th class="head_tab width_010">Precio</th>
 								 		<th class="head_tab width_005">Dscto.</th>
-								 		<th class="head_tab width_005">IVA(%)</th>
+								 		<th class="head_tab width_005">IVA</th>
 								 		<th class="head_tab width_010">Valor</th>
 								 		<th class="head_tab width_010">@</th>
 								 	</tr>
 								</thead>
 								<tbody border="1" id="movimientos">
+									{% for movimiento in movimientos %}
+										<tr >
+											<input type="hidden" value='{{ movimiento.mvi_nummovi }}' />
+											<td class="columns_tab width_015"> <input value="{{ movimiento.mvi_product.exs_product }}" disabled="disabled"/></td>
+											<td class="columns_tab width_040"> <input value="{{ movimiento.mvi_product.exs_detalle }}" disabled="disabled"></td>
+											<td class="columns_tab width_010"> <input class="align_tex_right" value='{{ movimiento.mvi_kntidad|default:0|stringformat:"0.2f" }}' disabled="disabled"/></td>
+											<td class="columns_tab width_005"> <input value="{{ movimiento.pop_pedUnid }}" disabled="disabled"></td>
+											<td class="columns_tab width_010"> <input class="align_tex_right" value='{{ movimiento.mvi_precios|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
+											<td class="columns_tab width_005"> <input class="align_tex_right" value='{{ movimiento.mvi_desctos|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
+											<td class="columns_tab width_005"> <input class="align_tex_right" value='{{ movimiento.mvi_impuest|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
+											<td class="columns_tab width_010"> <input class="align_tex_right" value='{{ movimiento.subtotal|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
+											<td class="columns_tab"><a class="icon-trash iconos" href="{% url 'comercial:ped_delet' movimiento.mvi_nummovi %}"></a></td>
+										</tr>
+									{% endfor %}
 									<tr>
 										<input name="pop_pedKyPr" type="hidden" id="inp_pedKyPr" value=" ">
 										<input name="pop_pedTbtl" type="hidden" id="inp_tabtall" value=" ">
@@ -117,24 +135,34 @@
 										<td class="columns_tab width_005"> <input name="mvi_unidade" disabled="disabled"></td>
 										<td class="columns_tab width_010"> <input class="align_tex_right" name="mvi_precios" id="inp_precios" type="number"></td>
 										<td class="columns_tab width_005"> <input class="align_tex_right" name="mvi_desctos" id="inp_desctos" disabled="disabled" value="0.00"></td>
-										<td class="columns_tab width_005"> <input class="align_tex_right" name="mvi_impuest" readonly="readonly" value="12.00"></td>
+										<td class="columns_tab width_005"> <input class="align_tex_right" name="mvi_impuest" readonly="readonly" value="12.00%"></td>
 										<td class="columns_tab width_010"> <input class="align_tex_right" name="pop_valores" stringformat:'0.2f' type="number" step="0.01" readonly="readonly"></td>
 										<td><div class=""><button class="icon-basket iconos" type="submit"></button></div></td>
 									</tr>
 								</tbody>
 								<tr>
 								</tr>
-
-
 								<tr>
-									<td class="columns_tab">{{form.fac_cajeras.label}}</td>
-									<td class="columns_tab align_tex_right"><label>Total de Itms </label>
-									<td class="columns_tab">{{ form.fac_cajeras }} </td>
-									<td class="columns_tab">{{ form.totpago }} </td>
-									<td class="columns_tab align_tex_right" colspan="3"><label>Total a pagar</labed></td>
-									<td class="columns_tab align_tex_right warnig1"> {{ total|stringformat:'0.2f' }} </td>
-								</tr>
-								<tr>
+									<td colspan="2">
+										<table>
+											<tr class="width_100">
+												<td class="columns_tab" colspan="2">Formas de pago:</td>
+												<td class="columns_tab"><label>Cash</label>
+												<td class="columns_tab">{{form.fac_pgoefec.label}}</td>
+												<td class="columns_tab">{{ form.fac_pgoefec }} </td>
+												<td class="columns_tab"><label>Total Itms</label>
+											</tr>
+										</table>
+									</td>
+									<td colspan="6">
+										<table>
+											<tr class="width_100">
+												<td class="columns_tab">{{ form.fac_totitms }} </td>
+												<td class="columns_tab" colspan="3"><label>Sub-total</label>
+												<td class="columns_tab align_tex_right warnig1"> {{ total|stringformat:'0.2f' }} </td>
+											</tr>
+										</table>
+									</td>
 								</tr>
 							</table>
 						</div>
@@ -144,7 +172,7 @@
 								{{ form.error }}
 							</div>
 						{% endif %}
-						<div ><a class="icon-cc-visa crea_boton" href="{% url 'comercial:ped_new' %}">  Cancelar  </a></div>
+						<div ><button class="icon-database form_submit" type="submit">  Guardar  </button></div>
 						<br>
 					</div>
 				</form>

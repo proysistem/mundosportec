@@ -7,7 +7,7 @@
 			<div class="crea_content">
 				<h3 class="crea_proceso">Inventarios:  Existencias</h3>
 
-				<a class="icon-print iconos align_tex_left crea_boton" href="{% url 'inventarios:exi_print' %}">Pirnt</a>
+				<a class="icon-print iconos align_tex_left crea_boton" target="_blank" href="{% url 'inventarios:exi_print' %}">Pirnt</a>
 				<a class="icon-database crea_boton" href="{% url 'inventarios:exi_new' %}">Crear nuevo</a>
 
 			</div>
@@ -61,13 +61,8 @@
 							<td class="columns_tab align_tex_right">{{ var_exifield.exs_comprom|default:0|stringformat:"0.2f" }} </td>
 							<td class="columns_tab align_tex_right">{{ var_exifield.exs_xconfir|default:0|stringformat:"0.2f" }} </td>
 							<td class="columns_tab align_tex_right">{{ var_exifield.exs_dsponib|default:0|stringformat:"0.2f" }} </td>
-
 							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:exi_view' var_exifield.id %}"></a></td>
 							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:exi_edit' var_exifield.id %}"></a></td>
-							{% comment %}
-							<td class="columns_tab"><a class="icon-trash botones" href="{% url 'inventarios:exi_panel' var_exifield.id %}"></a></td>
-
-							{% endcomment %}
 						</tr>
 						{% endfor %}
 						{% else %}

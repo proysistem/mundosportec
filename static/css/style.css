@@ -85,6 +85,10 @@
 	padding: 5px auto;
 	text-align: right;
 	}
+input:focus
+	{
+	background-color: #F1E9B2;
+	}
 .columns_tab_disab>input
 	{
 	background-color: #73918D;
@@ -123,6 +127,15 @@
 	{
 	left: 20px;
 	}
+.bicolor:nth-child(odd) {
+    background-color:#f2f2f2;
+    padding: 0 0 1px 0;
+}
+.bicolor:nth-child(even) {
+    background-color:#fbfbfb;
+    padding: 0 0 1px 0;
+}
+.width_760 {width: 7.67%;}
 .width_003 {width: 003%;}
 .width_005 {width: 005%;}
 .width_010 {width: 010%;}
@@ -147,6 +160,11 @@
 .align_itm_letf {align-items: flex_start;}
 .align_itm_center {align-items: flex_center;}
 
+.font_little{font-size: 10px; height: 15px;}
+.font_small{font-size: small;}
+.font_medium{font-size: medium;}
+.font_large{font-size: large;}
+
 .color_6D7969
 	{
 /*	background: linear-gradient(#6D7969, #6D9969); opacity: 0.8; /* Standard syntax */
@@ -155,11 +173,25 @@
 	border-left: 1px solid rgba(109,121,105, 0.9);
 	padding: 0 20px 0 5px;
 	}
-/*- - - - - iconos - - - - - - -*/
+.warnig1
+	{
+	color: #FD7303;
+	}
+.bordesito
+	{
+	border-style: solid 1px;
+	}
+.bordesito
+	{
+	border-top: 1px solid rgba(0,0,0, 1);
+	border-bottom: 1px solid rgba(0,0,0, 1);
+	border-right: 0.1px solid rgba(0,0,0, 1);
+	}
+/*- - - - - iconos (Exampl: en los reg. de  pedidos) - - - - - - -*/
 .iconos
 	{
 	background-color: green;
-	box-shadow:  	-0.1px -0.1px 0.2px rgba(255,255,255,0.7);
+	box-shadow:  -0.1px -0.1px 0.2px rgba(255,255,255,0.7);
 	cursor: pointer;
 	height: 1.35em;
 	width: 30px;
@@ -196,6 +228,16 @@ aside
 	box-shadow: 1px solid rgba(255,255,255, 0.3),
 	margin-bottom:30px;
 	}
+.boton_a_link
+	{
+	background: linear-gradient(#295641, #58A2B4); /* Standard syntax */
+	color: #FFF;
+	text-decoration: none;
+	text-align: center;
+	width: 520px;
+	border-style: solid 1px;
+	padding: 0 5px 0 30px;
+	}
 .boton_aplicacion    /*  Botones verticales  */
 	{
 /*	background: linear-gradient(#295641, #295645, #295641); /* Standard syntax */
@@ -227,11 +269,11 @@ aside
 .menus-link
 	{
 	background-color: #737629;
-	border-radius: 0% 35% 0% 0%;
+	border-radius: 0% 25% 0% 0%;
  	box-shadow:  	-0.1px -0.1px 0.2px rgba(255,255,255,0.7);
  	box-shadow:  	0.5px  0.5px 0.6px rgba(255,255,255,0.9);
 	display: block;
-	font-size: 1.2em;
+	font-size: 1.4em;
 	justify-content: space-between;
   	padding: 4px;
   	text-align: center;
@@ -246,8 +288,8 @@ aside
 	}
 .menus-link:hover a
 	{
-  	color: #000;
-	box-shadow: 1px solid rgba(255,255,255, 0.3),
+	color: #23FB00;
+	font-size: 1em;
 	}
 /*- - - - -  -  Contenedor barra orizontal  en lienso del contexto en si (View-create-lista-delet) - - -  - - - -*/
 .crea_content
@@ -371,3 +413,7 @@ fieldset
   	font-size: 1.1em;
   	display: block;
  	}
+.totales
+	{
+	font-size: 1.5em;
+	}

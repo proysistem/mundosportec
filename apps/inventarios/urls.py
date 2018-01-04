@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
-#from django.conf.urls import url
-from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista, ExiPrint,
+# from django.conf.urls import url
+from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista, ExiPrint, ExiQuery,
                     DivLista, DivNuevo, DivView, DivEdita, DivDelet, MrkLista,
                     MrkNuevo, MrkView, MrkEdita, MrkDelet, ModLista, ModNuevo,
                     ModView, ModEdita, ModDelet, ColLista, ColNuevo, ColView,
@@ -8,11 +8,11 @@ from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista, E
                     TllDelet, Mrkkyselect, TablaTalla, PopTalla)
 
 
-#from django.conf import settings
+# from django.conf import settings
 
-#from apps.parametros.views import  CliLista, PrvLista, VndLista, MviLista, PedLista, FacLista
-#from apps.parametros.views import  CjaLista, CjrLista, McjLista, MdaLista
-#SucNuevo, SucView, SucEdita, SucDelet
+# from apps.parametros.views import  CliLista, PrvLista, VndLista, MviLista, PedLista, FacLista
+# from apps.parametros.views import  CjaLista, CjrLista, McjLista, MdaLista
+# SucNuevo, SucView, SucEdita, SucDelet
 urlpatterns = [
     url(r'^DivPanel',                  DivLista.as_view(), name='div_panel'),
     url(r'^DivNuevo/$',                DivNuevo.as_view(), name='div_new'),
@@ -49,10 +49,11 @@ urlpatterns = [
     url(r'^ExiPrint',                  ExiPrint.as_view(), name='exi_print'),
     url(r'^ExiNuevo/$',                ExiNuevo.as_view(), name='exi_new'),
     url(r'^ExiEdita/(?P<pk>\d+)/$',    ExiEdita.as_view(), name='exi_edit'),
+    url(r'^ExiQuery/(?P<pk>\d+)/$',    ExiQuery.as_view(), name='exi_query'),
     url(r'^TablaTalla/(?P<model>\d+)/$',  TablaTalla.as_view(), name='tabla_talla'),
     #   url(r'^ExiNuevo/$',                ProdkyLista.as_view(), name='exi_new'),
     url(r'^ExiConsulta/(?P<pk>\d+)/$', ExiView.as_view(),  name='exi_view'),
-    #   url(r'^ExiElimina/(?P<pk>\d+)/$',  ExiDelet.as_view(), name='exi_delet'),
+    url(r'^ExiElimina/(?P<pk>\d+)/$',  ExiDelet.as_view(), name='exi_delet'),
 
     #   url(r'^SxtPanel',                  SxtLista.as_view(), name='sxt_panel'),
     #   url(r'^SxtNuevo/$',                SxtNuevo.as_view(), name='sxt_new'),

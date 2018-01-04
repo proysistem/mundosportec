@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+{% block super %}
+
+    <script type="text/javascript">
+
+        var jsw_varibll1;
+        var jsw_varibll2;
+        var jsw_varibll3;
+        var jsw_varibll4;
+        var jsw_varibll5;
+        var jsw_varibll6;
+
+        window.onload=function(){
+            jsw_varibll1=document.getElementById('field1').value || "";
+            jsw_varibll2=document.getElementById('field2').value || "";
+            jsw_varibll3=document.getElementById('field3').value || "";
+            jsw_varibll4=document.getElementById('field4').value || "";
+            jsw_varibll5=document.getElementById('field5').value || 0;
+            jsw_varibll6=document.getElementById('field6').value || 0;
+            opener.document.form_pedidos.mvi_product.value=jsw_varibll1;
+            opener.document.form_pedidos.pop_pedDtll.value=jsw_varibll2;
+            opener.document.form_pedidos.pop_pedTbtl.value=jsw_varibll3;
+            opener.document.form_pedidos.mvi_unidade.value=jsw_varibll4;
+            opener.document.form_pedidos.mvi_precios.value=jsw_varibll5;
+            opener.document.form_pedidos.pop_pedKyPr.value=jsw_varibll6;
+            opener.document.getElementById('inp_kntidad').focus();
+            window.close();
+        }
+
+    </script>
+{% endblock super %}
+
+{% block content %}
+    <form method="POST">{% csrf_token %}
+        <input type="hidden" name="" id="field1" value="{{ object.exs_product }}">
+        <input type="hidden" name="" id="field2" value="{{ object.exs_detalle }}">
+        <input type="hidden" name="" id="field3" value="{{ object.exs_tabtall }}">
+        <input type="hidden" name="" id="field4" value="{{ object.exs_idunida }}">
+        <input type="hidden" name="" id="field5" value="{{ object.exs_publico|default:0|stringformat:"0.2f" }}">
+        <input type="hidden" name="" id="field6" value="{{ object.pk }}">
+    </form>
+{% endblock content %}
+

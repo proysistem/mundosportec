@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura
@@ -5,6 +6,15 @@ from apps.comercial.forms import ClienteForm, ProveedorForm, VendedorForm, Movin
 from django.db import transaction
 from django.db.models import F, Prefetch
 from django.forms import inlineformset_factory
+
+from io import BytesIO
+
+from django.http import HttpResponse
+from reportlab.platypus import SimpleDocTemplate, Paragraph, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import Table
 
 # Create your views here.
 # ======== C L I E N T E S =========== #
@@ -366,6 +376,53 @@ class PedEdita(UpdateView):
     #     return initial
 
 
+# https://www.pythoniza.me/pdfs-en-django-con-reportlab/
+class PedRepor(ListView):
+    model = Pedido
+    template_name = "comercial/Ped_Report.html"
+    # context_object_name = "c"
+
+
+def generar_pdf(request):
+    ''' print "Genero el PDF" '''
+    response = HttpResponse(content_type='application/pdf')
+    # las 2 lineas siguientes son por si deseas descargar el pdf a tu computadora
+    # pdf_name = "pedidos.pdf"                                      # llamado "pedidos.pdf"
+    # response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+    buff = BytesIO()                                                # almacenamos BytesIO a la variable buff
+    doc = SimpleDocTemplate(buff,                                   # configuramos nuestro documento
+                            pagesize=letter,
+                            rightMargin=40,
+                            leftMargin=40,
+                            topMargin=60,
+                            bottomMargin=18,
+                            )
+    pedido = []                                                    # creamos una lista
+    styles = getSampleStyleSheet()                                  # almacenamos getSampleStyleSheet a una variable llamada styles
+    header = Paragraph("Listado de pedidos", styles['Heading1'])    # agregamos un titulo a nuestro documento usando Paragraph
+    pedido.append(header)
+    headings = ('Nombre', 'Email', 'Edad', 'Dirección')             # agregamos los encabezaos de las Columnas
+    #                                                               # aqui creamos una variable que almacena todos los datos que tengo en el modelo Clientes
+    allpedidos = [(p.nombre, p.email, p.edad, p.direccion) for p in pedido.objects.all()]
+    print(allpedidos)
+
+    #                                                               # creo una variable donde agrego a Table los nombres de las columnas con sus datos
+    #                                                               # correspondientes que están el allclientes
+    t = Table([headings] + allpedidos)
+    t.setStyle(TableStyle(                                          # doy color a la tabla
+        [
+            ('GRID', (0, 0), (3, -1), 1, colors.dodgerblue),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.darkblue),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.dodgerblue)
+        ]
+    ))
+    pedido.append(t)                                               # agrego todo a mi lista
+    doc.build(pedido)                                              # genero el documento a partir de la lista clientes
+    response.write(buff.getvalue())                                 # Recupero el archivo almacenado
+    buff.close()                                                    # Librero la memoria
+    return response                                                 # regreso la respuesta
+
+
 class PedDelet(DeleteView):
     """Elimina  Pedidos"""
     model = Pedido
@@ -418,5 +475,70 @@ class FacDelet(DeleteView):
     form_class = FacturaForm
     template_name = 'comercial/Fac_Delet.html'
     success_url = reverse_lazy('comercial:fac_panel')
+
+
+class FacPaid(UpdateView):
+    """Modifica Pedidos"""
+    model = Pedido
+    form_class = PedidoForm
+    template_name = 'comercial/Fac_Paid.html'
+
+    def get_queryset(self):
+        return Pedido.objects.prefetch_related(Prefetch(
+            'movinvent_set', queryset=Movinvent.objects.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'))))
+
+    def get_success_url(self):
+        return reverse_lazy('comercial:ped_new')
+        # return reverse_lazy('comercial:ped_new', kwargs={"pk": self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super(FacPaid, self).get_context_data(**kwargs)
+
+        if self.request.POST:
+            # context['movimientos'] = MovinventFormset(self.request.POST, queryset=Movinvent.objects.select_related())
+            context['nuevo_mov'] = MovinventInlineForm(self.request.POST)
+        else:
+            context['nuevo_mov'] = MovinventInlineForm()
+            # TODO: Hay un problema de 0n queries, debido a la generación de múltiples formset con mismo queryset, probablemente
+            #       Probé con select_related sin éxito aún.
+            movimientos = self.object.movinvent_set.all()
+            total = 0
+            for movimiento in movimientos:
+                total += movimiento.subtotal
+
+            context['movimientos'] = movimientos
+            context['total'] = total
+        return context
+
+    def form_invalid(self, form):
+        return super(FacPaid, self).form_invalid(form)
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        nuevo_mov = context['nuevo_mov']
+        # movimientos = context['movimientos']
+        with transaction.atomic():
+            self.object = form.save()
+
+            if nuevo_mov.is_valid():
+                mov_instance = nuevo_mov.save(commit=False)
+                mov_instance.mvi_npedido = self.object
+                mov_instance.mvi_fechmov = self.object.ped_fechped
+                mov_instance.mvi_cliente = self.object.ped_cliente
+                mov_instance.mvi_vendedo = self.object.ped_vendedo
+                mov_instance.mvi_tipomov = self.object.ped_tipomov
+                mov_instance.save(commit=True)
+            else:
+                return self.form_invalid(nuevo_mov)
+            # if movimientos.is_valid():
+            #     # TODO: Validate per form in formset
+            #     #       Although, formset.is_valid do this.
+            #     # for form in movimientos:
+            #     #     if form.is_valid():
+            #     #         form.
+            #     movimientos.instance = self.object
+            #     movimientos.save()
+        return super(FacPaid, self).form_valid(form)
 
 # ========    =========== #

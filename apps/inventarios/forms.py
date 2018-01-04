@@ -258,12 +258,12 @@ class ExistenciaEditForm(forms.ModelForm):
             "exs_idmarca",
             "exs_idmodel",
             "exs_idcolor",
-            #'exs_product':
-            #'exs_detalle',
-            #'exs_abrevia',
+            # 'exs_product':
+            # 'exs_detalle',
+            # 'exs_abrevia',
             'exs_tpoprod',
             'exs_idunida',
-            #'exs_tabtall',
+            # 'exs_tabtall',
             'exs_saldinc',
             'exs_ingreso',
             'exs_egresos',
@@ -299,7 +299,7 @@ class ExistenciaEditForm(forms.ModelForm):
             # 'exs_abrevia':   'Abreviatura',
             'exs_tpoprod':   'Tipo de producto',
             'exs_idunida':   'Unid. De medida',
-            #'exs_tabtall':   'Tab./Tallas ',
+            # 'exs_tabtall':   'Tab./Tallas ',
             'exs_saldinc':   'Saldo.inicial',
             'exs_ingreso':   'Ingresos',
             'exs_egresos':   'Egresos',
@@ -334,7 +334,7 @@ class ExistenciaEditForm(forms.ModelForm):
             # 'exs_abrevia':  forms.TextInput(),
             'exs_tpoprod':  forms.Select(),
             'exs_idunida':  forms.Select(),
-            #'exs_tabtall':  forms.TextInput(),
+            # 'exs_tabtall':  forms.TextInput(),
             'exs_saldinc':  forms.NumberInput(attrs={"disabled": "disabled", "step": "0.01"}),
             'exs_ingreso':  forms.NumberInput(attrs={"disabled": "disabled"}),
             'exs_egresos':  forms.NumberInput(attrs={"disabled": "disabled"}),
@@ -439,6 +439,7 @@ class ExistenciaForm(forms.ModelForm):
         initial=localtime(now()).date(),
         widget=forms.DateInput(attrs={"type": "date"}, format='%Y-%m-%d',)
     )
+
     class Meta:
         model = Existencia
         fields = [
@@ -447,12 +448,12 @@ class ExistenciaForm(forms.ModelForm):
             "exs_idmarca",
             "exs_idmodel",
             "exs_idcolor",
-            #'exs_product':
-            #'exs_detalle',
-            #'exs_abrevia',
+            # 'exs_product':
+            # 'exs_detalle',
+            # 'exs_abrevia',
             'exs_tpoprod',
             'exs_idunida',
-            #'exs_tabtall',
+            # 'exs_tabtall',
             'exs_saldinc',
             'exs_ingreso',
             'exs_egresos',
@@ -488,7 +489,7 @@ class ExistenciaForm(forms.ModelForm):
             # 'exs_abrevia':   'Abreviatura',
             'exs_tpoprod':   'Tipo de producto',
             'exs_idunida':   'Unid. De medida',
-            #'exs_tabtall':   'Tab./Tallas ',
+            # 'exs_tabtall':   'Tab./Tallas ',
             'exs_saldinc':   'Saldo.inicial',
             'exs_ingreso':   'Ingresos',
             'exs_egresos':   'Egresos',
@@ -523,7 +524,7 @@ class ExistenciaForm(forms.ModelForm):
             # 'exs_abrevia':  forms.TextInput(),
             'exs_tpoprod':  forms.Select(),
             'exs_idunida':  forms.Select(),
-            #'exs_tabtall':  forms.TextInput(),
+            # 'exs_tabtall':  forms.TextInput(),
             'exs_saldinc':  forms.NumberInput(),
             'exs_ingreso':  forms.NumberInput(),
             'exs_egresos':  forms.NumberInput(),
@@ -531,9 +532,9 @@ class ExistenciaForm(forms.ModelForm):
             'exs_comprom':  forms.NumberInput(),
             'exs_xconfir':  forms.NumberInput(),
             'exs_dsponib':  forms.NumberInput(),
-#            'exs_feching':  forms.DateInput(attrs={"type": "date"}),
-#            'exs_fechegr':  forms.DateInput(attrs={"type": "date"}),
-#            'exs_fechinv':  forms.DateInput(attrs={"type": "date"}),
+            # 'exs_feching':  forms.DateInput(attrs={"type": "date"}),
+            # 'exs_fechegr':  forms.DateInput(attrs={"type": "date"}),
+            # 'exs_fechinv':  forms.DateInput(attrs={"type": "date"}),
             'exs_costant':  forms.NumberInput(),
             'exs_dispant':  forms.NumberInput(),
             'exs_costact':  forms.NumberInput(),
@@ -544,7 +545,7 @@ class ExistenciaForm(forms.ModelForm):
             'exs_publico':  forms.NumberInput(),
             'exs_special':  forms.NumberInput(),
             'exs_imgprod':  forms.FileInput(),
-#           'exs_statreg':  forms.BoleanInput(),
+            # 'exs_statreg':  forms.BoleanInput(),
         }
 
 

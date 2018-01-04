@@ -6,8 +6,8 @@ from django.db.models import Sum
 from .models import Division, Marca, Modelo, Color, Tabtalla, Existencia, Saldoxtalla
 from .forms import (DivisionForm, MarcaForm, ModeloForm, ColorForm, TabtallaForm, ExistenciaForm,
                     SaldoxtallaForm, ExistenciaEditForm)
-#from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura
-#from apps.finanzas.models import Caja, Cajera, Movicaja, Moneda
+# from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura
+# from apps.finanzas.models import Caja, Cajera, Movicaja, Moneda
 # {% extends 'base/base.html' %}
 
 from django.contrib import messages
@@ -55,7 +55,7 @@ class DivDelet(DeleteView):
     success_url = reverse_lazy('inventarios:div_panel')
 
 
-#class MrkSelect(ListView):
+# class MrkSelect(ListView):
 #   """Listado de Marca"""
 #   model = Marca
 #   template_name = 'inventarios/Prd_New.html'
@@ -244,12 +244,20 @@ class PopExist(ListView):
     queryset = Existencia.objects.filter(exs_saldact__gt=0.00)
 
 
+class ExiQuery(DetailView):
+    """Consulta de Existencia"""
+    model = Existencia
+    template_name = 'inventarios/Exi_Query.html'
+    context_object_name = 'productos'
+
+
 class ExiPrint(ListView):
     """Reporte de Existencia"""
     model = Existencia
     template_name = 'inventarios/Exi_Print.html'
-    ordering = ['exs_product', 'exs_tabtall']
+    ordering = ['exs_product']
     context_object_name = 'productos'
+    # ordering = ['exs_product', 'exs_tabtall']
     # paginate_by = 54
     # queryset = Existencia.objects.filter(exs_saldact__gte=0.00)
 

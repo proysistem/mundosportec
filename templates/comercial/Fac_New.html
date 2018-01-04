@@ -1,4 +1,4 @@
-{% extends 'base/base_comercial.html' %}
+% extends 'base/base_comercial.html' %}
 
 {% block title %} Graba Facturas {% endblock title %}</title>
 
@@ -195,7 +195,6 @@
 		{% endblock context%}
 
 {% block js %}
-	{{ block.super }}
 	<script type="text/javascript">
 		$('#insertar_movimiento').click(function(e){
 			var cod_producto = prompt("Ingrese código de producto");

@@ -1,0 +1,17 @@
+/*	|=======================================================|	*/
+/* 	|					Estilo de Impresion					| 	*/
+/*	|=======================================================|	*/
+@charset "utf-8";
+@font-face {
+	font-family: IDAutomationHC39M;
+/*	src: url({% static 'font/IDAutomationHC39M.woff' %});  */
+	src: url('../font/IDAutomationHC39M.woff');
+	}
+.barcode
+	{
+	font-family: IDAutomationHC39M;
+	}
+.print_head
+	{
+	height: 1.5em;
+	}

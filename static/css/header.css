@@ -74,12 +74,12 @@
 	margin: 1px 0 0 7px;
 	}
 .menus-link:hover
-	{	
+	{
   background-color: #eaeaea;
 
 /*
 	background: rgba(196,163,153,0.6);*/
-	color: rgba(93,92,91,0.9);	
+	color: rgba(93,92,91,0.9);
 	}
 .mostrar
 	{
@@ -89,24 +89,38 @@
 	}
 .login-content
 	{
-	width: 100%;
 	display: block;
 	height: 40px;
 	margin-top: 60px;
+	width: 100%;
   	list-style: none;
   	text-decoration: none;
 	}
 .logear
 	{
- 	box-shadow: -0.5px -0.5px 0.6px rgba(255,255,255,1);
- 	box-shadow: 0.8px  0.8px 0.8px rgba(255,255,255,1);
-    color: #fff;
+ /*	box-shadow: -0.8px -0.8px 0.6px rgba(255,255,255,1);  */
+	border-left: solid 1px #A4A797;
+	border-top: solid 1px #A4A797;
 	display: block;
+ 	box-shadow: 1px  1px 1px rgba(255,255,255,1);
+ 	font-size: 1.2em;
+  	list-style: none;
+    color: #fff;
     height: 35px;
-    padding: 5px 0 0 0;
     margin-left: 80%;
+    padding: 5px 0 0 0;
     text-align: center;
+    text-decoration: none;
     width: 18%;
+	}
+.logear:hover
+	{
+ 	background: linear-gradient(#295641, #58A2B4, #295641); /* Standard syntax */
+ 	border-top: solid 1px #747866;
+ 	box-shadow: 0.8px  0.8px 0.8px rgba(164,167,151,1);
+ 	font-size: 1.1em;
+ 	padding: 3px 0 0 0;
+ 	/*color: #FBD85F;*/
 	}
 @media(min-width: 768px){
 	.logo
@@ -137,14 +151,14 @@
 	display: none;
 	}
 	.menu-link
-	{	
+	{
 	background-color: rgba(31,101,12,0.4);
 	border-bottom: solid 1px #eeddcc;
 	padding: 10px 15px;
-	}	
+	}
 /*	.menu-link:hover,.select
 	{
-	background-color: rgba(31,101,12,0.8);	
+	background-color: rgba(31,101,12,0.8);
 	border-bottom: solid 0px #ccbbaa;
 	}*/
 }
