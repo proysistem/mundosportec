@@ -244,11 +244,12 @@ class ExistenciaEditForm(forms.ModelForm):
 
     # field = forms.DecimalField(label="Etiqueta", widget=)
 
-#    def __init__(self, *args, **kwargs):
-#        if 'instance' in kwargs:
-#            kwargs['instance'].exs_saldinc = kwargs['instance'].exs_saldinc.quantize(Decimal('0.01'))
-#            # TODO: Quantize all Decimal Fields
-#        super(ExistenciaEditForm, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super(ExistenciaEditForm, self).__init__(*args, **kwargs)
+        if 'instance' in kwargs:
+            self.fields['exs_saldinc'].widget = forms.NumberInput(attrs={"step": "0.01"})
+            # kwargs['instance'].exs_saldinc = kwargs['instance'].exs_saldinc.quantize(Decimal('0.01'))
+            # TODO: Quantize all Decimal Fields
 
     class Meta:
         model = Existencia
@@ -360,65 +361,69 @@ class ExistenciaEditForm(forms.ModelForm):
 
     def save(self, commit=True):
         instance = super(ExistenciaEditForm, self).save(commit=False)
-        sxt = Saldoxtalla(
-            tex_product=instance,
-            tex_inici01=self.cleaned_data['tex_inici01'],
-            tex_inici02=self.cleaned_data['tex_inici02'],
-            tex_inici03=self.cleaned_data['tex_inici03'],
-            tex_inici04=self.cleaned_data['tex_inici04'],
-            tex_inici05=self.cleaned_data['tex_inici05'],
-            tex_inici06=self.cleaned_data['tex_inici06'],
-            tex_inici07=self.cleaned_data['tex_inici07'],
-            tex_inici08=self.cleaned_data['tex_inici08'],
-            tex_inici09=self.cleaned_data['tex_inici09'],
-            tex_inici10=self.cleaned_data['tex_inici10'],
-            tex_inici11=self.cleaned_data['tex_inici11'],
-            tex_inici12=self.cleaned_data['tex_inici12'],
-            tex_inici13=self.cleaned_data['tex_inici13'],
+        if instance.exs_tabtall.lower() != "x":
+            sxt = Saldoxtalla(
+                tex_product=instance,
+                tex_inici01=self.cleaned_data['tex_inici01'],
+                tex_inici02=self.cleaned_data['tex_inici02'],
+                tex_inici03=self.cleaned_data['tex_inici03'],
+                tex_inici04=self.cleaned_data['tex_inici04'],
+                tex_inici05=self.cleaned_data['tex_inici05'],
+                tex_inici06=self.cleaned_data['tex_inici06'],
+                tex_inici07=self.cleaned_data['tex_inici07'],
+                tex_inici08=self.cleaned_data['tex_inici08'],
+                tex_inici09=self.cleaned_data['tex_inici09'],
+                tex_inici10=self.cleaned_data['tex_inici10'],
+                tex_inici11=self.cleaned_data['tex_inici11'],
+                tex_inici12=self.cleaned_data['tex_inici12'],
+                tex_inici13=self.cleaned_data['tex_inici13'],
 
-            tex_ingre01=self.cleaned_data['tex_ingre01'],
-            tex_ingre02=self.cleaned_data['tex_ingre02'],
-            tex_ingre03=self.cleaned_data['tex_ingre03'],
-            tex_ingre04=self.cleaned_data['tex_ingre04'],
-            tex_ingre05=self.cleaned_data['tex_ingre05'],
-            tex_ingre06=self.cleaned_data['tex_ingre06'],
-            tex_ingre07=self.cleaned_data['tex_ingre07'],
-            tex_ingre08=self.cleaned_data['tex_ingre08'],
-            tex_ingre09=self.cleaned_data['tex_ingre09'],
-            tex_ingre10=self.cleaned_data['tex_ingre10'],
-            tex_ingre11=self.cleaned_data['tex_ingre11'],
-            tex_ingre12=self.cleaned_data['tex_ingre12'],
-            tex_ingre13=self.cleaned_data['tex_ingre13'],
+                tex_ingre01=self.cleaned_data['tex_ingre01'],
+                tex_ingre02=self.cleaned_data['tex_ingre02'],
+                tex_ingre03=self.cleaned_data['tex_ingre03'],
+                tex_ingre04=self.cleaned_data['tex_ingre04'],
+                tex_ingre05=self.cleaned_data['tex_ingre05'],
+                tex_ingre06=self.cleaned_data['tex_ingre06'],
+                tex_ingre07=self.cleaned_data['tex_ingre07'],
+                tex_ingre08=self.cleaned_data['tex_ingre08'],
+                tex_ingre09=self.cleaned_data['tex_ingre09'],
+                tex_ingre10=self.cleaned_data['tex_ingre10'],
+                tex_ingre11=self.cleaned_data['tex_ingre11'],
+                tex_ingre12=self.cleaned_data['tex_ingre12'],
+                tex_ingre13=self.cleaned_data['tex_ingre13'],
 
-            tex_egres01=self.cleaned_data['tex_egres01'],
-            tex_egres02=self.cleaned_data['tex_egres02'],
-            tex_egres03=self.cleaned_data['tex_egres03'],
-            tex_egres04=self.cleaned_data['tex_egres04'],
-            tex_egres05=self.cleaned_data['tex_egres05'],
-            tex_egres06=self.cleaned_data['tex_egres06'],
-            tex_egres07=self.cleaned_data['tex_egres07'],
-            tex_egres08=self.cleaned_data['tex_egres08'],
-            tex_egres09=self.cleaned_data['tex_egres09'],
-            tex_egres10=self.cleaned_data['tex_egres10'],
-            tex_egres11=self.cleaned_data['tex_egres11'],
-            tex_egres12=self.cleaned_data['tex_egres12'],
-            tex_egres13=self.cleaned_data['tex_egres13'],
+                tex_egres01=self.cleaned_data['tex_egres01'],
+                tex_egres02=self.cleaned_data['tex_egres02'],
+                tex_egres03=self.cleaned_data['tex_egres03'],
+                tex_egres04=self.cleaned_data['tex_egres04'],
+                tex_egres05=self.cleaned_data['tex_egres05'],
+                tex_egres06=self.cleaned_data['tex_egres06'],
+                tex_egres07=self.cleaned_data['tex_egres07'],
+                tex_egres08=self.cleaned_data['tex_egres08'],
+                tex_egres09=self.cleaned_data['tex_egres09'],
+                tex_egres10=self.cleaned_data['tex_egres10'],
+                tex_egres11=self.cleaned_data['tex_egres11'],
+                tex_egres12=self.cleaned_data['tex_egres12'],
+                tex_egres13=self.cleaned_data['tex_egres13'],
 
-            tex_compr01=self.cleaned_data['tex_compr01'],
-            tex_compr02=self.cleaned_data['tex_compr02'],
-            tex_compr03=self.cleaned_data['tex_compr03'],
-            tex_compr04=self.cleaned_data['tex_compr04'],
-            tex_compr05=self.cleaned_data['tex_compr05'],
-            tex_compr06=self.cleaned_data['tex_compr06'],
-            tex_compr07=self.cleaned_data['tex_compr07'],
-            tex_compr08=self.cleaned_data['tex_compr08'],
-            tex_compr09=self.cleaned_data['tex_compr09'],
-            tex_compr10=self.cleaned_data['tex_compr10'],
-            tex_compr11=self.cleaned_data['tex_compr11'],
-            tex_compr12=self.cleaned_data['tex_compr12'],
-            tex_compr13=self.cleaned_data['tex_compr13']
-        )
-        sxt.save(commit)
+                tex_compr01=self.cleaned_data['tex_compr01'],
+                tex_compr02=self.cleaned_data['tex_compr02'],
+                tex_compr03=self.cleaned_data['tex_compr03'],
+                tex_compr04=self.cleaned_data['tex_compr04'],
+                tex_compr05=self.cleaned_data['tex_compr05'],
+                tex_compr06=self.cleaned_data['tex_compr06'],
+                tex_compr07=self.cleaned_data['tex_compr07'],
+                tex_compr08=self.cleaned_data['tex_compr08'],
+                tex_compr09=self.cleaned_data['tex_compr09'],
+                tex_compr10=self.cleaned_data['tex_compr10'],
+                tex_compr11=self.cleaned_data['tex_compr11'],
+                tex_compr12=self.cleaned_data['tex_compr12'],
+                tex_compr13=self.cleaned_data['tex_compr13']
+            )
+            sxt.save(commit)
+        else:
+            instance.exs_saldact = (instance.exs_saldinc or 0) + (instance.exs_ingreso or 0) - (instance.exs_egresos or 0)
+            instance.exs_dsponib = instance.exs_saldact - (instance.exs_comprom or 0)
 
         if commit:
             instance.save()
