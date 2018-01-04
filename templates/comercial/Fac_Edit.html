@@ -245,7 +245,8 @@
 												<tr class="width_100">
 													<td class="width_015 align_tex_right">Cajer@:</td>
 													<td class="columns_tab width_015 align_tex_right warnig1">{{ form.fac_monedas|stringformat:'0.2f' }} </td>
-													<td class="width_020 align_tex_right"><label><span class="width_100"><a class="icon-cc-visa boton_a_link" href="{% url 'comercial:fac_new' %}">  Pagar   </a></span></label>
+													<td class="width_020 align_tex_right"><label><span class="width_100">
+														<button class="icon-database form_submit" type="submit">  Pagar  </button></span></label>
 													<td class="columns_tab width_025 align_tex_right warnig1"><input id="fld_tpagado" "{{ form.wrk_tpagado|stringformat:'0.2f' }}" readonly="readonly"> </td>
 													<td width="25%" class="columns_tab align_tex_right warnig1"><input id"idf_entrega" name="inf_entrega" type="number" pattern="[0-9]" "{{ form.wrk_entrega|stringformat:'0.2f' }}" ></td>
 												</tr>
