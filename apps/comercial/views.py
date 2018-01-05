@@ -256,6 +256,7 @@ class PedEdita(UpdateView):
     model = Pedido
     form_class = PedidoForm
     template_name = 'comercial/Ped_Edit.html'
+    formnam = 'comercial:ped_edit'
 
     def get_queryset(self):
         return Pedido.objects.prefetch_related(Prefetch(
@@ -263,7 +264,10 @@ class PedEdita(UpdateView):
                 subtotal=F('mvi_kntidad') * F('mvi_precios'))))
 
     def get_success_url(self):
-        return reverse_lazy('comercial:ped_edit', kwargs={"pk": self.object.pk})
+        if request.method == 'POST' and 'sub_factura' in request.POST:
+            return reverse_lazy('comercial:fac_edit', kwargs={"pk": self.object.pk})
+        else:
+            return reverse_lazy('comercial:ped_edit', kwargs={"pk": self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super(PedEdita, self).get_context_data(**kwargs)
@@ -397,7 +401,7 @@ def generar_pdf(request):
                             topMargin=60,
                             bottomMargin=18,
                             )
-    pedido = []                                                    # creamos una lista
+    pedido = []                                                     # creamos una lista
     styles = getSampleStyleSheet()                                  # almacenamos getSampleStyleSheet a una variable llamada styles
     header = Paragraph("Listado de pedidos", styles['Heading1'])    # agregamos un titulo a nuestro documento usando Paragraph
     pedido.append(header)
@@ -416,8 +420,8 @@ def generar_pdf(request):
             ('BACKGROUND', (0, 0), (-1, 0), colors.dodgerblue)
         ]
     ))
-    pedido.append(t)                                               # agrego todo a mi lista
-    doc.build(pedido)                                              # genero el documento a partir de la lista clientes
+    pedido.append(t)                                                # agrego todo a mi lista
+    doc.build(pedido)                                               # genero el documento a partir de la lista clientes
     response.write(buff.getvalue())                                 # Recupero el archivo almacenado
     buff.close()                                                    # Librero la memoria
     return response                                                 # regreso la respuesta
@@ -478,10 +482,10 @@ class FacDelet(DeleteView):
 
 
 class FacPaid(UpdateView):
-    """Modifica Pedidos"""
+    """Crea factura"""
     model = Pedido
     form_class = PedidoForm
-    template_name = 'comercial/Fac_Paid.html'
+    template_name = 'comercial/Fac_Edit.html'
 
     def get_queryset(self):
         return Pedido.objects.prefetch_related(Prefetch(
@@ -489,11 +493,10 @@ class FacPaid(UpdateView):
                 subtotal=F('mvi_kntidad') * F('mvi_precios'))))
 
     def get_success_url(self):
-        return reverse_lazy('comercial:ped_new')
-        # return reverse_lazy('comercial:ped_new', kwargs={"pk": self.object.pk})
+        return reverse_lazy('comercial:fac_edit', kwargs={"pk": self.object.pk})
 
     def get_context_data(self, **kwargs):
-        context = super(FacPaid, self).get_context_data(**kwargs)
+        context = super(PedEdita, self).get_context_data(**kwargs)
 
         if self.request.POST:
             # context['movimientos'] = MovinventFormset(self.request.POST, queryset=Movinvent.objects.select_related())
@@ -512,7 +515,7 @@ class FacPaid(UpdateView):
         return context
 
     def form_invalid(self, form):
-        return super(FacPaid, self).form_invalid(form)
+        return super(PedEdita, self).form_invalid(form)
 
     def form_valid(self, form):
         context = self.get_context_data()
@@ -539,6 +542,6 @@ class FacPaid(UpdateView):
             #     #         form.
             #     movimientos.instance = self.object
             #     movimientos.save()
-        return super(FacPaid, self).form_valid(form)
+        return super(PedEdita, self).form_valid(form)
 
 # ========    =========== #
