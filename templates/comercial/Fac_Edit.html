@@ -11,7 +11,7 @@
 				<form name="form_pedidos" method="POST" enctype="multipart">{% csrf_token %}
 					<div class="form_content">
 						<div>
-							<div class="form_titulo"><h1> Actualizar Pedidos </h1></div>
+							<div class="form_titulo"><h1> Actualizar Factura </h1></div>
 
 							{% if form.errors %}
 
@@ -64,18 +64,18 @@
 						<div>
 							<fieldset>
 								<div class="form_row_all">
-									<div class="width_010"><label for="{{form.ped_cliente.name}}">{{form.ped_cliente.label}}</label></div>
-									<div class="form_widget width_025">{{ form.ped_cliente }} </div>
+									<div class="width_010"><label for="{{form.fac_cliente.name}}">{{form.fac_cliente.label}}</label></div>
+									<div class="form_widget width_025">{{ form.fac_cliente }} </div>
 									<div class="width_040">&nbsp;</div>
-									<div class="width_015"><label for="{{form.ped_fechped.name}}">{{form.ped_fechped.label}}</label></div>
-									<div class="form_widget width_010">{{ form.ped_fechped }} </div>
+									<div class="width_015"><label for="{{form.fac_fechfac.name}}">{{form.fac_fechped.label}}</label></div>
+									<div class="form_widget width_010">{{ form.fac_fechfac }} </div>
 								</div >
 								<div class="form_row_all">
-									<div class="width_010"><label for="{{form.ped_vendedo.name}}">{{ form.ped_vendedo.label }}</label></div>
-									<div class="form_widget width_025">{{ form.ped_vendedo }} </div>
+									<div class="width_010"><label for="{{form.fac_vendedo.name}}">{{ form.fac_vendedo.label }}</label></div>
+									<div class="form_widget width_025">{{ form.fac_vendedo }} </div>
 									<div class="width_040">&nbsp;</div>
-									<div class="width_015"><label for="{{form.ped_npedido.name}}">{{form.ped_npedido.label}}</label></div>
-									<div class="width_010 color_6D7969">{{ form.ped_npedido }}</div>
+									<div class="width_015"><label for="{{form.fac_npedido.name}}">{{form.fac_npedido.label}}</label></div>
+									<div class="width_010 color_6D7969">{{ form.fac_npedido }}</div>
 								</div>
 							</fieldset>
 						</div>
@@ -95,7 +95,7 @@
 								 	</tr>
 								</thead>
 								<tbody border="1" id="movimientos">
-									{% for movimiento in movimientos %}
+									{% for movimiento in object.fac_npedido.movinvent_set.all %}
 										<tr >
 											<input type="hidden" value='{{ movimiento.mvi_nummovi }}' />
 											<td class="columns_tab width_015"> <input value="{{ movimiento.mvi_product.exs_product }}" disabled="disabled"/></td>

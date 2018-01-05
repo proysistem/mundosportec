@@ -6,6 +6,7 @@ from apps.comercial.forms import ClienteForm, ProveedorForm, VendedorForm, Movin
 from django.db import transaction
 from django.db.models import F, Prefetch
 from django.forms import inlineformset_factory
+from django.utils import timezone
 
 from io import BytesIO
 
@@ -263,11 +264,11 @@ class PedEdita(UpdateView):
             'movinvent_set', queryset=Movinvent.objects.select_related('mvi_product').annotate(
                 subtotal=F('mvi_kntidad') * F('mvi_precios'))))
 
-    def get_success_url(self):
-        if request.method == 'POST' and 'sub_factura' in request.POST:
-            return reverse_lazy('comercial:fac_edit', kwargs={"pk": self.object.pk})
-        else:
-            return reverse_lazy('comercial:ped_edit', kwargs={"pk": self.object.pk})
+    # def get_success_url(self):
+    #     if request.method == 'POST' and 'sub_factura' in self.request.POST:
+    #         return reverse_lazy('comercial:fac_edit', kwargs={"pk": self.object.pk})
+    #     else:
+    #         return reverse_lazy('comercial:ped_edit', kwargs={"pk": self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super(PedEdita, self).get_context_data(**kwargs)
@@ -459,10 +460,44 @@ class FacView(DetailView):
 
 class FacNuevo(CreateView):
     """Crear Cliente"""
-    model = Cliente
-    form_class = ClienteForm
+    model = Factura
+    form_class = FacturaForm
     template_name = 'comercial/Fac_New.html'
-    success_url = reverse_lazy('comercial:fac_panel')
+    # success_url = reverse_lazy('comercial:fac_panel')
+
+    def get_success_url(self):
+        return reverse_lazy('comercial:fac_edit', kwargs={"pk": self.object.pk})
+
+    def post(self, request, *args, **kwargs):
+        if 'sub_factura' in request.POST and 'pedido_id' in request.POST:
+            self.object = None
+            request.POST = request.POST.copy()
+            try:
+                pedido = Pedido.objects.get(pk=request.POST['pedido_id'])
+            except Exception:
+                pass
+            else:
+                # factura = Factura(
+                #         fac_npedido=pedido,
+                #         fac_cliente=pedido.ped_cliente,
+                #         fac_vendedo=pedido.ped_vendedo,
+                #         fac_fechfac=timezone.now()
+                #     )
+                # self.object = factura
+                request.POST.update({
+                    'fac_npedido': pedido.ped_npedido,
+                    'fac_cliente': pedido.ped_cliente.pk,
+                    'fac_vendedo': pedido.ped_vendedo.pk,
+                    'fac_fechfac': timezone.now()
+                })
+                form = self.get_form()
+
+                if form.is_valid():
+                    # pedido.ped_statreg = # TODO: Cambiar estado a Choices de Estado
+                    return self.form_valid(form)
+                else:
+                    return self.form_invalid(form)
+        return super(FacNuevo, self).post(request, *args, **kwargs)
 
 
 class FacEdita(UpdateView):

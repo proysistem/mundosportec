@@ -183,9 +183,7 @@ class VendedorForm(forms.ModelForm):
 
 class MovinventInlineForm(forms.ModelForm):
     """ Formulario de MovInvent para Factura """
-    # TODO:
-    # - Create Inline form form with these fields:
-    #   Product, Detail (? is this writable?), Quantity, Unit, Price, Discount, IVA, Value
+    # TODO:  Create Inline form form with these fields: Product, Detail (? is this writable?), Quantity, Unit, Price, Discount, IVA, Value
     mvi_product = forms.CharField(label='Producto')
     mvi_kntidad = forms.DecimalField(label="Cantidad", decimal_places=2)
     mvi_talla01 = forms.DecimalField(label="Cant. Talla 01", decimal_places=2)

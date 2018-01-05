@@ -171,15 +171,16 @@
 						}, false);
 				// - - Accesa a productos por cod.del producto digitados o cod.de barras  //
 				//	jsw_ctrlprd = document.getElementById('inp_kntidad').disabled;
-					tmp_keyprod = document.form_pedidos["pop_pedKyPr"].value=1;
+
 					pop_callprd.addEventListener("change", function(){
+						tmp_keyprod = document.form_pedidos["mvi_product"].value;
 						if (jsw_ctrlprd){
 							document.getElementById('inp_kntidad').disabled = false;
 							document.getElementById('inp_kntidad').focus();
 							};
 						document.form_pedidos['mvi_kntidad'].value="";
 						document.getElementById("inp_tabtall").value="";
-						var url = "{% url 'inventarios:exi_query' pk=987654321 %}".replace('987654321', tmp_keyprod);
+						var url = "{% url 'inventarios:exi_query' exs_product=987654321 %}".replace('987654321', tmp_keyprod);
 						queryexi(url);
 						}, false);
 					}

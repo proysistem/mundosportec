@@ -250,6 +250,10 @@ class ExiQuery(DetailView):
     template_name = 'inventarios/Exi_Query.html'
     context_object_name = 'productos'
 
+    slug_field = 'exs_product'
+    slug_url_kwarg = 'exs_product'
+    # pk_url_kwarg = None
+
 
 class ExiPrint(ListView):
     """Reporte de Existencia"""

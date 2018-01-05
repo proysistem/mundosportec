@@ -289,7 +289,9 @@
 						<br>
 					</div>
 				</form>
-				<form name="form_factura" method="POST" enctype="multipart">{% csrf_token %}
+				<form name="form_factura" method="POST" enctype="multipart" action="{% url 'comercial:fac_new' %}">
+					{% csrf_token %}
+					<input type="hidden" name="pedido_id" value="{{ object.pk }}">
 					<div><button name="sub_factura" class="icon-reply crea_boton" type="submit"> P a g a r </button></div>
 				</form>
 			</div>

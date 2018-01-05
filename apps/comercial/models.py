@@ -159,7 +159,7 @@ class Factura(models.Model):
     fac_otropgo = models.DecimalField('Internet (Paypal)', max_digits=15, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
-        return (self.fac_idfactu)
+        return self.fac_idfactu if self.fac_idfactu else super(Factura, self).__str__()
 
 
 # TODO: Adecuar campos correctos finales antes de crear migraciones
