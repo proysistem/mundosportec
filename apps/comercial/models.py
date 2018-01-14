@@ -68,10 +68,23 @@ class Vendedor(models.Model):
         return self.vnd_frsname
 
 
+class Ingreso(models.Model):
+    ing_ningres = models.AutoField('Núm. de Ingreso', primary_key=True)
+    ing_tipomov = models.PositiveIntegerField("Tipo de movimiento", choices=TIPO_MOV_CHOICES, default=TIPO_MOV_CHOICES.INGRESO)
+    ing_fechped = models.DateField('Fecha de pedido')
+    ing_cliente = models.ForeignKey(Proveedor)
+    ing_vendedo = models.ForeignKey(Vendedor, null=True, blank=True)
+    ing_statreg = models.CharField('Status del Registro', max_length=1, default=1)
+    # 1=En proceso, 2=Facturada, 7=Anulada, 9=Eliminada
+
+    def __str__(self):
+        return str(self.ing_ningres)
+
+
 class Pedido(models.Model):
     ped_npedido = models.AutoField('Núm. de Pedido', primary_key=True)
     ped_tipomov = models.PositiveIntegerField("Tipo de movimiento", choices=TIPO_MOV_CHOICES, default=TIPO_MOV_CHOICES.EGRESO)
-    ped_fechped = models.DateField('Fecha de pedido', )
+    ped_fechped = models.DateField('Fecha de pedido')
     ped_cliente = models.ForeignKey(Cliente)
     ped_vendedo = models.ForeignKey(Vendedor, null=True, blank=True)
     ped_statreg = models.CharField('Status del Registro', max_length=1, default=1)

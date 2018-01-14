@@ -40,6 +40,13 @@ urlpatterns = [
     url(r'^PedEdita/(?P<pk>\d+)/$',    PedEdita.as_view(), name='ped_edit'),
     url(r'^PedElimina/(?P<pk>\d+)/$',  PedDelet.as_view(), name='ped_delet'),
 
+    url(r'^IngPanel',                  PedLista.as_view(), name='ing_panel'),
+    url(r'^IngNuevo/$',                PedNuevo.as_view(), name='ing_new'),
+    url(r'^IngRepor',                  PedRepor.as_view(), name='ing_repor'),
+    url(r'^IngConsulta/(?P<pk>\d+)/$', PedView.as_view(),  name='ing_view'),
+    url(r'^IngEdita/(?P<pk>\d+)/$',    PedEdita.as_view(), name='ing_edit'),
+    url(r'^IngElimina/(?P<pk>\d+)/$',  PedDelet.as_view(), name='ing_delet'),
+
     url(r'^FacPanel',                  FacLista.as_view(), name='fac_panel'),
     url(r'^FacNuevo/$',                FacNuevo.as_view(), name='fac_new'),
     url(r'^FacPaid/(?P<pk>\d+)/$',     FacPaid.as_view(), name='fac_paid'),

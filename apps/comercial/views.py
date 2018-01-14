@@ -174,6 +174,7 @@ class MviDelet(DeleteView):
     template_name = 'conercial/Mvi_Delet.html'
     success_url = reverse_lazy('comercial:mvi_panel')
 
+
 # ======== P E D I D O S =========== #
 
 
@@ -263,6 +264,9 @@ class PedEdita(UpdateView):
         return Pedido.objects.prefetch_related(Prefetch(
             'movinvent_set', queryset=Movinvent.objects.select_related('mvi_product').annotate(
                 subtotal=F('mvi_kntidad') * F('mvi_precios'))))
+
+    def get_success_url(self):
+        return reverse_lazy('comercial:ped_edit', kwargs={"pk": self.object.pk})
 
     # def get_success_url(self):
     #     if request.method == 'POST' and 'sub_factura' in self.request.POST:
@@ -505,7 +509,22 @@ class FacEdita(UpdateView):
     model = Factura
     form_class = FacturaForm
     template_name = 'comercial/Fac_Edit.html'
-    success_url = reverse_lazy('comercial:fac_panel')
+    success_url = reverse_lazy('comercial:ped_new')
+
+    def get_queryset(self):
+        return Factura.objects.prefetch_related(Prefetch(
+            'fac_npedido__movinvent_set', queryset=Movinvent.objects.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'))))
+
+    def get_context_data(self, **kwargs):
+        context = super(FacEdita, self).get_context_data(**kwargs)
+        total = 0
+        movimientos = self.get_object().fac_npedido.movinvent_set.all()
+        for movimiento in movimientos:
+            total += movimiento.subtotal
+        # context['movimientos'] = movimientos
+        context['total'] = total
+        return context
 
 
 class FacDelet(DeleteView):

@@ -1,13 +1,13 @@
-#from django.shortcuts import render
+# from django.shortcuts import render
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
 from django.db.models import Sum
-
+from django.views.defaults import page_not_found
+from django.http import Http404
 from .models import Division, Marca, Modelo, Color, Tabtalla, Existencia, Saldoxtalla
 from .forms import (DivisionForm, MarcaForm, ModeloForm, ColorForm, TabtallaForm, ExistenciaForm,
                     SaldoxtallaForm, ExistenciaEditForm)
 # from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura
-# from apps.finanzas.models import Caja, Cajera, Movicaja, Moneda
 # {% extends 'base/base.html' %}
 
 from django.contrib import messages
@@ -252,7 +252,19 @@ class ExiQuery(DetailView):
 
     slug_field = 'exs_product'
     slug_url_kwarg = 'exs_product'
-    # pk_url_kwarg = None
+    pk_url_kwarg = None
+
+    def get(self, request, *args, **kwargs):
+        contexto = {}
+        try:
+            self.object = self.get_object()
+        except Http404:
+            self.object = None
+            contexto['err_err404'] = True
+            contexto['probado'] = 'probando'
+        context = self.get_context_data(object=self.object)
+        context.update(contexto)
+        return self.render_to_response(context)
 
 
 class ExiPrint(ListView):
@@ -270,6 +282,47 @@ class ExiPrint(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ExiPrint, self).get_context_data(**kwargs)
+        context['totaldesaldos'] = self.get_queryset().aggregate(totaldesaldos=Sum('exs_saldact'))['totaldesaldos']
+        return context
+
+    def get_initial(self):
+        tll_actual = {}
+        try:
+            sxt = Saldoxtalla.objects.get(tex_product=self.object)
+        except:
+            pass
+        else:
+            tll_actual['tex_actua01'] = sxt.tex_actua01
+            tll_actual['tex_actua02'] = sxt.tex_actua02
+            tll_actual['tex_actua03'] = sxt.tex_actua03
+            tll_actual['tex_actua04'] = sxt.tex_actua04
+            tll_actual['tex_actua05'] = sxt.tex_actua05
+            tll_actual['tex_actua06'] = sxt.tex_actua06
+            tll_actual['tex_actua07'] = sxt.tex_actua07
+            tll_actual['tex_actua08'] = sxt.tex_actua08
+            tll_actual['tex_actua09'] = sxt.tex_actua09
+            tll_actual['tex_actua10'] = sxt.tex_actua10
+            tll_actual['tex_actua11'] = sxt.tex_actua11
+            tll_actual['tex_actua12'] = sxt.tex_actua12
+            tll_actual['tex_actua13'] = sxt.tex_actua13
+        return tll_actual
+
+
+class ExiTiket(ListView):
+    """Reporte de Existencia"""
+    model = Existencia
+    template_name = 'inventarios/Exi_Tiket.html'
+    ordering = ['exs_product']
+    context_object_name = 'productos'
+    # ordering = ['exs_product', 'exs_tabtall']
+    # paginate_by = 54
+    # queryset = Existencia.objects.filter(exs_saldact__gte=0.00)
+
+    def get_queryset(self):
+        return Existencia.objects.select_related('exs_idunida', 'saldoxtalla')
+
+    def get_context_data(self, **kwargs):
+        context = super(ExiTiket, self).get_context_data(**kwargs)
         context['totaldesaldos'] = self.get_queryset().aggregate(totaldesaldos=Sum('exs_saldact'))['totaldesaldos']
         return context
 

@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 # from django.conf.urls import url
-from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista, ExiPrint, ExiQuery,
+from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista, ExiPrint, ExiQuery, ExiTiket,
                     DivLista, DivNuevo, DivView, DivEdita, DivDelet, MrkLista,
                     MrkNuevo, MrkView, MrkEdita, MrkDelet, ModLista, ModNuevo,
                     ModView, ModEdita, ModDelet, ColLista, ColNuevo, ColView,
@@ -47,6 +47,7 @@ urlpatterns = [
 
     url(r'^ExiPanel',                  ExiLista.as_view(), name='exi_panel'),
     url(r'^ExiPrint',                  ExiPrint.as_view(), name='exi_print'),
+    url(r'^ExiTiket',                  ExiTiket.as_view(), name='exi_tiket'),
     url(r'^ExiNuevo/$',                ExiNuevo.as_view(), name='exi_new'),
     url(r'^ExiEdita/(?P<pk>\d+)/$',    ExiEdita.as_view(), name='exi_edit'),
     url(r'^ExiQuery/(?P<exs_product>\d+)/$',    ExiQuery.as_view(), name='exi_query'),
@@ -55,16 +56,4 @@ urlpatterns = [
     url(r'^ExiConsulta/(?P<pk>\d+)/$', ExiView.as_view(),  name='exi_view'),
     url(r'^ExiElimina/(?P<pk>\d+)/$',  ExiDelet.as_view(), name='exi_delet'),
 
-    #   url(r'^SxtPanel',                  SxtLista.as_view(), name='sxt_panel'),
-    #   url(r'^SxtNuevo/$',                SxtNuevo.as_view(), name='sxt_new'),
-    #   url(r'^SxtConsulta/(?P<pk>\d+)/$', SxtView.as_view(),  name='sxt_view'),
-    #   url(r'^SxtEdita/(?P<pk>\d+)/$',    SxtEdita.as_view(), name='sxt_edit'),
-    #   url(r'^SxtElimina/(?P<pk>\d+)/$',  SxtDelet.as_view(), name='sxt_delet'),
-
 ]
-
-#if settings.DEBUG:
-#   urlpatterns += [
-#       url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}
-#           ),
-#   ]

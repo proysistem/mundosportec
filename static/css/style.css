@@ -40,9 +40,9 @@
 	color: #fff;
 	font-size: 110%;
 	background: -webkit-linear-gradient(#837D5C, #666350, #959073); /* For Safari 5.1 to 6.0 */
- 	background: -o-linear-gradient(#837D5C, #666350); /* For Opera 11.1 to 12.0 */
- 	background: -moz-linear-gradient(#837D5C, #666350); /* For Firefox 3.6 to 15 */
- 	background: linear-gradient(#58A2B4, #295641); /* Standard syntax */
+	background: -o-linear-gradient(#837D5C, #666350); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#837D5C, #666350); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#58A2B4, #295641); /* Standard syntax */
 	position: absolute;
 	padding: auto;
 	}
@@ -59,7 +59,7 @@
 .columns_tab   /*  Clumnas para los datos, en las tablas   */
 	{
 	background: linear-gradient(#2B383A,#142224); /* Standard syntax */
-	padding: 5px auto;
+	padding: 3px auto;
 	color: #fff;
 	}
 .columns_tab input
@@ -67,7 +67,7 @@
 	width: 100%;
 	max-width: 100%;
 	font-size: 18px;
-	padding: 5px auto;
+	padding: 3px auto;
 	}
 .columns_tab_tall   /*  Clumnas para los datos, en las tablas   */
 	{
@@ -87,7 +87,8 @@
 	}
 input:focus
 	{
-	background-color: #F1E9B2;
+	background-color: #BCE756;
+/*	background-color: #F1E9B2;  */
 	}
 .columns_tab_disab>input
 	{
@@ -187,7 +188,7 @@ input:focus
 	border-bottom: 1px solid rgba(0,0,0, 1);
 	border-right: 0.1px solid rgba(0,0,0, 1);
 	}
-/*- - - - - iconos (Exampl: en los reg. de  pedidos) - - - - - - -*/
+/*- - - - - iconos (Exampl: en los reg. de  pedidos) carrito de compras - - - - -*/
 .iconos
 	{
 	background-color: green;
@@ -316,12 +317,16 @@ aside
     right: 25px;
     height: 32px;
     width: 13%;
-    padding: 5px 0 0 0;
+    padding: 8px 0 0 0;
     text-align: center;
- 	box-shadow:  	0.5px  0.5px 0.6px rgba(255,255,255,0.9);
- 	box-shadow:  	-0.1px -0.1px 0.2px rgba(255,255,255,0.7);
+ 	box-shadow: 0.5px  0.5px 0.6px rgba(255,255,255,0.9);
+ 	box-shadow: -0.1px -0.1px 0.2px rgba(255,255,255,0.7);
   	text-decoration: none;
  	}
+.crea_boton:hover, .crea_boton:focus
+	{
+	background: linear-gradient(#0A5F12, #0B7D16, #0AAA19); /* Standard syntax */
+	}
 /* - - -| Configuracion del formulario | - - -  */
 .form_content
 	{
@@ -413,7 +418,15 @@ fieldset
   	font-size: 1.1em;
   	display: block;
  	}
+.form_submit:focus, .form_submit:hover
+	{
+ 	background: linear-gradient(#295641, #58A2B4, #295641); /* Standard syntax */
+ 	border-top: solid 1px #747866;
+ 	box-shadow: 0.8px  0.8px 0.8px rgba(164,167,151,1);
+ 	font-size: 1.1em;
+ 	color: #ff0000;
+	}
 .totales
 	{
-	font-size: 1.5em;
+	font-size: 1.3em;
 	}

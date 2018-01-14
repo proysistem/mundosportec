@@ -1,16 +1,16 @@
 {% extends 'base/base_comercial.html' %}
 
-{% block title %} Graba Pedidos {% endblock title %}</title>
+{% block title %} Graba Ingresos {% endblock title %}</title>
 			{% block context%}
 			<div class="crea_content">
-				<h3 class="crea_proceso">Comercial:  Facturación</h3>
+				<h3 class="crea_proceso">Comercial:  Compras</h3>
 				<a class="icon-reply crea_boton" href="{% url 'comercial:fac_panel' %}">Volver</a>
 			</div>
 			<div>
 				<form name="form_pedidos" method="POST" enctype="multipart">{% csrf_token %}
 					<div class="form_content">
 						<div>
-							<div class="form_titulo"><h1> Grabar Pedidos </h1></div>
+							<div class="form_titulo"><h1> Grabar Ingresos </h1></div>
 							{% if form.errors %}
 
 								<div class="form_errors" role="alert">

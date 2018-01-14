@@ -1,29 +1,257 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base_print.html' %}
 
 {% block title %} Tikets para  Productos {% endblock title %}</title>
 
-		{% block context%}
-			<table>
-				<tr>
-					<td>{{object.exs_sucursa}}</td>
-				</tr>
-				<tr>
-					<td>{{object.exs_iddivic}}</td>
-				</tr>
-				<tr>
-					<td>{{object.exs_idmarca}}</td>
-				</tr>
-				<tr>
-					<td>{{object.exs_idmodel}}</td>
-				</tr>
-				<tr>
-					<td>{{object.exs_idcolor}}</td>
-				</tr>
-				<tr>
-					<td>{{object.exs_codigo de barra}}</td>
-				</tr>
-				<tr>
-					<td>{{object.exs_product}}-{{object.exs_tabtall}}</td>
-				</tr>
-			</table>
-		{% endblock context%}
+{% block context %}
+
+
+<div>
+	<table width="10%">
+		<tbody border="0">
+			{% if productos %}
+				{% for var_exifield in productos %}
+					{% if var_exifield.saldoxtalla.tex_actua01 > 0 %}
+						    {{ var_exifield.saldoxtalla.tex_actua01 }}
+						 	<tr><td class="align_tex_center"><h3>Mundo Spor</h3><br></td></tr>
+							<tr>
+								<td>{{ var_exifield.exs_detalle }} </td>
+							</tr>
+							<tr>
+								<td class="align_tex_center">Talla.: {{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid01 }} </td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td class="barcode"> {{ var_exifield.exs_product }} </td>
+							</tr>
+							<tr><td><br><br></td></tr>
+					{% endif %}
+{% comment %}
+						{% for item in var_exifield.saldoxtalla.tex_actua01 %}
+						{% endfor %}
+					{% if var_exifield.saldoxtalla.tex_actua02 > 0 %}
+						{% for item in var_exifield.saldoxtalla.tex_actua02 %}
+							<tr>
+								<td>{{ var_exifield.exs_detalle }} </td>
+							</tr>
+							<tr>
+								<td>{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid02 }} </td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td class="barcode align_tex_center"> {{ var_exifield.exs_product }} </td>
+							</tr>
+							<tr>
+							</tr>
+						{% endfor %}
+					{% endif %}
+
+					{% if var_exifield.saldoxtalla.tex_actua03 > 0 %}
+						{% for item in var_exifield.saldoxtalla.tex_actua03 %}
+							<tr>
+								<td>{{ var_exifield.exs_detalle }} </td>
+							</tr>
+							<tr>
+								<td>{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid03 }} </td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td class="barcode align_tex_center"> {{ var_exifield.exs_product }} </td>
+							</tr>
+							<tr>
+							</tr>
+						{% endfor %}
+					{% endif %}
+
+					{% if var_exifield.saldoxtalla.tex_actua04 > 0 %}
+						{% for item in var_exifield.saldoxtalla.tex_actua04 %}
+							<tr>
+								<td>{{ var_exifield.exs_detalle }} </td>
+							</tr>
+							<tr>
+								<td>{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid04 }} </td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td class="barcode align_tex_center"> {{ var_exifield.exs_product }} </td>
+							</tr>
+							<tr>
+							</tr>
+						{% endfor %}
+					{% endif %}
+
+					{% if var_exifield.saldoxtalla.tex_actua05 > 0 %}
+						{% for item in var_exifield.saldoxtalla.tex_actua05 %}
+							<tr>
+								<td>{{ var_exifield.exs_detalle }} </td>
+							</tr>
+							<tr>
+								<td>{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid05 }} </td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td class="barcode align_tex_center"> {{ var_exifield.exs_product }} </td>
+							</tr>
+							<tr>
+							</tr>
+						{% endfor %}
+					{% endif %}
+
+					{% if var_exifield.saldoxtalla.tex_actua06 > 0 %}
+						{% for item in var_exifield.saldoxtalla.tex_actua06 %}
+							<tr>
+								<td>{{ var_exifield.exs_detalle }} </td>
+							</tr>
+							<tr>
+								<td>{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid06 }} </td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td class="barcode align_tex_center"> {{ var_exifield.exs_product }} </td>
+							</tr>
+							<tr>
+							</tr>
+						{% endfor %}
+					{% endif %}
+
+					{% if var_exifield.saldoxtalla.tex_actua07 > 0 %}
+						{% for item in var_exifield.saldoxtalla.tex_actua07 %}
+							<tr>
+								<td>{{ var_exifield.exs_detalle }} </td>
+							</tr>
+							<tr>
+								<td>{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid07 }} </td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td class="barcode align_tex_center"> {{ var_exifield.exs_product }} </td>
+							</tr>
+							<tr>
+							</tr>
+						{% endfor %}
+					{% endif %}
+
+					{% if var_exifield.saldoxtalla.tex_actua08 > 0 %}
+						{% for item in var_exifield.saldoxtalla.tex_actua08 %}
+							<tr>
+								<td>{{ var_exifield.exs_detalle }} </td>
+							</tr>
+							<tr>
+								<td>{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid08 }} </td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td class="barcode align_tex_center"> {{ var_exifield.exs_product }} </td>
+							</tr>
+							<tr>
+							</tr>
+						{% endfor %}
+					{% endif %}
+
+					{% if var_exifield.saldoxtalla.tex_actua09 > 0 %}
+						{% for item in var_exifield.saldoxtalla.tex_actua09 %}
+							<tr>
+								<td>{{ var_exifield.exs_detalle }} </td>
+							</tr>
+							<tr>
+								<td>{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid09 }} </td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td class="barcode align_tex_center"> {{ var_exifield.exs_product }} </td>
+							</tr>
+							<tr>
+							</tr>
+						{% endfor %}
+					{% endif %}
+
+					{% if var_exifield.saldoxtalla.tex_actua10 > 0 %}
+						{% for item in var_exifield.saldoxtalla.tex_actua10 %}
+							<tr>
+								<td>{{ var_exifield.exs_detalle }} </td>
+							</tr>
+							<tr>
+								<td>{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid10 }} </td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td class="barcode align_tex_center"> {{ var_exifield.exs_product }} </td>
+							</tr>
+							<tr>
+							</tr>
+						{% endfor %}
+					{% endif %}
+
+					{% if var_exifield.saldoxtalla.tex_actua11 > 0 %}
+						{% for item in var_exifield.saldoxtalla.tex_actua11 %}
+							<tr>
+								<td>{{ var_exifield.exs_detalle }} </td>
+							</tr>
+							<tr>
+								<td>{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid11 }} </td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td class="barcode align_tex_center"> {{ var_exifield.exs_product }} </td>
+							</tr>
+							<tr>
+							</tr>
+						{% endfor %}
+					{% endif %}
+
+					{% if var_exifield.saldoxtalla.tex_actua12 > 0 %}
+						{% for item in var_exifield.saldoxtalla.tex_actua12 %}
+							<tr>
+								<td>{{ var_exifield.exs_detalle }} </td>
+							</tr>
+							<tr>
+								<td>{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid12 }} </td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td class="barcode align_tex_center"> {{ var_exifield.exs_product }} </td>
+							</tr>
+							<tr>
+							</tr>
+						{% endfor %}
+					{% endif %}
+
+					{% if var_exifield.saldoxtalla.tex_actua13 > 0 %}
+						{% for item in var_exifield.saldoxtalla.tex_actua13 %}
+							<tr>
+								<td>{{ var_exifield.exs_detalle }} </td>
+							</tr>
+							<tr>
+								<td>{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid13 }} </td>
+							</tr>
+							<tr>
+							</tr>
+							<tr>
+								<td class="barcode align_tex_center"> {{ var_exifield.exs_product }} </td>
+							</tr>
+							<tr>
+							</tr>
+						{% endfor %}
+					{% endif %}
+					</tr>
+					{% endcomment %}
+				{% endfor %}
+			{% else %}
+				<h4> No hay registros en Existencias </h4>
+			{% endif %}
+			<br/>
+		</tbody>
+	</table>
+</div>
+{% endblock context %}

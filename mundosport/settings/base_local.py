@@ -27,10 +27,10 @@ SECRET_KEY = '#z62lq-_3^7k=hsu*8^z3es$19#w-^f@rutgp$jg*)cfily)8s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = [
-#    '45.55.223.175',
-#    '.mundosportec.com',
-#]
+# ALLOWED_HOSTS = [
+#     '45.55.223.175',
+#     '.mundosportec.com',
+# ]
 
 
 # Application definition
@@ -104,3 +104,22 @@ USE_L10N = True
 USE_TZ = True
 
 AUTH_USER_MODEL = 'users.User'
+
+if DEBUG:
+    # DJANGO DEBUG TOOLBAR
+    try:
+        import debug_toolbar
+    except ImportError:
+        pass
+    else:
+        INSTALLED_APPS += ('debug_toolbar', )
+        MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware', )
+
+    try:
+        import django_extensions
+    except ImportError:
+        pass
+    else:
+        INSTALLED_APPS += ('django_extensions', )
+
+INTERNAL_IPS = ('127.0.0.1',)

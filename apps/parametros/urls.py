@@ -15,32 +15,32 @@ from django.conf import settings
 
 
 urlpatterns = [
-    url(r'^SucPanel', 				   SucLista.as_view(), name='suc_panel'),
-    url(r'^SucNuevo/$', 			   SucNuevo.as_view(), name='suc_new'),
+    url(r'^SucPanel',                  SucLista.as_view(), name='suc_panel'),
+    url(r'^SucNuevo/$',                SucNuevo.as_view(), name='suc_new'),
     url(r'^SucConsulta/(?P<pk>\d+)/$', SucView.as_view(),  name='suc_view'),
     url(r'^SucEdita/(?P<pk>\d+)/$',    SucEdita.as_view(), name='suc_edit'),
     url(r'^SucElimina/(?P<pk>\d+)/$',  SucDelet.as_view(), name='suc_delet'),
 
     url(r'^ZipPanel',                  ZipLista.as_view(), name='zip_panel'),
-    url(r'^ZipNuevo/$',				   ZipNuevo.as_view(), name='zip_new'),
+    url(r'^ZipNuevo/$',                ZipNuevo.as_view(), name='zip_new'),
     url(r'^ZipConsulta/(?P<pk>\d+)/$', ZipView.as_view(),  name='zip_view'),
     url(r'^ZipEdita/(?P<pk>\d+)/$',    ZipEdita.as_view(), name='zip_edit'),
     url(r'^ZipElimina/(?P<pk>\d+)/$',  ZipDelet.as_view(), name='zip_delet'),
 
-    url(r'^CiuPanel', 				   CiuLista.as_view(), name='ciu_panel'),
+    url(r'^CiuPanel',                  CiuLista.as_view(), name='ciu_panel'),
     url(r'^CiuNuevo/$',                CiuNuevo.as_view(), name='ciu_new'),
     url(r'^CiuConsulta/(?P<pk>\d+)/$', CiuView.as_view(),  name='ciu_view'),
     url(r'^CiuEdita/(?P<pk>\d+)/$',    CiuEdita.as_view(), name='ciu_edit'),
     url(r'^CiuElimina/(?P<pk>\d+)/$',  CiuDelet.as_view(), name='ciu_delet'),
 
-    url(r'^PviPanel', 				   PviLista.as_view(), name='pvi_panel'),
+    url(r'^PviPanel',                  PviLista.as_view(), name='pvi_panel'),
     url(r'^PviNuevo/$',                PviNuevo.as_view(), name='pvi_new'),
     url(r'^PviConsulta/(?P<pk>\d+)/$', PviView.as_view(),  name='pvi_view'),
     url(r'^PviEdita/(?P<pk>\d+)/$',    PviEdita.as_view(), name='pvi_edit'),
     url(r'^PviElimina/(?P<pk>\d+)/$',  PviDelet.as_view(), name='pvi_delet'),
 
-    url(r'^PaiPanel', 				   PaiLista.as_view(), name='pai_panel'),
-    url(r'^PaiNuevo/$', 			   PaiNuevo.as_view(), name='pai_new'),
+    url(r'^PaiPanel',                  PaiLista.as_view(), name='pai_panel'),
+    url(r'^PaiNuevo/$',                PaiNuevo.as_view(), name='pai_new'),
     url(r'^PaiConsulta/(?P<pk>\d+)/$', PaiView.as_view(),  name='pai_view'),
     url(r'^PaiEdita/(?P<pk>\d+)/$',    PaiEdita.as_view(), name='pai_edit'),
     url(r'^PaiElimina/(?P<pk>\d+)/$',  PaiDelet.as_view(), name='pai_delet'),
@@ -74,7 +74,7 @@ urlpatterns = [
 ]
 
 #if settings.DEBUG:
-#	urlpatterns += [
-#		url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}
-#			),
-#	]
+#    urlpatterns += [
+#        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}
+#            ),
+#    ]
