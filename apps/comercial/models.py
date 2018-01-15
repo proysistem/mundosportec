@@ -133,7 +133,7 @@ class Movinvent(models.Model):
     def __str__(self):
         return str(self.mvi_nummovi)
 
-    def save(self, *args, **kwargs):
+    def save(self, commit=True, *args, **kwargs):
         # if self.id ?????:  ##   SOLO POR LA PRIMERA VEZ, LUEGO  SEGUIR  GRABANDO EL LMISMO NUMERO A TODOS LOS REG. DE LA MISMA TRANSACCION
         #     self.mvi_nummovi = "{0:0000007d}".format(
         #         self.mvi_nummovi.pk,  # 2

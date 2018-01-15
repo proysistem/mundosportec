@@ -61,6 +61,7 @@ class Sucursal(models.Model):
     suc_estados = models.ForeignKey(Provincia)
     suc_country = models.ForeignKey(Pais)
     suc_zipcodg = models.ForeignKey(Zipcodigo)
+    suc_impuest = models.PositiveIntegerField("IVA/Impuesto %", default=12)
     suc_statreg = models.CharField("Status del Registro", max_length=1)
 
     def __str__(self):
@@ -98,4 +99,4 @@ class Controlador(models.Model):
     ctl_secue10 = models.PositiveIntegerField('Secuencia 10', null=True, blank=True)
 
     def __str__(self):
-        return "%s" % (self.ctl_sucrsal if self.ctl_sucrsal else 'Controlador')  # TODO: Cambiar
+        return "%s" % (self.ctl_sucrsal if self.ctl_sucrsal else 'Controlador')

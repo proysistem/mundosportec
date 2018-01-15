@@ -483,15 +483,20 @@ class FacNuevo(CreateView):
                 subtotal=F('mvi_kntidad') * F('mvi_precios')).all()
             context['movimientos'] = movimientos
 
+            suma_iva = 0
             total = 0
             for movimiento in movimientos:
                 total += movimiento.subtotal
+                suma_iva += movimiento.subtotal * (movimiento.mvi_impuest/100)
             # context['movimientos'] = movimientos
             context['total'] = total
+            context['suma_iva'] = suma_iva
+            context['total_iva'] = total + suma_iva
         return context
 
     def get_success_url(self):
-        return reverse_lazy('comercial:fac_edit', kwargs={"pk": self.object.pk})
+        # TODO: Ir a impresión de factura
+        return reverse_lazy('comercial:ped_new', kwargs={"pk": self.object.pk})
 
     def post(self, request, *args, **kwargs):
         if 'sub_factura' in request.POST and 'pedido_id' in request.POST:

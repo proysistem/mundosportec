@@ -233,7 +233,7 @@
 												<tr class="width_100">
 													<td width="35%" class="align_tex_center" colspan="2">Cambio</td>
 													<td width="43%" class="align_tex_right"><label>I.V.A.</label>
-													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ form.fac_impuest }} </td>
+													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ suma_iva|stringformat:'0.2f' }} </td>
 												</tr>
 											</table>
 										</td>
@@ -258,7 +258,7 @@
 												<tr class="width_100">
 													<td width="35%" class="columns_tab align_tex_right warnig1" colspan="2"><input id"idf_cambios" name="inf_cambios" type="number" pattern="[0-9]"></td>
 													<td width="43%" class="align_tex_right"><label>TOTAL=></label>
-													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ total|stringformat:'0.2f' }} </td>
+													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ total_iva|stringformat:'0.2f' }} </td>
 												</tr>
 											</table>
 										</td>
