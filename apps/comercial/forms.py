@@ -362,6 +362,19 @@ class PedidoForm(forms.ModelForm):
 class FacturaForm(forms.ModelForm):
     fac_fechfac = forms.DateField(initial=localtime(now()).date())
 
+    def save(self, commit=True, *args, **kwargs):
+        request = None
+        if 'request' in kwargs:
+            request = kwargs.pop('request')
+
+        factura = super(FacturaForm, self).save(commit=True, *args, **kwargs)
+        if request:
+            factura.save(request=request)
+        return factura
+
+        # else:
+        #     super(Factura, self).save(*args, **kwargs)
+
     class Meta:
         model = Factura
         fields = [
@@ -419,7 +432,7 @@ class FacturaForm(forms.ModelForm):
                 'fac_cajeras':  forms.Select(),
                 'fac_cliente':  forms.Select(),
                 'fac_vendedo':  forms.Select(),
-                'fac_npedido':  forms.Select(),
+                'fac_npedido':  forms.HiddenInput(),
                 'fac_monedas':  forms.Select(),
                 'fac_cotizac':  forms.NumberInput(),
                 'fac_totitms':  forms.NumberInput(),

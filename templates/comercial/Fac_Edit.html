@@ -1,6 +1,6 @@
 {% extends 'base/base_comercial.html' %}
 
-{% block title %} Graba Pedidos {% endblock title %}</title>
+{% block title %} Graba Factura {% endblock title %}</title>
 
 			{% block context%}
 			<div class="crea_content">
@@ -12,7 +12,7 @@
 				<form name="form_pedidos" method="POST" enctype="multipart">{% csrf_token %}
 					<div class="form_content">
 						<div>
-							<div class="form_titulo"><h1> Actualizar Factura </h1></div>
+							<div class="form_titulo"><h1> Actualizar Factura {{ object.fac_ctrlfac }}</h1></div>
 
 							{% if form.errors %}
 
@@ -111,6 +111,7 @@
 										</tr>
 									{% endfor %}
 									<tr>
+										{{ form.fac_npedido }}
 										<input name="pop_pedKyPr" type="hidden" id="inp_pedKyPr" value=" ">
 										<input name="pop_pedTbtl" type="hidden" id="inp_tabtall" value=" ">
 										<input name="mvi_rcargos" type="hidden" id="inp_rcargos" value="0">
@@ -138,7 +139,7 @@
 												<tr class="width_100">
 													<td class="columns_tab width_030 align_tex_right" colspan="2">Forma de pago:</td>
 													<td class="columns_tab width_020 align_tex_right"><label>Cash:</label>
-													<td class="columns_tab width_025 align_tex_right warnig1"><input id"idf_pgoefec" name="inf_pgoefec" type="number" pattern="[0-9]" "{{ form.fac_pgoefec|stringformat:'0.2f' }}" ></td>
+													<td class="columns_tab width_025 align_tex_right warnig1">{{ form.fac_pgoefec }}</td>
 													<td class="width_025 align_tex_right"><label>Total Itms:</label>
 												</tr>
 											</table>
@@ -146,7 +147,7 @@
 										<td colspan="6">
 											<table border="0" width="100%">
 												<tr class="width_100">
-													<td width="22%" class="columns_tab">{{ form.fac_totitms|stringformat:'0.2f' }} </td>
+													<td width="22%" class="columns_tab">{{ form.fac_totitms }} </td>
 													<td width="56%" class="align_tex_right" colspan="3"><label>Sub-total:</label>
 													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ total|stringformat:'0.2f' }} </td>
 												</tr>
@@ -159,7 +160,7 @@
 												<tr class="width_100">
 													<td class="width_030 align_tex_right" colspan="2"></td>
 													<td class="width_020 align_tex_right"><label>Cheque:</label>
-													<td class="columns_tab width_025 align_tex_right warnig1"><input id"idf_pgocheq" name="inf_pgocheq" type="number" pattern="[0-9]" "{{ form.fac_pgocheq|stringformat:'0.2f' }}" ></td>
+													<td class="columns_tab width_025 align_tex_right warnig1">{{ form.fac_pgocheq }}</td>
 													<td class="width_025 align_tex_right"><label></label>
 												</tr>
 											</table>
@@ -169,7 +170,7 @@
 												<tr class="width_100">
 													<td width="22%"</td>
 													<td width="56%" class="align_tex_right" colspan="3"><label>Descuentos:</label>
-													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ form.fac_dscuent|stringformat:'0.2f' }} </td>
+													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ form.fac_dscuent }} </td>
 												</tr>
 											</table>
 										</td>
@@ -179,9 +180,9 @@
 											<table border="0" width="100%">
 												<tr class="width_100">
 													<td class="width_015 align_tex_right">Moneda:</td>
-													<td class="columns_tab width_015 align_tex_right warnig1">{{ form.fac_monedas|stringformat:'0.2f' }} </td>
+													<td class="columns_tab width_015 align_tex_right warnig1">{{ form.fac_monedas }} </td>
 													<td class="width_020 align_tex_right"><label>Tarj./Créd.:</label>
-													<td class="columns_tab width_025 align_tex_right warnig1"><input id"idf_pgotjcr" name="inf_pgotjcr" type="number" pattern="[0-9]" "{{ form.fac_pgotjcr|stringformat:'0.2f' }}" ></td>
+													<td class="columns_tab width_025 align_tex_right warnig1">{{ form.fac_pgotjcr }}</td>
 													<td class="width_025 align_tex_right"><label></label>
 												</tr>
 											</table>
@@ -191,7 +192,7 @@
 												<tr class="width_100">
 													<td width="22%"</td>
 													<td width="56%" class="align_tex_right" colspan="3"><label>Recargos:</label>
-													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ form.fac_rkargos|stringformat:'0.2f' }} </td>
+													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ form.fac_rkargos }} </td>
 												</tr>
 											</table>
 										</td>
@@ -201,9 +202,9 @@
 											<table border="0" width="100%">
 												<tr class="width_100">
 													<td class="width_015 align_tex_right">Cotizac:</td>
-													<td class="columns_tab width_015 align_tex_right warnig1">{{ form.fac_cotizac|stringformat:'0.2f' }} </td>
+													<td class="columns_tab width_015 align_tex_right warnig1">{{ form.fac_cotizac }} </td>
 													<td class="width_020 align_tex_right"><label>Crédito:</label>
-													<td class="columns_tab width_025 align_tex_right warnig1"><input id"idf_pgocred" name="inf_pgocred" type="number" pattern="[0-9]" "{{ form.fac_pgocred|stringformat:'0.2f' }}" ></td>
+													<td class="columns_tab width_025 align_tex_right warnig1">{{ form.fac_pgocred }}</td>
 													<td class="width_025 align_tex_right"><label></label>
 												</tr>
 											</table>
@@ -213,7 +214,7 @@
 												<tr class="width_100">
 													<td width="22%"</td>
 													<td width="56%" class="align_tex_right" colspan="3"><label>Transporte:</label>
-													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ form.fac_deliver|stringformat:'0.2f' }} </td>
+													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ form.fac_deliver }} </td>
 												</tr>
 											</table>
 										</td>
@@ -223,9 +224,9 @@
 											<table border="0" width="100%">
 												<tr class="width_100">
 													<td class="width_015 align_tex_right">Caja:</td>
-													<td class="columns_tab width_015 align_tex_right warnig1">{{ form.fac_numcaja|stringformat:'0.2f' }} </td>
+													<td class="columns_tab width_015 align_tex_right warnig1">{{ form.fac_numcaja }} </td>
 													<td class="width_020 align_tex_right"><label>Internet:</label>
-													<td class="columns_tab width_025 align_tex_right warnig1"><input id"idf_otropgo" name="inf_otropgo" type="number" pattern="[0-9]" "{{ form.fac_otropgo|stringformat:'0.2f' }}" ></td>
+													<td class="columns_tab width_025 align_tex_right warnig1">{{ form.fac_otropgo }}</td>
 													<td class="width_025 align_tex_center"><label>Recibido</label>
 												</tr>
 											</table>
@@ -235,7 +236,7 @@
 												<tr class="width_100">
 													<td width="35%" class="align_tex_center" colspan="2">Cambio</td>
 													<td width="43%" class="align_tex_right"><label>I.V.A.</label>
-													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ form.fac_impuest|stringformat:'0.2f' }} </td>
+													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ form.fac_impuest }} </td>
 												</tr>
 											</table>
 										</td>
@@ -245,20 +246,20 @@
 											<table border="0" width="100%">
 												<tr class="width_100">
 													<td class="width_015 align_tex_right">Cajer@:</td>
-													<td class="columns_tab width_015 align_tex_right warnig1">{{ form.fac_monedas|stringformat:'0.2f' }} </td>
+													<td class="columns_tab width_015 align_tex_right warnig1">{{ form.fac_monedas }} </td>
 													<td class="columns_tab width_020">
 														<label><span>
 													<button class="totales icon-database width_100" type="submit">Pagar</button></span></label>
 													</td>
-													<td class="columns_tab width_025 align_tex_right warnig1"><input id="fld_tpagado" "{{ form.wrk_tpagado|stringformat:'0.2f' }}" readonly="readonly"> </td>
-													<td width="25%" class="columns_tab align_tex_right warnig1"><input id"idf_entrega" name="inf_entrega" type="number" pattern="[0-9]" "{{ form.wrk_entrega|stringformat:'0.2f' }}" ></td>
+													<td class="columns_tab width_025 align_tex_right warnig1"><input id="fld_tpagado" readonly="readonly"> </td>
+													<td width="25%" class="columns_tab align_tex_right warnig1"><input id="inf_entrega" name="inf_entrega" type="number" pattern="[0-9]"></td>
 												</tr>
 											</table>
 										</td>
 										<td colspan="6">
 											<table border="0" width="100%">
 												<tr class="width_100">
-													<td width="35%" class="columns_tab align_tex_right warnig1" colspan="2"><input id"idf_cambios" name="inf_cambios" type="number" pattern="[0-9]" "{{ form.wrk_cambios|stringformat:'0.2f' }}" ></td>
+													<td width="35%" class="columns_tab align_tex_right warnig1" colspan="2"><input id="idf_cambios" name="inf_cambios" type="number" pattern="[0-9]"></td>
 													<td width="43%" class="align_tex_right"><label>TOTAL=></label>
 													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ total|stringformat:'0.2f' }} </td>
 												</tr>
@@ -293,18 +294,18 @@
 
 				function sum_frmapgo(){
 					jsw_tpagado=0;
-					jsw_pgoefec=document.form_pedidos['inf_pgoefec'].value || 0;
-					jsw_pgocheq=document.form_pedidos['inf_pgocheq'].value || 0;
-					jsw_pgotjcr=document.form_pedidos['inf_pgotjcr'].value || 0;
-					jsw_pgocred=document.form_pedidos['inf_pgocred'].value || 0;
-					jsw_otropgo=document.form_pedidos['inf_otropgo'].value || 0;
+					jsw_pgoefec=document.form_pedidos['fac_pgoefec'].value || 0;
+					jsw_pgocheq=document.form_pedidos['fac_pgocheq'].value || 0;
+					jsw_pgotjcr=document.form_pedidos['fac_pgotjcr'].value || 0;
+					jsw_pgocred=document.form_pedidos['fac_pgocred'].value || 0;
+					jsw_otropgo=document.form_pedidos['fac_otropgo'].value || 0;
 					jsw_entrega=document.form_pedidos['inf_entrega'].value || 0;
 					jsw_cambios=document.form_pedidos['inf_cambios'].value || 0;
 					jsw_tpagado=Number(jsw_pgoefec)+Number(jsw_pgocheq)+Number(jsw_pgotjcr)+Number(jsw_pgocred)+Number(jsw_otropgo);
-					alert(jsw_tpagado);
+					// alert(jsw_tpagado);
 					document.getElementById("fld_tpagado").value=jsw_tpagado;
 					}
-
+				sum_frmapgo();
 			</script>
 
 		{% endblock js %}

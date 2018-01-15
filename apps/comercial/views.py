@@ -7,6 +7,7 @@ from django.db import transaction
 from django.db.models import F, Prefetch
 from django.forms import inlineformset_factory
 from django.utils import timezone
+from django.http import HttpResponseRedirect
 
 from io import BytesIO
 
@@ -469,6 +470,26 @@ class FacNuevo(CreateView):
     template_name = 'comercial/Fac_New.html'
     # success_url = reverse_lazy('comercial:fac_panel')
 
+    def form_valid(self, form):
+        # import pdb; pdb.set_trace()
+        self.object = form.save(request=self.request)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_context_data(self, **kwargs):
+        context = super(FacNuevo, self).get_context_data(**kwargs)
+        pedido = getattr(self, 'pedido', None)
+        if pedido:
+            movimientos = self.pedido.movinvent_set.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios')).all()
+            context['movimientos'] = movimientos
+
+            total = 0
+            for movimiento in movimientos:
+                total += movimiento.subtotal
+            # context['movimientos'] = movimientos
+            context['total'] = total
+        return context
+
     def get_success_url(self):
         return reverse_lazy('comercial:fac_edit', kwargs={"pk": self.object.pk})
 
@@ -488,19 +509,22 @@ class FacNuevo(CreateView):
                 #         fac_fechfac=timezone.now()
                 #     )
                 # self.object = factura
-                request.POST.update({
+                self.pedido = pedido
+                form_data = {
                     'fac_npedido': pedido.ped_npedido,
                     'fac_cliente': pedido.ped_cliente.pk,
                     'fac_vendedo': pedido.ped_vendedo.pk,
                     'fac_fechfac': timezone.now()
-                })
+                }
+                request.POST.update(form_data)
                 form = self.get_form()
-
-                if form.is_valid():
-                    # pedido.ped_statreg = # TODO: Cambiar estado a Choices de Estado
-                    return self.form_valid(form)
-                else:
-                    return self.form_invalid(form)
+                form.initial = form_data
+                return self.form_invalid(form)
+                # if form.is_valid():
+                #     # pedido.ped_statreg = # TODO: Cambiar estado a Choices de Estado
+                #     return self.form_valid(form)
+                # else:
+                #     return self.form_invalid(form)
         return super(FacNuevo, self).post(request, *args, **kwargs)
 
 
@@ -568,8 +592,8 @@ class FacPaid(UpdateView):
             context['total'] = total
         return context
 
-    def form_invalid(self, form):
-        return super(PedEdita, self).form_invalid(form)
+    # def form_invalid(self, form):
+    #     return super(PedEdita, self).form_invalid(form)
 
     def form_valid(self, form):
         context = self.get_context_data()

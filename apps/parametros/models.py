@@ -83,12 +83,19 @@ class Categoria(models.Model):
 #     mot_detalle = models.CharField('Detalle', max_length=20)
 #     mot_abrevia = models.CharField('Abreviatura', max_length=10)
 
-
 class Controlador(models.Model):
-    ctl_idcontr = models.CharField('Cód. del control de secuencia', max_length=3, primary_key=True)
-    ctl_detalle = models.CharField('Detalle que documento  controla', max_length=20)
-    ctl_abrevia = models.CharField('Abreviatura', max_length=10)
-    ctl_secuenc = models.IntegerField('Secuencia del documento', )
+    ctl_idcontr = models.AutoField('Cód. del control de secuencia', primary_key=True)
+    ctl_sucrsal = models.OneToOneField('Sucursal')
+    ctl_secue01 = models.PositiveIntegerField('Secuencia 01', null=True, blank=True)
+    ctl_secue02 = models.PositiveIntegerField('Secuencia 02', null=True, blank=True)
+    ctl_secue03 = models.PositiveIntegerField('Secuencia 03', null=True, blank=True)
+    ctl_secue04 = models.PositiveIntegerField('Secuencia 04', null=True, blank=True)
+    ctl_secue05 = models.PositiveIntegerField('Secuencia 05', null=True, blank=True)
+    ctl_secue06 = models.PositiveIntegerField('Secuencia 06', null=True, blank=True)
+    ctl_secue07 = models.PositiveIntegerField('Secuencia 07', null=True, blank=True)
+    ctl_secue08 = models.PositiveIntegerField('Secuencia 08', null=True, blank=True)
+    ctl_secue09 = models.PositiveIntegerField('Secuencia 09', null=True, blank=True)
+    ctl_secue10 = models.PositiveIntegerField('Secuencia 10', null=True, blank=True)
 
     def __str__(self):
-        return "%s" % (self.ctl_secuenc)
+        return "%s" % (self.ctl_sucrsal if self.ctl_sucrsal else 'Controlador')  # TODO: Cambiar

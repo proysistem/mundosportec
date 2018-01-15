@@ -1,9 +1,12 @@
 from django.db import models
 from apps.finanzas.models import Cajera, Caja, Moneda
 from apps.inventarios.models import Existencia, Unidad
-from apps.parametros.models import Pais, Provincia, Ciudad, Zipcodigo, Sucursal, Categoria
+from apps.parametros.models import Pais, Provincia, Ciudad, Zipcodigo, Sucursal, Categoria, Controlador
 from apps.parametros.choices import TIPO_MOV_CHOICES
 from django.utils import timezone
+
+from django.core.exceptions import ObjectDoesNotExist
+from django.db import transaction
 
 
 class Cliente(models.Model):
@@ -137,19 +140,31 @@ class Movinvent(models.Model):
         #     )
         # TODO: Definir si amerita modificar los parámetros
         # TODO: Definir el max_length de CharField o poner TextField
-        super(Movinvent, self).save()
+        super(Movinvent, self).save(*args, **kwargs)
         # import pdb; pdb.set_trace()
-        saldos = self.mvi_product.saldoxtalla
-        for num_talla in range(1, 14):
-            egr_actual = getattr(saldos, "tex_egres{0:02d}".format(num_talla)) or 0
-            egr_nuevo = egr_actual + getattr(self, "mvi_talla{0:02d}".format(num_talla)) or 0
-            print(egr_nuevo)
-            setattr(saldos, "tex_egres{0:02d}".format(num_talla), egr_nuevo)
-        saldos.save()
+        try:
+            saldos = self.mvi_product.saldoxtalla
+        except ObjectDoesNotExist:
+            existencia = self.mvi_product
+            comprom_actual = getattr(existencia, 'exs_comprom', None)
+            existencia.exs_comprom = (comprom_actual or 0) + self.mvi_kntidad
+            existencia.exs_dsponib = (existencia.exs_dsponib or 0) - existencia.exs_comprom
+            existencia.save()
+        else:
+            # for num_talla in range(1, 14):
+            #     egr_actual = getattr(saldos, "tex_egres{0:02d}".format(num_talla)) or 0
+            #     egr_nuevo = egr_actual + getattr(self, "mvi_talla{0:02d}".format(num_talla)) or 0
+            #     setattr(saldos, "tex_egres{0:02d}".format(num_talla), egr_nuevo)
+            for num_talla in range(1, 14):
+                cmp_actual = getattr(saldos, "tex_compr{0:02d}".format(num_talla)) or 0
+                dsp_nuevo = cmp_actual + getattr(self, "mvi_talla{0:02d}".format(num_talla)) or 0
+                setattr(saldos, "tex_dispo{0:02d}".format(num_talla), dsp_nuevo)
+            saldos.save()
 
 
 class Factura(models.Model):
-    fac_idfactu = models.AutoField('Núm. de Factura', primary_key=True)
+    fac_idfactu = models.AutoField('Id. de Factura', primary_key=True)
+    fac_ctrlfac = models.CharField('Núm. de Factura', max_length=12, editable=False)
     fac_npedido = models.ForeignKey(Pedido, verbose_name='Núm. de Pedido', null=True, blank=True)
     fac_fechfac = models.DateField('Fecha de la factura', default=timezone.now)
     fac_cajanum = models.ForeignKey(Caja, verbose_name='Núm. de caja', null=True, blank=True)
@@ -172,12 +187,23 @@ class Factura(models.Model):
     fac_otropgo = models.DecimalField('Internet (Paypal)', max_digits=15, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
-        return self.fac_idfactu if self.fac_idfactu else super(Factura, self).__str__()
+        return str(self.fac_idfactu) if self.fac_idfactu else super(Factura, self).__str__()
 
+    def save(self, *args, **kwargs):
+        # if not self.id:
+        # if 'request' in kwargs and self.user is None:
+        # import pdb; pdb.set_trace()
+        if 'request' in kwargs:
+            request = kwargs.pop('request')
+            if request:
+                sucursal = request.user.sucursal
+                # TODO: Validar en views que Sucursal de usuario esté activa y tenga Controlador
+                controlador = Controlador.objects.get(ctl_sucrsal=sucursal)
 
-# TODO: Adecuar campos correctos finales antes de crear migraciones
-# class Controlador(models.Model):
-#     ctl_idcontr = models.CharField('Cód. del control de secuencia', primary_key=True)
-#     ctl_detalle = models.CharField('Detalle que  controla', max_length=20)
-#     ctl_abrevia = models.CharField('Abreviatura', max_length=10)
-#     ctl_secuenc = models.IntegerField('Secuencia del documento', )
+                with transaction.atomic():
+                    self.fac_ctrlfac = "{0:02d}{1:09d}".format(sucursal.id, controlador.ctl_secue01 + 1)
+                    controlador.ctl_secue01 += 1
+                    controlador.save()
+                    super(Factura, self).save(*args, **kwargs)
+        else:
+            super(Factura, self).save(*args, **kwargs)
