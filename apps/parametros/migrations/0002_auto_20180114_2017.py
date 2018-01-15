@@ -75,15 +75,15 @@ class Migration(migrations.Migration):
             name='ctl_secue10',
             field=models.PositiveIntegerField(blank=True, null=True, verbose_name='Secuencia 10'),
         ),
+        migrations.AlterField(
+            model_name='controlador',
+            name='ctl_idcontr',
+            field=models.AutoField(primary_key=True, serialize=False, verbose_name='Cód. del control de secuencia'),
+        ),
         migrations.AddField(
             model_name='controlador',
             name='ctl_sucrsal',
             field=models.OneToOneField(default=1, on_delete=django.db.models.deletion.CASCADE, to='parametros.Sucursal'),
             preserve_default=False,
-        ),
-        migrations.AlterField(
-            model_name='controlador',
-            name='ctl_idcontr',
-            field=models.AutoField(primary_key=True, serialize=False, verbose_name='Cód. del control de secuencia'),
         ),
     ]
