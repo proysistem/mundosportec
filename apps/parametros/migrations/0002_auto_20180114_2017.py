@@ -75,7 +75,11 @@ class Migration(migrations.Migration):
             name='ctl_secue10',
             field=models.PositiveIntegerField(blank=True, null=True, verbose_name='Secuencia 10'),
         ),
-        migrations.AlterField(
+        migrations.RemoveField(
+            model_name='controlador',
+            name='ctl_idcontr',
+        ),
+        migrations.AddField(
             model_name='controlador',
             name='ctl_idcontr',
             field=models.AutoField(primary_key=True, serialize=False, verbose_name='Cód. del control de secuencia'),
