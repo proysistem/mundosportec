@@ -35,21 +35,21 @@
 					 	{% if object_list %}
 					 	{% for var_tllfield in object_list %}
 					 	<tr>
-							<td class="columns_tab">{{ var_tllfield.jgo_divisio }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_idtalla }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_medid01 }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_medid02 }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_medid03 }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_medid04 }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_medid05 }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_medid06 }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_medid07 }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_medid08 }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_medid09 }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_medid10 }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_medid11 }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_medid12 }} </td>
-							<td class="columns_tab">{{ var_tllfield.jgo_medid13 }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_divisio }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_idtalla }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_medid01 }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_medid02 }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_medid03 }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_medid04 }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_medid05 }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_medid06 }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_medid07 }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_medid08 }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_medid09 }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_medid10 }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_medid11 }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_medid12 }} </td>
+							<td class="columns_tab_tall">{{ var_tllfield.jgo_medid13 }} </td>
 							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:tll_view'  var_tllfield.pk %}"></a></td>
 							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:tll_edit'  var_tllfield.pk %}"></a></td>
 							<td class="columns_tab"><a class="icon-trash botones" href="{% url 'inventarios:tll_delet' var_tllfield.pk %}"></a></td>

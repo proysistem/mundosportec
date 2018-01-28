@@ -21,6 +21,7 @@
 					 		<th class="head_tab">Provincia</th>
 					 		<th class="head_tab">País</th>
 					 		<th class="head_tab">Zip-cod</th>
+					 		<th class="head_tab">I.V.A.</th>
 					 		<th class="head_tab">Status</th>
 					 		<th class="head_tab" colspan="3">Opción</th>
 					 	</tr>
@@ -37,6 +38,7 @@
 							<td class="columns_tab">{{ var_sucfield.suc_estados }} </td>
 							<td class="columns_tab">{{ var_sucfield.suc_country }} </td>
 							<td class="columns_tab">{{ var_sucfield.suc_zipcodg }} </td>
+							<td class="columns_tab">{{ var_sucfield.suc_impuest }} </td>
 							<td class="columns_tab">{{ var_sucfield.suc_statreg }} </td>
 
 							<td class="columns_tab"><a class="icon-eye   botones" href="{% url 'parametros:suc_view'  var_sucfield.id %}"></a></td>

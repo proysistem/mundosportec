@@ -1,0 +1,39 @@
+{% extends 'base/base_inventarios.html' %}
+
+{% block title %} Crear Usuarios {% endblock title %}</title>
+
+			{% block context%}
+			<div class="crea_content">
+				<h3 class="crea_proceso">Manage: Usuarios</h3>
+				<a class="icon-reply crea_boton" href="{% url 'inventarios:div_panel' %}">Volver</a>
+
+			</div>
+			<div>
+				<form method="POST" enctype="multipart">{% csrf_token %}
+					<div class="form_content">
+						<div class="form_titulo"><h1>Crea Usuarios</h1></div>
+						<div class="form_esc">
+							<a class="icon-cancel" href="{% url 'usuarios:login' %}"></a>
+						</div>
+						{% if forms.error %}
+							<div class="form_errors" role="alert">
+								{{ form.error }}
+							</div>
+						{% endif %}
+						<div class="form_row"><div class="form_label"><label for="{{form.username.name}}">{{form.username.label}}</label></div><div class="form_widget">{{form.username}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.email.name}}">{{form.email.label}}</label></div><div class="form_widget">{{form.email}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.first_name.name}}">{{form.first_name.label}}</label></div><div class="form_widget">{{form.first_name}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.last_name.name}}">{{form.last_name.label}}</label></div><div class="form_widget">{{form.last_name}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.sucursal.name}}">{{form.sucursal.label}}</label></div><div class="form_widget">{{form.sucursal}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.telefono.name}}">{{form.telefono.label}}</label></div><div class="form_widget">{{form.telefono}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.celular.name}}">{{form.celular.label}}</label></div><div class="form_widget">{{form.celular}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.picture_user.name}}">{{form.picture_user.label}}</label></div><div class="form_widget">{{form.picture_user}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.is_activ.name}}">{{form.is_activ.label}}</label></div><div class="form_widget">{{form.is_activ}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.is_staff.name}}">{{form.is_staff.label}}</label></div><div class="form_widget">{{form.is_staff}}</div></div>
+						<br><br>
+						<div ><button class="icon-database form_submit" type="submit">  Guardar  </button></div>
+						<br>
+					</div>
+				</form>
+			</div>
+		{% endblock context%}

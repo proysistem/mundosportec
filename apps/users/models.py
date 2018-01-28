@@ -27,7 +27,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField('Usuario', max_length=25, unique=True)
     email = models.EmailField('e-mail')
     first_name = models.CharField('Primer Nombre', max_length=20)
-    last_name = models.CharField('Segundo Nombre', max_length=20)
+    last_name = models.CharField('Apellidos', max_length=20)
     sucursal = models.ForeignKey(Sucursal,  null=True, blank=True)
     telefono = models.CharField('Teléfono', max_length=15)
     celular = models.CharField('Celular', max_length=15)
@@ -35,8 +35,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
 
-    is_active = models.BooleanField('Status del Registro', default=True)
-    is_staff = models.BooleanField('Tipo de Usuario', default=False)
+    is_active = models.BooleanField('Status (Activo=On/Off', default=True)
+    is_staff = models.BooleanField('Usuario Staff (On/Off)', default=False)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']

@@ -20,6 +20,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^AppUsers/', include('apps.users.urls', namespace="usuarios",)),
     url(r'^AppParamt/', include('apps.parametros.urls', namespace="parametros",)),
     url(r'^AppInvent/', include('apps.inventarios.urls', namespace="inventarios",)),
     url(r'^AppComerc/', include('apps.comercial.urls', namespace="comercial",)),

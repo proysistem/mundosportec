@@ -13,6 +13,7 @@ class SucursalForm(forms.ModelForm):
             'suc_estados',
             'suc_country',
             'suc_zipcodg',
+            'suc_impuest',
             'suc_statreg',
         ]
         labels = {
@@ -23,6 +24,7 @@ class SucursalForm(forms.ModelForm):
             'suc_estados': 'Provincia',
             'suc_country': 'País',
             'suc_zipcodg': 'Cód.Postal',
+            'suc_impuest': 'I.V.A.',
             'suc_statreg': 'Status',
         }
         widgets = {
@@ -33,6 +35,7 @@ class SucursalForm(forms.ModelForm):
             'suc_estados': forms.Select(),
             'suc_country': forms.Select(),
             'suc_zipcodg': forms.Select(),
+            'suc_impuest': forms.NumberInput(),
             'suc_statreg': forms.TextInput(),
         }
 

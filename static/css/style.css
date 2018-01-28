@@ -1,7 +1,7 @@
 @charset "utf-8";
 * 	{
-	margin: 		0;
-	padding:		0;
+	margin: 0;
+	padding: 0;
 	text-decoration: none;
 	list-style: none;
  	}
@@ -59,6 +59,7 @@
 .columns_tab   /*  Clumnas para los datos, en las tablas   */
 	{
 	background: linear-gradient(#2B383A,#142224); /* Standard syntax */
+	font-size: 1.2em;
 	padding: 3px auto;
 	color: #fff;
 	}
@@ -72,17 +73,16 @@
 .columns_tab_tall   /*  Clumnas para los datos, en las tablas   */
 	{
 	background: linear-gradient(#2B383A,#142224); /* Standard syntax */
-	padding: 5px 0;
+	padding: 3px 0;
 	font-size: 1.20em;
-	text-align: right;
+	text-align: center;
+	color: #FFF;
 	}
-.columns_tab_tall>input
+.columns_tab_tall input
 	{
-	background-color: #F2F2CA;
 	width: 100%;
 	max-width: 100%;
 	font-size: 18px;
-	padding: 5px auto;
 	text-align: right;
 	}
 input:focus

@@ -1,0 +1,31 @@
+<body>
+
+</body>
+</html>
+
+
+{% extends 'base/base_main.html' %}
+
+{% block title %} Home {% endblock title %}</title>
+
+{% block context%}
+
+			<section class="fondo_page">
+				<article class="back_slide">
+					<div class="login">
+						<h2 class="login__title">Mundo Sport Admin</h2>
+						<form method="post" action="/login">
+							<input class="block input" type="email" name="email" placeholder="Correo electrónico" />
+							<input class="block input" type="password" name="password" placeholder="Contraseña" />
+							<span class="block secondary_text">¿Olvidaste tu contraseña?</span>
+							<button type="submit" class="block button">Ingresar</button>
+							<span class="bottom">© 2017 Mundo Sport</span>
+						</form>
+					</div>
+				</article>
+			</section>
+
+{% endblock context %}
+
+{% block js %}
+{% endblock js %}
