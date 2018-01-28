@@ -91,6 +91,7 @@ class Pedido(models.Model):
     ped_cliente = models.ForeignKey(Cliente)
     ped_vendedo = models.ForeignKey(Vendedor, null=True, blank=True)
     ped_statreg = models.CharField('Status del Registro', max_length=1, default=1)
+    ped_sucursa = models.ForeignKey(Sucursal, null=True, blank=True)
     # 1=En proceso, 2=Facturada, 7=Anulada, 9=Eliminada
 
     def __str__(self):

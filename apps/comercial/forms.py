@@ -345,6 +345,7 @@ class PedidoForm(forms.ModelForm):
                 'ped_fechped',
                 'ped_cliente',
                 'ped_vendedo',
+                'ped_sucursa',
         ]
         labels = {
                 # 'ped_tipomov': 'Tipo de Movimiento',
@@ -356,6 +357,7 @@ class PedidoForm(forms.ModelForm):
                 'ped_fechfac':   forms.DateInput(attrs={"type": "date"}),
                 'ped_cliente':   forms.Select(),
                 'ped_vendedo':   forms.Select(),
+                'ped_sucursa':   forms.HiddenInput(),
                 }
 
 

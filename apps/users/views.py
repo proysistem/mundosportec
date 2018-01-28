@@ -1,7 +1,7 @@
 from django.views.generic import CreateView
 from .models import User
 from .forms import Usuarioform
-from django.core.unresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy
 
 
 class UsrNuevo(CreateView):
