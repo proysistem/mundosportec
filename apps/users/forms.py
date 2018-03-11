@@ -12,6 +12,8 @@ class Usuarioform(UserCreationForm):
         model = User
         fields = [
             'username',
+            'password1',
+            'password2',
             'email',
             'first_name',
             'last_name',
@@ -34,3 +36,7 @@ class Usuarioform(UserCreationForm):
             'is_active':  'Activo',
             'is_staff':  'Staf',
             }
+
+        # widgets = {
+            # 'password': forms.PasswordInput(),
+            # }

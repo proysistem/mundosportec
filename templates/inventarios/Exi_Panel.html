@@ -64,6 +64,7 @@
 							<td class="columns_tab align_tex_right">{{ var_exifield.exs_dsponib|default:0|stringformat:"0.2f" }} </td>
 							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:exi_view' var_exifield.id %}"></a></td>
 							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:exi_edit' var_exifield.id %}"></a></td>
+							<td class="columns_tab"><a class="icon-trash botones" href="{% url 'inventarios:exi_delet' var_exifield.id %}"></a></td>
 						</tr>
 						{% endfor %}
 						{% else %}

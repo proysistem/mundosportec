@@ -191,6 +191,7 @@ class ColDelet(DeleteView):
     form_class = ColorForm
     template_name = 'inventarios/Col_Delet.html'
     success_url = reverse_lazy('inventarios:col_panel')
+
 # ======== T  A  B  T  A  L  L  A  S  =========== #
 
 
@@ -376,7 +377,6 @@ class ExiView(DetailView):
     queryset = Existencia.objects.select_related('saldoxtalla', 'exs_sucursa', 'exs_idmodel', 'exs_idmodel', 'exs_iddivis', 'exs_idmodel')
     # TODO: VER CANT. QUERIES
     # TODO: Evitar que el usuario ingrese a Detalle de Existencia que no sea de la misma sucursal
-
 
 
 class PopTalla(DetailView):

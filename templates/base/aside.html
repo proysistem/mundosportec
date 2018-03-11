@@ -5,6 +5,12 @@
 				<img class="foto_user" src="/static/images/placeholder300.png">
 			{% endcomment %}
 			<img class="foto_user" src="/static/images/siga.gif">
+		</div>
+		<div>
+			<div>Sucursal  {{ request.user.sucursal.id }} : {{ request.user.sucursal }}  </div>
+		</div>
+		<div>
+			<div>UIsuario <a href="{% url 'usuarios:usr_new' %}"> : </a> {{ request.user.username }}</div>
 		</div><br>
 		<div>
 			<h1>Aplicaciones</h1>
@@ -26,9 +32,7 @@
 		</div>
 		<div>
 			<td><a class="boton_aplicacion" href="{% url 'parametros:suc_panel' %}">Reportes</a></td>
-		</div> <br> <br>
-		<div>
-			<td><a class="boton_aplicacion" href="{% url 'usuarios:usr_new' %}">Reportes</a></td>
-		</div> <br> <br>
+		</div>
+		<br>
 	</div>
 </aside>

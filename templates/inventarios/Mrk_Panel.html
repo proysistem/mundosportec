@@ -20,7 +20,7 @@
 					 		<th class="head_tab">Status</th>
 					 		<th class="head_tab" colspan="3">Opcoón</th>
 					 	</tr>
-					</thead> 
+					</thead>
 					<tbody border="0">
 					 	{% if object_list %}
 					 	{% for var_mrkfield in object_list %}
@@ -33,7 +33,7 @@
 
 							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:mrk_view'  var_mrkfield.mrk_idmarca %}"></a></td>
 							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:mrk_edit'  var_mrkfield.mrk_idmarca %}"></a></td>
-							<td class="columns_tab"><a class="icon-trash botones" href="{% url 'inventarios:mrk_delet' var_mrkfield.mrk_idmarca %}"></a></td>
+							<td class="columns_tab"><a class="icon-trash botones" href="#"></a></td>
 						</tr>
 						{% endfor %}
 						{% else %}

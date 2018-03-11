@@ -9,18 +9,51 @@
 
 			</div>
 			<div>
-				<form method="POST" enctype="multipart">{% csrf_token %}
+				<form method="POST" enctype="multipart/form-data">{% csrf_token %}
 					<div class="form_content">
 						<div class="form_titulo"><h1>Crea Usuarios</h1></div>
 						<div class="form_esc">
-							<a class="icon-cancel" href="{% url 'usuarios:login' %}"></a>
+							<a class="icon-cancel" href="#"></a>
 						</div>
-						{% if forms.error %}
-							<div class="form_errors" role="alert">
-								{{ form.error }}
-							</div>
-						{% endif %}
+							{% if form.errors %}
+
+								<div class="form_errors" role="alert">
+									{{ form.errors }}
+								</div>
+
+							{% endif %}
+
+							{% for field in form %}
+								{% for error in field.errors %}
+									<strong>{{ field.label }}</strong>: {{ error }}<br>
+								{% endfor %}
+							{% endfor %}
+
+							{% for error in form.non_field_errors %}
+								<strong>{{ error }}</strong>
+							{% endfor %}
+
+
+							{% if nuevo_mov.errors %}
+
+								<div class="form_errors" role="alert">
+									{{ nuevo_mov.errors }}
+								</div>
+
+							{% endif %}
+
+							{% for field in nuevo_mov %}
+								{% for error in field.errors %}
+									<strong>{{ field.label }}</strong>: {{ error }}<br>
+								{% endfor %}
+							{% endfor %}
+
+							{% for error in nuevo_mov.non_field_errors %}
+								<strong>{{ error }}</strong>
+							{% endfor %}
 						<div class="form_row"><div class="form_label"><label for="{{form.username.name}}">{{form.username.label}}</label></div><div class="form_widget">{{form.username}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.password1.name}}">{{form.password1.label}}</label></div><div class="form_widget">{{form.password1}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.password2.name}}">{{form.password2.label}}</label></div><div class="form_widget">{{form.password2}}</div></div>
 						<div class="form_row"><div class="form_label"><label for="{{form.email.name}}">{{form.email.label}}</label></div><div class="form_widget">{{form.email}}</div></div>
 						<div class="form_row"><div class="form_label"><label for="{{form.first_name.name}}">{{form.first_name.label}}</label></div><div class="form_widget">{{form.first_name}}</div></div>
 						<div class="form_row"><div class="form_label"><label for="{{form.last_name.name}}">{{form.last_name.label}}</label></div><div class="form_widget">{{form.last_name}}</div></div>
@@ -28,7 +61,7 @@
 						<div class="form_row"><div class="form_label"><label for="{{form.telefono.name}}">{{form.telefono.label}}</label></div><div class="form_widget">{{form.telefono}}</div></div>
 						<div class="form_row"><div class="form_label"><label for="{{form.celular.name}}">{{form.celular.label}}</label></div><div class="form_widget">{{form.celular}}</div></div>
 						<div class="form_row"><div class="form_label"><label for="{{form.picture_user.name}}">{{form.picture_user.label}}</label></div><div class="form_widget">{{form.picture_user}}</div></div>
-						<div class="form_row"><div class="form_label"><label for="{{form.is_activ.name}}">{{form.is_activ.label}}</label></div><div class="form_widget">{{form.is_activ}}</div></div>
+						<div class="form_row"><div class="form_label"><label for="{{form.is_active.name}}">{{form.is_active.label}}</label></div><div class="form_widget">{{form.is_active}}</div></div>
 						<div class="form_row"><div class="form_label"><label for="{{form.is_staff.name}}">{{form.is_staff.label}}</label></div><div class="form_widget">{{form.is_staff}}</div></div>
 						<br><br>
 						<div ><button class="icon-database form_submit" type="submit">  Guardar  </button></div>

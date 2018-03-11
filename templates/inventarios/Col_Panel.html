@@ -20,7 +20,7 @@
 					 		<th class="head_tab">Status</th>
 					 		<th class="head_tab" colspan="3">Opcoón</th>
 					 	</tr>
-					</thead> 
+					</thead>
 					<tbody border="0">
 					 	{% if object_list %}
 					 	{% for var_colfield in object_list %}
@@ -33,7 +33,7 @@
 
 							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:col_view'  var_colfield.col_idcolor %}"></a></td>
 							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:col_edit'  var_colfield.col_idcolor %}"></a></td>
-							<td class="columns_tab"><a class="icon-trash botones" href="{% url 'inventarios:col_delet' var_colfield.col_idcolor %}"></a></td>
+							<td class="columns_tab"><a class="icon-trash botones" href="#"></a></td>
 						</tr>
 						{% endfor %}
 						{% else %}
