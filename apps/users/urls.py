@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.conf.urls import url
 from apps.users.views import UsrNuevo
 
 urlpatterns = [

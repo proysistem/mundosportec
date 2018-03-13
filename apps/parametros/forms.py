@@ -6,6 +6,8 @@ class SucursalForm(forms.ModelForm):
     class Meta:
         model = Sucursal
         fields = [
+
+            'suc_codgsuc',
             'suc_nombres',
             'suc_abrevia',
             'suc_direcci',
@@ -17,6 +19,7 @@ class SucursalForm(forms.ModelForm):
             'suc_statreg',
         ]
         labels = {
+            'suc_codgsuc': 'Cód. Sucursal',
             'suc_nombres': 'Nombre',
             'suc_abrevia': 'Abreviatura',
             'suc_direcci': 'Dirección',
@@ -28,6 +31,7 @@ class SucursalForm(forms.ModelForm):
             'suc_statreg': 'Status',
         }
         widgets = {
+            'suc_codgsuc': forms.TextInput(),
             'suc_nombres': forms.TextInput(),
             'suc_abrevia': forms.TextInput(),
             'suc_direcci': forms.TextInput(),

@@ -1,3 +1,4 @@
+
 {% extends 'base/base_inventarios.html' %}
 
 
@@ -15,9 +16,9 @@
 			</div>
 			<div>
 
-				<form method="POST" enctype="multipart">{% csrf_token %}
+				<form method="POST" enctype="multipart/form-data">{% csrf_token %}
 					<div class="form_content">
-						<div class="form_titulo"><h1>Visualiza Productos</h1></div>
+						<div class="form_titulo"><h1>Editar Productos</h1></div>
 						<div class="form_esc">
 							<a class="icon-cancel" href="{% url 'inventarios:exi_panel' %}"></a>
 						</div>
@@ -274,7 +275,7 @@
 						</table>
 						<table border="0">
 							<tr><td class="form_label width_020">{{form.exs_feching.label}}</td> <td class="form_widget">{{form.exs_feching}}</td> <td colspan="2"><h2 CLASS="align_tex_center">P  R  E  C  I  O  S</h2></td> <td class="form_widget">{{form.exs_imgprod}}</td></tr>
-							<tr><td class="form_label width_020">{{form.exs_fechegr.label}}</td> <td class="form_widget">{{form.exs_fechegr}}</td> <td colspan="2"></td><td rowspan="6" class="form_label">{{form.exs_imgprod.label}}</td> </tr>
+							<tr><td class="form_label width_020">{{form.exs_fechegr.label}}</td> <td class="form_widget">{{form.exs_fechegr}}</td> <td colspan="2"></td>                                                      <td rowspan="6" class="form_widget">{% if object.exs_imgprod %}<img src="{{object.exs_imgprod.url }}" width="320px"> {% endif %} </td></tr>
 							<tr><td class="form_label width_020">{{form.exs_fechinv.label}}</td> <td class="form_widget">{{form.exs_fechinv}}</td> <td class="form_label">{{form.exs_distrib.label}}</td><td class="form_widget">{{form.exs_distrib}}</td></tr>
 							<tr><td class="form_label width_020">{{form.exs_costant.label}}</td> <td class="form_widget">{{form.exs_costant}}</td> <td class="form_label">{{form.exs_mayoris.label}}</td><td class="form_widget">{{form.exs_mayoris}}</td></tr>
 							<tr><td class="form_label width_020">{{form.exs_dispant.label}}</td> <td class="form_widget">{{form.exs_dispant}}</td> <td class="form_label">{{form.exs_detalls.label}}</td><td class="form_widget">{{form.exs_detalls}}</td></tr>

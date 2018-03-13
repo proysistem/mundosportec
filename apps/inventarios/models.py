@@ -133,7 +133,7 @@ class Existencia(models.Model):
 
     def generate_id(self):
         product_id = "{0:02d}{1:02d}{2}{3}{4}".format(
-            self.exs_sucursa.pk,  # 2
+            self.exs_sucursa.suc_codgsuc,  # 2
             self.exs_iddivis.pk,  # 2
             self.exs_idmarca.pk,  # 3
             self.exs_idmodel.pk,  # 3

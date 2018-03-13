@@ -1,6 +1,7 @@
 from django import forms
 from .models import Existencia, Saldoxtalla, Division, Marca, Modelo, Color, Tabtalla
 from django.utils.timezone import localtime, now
+from apps.parametros.models import Sucursal
 from decimal import Decimal
 
 
@@ -244,12 +245,16 @@ class ExistenciaEditForm(forms.ModelForm):
 
     # field = forms.DecimalField(label="Etiqueta", widget=)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         super(ExistenciaEditForm, self).__init__(*args, **kwargs)
         if 'instance' in kwargs:
             self.fields['exs_saldinc'].widget = forms.NumberInput(attrs={"step": "0.01"})
             # kwargs['instance'].exs_saldinc = kwargs['instance'].exs_saldinc.quantize(Decimal('0.01'))
             # TODO: Quantize all Decimal Fields
+
+        self.fields['exs_sucursa'] = forms.ModelChoiceField(
+            queryset=Sucursal.objects.filter(id=user.sucursal.id)
+        )
 
     class Meta:
         model = Existencia
@@ -444,6 +449,12 @@ class ExistenciaForm(forms.ModelForm):
         initial=localtime(now()).date(),
         widget=forms.DateInput(attrs={"type": "date"}, format='%Y-%m-%d',)
     )
+
+    def __init__(self, user, *args, **kwargs):
+        super(ExistenciaForm, self).__init__(*args, **kwargs)
+        self.fields['exs_sucursa'] = forms.ModelChoiceField(
+            queryset=Sucursal.objects.filter(id=user.sucursal.id)
+        )
 
     class Meta:
         model = Existencia

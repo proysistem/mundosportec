@@ -1,7 +1,5 @@
-from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 User = get_user_model()
 
@@ -36,7 +34,3 @@ class Usuarioform(UserCreationForm):
             'is_active':  'Activo',
             'is_staff':  'Staf',
             }
-
-        # widgets = {
-            # 'password': forms.PasswordInput(),
-            # }

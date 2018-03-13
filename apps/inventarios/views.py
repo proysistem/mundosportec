@@ -393,6 +393,27 @@ class ExiNuevo(CreateView):
     form_class = ExistenciaForm
     template_name = 'inventarios/Exi_New.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(ExiNuevo, self).get_form_kwargs()
+        try:
+            user = self.request.user
+        except:
+            pass
+        else:
+            kwargs.update({"user": user})
+        return kwargs
+
+    def get_initial(self):
+        initial = {}
+        # import pdb; pdb.set_trace()
+        try:
+            sucursal = self.request.user.sucursal
+        except:
+            pass
+        else:
+            initial['exs_sucursa'] = sucursal.pk
+        return initial
+
     def get_success_url(self):
         return reverse_lazy('inventarios:exi_edit', kwargs={'pk': self.object.pk})
 
@@ -421,8 +442,25 @@ class ExiEdita(UpdateView):
     template_name = 'inventarios/Exi_Edit.html'
     success_url = reverse_lazy('inventarios:exi_panel')
 
+    def get_form_kwargs(self):
+        kwargs = super(ExiEdita, self).get_form_kwargs()
+        try:
+            user = self.request.user
+        except:
+            pass
+        else:
+            kwargs.update({"user": user})
+        return kwargs
+
     def get_initial(self):
         initial = {}
+        try:
+            sucursal = self.request.user.sucursal
+        except:
+            pass
+        else:
+            initial['exs_sucursa'] = sucursal.pk
+
         try:
             sxt = Saldoxtalla.objects.get(tex_product=self.object)
         except:

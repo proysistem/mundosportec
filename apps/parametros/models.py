@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 class TimeStampModel(models.Model):
@@ -54,6 +55,7 @@ class Zipcodigo(models.Model):
 
 class Sucursal(models.Model):
 
+    suc_codgsuc = models.PositiveIntegerField("Cód.Sucursal", unique=True, db_index=True)
     suc_nombres = models.CharField("Nombre", max_length=30)
     suc_abrevia = models.CharField("Abreviatura", max_length=15)
     suc_direcci = models.CharField("Dirección", max_length=45)
@@ -65,7 +67,7 @@ class Sucursal(models.Model):
     suc_statreg = models.CharField("Status del Registro", max_length=1)
 
     def __str__(self):
-        return "%s" % (self.suc_nombres)
+        return "%s %s" % (self.suc_codgsuc, self.suc_nombres)
 
 
 class Categoria(models.Model):
@@ -87,7 +89,7 @@ class Categoria(models.Model):
 class Controlador(models.Model):
     ctl_idcontr = models.AutoField('Cód. del control de secuencia', primary_key=True)
     ctl_sucrsal = models.OneToOneField('Sucursal')
-    ctl_secue01 = models.PositiveIntegerField('Secuencia 01', null=True, blank=True)
+    ctl_secue01 = models.PositiveIntegerField('Secuencia 01 (Factura)', null=True, blank=True)
     ctl_secue02 = models.PositiveIntegerField('Secuencia 02', null=True, blank=True)
     ctl_secue03 = models.PositiveIntegerField('Secuencia 03', null=True, blank=True)
     ctl_secue04 = models.PositiveIntegerField('Secuencia 04', null=True, blank=True)
