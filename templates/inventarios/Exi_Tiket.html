@@ -19,6 +19,7 @@
                                             {{ var_exifield.exs_detalle }}<br>
                                             Talla.: {{ talla }}<br>
                                             <span class="barcode"> {{ var_exifield.exs_product }} </span>
+                                            Cód.aux: {{ var_exifield.exs_costact }}
                                         </td>
                                     {% cycle "" "</tr>" %}
                                 {% endfor %}
@@ -33,6 +34,7 @@
                                         {{ var_exifield.exs_detalle }}<br>
                                         Talla.: --- <br>
                                         <span class="barcode"> {{ var_exifield.exs_product }} </span>
+                                        Cód.aux: {{ var_exifield.exs_costact }}
                                     </td>
                                 {% cycle "" "</tr>" %}
                             {% endfor %}
