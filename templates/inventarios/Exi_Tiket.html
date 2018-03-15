@@ -4,52 +4,37 @@
 
 {% block context %}
 
-
-<div>
-    <table width="20%">
+<div id="tickets">
+    <table width="10%">
         <tbody border="0">
             {% if productos %}
                {% for var_exifield in productos %}
-
                         {% if var_exifield.saldoxtalla %}
                             {% for talla, saldo_talla in var_exifield|por_tallas:'tex_actua' %}
                                 {% for _ in saldo_talla|por_saldo %}
-
-
-
-
-
-                                    <tr><td class="align_tex_center"><h3>Mundo Sport</h3><br></td></tr>
-                                    <tr>
-                                        <td>{{ var_exifield.exs_detalle }} </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align_tex_center">Talla.: {{ talla }} </td>
-                                    </tr>
-                                    <tr>
-                                    </tr>
-                                    <tr>
-                                        <td class="barcode"> {{ var_exifield.exs_product }} </td>
-                                    </tr>
-                                    <tr><td><br><br></td></tr>
+                                    {% cycle "<tr>" "" %}
+                                        <td class="align_tex_center">
+                                            <br>
+                                            <h3>Mundo Sport</h3><br>
+                                            {{ var_exifield.exs_detalle }}<br>
+                                            Talla.: {{ talla }}<br>
+                                            <span class="barcode"> {{ var_exifield.exs_product }} </span>
+                                        </td>
+                                    {% cycle "" "</tr>" %}
                                 {% endfor %}
                             {% endfor %}
                         {% else %}
                             {% for _ in var_exifield.exs_saldact|por_saldo %}
                                 {{ saldo_talla }}
-                                <tr><td class="align_tex_center"><h3>Mundo Sport</h3><br></td></tr>
-                                <tr>
-                                    <td>{{ var_exifield.exs_detalle }} </td>
-                                </tr>
-                                <tr>
-                                    <td class="align_tex_center">Talla.: --- </td>
-                                </tr>
-                                <tr>
-                                </tr>
-                                <tr>
-                                    <td class="barcode"> {{ var_exifield.exs_product }} </td>
-                                </tr>
-                                <tr><td><br><br></td></tr>
+                                {% cycle "<tr>" "" %}
+                                    <td class="align_tex_center">
+                                        <br>
+                                        <h3>Mundo Sport</h3><br>
+                                        {{ var_exifield.exs_detalle }}<br>
+                                        Talla.: --- <br>
+                                        <span class="barcode"> {{ var_exifield.exs_product }} </span>
+                                    </td>
+                                {% cycle "" "</tr>" %}
                             {% endfor %}
                         {% endif %}
                 {% endfor %}
