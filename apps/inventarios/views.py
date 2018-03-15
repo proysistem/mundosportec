@@ -325,35 +325,20 @@ class ExiTiket(ListView):
     # queryset = Existencia.objects.filter(exs_saldact__gte=0.00)
 
     def get_queryset(self):
-        return Existencia.objects.select_related('exs_idunida', 'saldoxtalla')
+       return Existencia.objects.select_related('exs_idunida', 'saldoxtalla')
+
+    # def get_queryset(self):
+        # queryset = super(ExiTiket, self).get_queryset()
+        # user = self.request.user
+        # sucursal = user.sucursal.pk
+        # return queryset.filter(exs_sucursa=sucursal)
+
 
     # def get_context_data(self, **kwargs):
     #     context = super(ExiTiket, self).get_context_data(**kwargs)
 
     #     context['totaldesaldos'] = self.get_queryset().aggregate(totaldesaldos=Sum('exs_saldact'))['totaldesaldos']
     #     return context
-
-    # def get_initial(self):
-    #     tll_actual = {}
-    #     try:
-    #         sxt = Saldoxtalla.objects.get(tex_product=self.object)
-    #     except:
-    #         pass
-    #     else:
-    #         tll_actual['tex_actua01'] = sxt.tex_actua01
-    #         tll_actual['tex_actua02'] = sxt.tex_actua02
-    #         tll_actual['tex_actua03'] = sxt.tex_actua03
-    #         tll_actual['tex_actua04'] = sxt.tex_actua04
-    #         tll_actual['tex_actua05'] = sxt.tex_actua05
-    #         tll_actual['tex_actua06'] = sxt.tex_actua06
-    #         tll_actual['tex_actua07'] = sxt.tex_actua07
-    #         tll_actual['tex_actua08'] = sxt.tex_actua08
-    #         tll_actual['tex_actua09'] = sxt.tex_actua09
-    #         tll_actual['tex_actua10'] = sxt.tex_actua10
-    #         tll_actual['tex_actua11'] = sxt.tex_actua11
-    #         tll_actual['tex_actua12'] = sxt.tex_actua12
-    #         tll_actual['tex_actua13'] = sxt.tex_actua13
-    #     return tll_actual
 
 
 class ExiLista(ListView):

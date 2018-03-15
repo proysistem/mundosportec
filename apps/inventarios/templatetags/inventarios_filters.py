@@ -19,5 +19,4 @@ def iterate_per_size(existencia, saldo_prefijo):
 
 @register.filter(name='por_saldo')
 def iterate_per_saldo(saldo):
-    print(saldo)
-    return [i for i in range(int(saldo))]
+    return [i for i in range(int(saldo))] if saldo else []
