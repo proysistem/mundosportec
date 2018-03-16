@@ -24,7 +24,7 @@ class Unidad(models.Model):
 class Division(models.Model):
 
     div_detalle = models.CharField('Detalle', max_length=20)
-    div_abrevia = models.CharField('Abreviatura', max_length=10)
+    div_abrevia = models.CharField('Abreviatura', max_length=7)
     div_indicad = models.IntegerField('Un indicador', default=1)
     div_statreg = models.BooleanField('Status del Registro', default=True)
 
@@ -74,7 +74,7 @@ class Modelo(models.Model):
     mod_idmodel = models.CharField('Código de Modelo', max_length=5, primary_key=True)
     mod_idmarca = models.ForeignKey(Marca)
     mod_detalle = models.CharField('Detalle', max_length=20)
-    mod_abrevia = models.CharField('Abreviatura', max_length=10)
+    mod_abrevia = models.CharField('Abreviatura', max_length=8)
     mod_tabtall = models.ForeignKey(Tabtalla, null=True, blank=True)
     mod_statreg = models.BooleanField('Status del Registro', default=True)
 
@@ -86,7 +86,7 @@ class Color(models.Model):
 
     col_idcolor = models.CharField('Código de Color', max_length=5, primary_key=True)
     col_detalle = models.CharField('Detalle', max_length=15)
-    col_abrevia = models.CharField('Abreviatura', max_length=10)
+    col_abrevia = models.CharField('Abreviatura', max_length=5)
     col_indicad = models.CharField('Indicador', max_length=1, default=1)
     col_statreg = models.BooleanField('Status del Registro', default=True)
 
@@ -160,11 +160,11 @@ class Existencia(models.Model):
                 str(self.exs_idmodel.mod_detalle),  # 3
                 str(self.exs_idcolor.col_detalle)   # 3
             )
-            self.exs_abreria = "{} {} {} {}".format(
-                str(self.exs_iddivis.div_abrevia),  # 2
-                str(self.exs_idmarca.mrk_abrevia),  # 3
-                str(self.exs_idmodel.mod_abrevia),  # 3
-                str(self.exs_idcolor.col_abrevia)   # 3
+            self.exs_abrevia = "{} {} {} {}".format(
+                str(self.exs_idmarca.mrk_abrevia),  # 5
+                str(self.exs_iddivis.div_abrevia),  # 7
+                str(self.exs_idmodel.mod_abrevia),  # 8
+                str(self.exs_idcolor.col_abrevia)   # 5
             )
             self.exs_tabtall = "{}".format(
                 str(self.exs_idmodel.mod_tabtall)  # 2
