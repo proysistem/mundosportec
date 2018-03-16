@@ -7,15 +7,17 @@
 /*  src: url({% static 'font/IDAutomationHC39M.woff' %});  */
     src: url('../font/IDAutomationHC39M.woff');
     }
-/* TODO: Colocar en su sitio */
-#tickets .align_tex_center{
-    padding-left:12px; padding-right: 12px;
-    font-size: 80%;
-    }
+
 .barcode
     {
     font-family: IDAutomationHC39M;
+    }
 .print_head
     {
     height: 1.5em;
+    }
+/* TODO: Colocar en su sitio */
+#tickets .align_tex_center{
+    padding-left:5px; padding-right: 5px;
+    font-size: 85%;
     }

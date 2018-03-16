@@ -5,8 +5,8 @@
 {% block context %}
 
 <div id="tickets">
-    <table width="10%">
-        <tbody border="0">
+    <table width="10%" border="0">
+        <tbody>
             {% if productos %}
                {% for var_exifield in productos %}
                         {% if var_exifield.saldoxtalla %}
@@ -14,11 +14,11 @@
                                 {% for _ in saldo_talla|por_saldo %}
                                     {% cycle "<tr>" "" %}
                                         <td class="align_tex_center">
-                                            <br>
                                             {{ var_exifield.exs_abrevia }}<br>
                                             Talla.: {{ talla }}<br>
                                             <span class="barcode"> {{ var_exifield.exs_product }} </span>
-                                            Cód.aux: {{ var_exifield.exs_costact }}
+                                            Cód.aux: {{ var_exifield.exs_costact }}<br>
+                                            .
                                         </td>
                                     {% cycle "" "</tr>" %}
                                 {% endfor %}
@@ -28,7 +28,6 @@
                                 {{ saldo_talla }}
                                 {% cycle "<tr>" "" %}
                                     <td class="align_tex_center">
-                                        <br>
                                         {{ var_exifield.exs_abrevia }}<br>
                                         Talla.: --- <br>
                                         <span class="barcode"> {{ var_exifield.exs_product }} </span>
