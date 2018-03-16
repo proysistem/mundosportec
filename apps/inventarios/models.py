@@ -161,9 +161,9 @@ class Existencia(models.Model):
                 str(self.exs_idcolor.col_detalle)   # 3
             )
             self.exs_abrevia = "{} {} {} {}".format(
-                str(self.exs_idmarca.mrk_abrevia),  # 5
-                str(self.exs_iddivis.div_abrevia),  # 7
-                str(self.exs_idmodel.mod_abrevia),  # 8
+                str(self.exs_idmarca.mrk_abrevia),  # 05
+                str(self.exs_iddivis.div_abrevia),  # 07
+                str(self.exs_idmodel.mod_abrevia),  # 08
                 str(self.exs_idcolor.col_abrevia)   # 10
             )
             self.exs_tabtall = "{}".format(

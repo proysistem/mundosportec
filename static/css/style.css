@@ -105,24 +105,24 @@ input:focus
     }
 .pager_botons
     {
-    position: relative;
-    display: flex;
     background-color: red;
+    display: flex;
     list-style: none;
     margin-bottom: 3px;
+    position: relative;
     }
 .pager_next, .pager_prev
     {
-    position: absolute;
-    height: 35px;
-    width: 120px;
-    color: #fff;
+    background: linear-gradient(#808383, #0F292C); /* Standard syntax */
     border-radius: 2% 2% 2% 2%;
+    color: #fff;
+    height: 35px;
+    padding: 10px 0 0 0;
+    position: absolute;
     right: 20px;
     text-align: center;
     text-decoration: none;
-    padding: 10px 0 0 0;
-    background: linear-gradient(#808383, #0F292C); /* Standard syntax */
+    width: 120px;
     }
 .pager_prev
     {
