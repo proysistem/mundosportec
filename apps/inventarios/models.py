@@ -86,7 +86,7 @@ class Color(models.Model):
 
     col_idcolor = models.CharField('Código de Color', max_length=5, primary_key=True)
     col_detalle = models.CharField('Detalle', max_length=15)
-    col_abrevia = models.CharField('Abreviatura', max_length=5)
+    col_abrevia = models.CharField('Abreviatura', max_length=10)
     col_indicad = models.CharField('Indicador', max_length=1, default=1)
     col_statreg = models.BooleanField('Status del Registro', default=True)
 
@@ -102,7 +102,7 @@ class Existencia(models.Model):
     exs_idcolor = models.ForeignKey(Color)
     exs_product = models.CharField('Cód. Producto', max_length=13, editable=False, unique=True, db_index=True)
     exs_detalle = models.CharField('Detalle del Producto', editable=False, max_length=45)
-    exs_abrevia = models.CharField('Abreviatura del Producto', editable=False, max_length=25)
+    exs_abrevia = models.CharField('Abreviatura del Producto', editable=False, max_length=30)
     exs_tpoprod = models.ForeignKey(Tipoproducto)
     exs_tabtall = models.CharField('Tabla de Tallas', editable=False, max_length=5, blank=True, null=True)
     exs_idunida = models.ForeignKey(Unidad)
@@ -164,7 +164,7 @@ class Existencia(models.Model):
                 str(self.exs_idmarca.mrk_abrevia),  # 5
                 str(self.exs_iddivis.div_abrevia),  # 7
                 str(self.exs_idmodel.mod_abrevia),  # 8
-                str(self.exs_idcolor.col_abrevia)   # 5
+                str(self.exs_idcolor.col_abrevia)   # 10
             )
             self.exs_tabtall = "{}".format(
                 str(self.exs_idmodel.mod_tabtall)  # 2
