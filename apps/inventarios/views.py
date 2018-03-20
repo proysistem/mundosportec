@@ -314,15 +314,19 @@ class ExiPrint(ListView):
         return tll_actual
 
 
-class ExiTiket(ListView):
+class ExiTiket(DetailView):
+    """Listado de Existencia"""
+    template_name = 'inventarios/Exi_Tiket.html'
+    model = Existencia
+    queryset = Existencia.objects.select_related('saldoxtalla', 'exs_sucursa', 'exs_idmodel', 'exs_idmodel', 'exs_iddivis', 'exs_idmodel')
+
+
+class ExiTikts(ListView):
     """Reporte de Existencia"""
     model = Existencia
-    template_name = 'inventarios/Exi_Tiket.html'
+    template_name = 'inventarios/Exi_Tikts.html'
     ordering = ['exs_product']
     context_object_name = 'productos'
-    # ordering = ['exs_product', 'exs_tabtall']
-    # paginate_by = 54
-    # queryset = Existencia.objects.filter(exs_saldact__gte=0.00)
 
     def get_queryset(self):
        return Existencia.objects.select_related('exs_idunida', 'saldoxtalla')

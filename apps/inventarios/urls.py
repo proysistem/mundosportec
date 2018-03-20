@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 # from django.conf.urls import url
-from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista, ExiPrint, ExiQuery, ExiTiket,
+from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista, ExiPrint, ExiQuery, ExiTiket, ExiTikts,
                     DivLista, DivNuevo, DivView, DivEdita, DivDelet, MrkLista,
                     MrkNuevo, MrkView, MrkEdita, MrkDelet, ModLista, ModNuevo,
                     ModView, ModEdita, ModDelet, ColLista, ColNuevo, ColView,
@@ -50,7 +50,8 @@ urlpatterns = [
 
     url(r'^ExiPanel',                  login_required_view(ExiLista.as_view()), name='exi_panel'),
     url(r'^ExiPrint',                  login_required_view(ExiPrint.as_view()), name='exi_print'),
-    url(r'^ExiTiket',                  login_required_view(ExiTiket.as_view()), name='exi_tiket'),
+    url(r'^ExiTikts',                  login_required_view(ExiTikts.as_view()), name='exi_tikts'),
+    url(r'^ExiTiket/(?P<pk>\d+)/$',    login_required_view(ExiTiket.as_view()), name='exi_tiket'),
     url(r'^ExiNuevo/$',                login_required_view(ExiNuevo.as_view()), name='exi_new'),
     url(r'^ExiEdita/(?P<pk>\d+)/$',    login_required_view(ExiEdita.as_view()), name='exi_edit'),
     url(r'^ExiQuery/(?P<exs_product>\d+)/$',    login_required_view(ExiQuery.as_view()), name='exi_query'),

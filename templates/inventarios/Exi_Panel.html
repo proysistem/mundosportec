@@ -8,7 +8,7 @@
 				<h3 class="crea_proceso">Inventarios:  Existencias</h3>
 
 				<a class="icon-print align_tex_left crea_boton" target="_blank" href="{% url 'inventarios:exi_print' %}">Pirnt</a>
-				<a class="icon-print align_tex_left crea_boton" target="_blank" href="{% url 'inventarios:exi_tiket' %}">Tiket's</a>
+				<a class="icon-print align_tex_left crea_boton" target="_blank" href="{% url 'inventarios:exi_tikts' %}">Tiket's</a>
 				<a class="icon-database crea_boton" href="{% url 'inventarios:exi_new' %}">Crear nuevo</a>
 
 			</div>
@@ -28,22 +28,8 @@
 					 		<th class="head_tab">Saldo Comprom.</th>
 					 		<th class="head_tab">Saldo x Confirm.</th>
 					 		<th class="head_tab">Saldo Disponible</th>
-					 		{% comment %}
-					 		<th class="head_tab">Tall.01</th>
-					 		<th class="head_tab">Tall.02</th>
-					 		<th class="head_tab">Tall.03</th>
-					 		<th class="head_tab">Tall.04</th>
-					 		<th class="head_tab">Tall.05</th>
-					 		<th class="head_tab">Tall.06</th>
-					 		<th class="head_tab">Tall.07</th>
-					 		<th class="head_tab">Tall.08</th>
-					 		<th class="head_tab">Tall.09</th>
-					 		<th class="head_tab">Tall.10</th>
-					 		<th class="head_tab">Tall.11</th>
-					 		<th class="head_tab">Tall.12</th>
-					 		<th class="head_tab">Tall.13</th>
-					 		{% endcomment %}
 					 		<th class="head_tab" colspan="3">Opción</th>
+					 		<th class="head_tab">Tikt</th>
 					 	</tr>
 					</thead>
 					<tbody border="0">
@@ -62,10 +48,10 @@
 							<td class="columns_tab align_tex_right">{{ var_exifield.exs_comprom|default:0|stringformat:"0.2f" }} </td>
 							<td class="columns_tab align_tex_right">{{ var_exifield.exs_xconfir|default:0|stringformat:"0.2f" }} </td>
 							<td class="columns_tab align_tex_right">{{ var_exifield.exs_dsponib|default:0|stringformat:"0.2f" }} </td>
-							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'inventarios:exi_view' var_exifield.id %}"></a></td>
-							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'inventarios:exi_edit' var_exifield.id %}"></a></td>
-							<td class="columns_tab"><a class="icon-trash botones" href="{% url 'inventarios:exi_delet' var_exifield.id %}"></a></td>
-							<td class="columns_tab"><a class="icon-th-list botones" href="{% url 'inventarios:exi_edit' var_exifield.id %}"></a></td>
+							<td class="columns_tab"><a class="icon-eye botones"     href="{% url 'inventarios:exi_view' var_exifield.id %}"></a></td>
+							<td class="columns_tab"><a class="icon-edit botones"    href="{% url 'inventarios:exi_edit' var_exifield.id %}"></a></td>
+							<td class="columns_tab"><a class="icon-trash botones"   href="{% url 'inventarios:exi_delet' var_exifield.id %}"></a></td>
+							<td class="columns_tab"><a class="icon-th-list botones" href="{% url 'inventarios:exi_tiket' var_exifield.id %}" target="_blank"></a></td>
 						</tr>
 						{% endfor %}
 						{% else %}
