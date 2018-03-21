@@ -18,12 +18,12 @@
         <strong>{{ error }}</strong>
     {% endfor %}
     <div class="print_content">
-        <table class="print_item" border="0">
+        <table class="print_item_cont" border="0">
                 {% if object.saldoxtalla %}
                     {% for talla, saldo_talla in object|por_tallas:'tex_actua' %}
                         {% for _ in saldo_talla|por_saldo %}
                             {% cycle "<tr>" "" %}
-                                <td class="align_tex_center">
+                                <td class="print_item align_tex_center">
                                     {{ object.exs_abrevia }}<br>
                                     Talla.: {{ talla }}<br>
                                     <span class="barcode"> {{ object.exs_product }} </span>
