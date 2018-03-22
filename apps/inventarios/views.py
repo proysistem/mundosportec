@@ -16,7 +16,7 @@ from multi_form_view import MultiModelFormView
 
 from django.http import HttpResponse
 # from django.views.generic import View
-from .utils import render_to_pdf  # created in step 4
+# from .utils import render_to_pdf  # created in step 4
 
 # Create your views here.
 
@@ -318,16 +318,16 @@ class ExiPrint(ListView):
         return tll_actual
 
 
-class ExiEtiq(DetailView):
-    """Listado de Existencia"""
-    model = Existencia
+# class ExiEtiq(DetailView):
+#     """Listado de Existencia"""
+#     model = Existencia
 
-    def get_queryset(self):
-        contexto = Existencia.objects.select_related('saldoxtalla', 'exs_sucursa', 'exs_idmodel', 'exs_idmodel', 'exs_iddivis', 'exs_idmodel')
-        template = 'inventarios/Exi_Print.html'
-        html = template
-        pdf = render_to_pdf(template, contexto)
-        return HttpResponse(pdf, content_type='/inventarios/pdf')
+#     def get_queryset(self):
+#         contexto = Existencia.objects.select_related('saldoxtalla', 'exs_sucursa', 'exs_idmodel', 'exs_idmodel', 'exs_iddivis', 'exs_idmodel')
+#         template = 'inventarios/Exi_Print.html'
+#         html = template
+#         pdf = render_to_pdf(template, contexto)
+#         return HttpResponse(pdf, content_type='/inventarios/pdf')
 
 # pdf = render_to_pdf('inventarios/Exi_Etiq.html', contexto)
 
