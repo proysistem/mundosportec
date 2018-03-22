@@ -14,6 +14,10 @@ from django.contrib import messages
 
 from multi_form_view import MultiModelFormView
 
+from django.http import HttpResponse
+# from django.views.generic import View
+from .utils import render_to_pdf  # created in step 4
+
 # Create your views here.
 
 
@@ -312,6 +316,55 @@ class ExiPrint(ListView):
             tll_actual['tex_actua12'] = sxt.tex_actua12
             tll_actual['tex_actua13'] = sxt.tex_actua13
         return tll_actual
+
+
+class ExiEtiq(DetailView):
+    """Listado de Existencia"""
+    model = Existencia
+
+    def get_queryset(self):
+        contexto = Existencia.objects.select_related('saldoxtalla', 'exs_sucursa', 'exs_idmodel', 'exs_idmodel', 'exs_iddivis', 'exs_idmodel')
+        template = 'inventarios/Exi_Print.html'
+        html = template
+        pdf = render_to_pdf(template, contexto)
+        return HttpResponse(pdf, content_type='/inventarios/pdf')
+
+# pdf = render_to_pdf('inventarios/Exi_Etiq.html', contexto)
+
+#     def get_queryset(self):
+#        return Existencia.objects.select_related('exs_idunida', 'saldoxtalla')
+# class GeneratePdf(View):
+#     def get(self, request, *args, **kwargs):
+#         data = {
+#             'today': datetime.date.today(),
+#             'amount': 39.99,
+#             'customer_name': 'Cooper Mann',
+#             'order_id': 1233434,
+#             }
+
+# class GeneratePDF(View):
+#     def get(self, request, *args, **kwargs):
+
+#         template = get_template('invoice.html')
+#         context = {
+#             "invoice_id": 123,
+#             "customer_name": "John Cooper",
+#             "amount": 1399.99,
+#             "today": "Today",
+#         }
+#         html = template.render(context)
+#         pdf = render_to_pdf('invoice.html', context)
+
+#         if pdf:
+#             response = HttpResponse(pdf, content_type='application/pdf')
+#             filename = "Invoice_%s.pdf" %("12341231")
+#             content = "inline; filename='%s'" %(filename)
+#             download = request.GET.get("download")
+#             if download:
+#                 content = "attachment; filename='%s'" %(filename)
+#             response['Content-Disposition'] = content
+#             return response
+#         return HttpResponse("Not found")
 
 
 class ExiTiket(DetailView):
