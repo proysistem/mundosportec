@@ -7,6 +7,31 @@
 /*  src: url({% static 'font/IDAutomationHC39M.woff' %});  */
     src: url('../font/IDAutomationHC39M.woff');
     }
+
+/*@page {
+    size: {{ pagesize|default:"A4" }};
+    margin-left: 2.5cm;
+    margin-right: 2.5cm;
+    margin-top: 2.5cm;
+    margin-bottom: 2cm;
+
+    @frame header {
+        -pdf-frame-content: page-header;
+        margin-top: 0.7cm;
+        margin-right: 2mm;
+        margin-bottom: 0cm;
+        margin-left: 1.2cm;
+    }
+
+    @frame footer {
+        -pdf-frame-content: page-footer;
+        bottom: 0cm;
+        margin-left: 1cm;
+        margin-right: 1cm;
+        height: 1cm;
+    }
+}*/
+
 .print_content
     {
     /*background-color: green;
@@ -32,3 +57,39 @@
     {
     height: 1.5em;
     }
+/*
+    body {
+    font-weight: 200;
+    font-size: 14px;
+    }
+    .header {
+    font-size: 20px;
+    font-weight: 100;
+    text-align: center;
+    color: #007cae;
+    }
+    .title {
+    font-size: 22px;
+    font-weight: 100;
+    /* text-align: right;*/
+
+/*
+    padding: 10px 20px 0px 20px;
+    }
+    .title span {
+    color: #007cae;
+    }
+    .details {
+    padding: 10px 20px 0px 20px;
+    text-align: left !important;
+    /*margin-left: 40%;*/
+/*    }
+
+/*
+    .hrItem {
+    border: none;
+    height: 1px;
+    /* Set the hr color */
+/*    color: #333; /* old IE */
+/*    background-color: #fff; /* Modern Browsers */
+/*    }

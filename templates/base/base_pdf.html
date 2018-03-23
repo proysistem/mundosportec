@@ -1,7 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ title|default:"" }}</title>
+{% extends "base/base.html" %}
+
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontello.css' %}">
+{% endblock css %}
 
     {% block style_base %}
         {% comment %}
@@ -42,7 +47,9 @@
         {%block page_header%}
         {%endblock%}
 
+
         {%block content%}
+
         {%endblock%}
     </div>
 

@@ -1,24 +1,112 @@
-# from django.shortcuts import render
+from __future__ import absolute_import, division, print_function, unicode_literals
+import copy
+from django.views.generic.base import TemplateResponseMixin, ContextMixin, View
+from .rendering import render_to_pdf_response
+
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
 from django.db.models import Sum
 from django.views.defaults import page_not_found
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from .models import Division, Marca, Modelo, Color, Tabtalla, Existencia, Saldoxtalla
 from .forms import (DivisionForm, MarcaForm, ModeloForm, ColorForm, TabtallaForm, ExistenciaForm,
                     SaldoxtallaForm, ExistenciaEditForm)
-# from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura
-# {% extends 'base/base.html' %}
+
+# from django_xhtml2pdf.views import PdfMixin
 
 from django.contrib import messages
 
 from multi_form_view import MultiModelFormView
 
-from django.http import HttpResponse
+
 # from django.views.generic import View
 # from .utils import render_to_pdf  # created in step 4
 
+
+# class ExiPrint(PdfMixin, DetailView):
+#     model = Existencia
+#     template_name = "inventarios/Exi_Pdf.html"
+
+
+# coding=utf-8
+
+
+class PDFTemplateResponseMixin(TemplateResponseMixin):
+    """
+    A mixin class that implements PDF rendering and Django response construction.
+    """
+
+    #: Optional name of the PDF file for download. Leave blank for display in browser.
+    pdf_filename = None
+
+    #: Additional params passed to :func:`render_to_pdf_response`
+    pdf_kwargs = None
+
+    def get_pdf_filename(self):
+        """
+        Returns :attr:`pdf_filename` value by default.
+
+        If left blank the browser will display the PDF inline.
+        Otherwise it will pop up the "Save as.." dialog.
+
+        :rtype: :func:`str`
+        """
+        return self.pdf_filename
+
+    def get_pdf_kwargs(self):
+        """
+        Returns :attr:`pdf_kwargs` by default.
+
+        The kwargs are passed to :func:`render_to_pdf_response` and
+        :func:`xhtml2pdf.pisa.pisaDocument`.
+
+        :rtype: :class:`dict`
+        """
+        if self.pdf_kwargs is None:
+            return {}
+        return copy.copy(self.pdf_kwargs)
+
+    def get_pdf_response(self, context, **response_kwargs):
+        """
+        Renders PDF document and prepares response.
+
+        :returns: Django HTTP response
+        :rtype: :class:`django.http.HttpResponse`
+        """
+        return render_to_pdf_response(
+            request=self.request,
+            template=self.get_template_names('inventarios/Exi_Pdf.html'),
+            context=context,
+            using=self.template_engine,
+            filename=self.get_pdf_filename(),
+            **self.get_pdf_kwargs()
+        )
+
+    def render_to_response(self, context, **response_kwargs):
+        return self.get_pdf_response(context, **response_kwargs)
+
+
+class PDFTemplateView(PDFTemplateResponseMixin, ContextMixin, View):
+    """
+    Concrete view for serving PDF files.
+
+    .. code-block:: python
+
+        class HelloPDFView(PDFTemplateView):
+            template_name = "hello.html"
+    """
+
+    def get(self, request, *args, **kwargs):
+        """
+        Handles GET request and returns HTTP response.
+        """
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
+
+
+# ====================================================================#
 # Create your views here.
+# ====================================================================#
 
 
 class DivLista(ListView):

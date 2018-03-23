@@ -1,0 +1,178 @@
+{% extends 'base/base_pdf.html' %}
+
+{% block title %} pdf de productos {% endblock title %}</title>
+
+
+{%block content%}
+
+<div class="align_tex_center">
+    <h3>Inventarios:  Existencias</h3>
+</div>
+<div>
+    <table width="100%">
+        <thead>
+            <tr><th colspan="19"><hr></th></tr>
+            <tr class="borders print_head">
+                <th class="bicolorxx">Producto</th>
+                <th class="bicolorxx">Detalle del producto</th>
+                <th class="bicolorxx align_tex_left">Unid.</th>
+                <th class="bicolorxx align_tex_left">Tbla.</th>
+                <th class="bicolor">Talla-01</th>
+                <th class="bicolor">Talla-02</th>
+                <th class="bicolor">Talla-03</th>
+                <th class="bicolor">Talla-04</th>
+                <th class="bicolor">Talla-05</th>
+                <th class="bicolor">Talla-06</th>
+                <th class="bicolor">Talla-07</th>
+                <th class="bicolor">Talla-08</th>
+                <th class="bicolor">Talla-09</th>
+                <th class="bicolor">Talla-10</th>
+                <th class="bicolor">Talla-11</th>
+                <th class="bicolor">Talla-12</th>
+                <th class="bicolor">Talla-13</th>
+                <th class="bicolorxx align_tex_right">Saldo Actual</th>
+                <th class="bicolorxx align_tex_right">Precio-vnta. publico</th>
+            </tr>
+            <tr><th colspan="19"><hr></th></tr>
+        </thead>
+        <tbody border="0">
+            {% if productos %}
+            {% for var_exifield in productos %}
+            <tr>
+                <td class="barcode align_tex_center"> {{ var_exifield.exs_product }} </td>
+                <td>{{ var_exifield.exs_detalle }} </td>
+                <td>{{ var_exifield.exs_idunida }} </td>
+                <td>{{ var_exifield.exs_tabtall|default:"-" }} </td>
+                <td class="align_tex_right" colspan="13">
+                    <div>
+                        <div class="width_100">
+                            <ul class="container_pop width_100">
+                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid01 }}</li>
+                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid02 }}</li>
+                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid03 }}</li>
+                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid04 }}</li>
+                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid05 }}</li>
+                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid06 }}</li>
+                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid07 }}</li>
+                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid08 }}</li>
+                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid09 }}</li>
+                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid10 }}</li>
+                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid11 }}</li>
+                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid12 }}</li>
+                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid13 }}</li>
+                            </ul>
+                        </div>
+                        <div class="width_100">
+                            <ul class="container_pop width_100">
+                                {% if var_exifield.saldoxtalla.tex_actua01 > 0 %}
+                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua01|default:0|stringformat:"0.2f" }} </li>
+                                {% else %}
+                                    <li class="bicolor align_tex_center width_760">___</li>
+                                {% endif %}
+                                {% if var_exifield.saldoxtalla.tex_actua02 > 0 %}
+                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua02|default:0|stringformat:"0.2f" }} </li>
+                                {% else %}
+                                    <li class="bicolor align_tex_center width_760">___</li>
+                                {% endif %}
+                                {% if var_exifield.saldoxtalla.tex_actua03 > 0 %}
+                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua03|default:0|stringformat:"0.2f" }} </li>
+                                {% else %}
+                                    <li class="bicolor align_tex_center width_760">___</li>
+                                {% endif %}
+                                {% if var_exifield.saldoxtalla.tex_actua04 > 0 %}
+                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua04|default:0|stringformat:"0.2f" }} </li>
+                                {% else %}
+                                    <li class="bicolor align_tex_center width_760">___</li>
+                                {% endif %}
+                                {% if var_exifield.saldoxtalla.tex_actua05 > 0 %}
+                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua05|default:0|stringformat:"0.2f" }} </li>
+                                {% else %}
+                                    <li class="bicolor align_tex_center width_760">___</li>
+                                {% endif %}
+                                {% if var_exifield.saldoxtalla.tex_actua06 > 0 %}
+                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua06|default:0|stringformat:"0.2f" }} </li>
+                                {% else %}
+                                    <li class="bicolor align_tex_center width_760">___</li>
+                                {% endif %}
+                                {% if var_exifield.saldoxtalla.tex_actua07 > 0 %}
+                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua07|default:0|stringformat:"0.2f" }} </li>
+                                {% else %}
+                                    <li class="bicolor align_tex_center width_760">___</li>
+                                {% endif %}
+                                {% if var_exifield.saldoxtalla.tex_actua08 > 0 %}
+                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua08|default:0|stringformat:"0.2f" }} </li>
+                                {% else %}
+                                    <li class="bicolor align_tex_center width_760">___</li>
+                                {% endif %}
+                                {% if var_exifield.saldoxtalla.tex_actua09 > 0 %}
+                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua09|default:0|stringformat:"0.2f" }} </li>
+                                {% else %}
+                                    <li class="bicolor align_tex_center width_760">___</li>
+                                {% endif %}
+                                {% if var_exifield.saldoxtalla.tex_actua10 > 0 %}
+                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua10|default:0|stringformat:"0.2f" }} </li>
+                                {% else %}
+                                    <li class="bicolor align_tex_center width_760">___</li>
+                                {% endif %}
+                                {% if var_exifield.saldoxtalla.tex_actua11 > 0 %}
+                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua11|default:0|stringformat:"0.2f" }} </li>
+                                {% else %}
+                                    <li class="bicolor align_tex_center width_760">___</li>
+                                {% endif %}
+                                {% if var_exifield.saldoxtalla.tex_actua12 > 0 %}
+                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua12|default:0|stringformat:"0.2f" }} </li>
+                                {% else %}
+                                    <li class="bicolor align_tex_center width_760">___</li>
+                                {% endif %}
+                                {% if var_exifield.saldoxtalla.tex_actua13 > 0 %}
+                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua13|default:0|stringformat:"0.2f" }} </li>
+                                {% else %}
+                                    <li class="bicolor align_tex_center width_760">___</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <td class="align_tex_right">{{ var_exifield.exs_saldact|default:0|stringformat:"0.2f" }} </td>
+                <td class="align_tex_right">{{ var_exifield.exs_publico|default:0|stringformat:"0.2f" }} </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="19"><hr></td>
+            </tr>
+            <tr>
+                <td align="right" colspan="17">Total</td>
+                <td align="right">{{ totaldesaldos|default:0|stringformat:"0.2f" }}</td>
+                <td></td>
+            </tr>
+            {% else %}
+            <h4> No hay registros en Existencias </h4>
+            {% endif %}
+            <br/>
+        </tbody>
+    </table>
+    <div class="page_content">
+        <ul class="pager_botons">
+            <li>
+                {% if page_obj.has_previous %}
+                <a class="icon-left-open pager_prev" href="?page={{page_obj.previous_page_number}}">Previous</a>
+                {% endif %}
+            </li>
+            <li>
+                {% if page_obj.has_next %}
+                <a class="pager_next" href="?page={{page_obj.next_page_number}}">Next <span class="icon-right-open"></span></a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock context %}
+
+    <div id="page-footer">
+        {%block page_foot%}
+            {% comment %}
+                <pdf:pagenumber />
+            {% endcomment %}
+        {%endblock%}
+    </div>
+
