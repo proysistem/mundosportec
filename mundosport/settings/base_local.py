@@ -42,6 +42,8 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    '.site-packages.easy_pdfa'
+
     # 'django.contrib.sites'
 ]
 
