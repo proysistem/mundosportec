@@ -42,9 +42,6 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'easy_pdf',
-
-    # 'django.contrib.sites'
 ]
 
 LOCAL_APPS = [

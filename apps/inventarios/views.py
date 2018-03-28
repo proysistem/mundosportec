@@ -3,7 +3,7 @@ import copy
 from django.views.generic.base import TemplateResponseMixin, ContextMixin, View
 from .rendering import render_to_pdf_response
 
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.core.urlresolvers import reverse_lazy
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
 from django.db.models import Sum
 from django.views.defaults import page_not_found
@@ -26,9 +26,6 @@ from multi_form_view import MultiModelFormView
 # class ExiPrint(PdfMixin, DetailView):
 #     model = Existencia
 #     template_name = "inventarios/Exi_Pdf.html"
-
-
-# coding=utf-8
 
 
 class PDFTemplateResponseMixin(TemplateResponseMixin):
@@ -105,7 +102,7 @@ class PDFTemplateView(PDFTemplateResponseMixin, ContextMixin, View):
 
 
 # ====================================================================#
-# Create your views here.
+# ===============  D  I  V  I  S  I  O  N  E  S  =====================#
 # ====================================================================#
 
 
@@ -160,7 +157,9 @@ class Mrkkyselect(ListView):
     context_object_name = 'all_marcas'
 #   paginate_by = 10
 
-# ========M A R C A S=========== #
+# ====================================================================#
+# ========================  M A R C A S ==============================#
+# ====================================================================#
 
 
 class MrkLista(ListView):
@@ -200,7 +199,9 @@ class MrkDelet(DeleteView):
     template_name = 'inventarios/Mrk_Delet.html'
     success_url = reverse_lazy('inventarios:mrk_panel')
 
-    # ========M O  D  E  L  O  S=========== #
+# ====================================================================#
+# =====================  M O  D  E  L  O  S ==========================#
+# ====================================================================#
 
 
 class ModLista(ListView):
@@ -244,7 +245,9 @@ class ModDelet(DeleteView):
     template_name = 'inventarios/Mod_Delet.html'
     success_url = reverse_lazy('inventarios:mod_panel')
 
-# ======== C   O   L  O  R  E  S=========== #
+# ====================================================================#
+# ==================  C   O   L  O  R  E  S ==========================#
+# ====================================================================#
 
 
 class ColLista(ListView):
@@ -284,7 +287,9 @@ class ColDelet(DeleteView):
     template_name = 'inventarios/Col_Delet.html'
     success_url = reverse_lazy('inventarios:col_panel')
 
-# ======== T  A  B  T  A  L  L  A  S  =========== #
+# ====================================================================#
+# ================  T  A  B  T  A  L  L  A  S  =======================#
+# ====================================================================#
 
 
 class TllLista(ListView):
@@ -324,8 +329,10 @@ class TllDelet(DeleteView):
     template_name = 'inventarios/Tll_Delet.html'
     success_url = reverse_lazy('inventarios:tll_panel')
 
+# ====================================================================#
+# ==============  E  X  I  S  T  E  N  C  I  A  S  ===================#
+# ====================================================================#
 
-# ======== E  X  I  S  T  E  N  C  I  A  S =========== #
 
 class PopExist(ListView):
     """Listado de Existencia"""
@@ -470,7 +477,7 @@ class ExiTikts(ListView):
     context_object_name = 'productos'
 
     def get_queryset(self):
-       return Existencia.objects.select_related('exs_idunida', 'saldoxtalla')
+        return Existencia.objects.select_related('exs_idunida', 'saldoxtalla')
 
     # def get_queryset(self):
         # queryset = super(ExiTiket, self).get_queryset()
@@ -658,8 +665,9 @@ class ExiDelet(DeleteView):
     template_name = 'inventarios/Exi_Delet.html'
     success_url = reverse_lazy('inventarios:exi_panel')
 
-
-# ======== SALDOS X TALLAS =========== #
+# ====================================================================#
+# ==================  SALDOS  X  TALLAS  =============================#
+# ====================================================================#
 
 
 class SxtLista(ListView):

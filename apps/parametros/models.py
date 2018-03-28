@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.exceptions import ValidationError
+# from django.core.exceptions import ValidationError
 
 
 class TimeStampModel(models.Model):
@@ -11,7 +11,6 @@ class TimeStampModel(models.Model):
 
 
 class Pais(models.Model):
-
     pai_detalle = models.CharField("Nombre", max_length=25)
     pai_abrevia = models.CharField("Abreviatura", max_length=10)
 
@@ -20,7 +19,6 @@ class Pais(models.Model):
 
 
 class Provincia(models.Model):
-
     est_country = models.ForeignKey(Pais)
     est_detalle = models.CharField("Nombre", max_length=25)
     est_abrevia = models.CharField("Abreviatura", max_length=10)
@@ -31,7 +29,6 @@ class Provincia(models.Model):
 
 
 class Ciudad(models.Model):
-
     ciu_estados = models.ForeignKey(Provincia)
     ciu_country = models.ForeignKey(Pais)
     ciu_nombres = models.CharField("Nombre", max_length=25)
@@ -43,7 +40,6 @@ class Ciudad(models.Model):
 
 
 class Zipcodigo(models.Model):
-
     zip_idzipco = models.CharField("Código Postal", max_length=15)
     zip_idciuda = models.ForeignKey(Ciudad)
     zip_estados = models.ForeignKey(Provincia)
@@ -54,7 +50,6 @@ class Zipcodigo(models.Model):
 
 
 class Sucursal(models.Model):
-
     suc_codgsuc = models.PositiveIntegerField("Cód.Sucursal", unique=True, db_index=True)
     suc_nombres = models.CharField("Nombre", max_length=30)
     suc_abrevia = models.CharField("Abreviatura", max_length=15)
