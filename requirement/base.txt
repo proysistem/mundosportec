@@ -8,3 +8,4 @@ psycopg2==2.6.2
 pytz==2017.2
 reportlab==3.4.0
 Unipath==1.1
+xhtml2pdf>=0.2b1
