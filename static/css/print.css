@@ -10,7 +10,7 @@
 
 page {
     size: {{ pagesize|default:"A4" }};
-    margin-left: 2.5cm;
+    margin-left: 0.5cm;
     margin-right: 2.5cm;
     margin-top: 2.5cm;
     margin-bottom: 2cm;
@@ -34,20 +34,21 @@ page {
 
 .print_content
     {
-    /*background-color: green;
-    margin-left: 0px;
-    margin-top: -12px;*/
+    /*background-color: green;*/
+    margin-left: 3px;
+    margin-top: -10px;
     vertical-align: top;
-    width: 520px;
+    width: 530px;
     }
 .print_item_cont
     {
-    padding-left:0px; padding-right: 50px;
+    padding-left:7px;
+    padding-right: 1px;
     }
 .print_item
     {
-    font-size: 1em;
-    border: solid 1px;
+    font-size: 1.3em;
+    border: solid 0px;
     }
 .barcode
     {

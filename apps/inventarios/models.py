@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 
 class Tipoproducto(models.Model):
-    tpo_idtipos = models.CharField('Cód. Tipo/Producto', max_length=1, primary_key=True, default="I")
+    tpo_idtipos = models.CharField('Cód. Tipo/Producto', max_length=1, primary_key=True, default="P")
     tpo_detalle = models.CharField('Detalle', max_length=20)
     tpo_abrevia = models.CharField('Abreviatura', max_length=10)
 

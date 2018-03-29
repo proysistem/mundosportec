@@ -11,7 +11,11 @@ from django.http import Http404, HttpResponse
 from .models import Division, Marca, Modelo, Color, Tabtalla, Existencia, Saldoxtalla
 from .forms import (DivisionForm, MarcaForm, ModeloForm, ColorForm, TabtallaForm, ExistenciaForm,
                     SaldoxtallaForm, ExistenciaEditForm)
+# import pdfkit
+# from jinja2 import Environment, FileSystemLoader
 
+# env = Environment(loader=FileSystemLoader("templates/inventarios/"))
+# template = env.get_template("Exi_Pdf.html")
 # from django_xhtml2pdf.views import PdfMixin
 
 from django.contrib import messages
@@ -26,6 +30,56 @@ from multi_form_view import MultiModelFormView
 # class ExiPrint(PdfMixin, DetailView):
 #     model = Existencia
 #     template_name = "inventarios/Exi_Pdf.html"
+
+
+class ExiPdf(ListView):
+    """docstring for ExiPdf"""
+    model = Existencia
+    template_name = 'inventarios/Exi_Pdf.html'
+    ordering = ['exs_product']
+    context_object_name = 'productos'
+    # ordering = ['exs_product', 'exs_tabtall']
+    # paginate_by = 54
+    # queryset = Existencia.objects.filter(exs_saldact__gte=0.00)
+
+    def get_queryset(self):
+        return Existencia.objects.select_related('exs_idunida', 'saldoxtalla')
+
+    def get_context_data(self, **kwargs):
+        html = super(ExiPdf, self).get_context_data(**kwargs)
+        context = super(ExiPdf, self).get_context_data(**kwargs)
+        context['totaldesaldos'] = self.get_queryset().aggregate(totaldesaldos=Sum('exs_saldact'))['totaldesaldos']
+        options = {
+                'page-size': 'A5',
+                'margin-top': '0.1in',
+                'margin-right': '0.1in',
+                'margin-bottom': '0.1in',
+                'margin-left': '0.1in',
+        }
+        # pdfkit.from_string(html, 'nuevo_pdf.pdf', options=options)
+        return context
+
+    def get_initial(self):
+        tll_actual = {}
+        try:
+            sxt = Saldoxtalla.objects.get(tex_product=self.object)
+        except:
+            pass
+        else:
+            tll_actual['tex_actua01'] = sxt.tex_actua01
+            tll_actual['tex_actua02'] = sxt.tex_actua02
+            tll_actual['tex_actua03'] = sxt.tex_actua03
+            tll_actual['tex_actua04'] = sxt.tex_actua04
+            tll_actual['tex_actua05'] = sxt.tex_actua05
+            tll_actual['tex_actua06'] = sxt.tex_actua06
+            tll_actual['tex_actua07'] = sxt.tex_actua07
+            tll_actual['tex_actua08'] = sxt.tex_actua08
+            tll_actual['tex_actua09'] = sxt.tex_actua09
+            tll_actual['tex_actua10'] = sxt.tex_actua10
+            tll_actual['tex_actua11'] = sxt.tex_actua11
+            tll_actual['tex_actua12'] = sxt.tex_actua12
+            tll_actual['tex_actua13'] = sxt.tex_actua13
+        return tll_actual
 
 
 class PDFTemplateResponseMixin(TemplateResponseMixin):
