@@ -54,6 +54,8 @@ page {
 .barcode
     {
     font-family: IDAutomationHC39M;
+    font-size: 0.8em;
+    padding: 0 0 0 10px;
     }
 .print_head
     {
