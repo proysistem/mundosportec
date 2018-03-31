@@ -51,7 +51,7 @@ page {
 .print_item
     {
     font-size: 0.8em;
-    border: solid 1px;
+    border: solid 0px;
     padding-left: 20px;
     }
 .barcode
@@ -68,6 +68,10 @@ page {
 .print_algn_left
     {
     /*text-align: right;*/
+    }
+.print_with_text
+    {
+    font-weight: 5em;
     }
 /*
     body {
