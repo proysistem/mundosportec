@@ -25,12 +25,9 @@
                             {% cycle "<tr>" "" %}
                                 <td class="print_item">
                                     {{ object.exs_abrevia }}<br>
-                                    Talla.: {{ talla }}<br>
-                                    <span class="barcode"> {{ object.exs_product }} </span><br>
-                                    {% comment %}
-                                    Cód.aux: {{ object.exs_costact }}<br>
-                                    .
-                                    {% endcomment %}
+                                    Talla.: {{ talla }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span class="align_tex_right"> Cód.aux: {{ object.exs_costact }} </span><br>
+                                    <span class="barcode"> {{ object.exs_product }} </span><br><br>
                                 </td>
                             {% cycle "" "</tr>" %}
                         {% endfor %}
