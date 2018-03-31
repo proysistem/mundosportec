@@ -6,7 +6,6 @@
     font-family: IDAutomationHC39M;
 /*  src: url({% static 'font/IDAutomationHC39M.woff' %});  */
     src: url('../font/IDAutomationHC39M.woff');
-    height: 0.8em;
     }
 
 page {
@@ -37,7 +36,7 @@ page {
     {
     /*background-color: green;*/
     margin-left: 1px;
-/*    margin-top: -10px;*/
+    margin-top: -2px;
     vertical-align: top;
     width: 530px;
     }
