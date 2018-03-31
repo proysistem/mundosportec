@@ -24,11 +24,11 @@
                         {% for _ in saldo_talla|por_saldo %}
                             {% cycle "<tr>" "" %}
                                 <td class="print_item"><br>
-                                    {{ object.exs_abrevia }}<br>
-                                    Talla.: {{ talla }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    Cód.aux: {{ object.exs_costact }}<br>
-                                    <span class="barcode"> {{ object.exs_product }} </span>&nbsp;<br>
-                                    <p>..</p>
+                                    &nbsp;&nbsp;&nbsp;{{ object.exs_abrevia }}<br>
+                                    &nbsp;&nbsp;&nbsp;Talla.: {{ talla }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;Cód.aux: {{ object.exs_costact }}<br>
+                                    &nbsp;&nbsp;&nbsp;<span class="barcode"> {{ object.exs_product }} </span>&nbsp;<br>
+                                    <p>._.</p>
                                 </td>
                             {% cycle "" "</tr>" %}
                         {% endfor %}
