@@ -38,6 +38,7 @@ page {
     margin-left: 1px;
     vertical-align: top;
     width: 530px;
+    border: solid 1px;
     }
 .print_item_cont
     {
@@ -48,7 +49,7 @@ page {
 .print_item
     {
     font-size: 0.8em;
-    border: solid 0px;
+    border: solid 1px;
     padding-left: 20px;
     }
 .barcode
