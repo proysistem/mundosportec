@@ -23,7 +23,7 @@
                     {% for talla, saldo_talla in object|por_tallas:'tex_actua' %}
                         {% for _ in saldo_talla|por_saldo %}
                             {% cycle "<tr>" "" %}
-                                <td class="print_item">
+                                <td class="print_item"><br>
                                     {{ object.exs_abrevia }}<br>
                                     Talla.: {{ talla }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     Cód.aux: {{ object.exs_costact }}<br>
