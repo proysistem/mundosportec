@@ -34,11 +34,11 @@ page {
 
 .print_content
     {
-    /*background-color: green;*/
+    background-color: green;*/
     margin-left: -20px;
     margin-top: -10px;
     /*vertical-align: top;*/
-    width: 530px;
+    width: 540px;
     /*border: solid 1px;*/
     }
 .print_item_cont
@@ -50,6 +50,7 @@ page {
     }
 .print_item
     {
+    margin-left: 5px;
     font-size: 0.8em;
     border: solid 0px;
     padding-left: 22px;
