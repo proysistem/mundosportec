@@ -9,7 +9,7 @@
 				<a class="icon-reply crea_boton" href="{% url 'comercial:fac_panel' %}">Volver</a>
 			</div>
 			<div>
-				<form name="form_pedidos" method="POST" enctype="multipart">{% csrf_token %}
+				<form name="form_transac" method="POST" enctype="multipart">{% csrf_token %}
 					<div class="form_content">
 						<div>
 							<div class="form_titulo"><h1> Actualizar Factura </h1></div>
@@ -291,13 +291,13 @@
 
 				function sum_frmapgo(){
 					jsw_tpagado=0;
-					jsw_pgoefec=document.form_pedidos['fac_pgoefec'].value || 0;
-					jsw_pgocheq=document.form_pedidos['fac_pgocheq'].value || 0;
-					jsw_pgotjcr=document.form_pedidos['fac_pgotjcr'].value || 0;
-					jsw_pgocred=document.form_pedidos['fac_pgocred'].value || 0;
-					jsw_otropgo=document.form_pedidos['fac_otropgo'].value || 0;
-					jsw_entrega=document.form_pedidos['inf_entrega'].value || 0;
-					jsw_cambios=document.form_pedidos['inf_cambios'].value || 0;
+					jsw_pgoefec=document.form_transac['fac_pgoefec'].value || 0;
+					jsw_pgocheq=document.form_transac['fac_pgocheq'].value || 0;
+					jsw_pgotjcr=document.form_transac['fac_pgotjcr'].value || 0;
+					jsw_pgocred=document.form_transac['fac_pgocred'].value || 0;
+					jsw_otropgo=document.form_transac['fac_otropgo'].value || 0;
+					jsw_entrega=document.form_transac['inf_entrega'].value || 0;
+					jsw_cambios=document.form_transac['inf_cambios'].value || 0;
 					jsw_tpagado=Number(jsw_pgoefec)+Number(jsw_pgocheq)+Number(jsw_pgotjcr)+Number(jsw_pgocred)+Number(jsw_otropgo);
 					// alert(jsw_tpagado);
 					document.getElementById("fld_tpagado").value=jsw_tpagado;

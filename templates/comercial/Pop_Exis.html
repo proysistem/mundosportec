@@ -6,12 +6,12 @@
     <script>
 
         function datos(pedProd,pedDtll,pedTbtl,pedUnid,pedPrc4,pedKeys){
-            opener.document.form_pedidos.mvi_product.value=pedProd;
-            opener.document.form_pedidos.pop_pedDtll.value=pedDtll;
-            opener.document.form_pedidos.pop_pedTbtl.value=pedTbtl;
-            opener.document.form_pedidos.mvi_unidade.value=pedUnid;
-            opener.document.form_pedidos.mvi_precios.value=pedPrc4;
-            opener.document.form_pedidos.pop_pedKyPr.value=pedKeys;
+            opener.document.form_transac.mvi_product.value=pedProd;
+            opener.document.form_transac.pop_pedDtll.value=pedDtll;
+            opener.document.form_transac.pop_pedTbtl.value=pedTbtl;
+            opener.document.form_transac.mvi_unidade.value=pedUnid;
+            opener.document.form_transac.mvi_precios.value=pedPrc4;
+            opener.document.form_transac.pop_pedKyPr.value=pedKeys;
             opener.document.getElementById('inp_kntidad').focus();
             window.close();
         }
@@ -42,14 +42,15 @@
             <div class="crea_content color_6D7969">
                 <h3 class="crea_proceso">Inventarios:  Existencias</h3>
             </div>
-            <form id="form1" name="form1" method="POST" action="?">{% csrf_token %}
+            <form id="form1" name="form1" method="POST" action="{% url 'inventarios:exi_search' %}">{% csrf_token %}
                 <label for="seleccion"></label>
-                <select name="seleccion" id="seleccion" onchange='this.form.submit("enviar")'>
+ {% comment %}               <select name="seleccion" id="seleccion" onchange='this.form.submit("enviar")'>  {% endcomment %}
+                <select name="seleccion" id="seleccion">
                     <option value="1">Por dato aproximado</option>
                     <option value="2">Todos los Productos</option>
                 </select>
-                <label for="q"></label>
-                <input type="text" name="q" id="q" />
+                <label for="fnd_myfound"></label>
+                <input type="text" name="fnd_myfound" id="fnd_idfound" />
                 <input type="submit" name="enviar" id="enviar" value="Buscar" />
             </form>
             <div>

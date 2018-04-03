@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
-from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura
-from apps.comercial.forms import ClienteForm, ProveedorForm, VendedorForm, MovinventInlineForm, MovinventForm, PedidoForm, FacturaForm
+from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura, Ingreso
+from apps.comercial.forms import (ClienteForm, ProveedorForm, VendedorForm, MovinventInlineForm,
+                                  MovinventForm, PedidoForm, FacturaForm, IngresoForm)
 from django.db import transaction
 from django.db.models import F, Prefetch
 from django.forms import inlineformset_factory
@@ -175,6 +176,83 @@ class MviDelet(DeleteView):
     template_name = 'conercial/Mvi_Delet.html'
     success_url = reverse_lazy('comercial:mvi_panel')
 
+
+# ======== I  N  G  R  E  S  O  S =========== #
+
+
+class IngLista(ListView):
+    """Listado de Ingresos"""
+    model = Ingreso
+    template_name = 'comercial/Ing_Panel.html'
+    paginate_by = 8
+
+
+class IngView(DetailView):
+    """Visualiza Ingreso"""
+    template_name = 'comercial/Ing_View.html'
+    model = Ingreso
+
+
+class IngNuevo(CreateView):
+    """Crear Ingreso"""
+    model = Ingreso
+    form_class = IngresoForm
+    template_name = 'comercial/Ing_New.html'
+
+    def get_success_url(self):
+        return reverse_lazy('comercial:ing_edit', kwargs={"pk": self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super(IngNuevo, self).get_context_data(**kwargs)
+
+        if self.request.POST:
+            # context['movimientos'] = MovinventFormset(self.request.POST, queryset=Movinvent.objects.select_related())
+            context['nuevo_mov'] = MovinventInlineForm(self.request.POST)
+        else:
+            context['nuevo_mov'] = MovinventInlineForm()
+            # TODO: Hay un problema de 0n queries, debido a la generación de múltiples formset con mismo queryset, probablemente
+            #       Probé con select_related sin éxito aún.
+        return context
+
+    # def post(self, request, *args, **kwargs):
+    #     self.object = None
+    #     form = self.get_form()
+    #     import pdb; pdb.set_trace()
+    #     if form.is_valid():
+    #         return self.form_valid(form)
+    #     else:
+    #         return self.form_invalid(form)
+
+    def form_invalid(self, form):
+        # import pdb; pdb.set_trace()
+        return super(IngNuevo, self).form_invalid(form)
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        nuevo_mov = context['nuevo_mov']
+        # movimientos = context['movimientos']
+        with transaction.atomic():
+            self.object = form.save()
+
+            if nuevo_mov.is_valid():
+                mov_instance = nuevo_mov.save(commit=False)
+                mov_instance.mvi_npedido = self.object
+                mov_instance.mvi_fechmov = self.object.ing_fechped
+                mov_instance.mvi_cliente = self.object.ing_proveed
+                mov_instance.mvi_vendedo = self.object.ing_vendedo
+                mov_instance.mvi_tipomov = self.object.ing_tipomov
+                mov_instance.save(commit=True)
+            else:
+                return self.form_invalid(form)
+            # if movimientos.is_valid():
+            #     # TODO: Validate per form in formset
+            #     #       Although, formset.is_valid do this.
+            #     # for form in movimientos:
+            #     #     if form.is_valid():
+            #     #         form.
+            #     movimientos.instance = self.object
+            #     movimientos.save()
+        return super(IngNuevo, self).form_valid(form)
 
 # ======== P E D I D O S =========== #
 

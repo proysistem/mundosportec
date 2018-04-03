@@ -1,6 +1,7 @@
 from django.conf.urls import url
 # from django.conf.urls import url
-from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista, ExiPrint, ExiQuery, ExiTiket, ExiTikts, ExiPdf,
+from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista,
+                    ExiPrint, ExiQuery, ExiTiket, ExiTikts, ExiPdf, ExiBuscar,
                     DivLista, DivNuevo, DivView, DivEdita, DivDelet, MrkLista,
                     MrkNuevo, MrkView, MrkEdita, MrkDelet, ModLista, ModNuevo,
                     ModView, ModEdita, ModDelet, ColLista, ColNuevo, ColView,
@@ -48,6 +49,7 @@ urlpatterns = [
     url(r'^TllPopup/(?P<pk>\d+)/$',    login_required_view(PopTalla.as_view()), name='pop_talla'),
 
     url(r'^ExiPanel',                  login_required_view(ExiLista.as_view()), name='exi_panel'),
+    url(r'^ExiSearch',                 login_required_view(ExiBuscar.as_view()), name='exi_search'),
     url(r'^ExiPrint',                  login_required_view(ExiPrint.as_view()), name='exi_print'),
     url(r'^ExiPdf',                    login_required_view(ExiPdf.as_view()),   name='exi_pdf'),
     url(r'^ExiTikts',                  login_required_view(ExiTikts.as_view()), name='exi_tikts'),

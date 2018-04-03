@@ -4,7 +4,8 @@ from apps.comercial.views import (CliLista, CliNuevo, CliView, CliEdita, CliDele
                                   VndLista, VndNuevo, VndView, VndEdita, VndDelet,
                                   MviLista, MviNuevo, MviView, MviEdita, MviDelet,
                                   PedLista, PedNuevo, PedView, PedEdita, PedDelet, PedRepor,
-                                  FacLista, FacPrint, FacNuevo, FacView, FacEdita, FacPaid, FacDelet)
+                                  FacLista, FacPrint, FacNuevo, FacView, FacEdita, FacPaid, FacDelet,
+                                  IngNuevo)
 from apps.inventarios.views import PopExist
 from mundosport.utils import login_required_view
 
@@ -43,7 +44,7 @@ urlpatterns = [
     url(r'^PedElimina/(?P<pk>\d+)/$',  login_required_view(PedDelet.as_view()), name='ped_delet'),
 
     url(r'^IngPanel',                  login_required_view(PedLista.as_view()), name='ing_panel'),
-    url(r'^IngNuevo/$',                login_required_view(PedNuevo.as_view()), name='ing_new'),
+    url(r'^IngNuevo/$',                login_required_view(IngNuevo.as_view()), name='ing_new'),
     url(r'^IngRepor',                  login_required_view(PedRepor.as_view()), name='ing_repor'),
     url(r'^IngConsulta/(?P<pk>\d+)/$', login_required_view(PedView.as_view()),  name='ing_view'),
     url(r'^IngEdita/(?P<pk>\d+)/$',    login_required_view(PedEdita.as_view()), name='ing_edit'),
@@ -58,9 +59,3 @@ urlpatterns = [
     url(r'^FacPrint/(?P<pk>\d+)/$',    login_required_view(FacPrint.as_view()), name='fac_print'),
 
 ]
-
-#if settings.DEBUG:
-#	urlpatterns += [
-#		url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}
-#			),
-#	]

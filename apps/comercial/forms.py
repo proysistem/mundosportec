@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura
+from .models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura, Ingreso
 from django.utils.timezone import localtime, now
 from apps.inventarios.models import Existencia
 
@@ -335,6 +335,32 @@ class MovinventForm(forms.ModelForm):
                 }
 
 
+class IngresoForm(forms.ModelForm):
+    ing_feching = forms.DateField(initial=localtime(now()).date())
+
+    class Meta:
+        model = Ingreso
+        fields = [
+                # 'ing_tipomov',
+                'ing_feching',
+                'ing_proveed',
+                'ing_vendedo',
+                'ing_sucursa',
+        ]
+        labels = {
+                # 'ing_tipomov': 'Tipo de Movimiento',
+                'ing_feching': 'Fecha de compra',
+                'ing_proveed': 'Proveedor ',
+                'ing_vendedo': 'Vendedor',
+        }
+        widgets = {
+                'ing_feching':   forms.DateInput(attrs={"type": "date"}),
+                'ing_proveed':   forms.Select(),
+                'ing_vendedo':   forms.Select(),
+                'ing_sucursa':   forms.HiddenInput(),
+                }
+
+
 class PedidoForm(forms.ModelForm):
     ped_fechped = forms.DateField(initial=localtime(now()).date())
 
@@ -349,12 +375,12 @@ class PedidoForm(forms.ModelForm):
         ]
         labels = {
                 # 'ped_tipomov': 'Tipo de Movimiento',
-                'ped_fechped': 'Fecha',
+                'ped_fechped': 'Fecha de pedido',
                 'ped_cliente': 'Cliente ',
                 'ped_vendedo': 'Vendedor',
         }
         widgets = {
-                'ped_fechfac':   forms.DateInput(attrs={"type": "date"}),
+                'ped_fechped':   forms.DateInput(attrs={"type": "date"}),
                 'ped_cliente':   forms.Select(),
                 'ped_vendedo':   forms.Select(),
                 'ped_sucursa':   forms.HiddenInput(),

@@ -2,15 +2,15 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import copy
 from django.views.generic.base import TemplateResponseMixin, ContextMixin, View
 from .rendering import render_to_pdf_response
-
+from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
 from django.db.models import Sum
-from django.views.defaults import page_not_found
-from django.http import Http404, HttpResponse
 from .models import Division, Marca, Modelo, Color, Tabtalla, Existencia, Saldoxtalla
 from .forms import (DivisionForm, MarcaForm, ModeloForm, ColorForm, TabtallaForm, ExistenciaForm,
                     SaldoxtallaForm, ExistenciaEditForm)
+# from django.views.defaults import page_not_found
+# from django.http import Http404, HttpResponse
 # import pdfkit
 # from jinja2 import Environment, FileSystemLoader
 
@@ -718,6 +718,17 @@ class ExiDelet(DeleteView):
     form_class = ExistenciaForm
     template_name = 'inventarios/Exi_Delet.html'
     success_url = reverse_lazy('inventarios:exi_panel')
+
+
+class ExiBuscar(TemplateView):
+    """Busqueda en Existencias"""
+    def post(self, request, *args, **kwargs):
+        # wrk_templt = self.get_template_names('comercial/Pop_Exis.html'),
+        wrk_buscar = request.POST['fnd_myfound']
+        wrk_byprod = Existencia.objects.filter(exs_product=wrk_buscar)
+        # if wrk_byprod
+        return render(request, 'comercial/Pop_Exis.html', {'productos': wrk_byprod, 'wrk_bydetal': True})
+        # return render(request, 'inventarios/Exi_Found.html', {'productos': wrk_product, 'por_detalle': True})
 
 # ====================================================================#
 # ==================  SALDOS  X  TALLAS  =============================#

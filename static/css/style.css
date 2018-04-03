@@ -174,9 +174,13 @@ input:focus
     border-left: 1px solid rgba(109,121,105, 0.9);
     padding: 0 20px 0 5px;
     }
-.warnig1
+.warnig1 /* Exi_View,   */
     {
     color: #FD7303;
+    }
+.color_green /* Exi_View,   */
+    {
+    color: green;
     }
 .bordesito
     {
@@ -253,7 +257,7 @@ aside
     text-decoration: none;
     border-bottom: 1px solid rgba(255, 255, 255, .2);
     }
-/*------------------------ Estilos del menu ----------------------- */
+/*------------------------ Estilos del menu horizontsal administrativo por aplicaciones ----------------------- */
 .nav
     {
     background: linear-gradient(#295641, #295641, #295641, #295641, #295641, #295641, #58A2B4); /* Standard syntax */
@@ -278,7 +282,7 @@ aside
     justify-content: space-between;
     padding: 4px;
     text-align: center;
-    width: 8%;
+    width: 7%;
     }
 .menus-link a
     {

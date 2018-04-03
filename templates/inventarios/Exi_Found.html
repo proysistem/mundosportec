@@ -1,0 +1,128 @@
+{% extends 'base/base_pops.html' %}
+
+{% block title %} Panel de Exixtencias {% endblock title %}</title>
+
+{% block super %}
+    <script>
+
+        function datos(pedProd,pedDtll,pedTbtl,pedUnid,pedPrc4,pedKeys){
+            opener.document.form_transac.mvi_product.value=pedProd;
+            opener.document.form_transac.pop_pedDtll.value=pedDtll;
+            opener.document.form_transac.pop_pedTbtl.value=pedTbtl;
+            opener.document.form_transac.mvi_unidade.value=pedUnid;
+            opener.document.form_transac.mvi_precios.value=pedPrc4;
+            opener.document.form_transac.pop_pedKyPr.value=pedKeys;
+            opener.document.getElementById('inp_kntidad').focus();
+            window.close();
+        }
+
+        function Resaltar_On(GridView){
+            if(GridView != null){
+                GridView.originalBgColor = GridView.style.backgroundColor;
+                GridView.style.backgroundColor = "#33372E"; /* Standard syntax */
+                GridView.style.cursor = "hand";
+                }
+        }
+        function Resaltar_Off(GridView){
+            if(GridView != null)
+            {
+            GridView.style.backgroundColor = GridView.originalBgColor;
+            }
+        }
+        function Close(){
+            window.close();
+        }
+    </script>
+
+{% endblock %}
+
+
+{% block context %}
+
+            <div class="crea_content color_6D7969">
+                <h3 class="crea_proceso">Inventarios:  Existencias</h3>
+            </div>
+            <form id="form1" name="form1" method="POST" action="{% url 'inventarios:exi_search' %}">{% csrf_token %}
+                <label for="seleccion"></label>
+ {% comment %}               <select name="seleccion" id="seleccion" onchange='this.form.submit("enviar")'>  {% endcomment %}
+                <select name="seleccion" id="seleccion">
+                    <option value="1">Por dato aproximado</option>
+                    <option value="2">Todos los Productos</option>
+                </select>
+                <label for="fnd_myfound"></label>
+                <input type="text" name="fnd_myfound" id="fnd_idfound" />
+                <input type="submit" name="enviar" id="enviar" value="Buscar" />
+            </form>
+            <div>
+            {% comment %}
+
+            alert("aja");
+            opener.actualizar(pedProd,pedDtll,pedTbtl,pedUnid,pedPrc4,pedKeys);
+
+
+            https://github.com/uvcode/Biblioteca_TechKeyWorld/blob/master/popupbqdacategoriaphp.php
+              function datos(a,b,{{ var_exifield.exs_product }},{{ var_exifield.exs_detalle }},{{ var_exifield.exs_tabtall }},{{ var_exifield.exs_idunida }},{{ var_exifield.exs_publico }},{{ var_exifield.exs_saldinc }},{{ var_exifield.exs_ingreso }},{{ var_exifield.exs_egresos }},{{ var_exifield.exs_saldact }},{{ var_exifield.exs_comprom }},{{ var_exifield.exs_xconfir }},{{ var_exifield.exs_dsponib }}){
+             <form method="POST" onkeydown="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_ContentPlaceMain_btnBuscar&#39;)">{% csrf_token %}
+            <form method="POST" onkeydown="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_ContentPlaceMain_btnBuscar&#39;)">{% csrf_token %}
+
+            {% endcomment %}
+            <form method="POST">{% csrf_token %}
+                <table border="1" >
+                    <thead>
+                        <tr color="#:000066">
+                            <th class="head_tab">Producto</th>
+                            <th class="head_tab">Detalle del producto</th>
+                            <th class="head_tab">Tbla</th>
+                            <th class="head_tab">Unid.</th>
+                            <th class="head_tab">Precio-vnta. publico</th>
+                            <th class="head_tab">Saldo Inicial</th>
+                            <th class="head_tab">Saldo Ingresos</th>
+                            <th class="head_tab">Saldo Egresos</th>
+                            <th class="head_tab">Saldo Actual</th>
+                            <th class="head_tab">Saldo Comprom.</th>
+                            <th class="head_tab">Saldo x Confirm.</th>
+                            <th class="head_tab">Saldo Disponible</th>
+                        </tr>
+                    </thead>
+                    <tbody border="0">
+                        {% if productos %}
+                        {% for var_exifield in productos %}
+                            <tr id="elemento" OnMouseOver="Resaltar_On(this);" OnMouseOut="Resaltar_Off(this);" OnClick="datos('{{ var_exifield.exs_product }}','{{ var_exifield.exs_detalle }}','{{ var_exifield.exs_tabtall }}','{{ var_exifield.exs_idunida }}','{{ var_exifield.exs_publico|default:0|stringformat:"0.2f" }}','{{ var_exifield.pk }}');">
+                                <td>{{ var_exifield.exs_product }} </td>
+                                <td>{{ var_exifield.exs_detalle }} </td>
+                                <td>{{ var_exifield.exs_tabtall }} </td>
+                                <td>{{ var_exifield.exs_idunida }} </td>
+                                <td>{{ var_exifield.exs_publico|default:0|stringformat:"0.2f" }}</td>
+                                <td>{{ var_exifield.exs_saldinc|default:0|stringformat:"0.2f" }}</td>
+                                <td>{{ var_exifield.exs_ingreso|default:0|stringformat:"0.2f" }}</td>
+                                <td>{{ var_exifield.exs_egresos|default:0|stringformat:"0.2f" }}</td>
+                                <td>{{ var_exifield.exs_saldact|default:0|stringformat:"0.2f" }}</td>
+                                <td>{{ var_exifield.exs_comprom|default:0|stringformat:"0.2f" }}</td>
+                                <td>{{ var_exifield.exs_xconfir|default:0|stringformat:"0.2f" }}</td>
+                                <td>{{ var_exifield.exs_dsponib|default:0|stringformat:"0.2f" }}</td>
+                            </tr>
+                        {% endfor %}
+                        {% else %}
+                        <h4> No hay registros en Existencias </h4>
+                        {% endif %}
+                        <br/>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+
+        <div class="page_content">
+            <ul class="pager_botons">
+                <li>
+                    {% if page_obj.has_previous %}
+                    <a class="icon-left-open pager_prev" href="?page={{page_obj.previous_page_number}}">Previous</a>
+                    {% endif %}
+                </li>
+                <li>
+                    {% if page_obj.has_next %}
+                    <a class="pager_next" href="?page={{page_obj.next_page_number}}">Next <span class="icon-right-open"></span></a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+{% endblock context %}

@@ -7,7 +7,7 @@
 				<a class="icon-reply crea_boton" href="{% url 'comercial:fac_panel' %}">Volver</a>
 			</div>
 			<div>
-				<form name="form_pedidos" method="POST" enctype="multipart">{% csrf_token %}
+				<form name="form_transac" method="POST" enctype="multipart">{% csrf_token %}
 					<div class="form_content">
 						<div>
 							<div class="form_titulo"><h1> Grabar Pedidos </h1></div>
@@ -165,7 +165,7 @@
 						if (jsw_ctrlprd){
 							document.getElementById('inp_kntidad').disabled = false;
 							}
-						document.form_pedidos['mvi_kntidad'].value="";
+						document.form_transac['mvi_kntidad'].value="";
 						document.getElementById("inp_tabtall").value="";
 						window.open("{% url 'comercial:pop_exist' %}", "prd_winpops", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=520,width=1180,left=210,top=200");
 						}, false);
@@ -175,12 +175,12 @@
 					pop_callprd.addEventListener("change", function(){
 						var campo1 = document.getElementById("inp_product").value;
 						if(campo1.length > 0){
-							tmp_keyprod = document.form_pedidos["mvi_product"].value;
+							tmp_keyprod = document.form_transac["mvi_product"].value;
 							if (jsw_ctrlprd){
 								document.getElementById('inp_kntidad').disabled = false;
 							//	document.getElementById('inp_kntidad').focus();
 								};
-							document.form_pedidos['mvi_kntidad'].value="";
+							document.form_transac['mvi_kntidad'].value="";
 							document.getElementById("inp_tabtall").value="";
 							var url = "{% url 'inventarios:exi_query' exs_product=987654321 %}".replace('987654321', tmp_keyprod);
 							queryexi(url);
@@ -199,7 +199,7 @@
 					var jsw_tabtlla = document.getElementById("inp_tabtall").value;
 					var jsw_kntidad = document.getElementById("inp_kntidad").value || 0;
 					lst_calltll.addEventListener("submit", function(){
-						var jsw_keyprod = document.form_pedidos['pop_pedKyPr'].value;
+						var jsw_keyprod = document.form_transac['pop_pedKyPr'].value;
 						if (jsw_kntidad < 1){
 							if (jsw_tabtlla != "X"){
 								var url = "{% url 'inventarios:pop_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
@@ -212,54 +212,54 @@
 						},
 					lst_calltll.addEventListener("click", function(){
 						var jsw_tabtlla = document.getElementById("inp_tabtall").value;
-						var jsw_keyprod = document.form_pedidos['pop_pedKyPr'].value;
+						var jsw_keyprod = document.form_transac['pop_pedKyPr'].value;
 						if (jsw_tabtlla != "X"){
 							var url = "{% url 'inventarios:pop_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
 							poptalla(url);
 							}
 						else{
-							document.form_pedidos['inp_precios'].disabled = false;
-							document.form_pedidos['inp_desctos'].disabled = false;
-							document.form_pedidos['mvi_talla01'].value=0;
-							document.form_pedidos['mvi_talla02'].value=0;
-							document.form_pedidos['mvi_talla03'].value=0;
-							document.form_pedidos['mvi_talla04'].value=0;
-							document.form_pedidos['mvi_talla05'].value=0;
-							document.form_pedidos['mvi_talla06'].value=0;
-							document.form_pedidos['mvi_talla07'].value=0;
-							document.form_pedidos['mvi_talla08'].value=0;
-							document.form_pedidos['mvi_talla09'].value=0;
-							document.form_pedidos['mvi_talla10'].value=0;
-							document.form_pedidos['mvi_talla11'].value=0;
-							document.form_pedidos['mvi_talla12'].value=0;
-							document.form_pedidos['mvi_talla13'].value=0;
+							document.form_transac['inp_precios'].disabled = false;
+							document.form_transac['inp_desctos'].disabled = false;
+							document.form_transac['mvi_talla01'].value=0;
+							document.form_transac['mvi_talla02'].value=0;
+							document.form_transac['mvi_talla03'].value=0;
+							document.form_transac['mvi_talla04'].value=0;
+							document.form_transac['mvi_talla05'].value=0;
+							document.form_transac['mvi_talla06'].value=0;
+							document.form_transac['mvi_talla07'].value=0;
+							document.form_transac['mvi_talla08'].value=0;
+							document.form_transac['mvi_talla09'].value=0;
+							document.form_transac['mvi_talla10'].value=0;
+							document.form_transac['mvi_talla11'].value=0;
+							document.form_transac['mvi_talla12'].value=0;
+							document.form_transac['mvi_talla13'].value=0;
 							alert("Este producto no tiene tallas");
 							};
 						},
 					lst_calltll.addEventListener("change", function(){
-						jsw_tabtlla = document.form_pedidos["pop_pedTbtl"].value;
-						jsw_keyprod = document.form_pedidos["pop_pedKyPr"].value;
+						jsw_tabtlla = document.form_transac["pop_pedTbtl"].value;
+						jsw_keyprod = document.form_transac["pop_pedKyPr"].value;
 						if (jsw_tabtlla != "X"){
 							alert("Este producto tiene tallas: ", jsw_tabtlla);
 							var url = "{% url 'inventarios:pop_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
 							poptalla(url);
 							}
 						else{
-							document.form_pedidos['inp_precios'].disabled = false;
-							document.form_pedidos['inp_desctos'].disabled = false;
-							document.form_pedidos['mvi_talla01'].value=0;
-							document.form_pedidos['mvi_talla02'].value=0;
-							document.form_pedidos['mvi_talla03'].value=0;
-							document.form_pedidos['mvi_talla04'].value=0;
-							document.form_pedidos['mvi_talla05'].value=0;
-							document.form_pedidos['mvi_talla06'].value=0;
-							document.form_pedidos['mvi_talla07'].value=0;
-							document.form_pedidos['mvi_talla08'].value=0;
-							document.form_pedidos['mvi_talla09'].value=0;
-							document.form_pedidos['mvi_talla10'].value=0;
-							document.form_pedidos['mvi_talla11'].value=0;
-							document.form_pedidos['mvi_talla12'].value=0;
-							document.form_pedidos['mvi_talla13'].value=0;
+							document.form_transac['inp_precios'].disabled = false;
+							document.form_transac['inp_desctos'].disabled = false;
+							document.form_transac['mvi_talla01'].value=0;
+							document.form_transac['mvi_talla02'].value=0;
+							document.form_transac['mvi_talla03'].value=0;
+							document.form_transac['mvi_talla04'].value=0;
+							document.form_transac['mvi_talla05'].value=0;
+							document.form_transac['mvi_talla06'].value=0;
+							document.form_transac['mvi_talla07'].value=0;
+							document.form_transac['mvi_talla08'].value=0;
+							document.form_transac['mvi_talla09'].value=0;
+							document.form_transac['mvi_talla10'].value=0;
+							document.form_transac['mvi_talla11'].value=0;
+							document.form_transac['mvi_talla12'].value=0;
+							document.form_transac['mvi_talla13'].value=0;
 							calcula();
 							}
 						},
@@ -274,21 +274,21 @@
 				}
 
 				function calcula(){
-					var jsw_cantida = document.form_pedidos['mvi_kntidad'].value || 0.00;
-					var jsw_precios = document.form_pedidos['mvi_precios'].value || 0.00;
-					document.form_pedidos['pop_valores'].value = (jsw_cantida * jsw_precios) || 0.00;
-					document.form_pedidos['mvi_precios'].value = jsw_precios;
+					var jsw_cantida = document.form_transac['mvi_kntidad'].value || 0.00;
+					var jsw_precios = document.form_transac['mvi_precios'].value || 0.00;
+					document.form_transac['pop_valores'].value = (jsw_cantida * jsw_precios) || 0.00;
+					document.form_transac['mvi_precios'].value = jsw_precios;
 					}
 
 				function poptalla(url){
-					document.form_pedidos['inp_precios'].disabled = false;
-					document.form_pedidos['inp_desctos'].disabled = false;
+					document.form_transac['inp_precios'].disabled = false;
+					document.form_transac['inp_desctos'].disabled = false;
 					window.open(url, "pop_dtallas", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=200,width=920,left=380,top=450");
 					}
 
 				function queryexi(url){
-					document.form_pedidos['inp_precios'].disabled = false;
-					document.form_pedidos['inp_desctos'].disabled = false;
+					document.form_transac['inp_precios'].disabled = false;
+					document.form_transac['inp_desctos'].disabled = false;
 					window.open(url, "qry_existenc", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=20,width=20");
 					}
 			</script>
