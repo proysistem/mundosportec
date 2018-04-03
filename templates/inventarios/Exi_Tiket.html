@@ -1,6 +1,6 @@
 {% extends 'base/base_print.html' %}{% load inventarios_filters %}
 
-{% block title %} Tickets para Productos {% endblock title %}</title>
+{% block title %} Tickets para Productos {% endblock title %}
 
 {% block context %}
 
@@ -27,7 +27,13 @@
                                     &nbsp;&nbsp;&nbsp;{{ object.exs_abrevia }}<br>
                                     &nbsp;&nbsp;&nbsp;Talla.: {{ talla }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     &nbsp;&nbsp;&nbsp;Cód.aux: {{ object.exs_costact }}<br>
-                                    &nbsp;&nbsp;&nbsp;<span class="barcode"> {{ object.exs_product }} </span>&nbsp;<br>
+                                    &nbsp;&nbsp;&nbsp; <svg class="barcode"
+  jsbarcode-format="EAN13"
+  jsbarcode-height="50"
+  jsbarcode-fontsize="14"
+  jsbarcode-value="{{ object.exs_product }}"
+  jsbarcode-textmargin="0">
+</svg> &nbsp;<br>
                                     <p>._.</p>
                                 </td>
                             {% cycle "" "</tr>" %}
@@ -37,4 +43,9 @@
             <br/>
         </table>
     </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/barcodes/JsBarcode.ean-upc.min.js"></script>
+
+    <script type="text/javascript">
+        JsBarcode(".barcode").init();
+    </script>
 {% endblock context %}

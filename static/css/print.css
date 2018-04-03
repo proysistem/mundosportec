@@ -55,13 +55,13 @@ page {
     border: solid 0px;
     padding-left: 22px;
     }
-.barcode
+/*.barcode
     {
     font-family: IDAutomationHC39M;
     font-size: 1.2em;
-    /* height: 5px; */
+
     padding-left: 15px;
-    }
+    }*/
 .print_head
     {
     /*height: 0.8em;*/
