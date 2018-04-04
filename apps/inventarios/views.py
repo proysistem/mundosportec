@@ -5,7 +5,7 @@ from .rendering import render_to_pdf_response
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from .models import Division, Marca, Modelo, Color, Tabtalla, Existencia, Saldoxtalla
 from .forms import (DivisionForm, MarcaForm, ModeloForm, ColorForm, TabtallaForm, ExistenciaForm,
                     SaldoxtallaForm, ExistenciaEditForm)
@@ -724,10 +724,20 @@ class ExiBuscar(TemplateView):
     def post(self, request, *args, **kwargs):
         # wrk_templt = self.get_template_names('comercial/Pop_Exis.html'),
         wrk_buscar = request.POST['fnd_myfound']
-        wrk_byprod = Existencia.objects.filter(exs_product=wrk_buscar)
+        # wrk_byprod = Existencia.objects.filter(exs_product=wrk_buscar)
+        # TODO: Aumentar espectro de busqueda
+        wrk_results = self.get_queryset().filter(
+            Q(exs_product=wrk_buscar) | Q(exs_detalle__contains=wrk_buscar)
+        )
         # if wrk_byprod
-        return render(request, 'comercial/Pop_Exis.html', {'productos': wrk_byprod, 'wrk_bydetal': True})
-        # return render(request, wrk_templt, {'productos': wrk_product, 'por_detalle': True})
+        return render(request, 'comercial/Pop_Exis.html', {'productos': wrk_results, 'wrk_bydetal': True})
+        # return render(request, 'inventarios/Exi_Found.html', {'productos': wrk_product, 'por_detalle': True})
+	# return render(request, wrk_templt, {'productos': wrk_product, 'por_detalle': True})
+
+    def get_queryset(self):
+        user = self.request.user
+        sucursal = user.sucursal
+        return Existencia.objects.filter(exs_saldact__gt=0.00, exs_sucursa=sucursal)
 
 # ====================================================================#
 # ==================  SALDOS  X  TALLAS  =============================#

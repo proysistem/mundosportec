@@ -45,10 +45,12 @@
             <form id="form1" name="form1" method="POST" action="{% url 'inventarios:exi_search' %}">{% csrf_token %}
                 <label for="seleccion"></label>
  {% comment %}               <select name="seleccion" id="seleccion" onchange='this.form.submit("enviar")'>  {% endcomment %}
-                <select name="seleccion" id="seleccion">
-                    <option value="1">Por dato aproximado</option>
-                    <option value="2">Todos los Productos</option>
-                </select>
+                {% comment %}
+                    <select name="seleccion" id="seleccion">
+                        <option value="1">Por dato aproximado</option>
+                        <option value="2">Todos los Productos</option>
+                    </select>
+                {% endcomment %}
                 <label for="fnd_myfound"></label>
                 <input type="text" name="fnd_myfound" id="fnd_idfound" />
                 <input type="submit" name="enviar" id="enviar" value="Buscar" />
