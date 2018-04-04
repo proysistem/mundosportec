@@ -24,9 +24,9 @@
                         {% for _ in saldo_talla|por_saldo %}
                             {% cycle "<tr>" "" %}
                                 <td class="print_item"><br>
-                                    &nbsp;&nbsp;&nbsp;{{ object.exs_abrevia }}<br>
-                                    &nbsp;&nbsp;&nbsp;Talla.: {{ talla }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    &nbsp;&nbsp;&nbsp;Cód.aux: {{ object.exs_costact }}
+                                    &nbsp;&nbsp;{{ object.exs_abrevia }}<br>
+                                    &nbsp;&nbsp;Talla.: {{ talla }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;Cód.aux: {{ object.exs_costact }}
                                     &nbsp;&nbsp; <svg class="barcode"
   jsbarcode-format="EAN13"
   jsbarcode-height="40"
