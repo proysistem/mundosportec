@@ -539,7 +539,6 @@ class ExiTikts(ListView):
         # sucursal = user.sucursal.pk
         # return queryset.filter(exs_sucursa=sucursal)
 
-
     # def get_context_data(self, **kwargs):
     #     context = super(ExiTiket, self).get_context_data(**kwargs)
 
@@ -728,7 +727,7 @@ class ExiBuscar(TemplateView):
         wrk_byprod = Existencia.objects.filter(exs_product=wrk_buscar)
         # if wrk_byprod
         return render(request, 'comercial/Pop_Exis.html', {'productos': wrk_byprod, 'wrk_bydetal': True})
-        # return render(request, 'inventarios/Exi_Found.html', {'productos': wrk_product, 'por_detalle': True})
+        # return render(request, wrk_templt, {'productos': wrk_product, 'por_detalle': True})
 
 # ====================================================================#
 # ==================  SALDOS  X  TALLAS  =============================#

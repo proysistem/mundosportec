@@ -26,21 +26,21 @@
                                 <td class="print_item"><br>
                                     &nbsp;&nbsp;&nbsp;{{ object.exs_abrevia }}<br>
                                     &nbsp;&nbsp;&nbsp;Talla.: {{ talla }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    &nbsp;&nbsp;&nbsp;Cód.aux: {{ object.exs_costact }}<br>
-                                    &nbsp;&nbsp;&nbsp; <svg class="barcode"
+                                    &nbsp;&nbsp;&nbsp;Cód.aux: {{ object.exs_costact }}
+                                    &nbsp;&nbsp; <svg class="barcode"
   jsbarcode-format="EAN13"
   jsbarcode-height="50"
   jsbarcode-fontsize="14"
   jsbarcode-value="{{ object.exs_product }}"
   jsbarcode-textmargin="0">
-</svg> &nbsp;<br>
-                                    <p>._.</p>
+</svg> &nbsp;
+                                    <p>...</p>
                                 </td>
                             {% cycle "" "</tr>" %}
                         {% endfor %}
                     {% endfor %}
                 {% endif %}
-            <br/>
+
         </table>
     </div>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/barcodes/JsBarcode.ean-upc.min.js"></script>
