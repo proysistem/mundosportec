@@ -29,12 +29,11 @@
                                     &nbsp;&nbsp;&nbsp;Cód.aux: {{ object.exs_costact }}
                                     &nbsp;&nbsp; <svg class="barcode"
   jsbarcode-format="EAN13"
-  jsbarcode-height="50"
+  jsbarcode-height="40"
   jsbarcode-fontsize="14"
   jsbarcode-value="{{ object.exs_product }}"
   jsbarcode-textmargin="0">
 </svg> &nbsp;
-                                    <p>...</p>
                                 </td>
                             {% cycle "" "</tr>" %}
                         {% endfor %}
