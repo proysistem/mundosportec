@@ -560,6 +560,24 @@ class ExiLista(ListView):
         return queryset.filter(exs_sucursa=sucursal)
 
 
+class ExiBuscar(TemplateView):
+    """Busqueda en Existencias"""
+    def post(self, request, *args, **kwargs):
+        # wrk_templt = self.get_template_names('comercial/Pop_Exis.html'),
+        wrk_buscar = request.POST['fnd_myfound']
+        # wrk_byprod = Existencia.objects.filter(exs_product=wrk_buscar)
+        # TODO: Aumentar espectro de busqueda
+        wrk_results = self.get_queryset().filter(
+            Q(exs_product=wrk_buscar) | Q(exs_detalle__contains=wrk_buscar)
+        )
+        return render(request, 'comercial/Pop_Exis.html', {'productos': wrk_results, 'wrk_bydetal': True})
+
+    def get_queryset(self):
+        user = self.request.user
+        sucursal = user.sucursal
+        return Existencia.objects.filter(exs_saldact__gt=0.00, exs_sucursa=sucursal)
+
+
 class ExiView(DetailView):
     """Listado de Existencia"""
     template_name = 'inventarios/Exi_View.html'
@@ -570,8 +588,16 @@ class ExiView(DetailView):
 
 
 class PopTalla(DetailView):
-    """Listado de Existencia"""
+    """Pop de tallas para pedidos (VEENTAS) """
     template_name = 'comercial/Pop_Tallas.html'
+    model = Existencia
+    queryset = Existencia.objects.select_related('saldoxtalla', 'exs_sucursa', 'exs_idmodel', 'exs_idmodel', 'exs_iddivis', 'exs_idmodel')
+    # TODO: VER CANT. QUERIES
+
+
+class IngTalla(DetailView):
+    """Pop de tallas para ingresos (COMPRAS)"""
+    template_name = 'comercial/Ing_Tallas.html'
     model = Existencia
     queryset = Existencia.objects.select_related('saldoxtalla', 'exs_sucursa', 'exs_idmodel', 'exs_idmodel', 'exs_iddivis', 'exs_idmodel')
     # TODO: VER CANT. QUERIES
@@ -722,17 +748,21 @@ class ExiDelet(DeleteView):
 class ExiBuscar(TemplateView):
     """Busqueda en Existencias"""
     def post(self, request, *args, **kwargs):
+
         # wrk_templt = self.get_template_names('comercial/Pop_Exis.html'),
         wrk_buscar = request.POST['fnd_myfound']
+        wrk_itflag = request.POST['fnd_templat']
+        if wrk_itflag == "pop"
+            wrk_template = 'comercial/Pop_Exis.html'
+        else
+            wrk_template = 'comercial/Exi_Panel.html'
+
         # wrk_byprod = Existencia.objects.filter(exs_product=wrk_buscar)
         # TODO: Aumentar espectro de busqueda
         wrk_results = self.get_queryset().filter(
             Q(exs_product=wrk_buscar) | Q(exs_detalle__contains=wrk_buscar)
         )
-        # if wrk_byprod
         return render(request, 'comercial/Pop_Exis.html', {'productos': wrk_results, 'wrk_bydetal': True})
-        # return render(request, 'inventarios/Exi_Found.html', {'productos': wrk_product, 'por_detalle': True})
-	# return render(request, wrk_templt, {'productos': wrk_product, 'por_detalle': True})
 
     def get_queryset(self):
         user = self.request.user

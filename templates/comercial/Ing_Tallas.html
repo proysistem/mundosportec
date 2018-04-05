@@ -1,0 +1,196 @@
+{% extends 'base/base_pops.html' %}
+
+{% block title %} Compra por tallas {% endblock title %}</title>
+
+{% block context %}
+            <br />
+            <form method="POST">{% csrf_token %}
+                <div class="form_content">
+                    <div>
+                        <div class="form_row"><div class="form_label">Sucursal :</div><div class=" color_6D7969">{{object.exs_sucursa}}</div></div>
+                        <div class="form_row"><div class="form_label">Producto :</div><div class=" color_6D7969">{{object.exs_product}}</div><div class="form_label"> Detalle :</div><div class=" color_6D7969">{{object.exs_detalle}}</div></div>
+                    </div>
+                    <table border="0" class="width_100">
+                        <thead>
+                            <tr color="#:000066" class="width_99">
+                                <td class="head_tab"><div class=""><label for="">Tab./Talla</label></div></td>
+                                <td class="head_tab_tall">{{ object.exs_tabtall }} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid01 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid02 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid03 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid04 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid05 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid06 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid07 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid08 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid09 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid10 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid11 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid12 | default:'-'}} </td>
+                                <td class="head_tab_tall">{{ object.exs_idmodel.mod_tabtall.jgo_medid13 | default:'-'}} </td>
+                                <td class="head_tab width_005 ">TOTALES</td>
+                            </tr>
+                        </thead>
+                        <tbody border="0">
+                            <tr  id="lst_changes" onchange="calculatotal()">
+                                <td class="head_tab" colspan="2"><div class="form_label"><label for="{{form.exs_saldinc.name}}">Saldo.Actual</label></div></td>
+                                <td>
+                                    {% if object.exs_idmodel.mod_tabtall.jgo_medid01 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid01" name="mvi_talla01" type="number" pattern="[0-9]" step="1" min="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.exs_idmodel.mod_tabtall.jgo_medid02 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid02" name="mvi_talla02" type="number" pattern="[0-9]" step="1" min="0"></div>
+                                   {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.exs_idmodel.mod_tabtall.jgo_medid03 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid03" name="mvi_talla03" type="number" pattern="[0-9]" step="1" min="0"></div>
+                                   {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.exs_idmodel.mod_tabtall.jgo_medid04 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid04" name="mvi_talla04" type="number" pattern="[0-9]" step="1" min="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.exs_idmodel.mod_tabtall.jgo_medid05 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid05" name="fym_kntid05" type="number" pattern="[0-9]" step="1" min="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.exs_idmodel.mod_tabtall.jgo_medid06 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid06" name="mvi_talla06" type="number" pattern="[0-9]" step="1" min="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.exs_idmodel.mod_tabtall.jgo_medid07 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid07" name="mvi_talla07" type="number" pattern="[0-9]" step="1" min="0"></div>
+                                   {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.exs_idmodel.mod_tabtall.jgo_medid08 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid08" name="mvi_talla08" type="number" pattern="[0-9]" step="1" min="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.exs_idmodel.mod_tabtall.jgo_medid09 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid09" name="mvi_talla09" type="number" pattern="[0-9]" step="1" min="0"></div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.exs_idmodel.mod_tabtall.jgo_medid10 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid10" name="mvi_talla10" type="number" pattern="[0-9]" step="1" min="0"></div>
+                                   {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.exs_idmodel.mod_tabtall.jgo_medid11 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid11" name="mvi_talla11" type="number" pattern="[0-9]" step="1" min="0"></div>
+                                   {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.exs_idmodel.mod_tabtall.jgo_medid12 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid12" name="mvi_talla12" type="number" pattern="[0-9]" step="1" min="0"></div>
+                                   {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if object.exs_idmodel.mod_tabtall.jgo_medid13 %}
+                                        <div class="columns_tab_tall"><input id="ids_kntid13" name="mvi_talla13" type="number" pattern="[0-9]" step="1" min="0"></div>
+                                   {% endif %}
+                                </td>
+                                <td>
+                                    <div class="columns_tab_tall"><input id="ids_kntidad" name="pop_kntidad" type="text"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+            <br>
+
+            <div><button class="icon-reply form_submit" type="button" id="btn_botclik" onclick="enviar()"> Continuar  </button></div>
+
+            {% comment %}
+                <div><button class="icon-reply form_submit" type="button" id="btn_botclik" onclick="calculatotal(); datos(01,02,03,04,05,06,07,08,09,10,11,12,13,54);"> Continuar  </button></div>
+            {% endcomment %}
+            <br>
+           <br>
+{% endblock context %}
+
+{% block js %}
+
+    <script type="text/javascript">
+
+        var knt_tottall,
+            jsw_sbtotal,
+            knt_xtlla01,
+            knt_xtlla02,
+            knt_xtlla03,
+            knt_xtlla04,
+            knt_xtlla05,
+            knt_xtlla06,
+            knt_xtlla07,
+            knt_xtlla08,
+            knt_xtlla09,
+            knt_xtlla10,
+            knt_xtlla11,
+            knt_xtlla12,
+            knt_xtlla13;
+
+
+        function calculatotal(){
+            knt_tottall=0;
+            knt_xtlla01=document.getElementById('ids_kntid01').value || 0;
+            knt_xtlla02=document.getElementById('ids_kntid02').value || 0;
+            knt_xtlla03=document.getElementById('ids_kntid03').value || 0;
+            knt_xtlla04=document.getElementById('ids_kntid04').value || 0;
+            knt_xtlla05=document.getElementById('ids_kntid05').value || 0;
+            knt_xtlla06=document.getElementById('ids_kntid06').value || 0;
+            knt_xtlla07=document.getElementById('ids_kntid07').value || 0;
+            knt_xtlla08=document.getElementById('ids_kntid08').value || 0;
+            knt_xtlla09=document.getElementById('ids_kntid09').value || 0;
+            knt_xtlla10=document.getElementById('ids_kntid10').value || 0;
+            knt_xtlla11=document.getElementById('ids_kntid11').value || 0;
+            knt_xtlla12=document.getElementById('ids_kntid12').value || 0;
+            knt_xtlla13=document.getElementById('ids_kntid13').value || 0;
+            jsw_prcpubl={{ object.exs_publico|default:'0'}};
+            knt_tottall=Number(knt_xtlla01)+Number(knt_xtlla02)+Number(knt_xtlla03)+Number(knt_xtlla04)+Number(knt_xtlla05)+Number(knt_xtlla06)+Number(knt_xtlla07)+Number(knt_xtlla08)+Number(knt_xtlla09)+Number(knt_xtlla10)+Number(knt_xtlla11)+Number(knt_xtlla12)+Number(knt_xtlla13);
+            document.getElementById('ids_kntidad').value=knt_tottall;
+            jsw_sbtotal=knt_tottall * jsw_prcpubl;
+        }
+
+        function enviar(){
+            opener.document.form_transac.mvi_talla01.value=knt_xtlla01;
+            opener.document.form_transac.mvi_talla02.value=knt_xtlla02;
+            opener.document.form_transac.mvi_talla03.value=knt_xtlla03;
+            opener.document.form_transac.mvi_talla04.value=knt_xtlla04;
+            opener.document.form_transac.mvi_talla05.value=knt_xtlla05;
+            opener.document.form_transac.mvi_talla06.value=knt_xtlla06;
+            opener.document.form_transac.mvi_talla07.value=knt_xtlla07;
+            opener.document.form_transac.mvi_talla08.value=knt_xtlla08;
+            opener.document.form_transac.mvi_talla09.value=knt_xtlla09;
+            opener.document.form_transac.mvi_talla10.value=knt_xtlla10;
+            opener.document.form_transac.mvi_talla11.value=knt_xtlla11;
+            opener.document.form_transac.mvi_talla12.value=knt_xtlla12;
+            opener.document.form_transac.mvi_talla13.value=knt_xtlla13;
+            opener.document.form_transac.mvi_kntidad.value=knt_tottall;
+            opener.document.form_transac.pop_valores.value=jsw_sbtotal;
+            // opener.document.getElementById('inp_desctos').disabled=false;
+            // opener.document.getElementById('inp_desctos').focus();
+            window.close();
+            }
+    </script>
+{% endblock js %}

@@ -4,76 +4,82 @@
 
 {% block context %}
 
-			<div class="crea_content">
-				<h3 class="crea_proceso">Inventarios:  Existencias</h3>
+            <div class="crea_content">
+                <h3 class="crea_proceso">Inventarios:  Existencias</h3>
 
-				<a class="icon-print align_tex_left crea_boton" target="_blank" href="{% url 'inventarios:exi_pdf' %}">Print-Pdf</a>
-				<a class="icon-print align_tex_left crea_boton" target="_blank" href="{% url 'inventarios:exi_print' %}">Pirnt</a>
-				<a class="icon-print align_tex_left crea_boton" target="_blank" href="{% url 'inventarios:exi_tikts' %}">Tiket's</a>
-				<a class="icon-database crea_boton" href="{% url 'inventarios:exi_new' %}">Crear nuevo</a>
-
-			</div>
-			<div>
-				<table border="1" >
-					<thead>
-					 	<tr color="#:000066">
-							<th class="head_tab">Producto</th>
-							<th class="head_tab">Detalle del producto</th>
-							<th class="head_tab">Tbla</th>
-					 		<th class="head_tab">Unid.</th>
-							<th class="head_tab">Precio-vnta. publico</th>
-					 		<th class="head_tab">Saldo Inicial</th>
-					 		<th class="head_tab">Saldo Ingresos</th>
-					 		<th class="head_tab">Saldo Egresos</th>
-					 		<th class="head_tab">Saldo Actual</th>
-					 		<th class="head_tab">Saldo Comprom.</th>
-					 		<th class="head_tab">Saldo x Confirm.</th>
-					 		<th class="head_tab">Saldo Disponible</th>
-					 		<th class="head_tab" colspan="3">Opción</th>
-					 		<th class="head_tab">Tikt</th>
-					 	</tr>
-					</thead>
-					<tbody border="0">
-					 	{% if object_list %}
-					 	{% for var_exifield in object_list %}
-					 	<tr>
-							<td class="columns_tab">{{ var_exifield.exs_product }} </td>
-							<td class="columns_tab">{{ var_exifield.exs_detalle }} </td>
-							<td class="columns_tab">{{ var_exifield.exs_tabtall }} </td>
-							<td class="columns_tab">{{ var_exifield.exs_idunida }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_publico|default:0|stringformat:"0.2f" }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_saldinc|default:0|stringformat:"0.2f" }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_ingreso|default:0|stringformat:"0.2f" }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_egresos|default:0|stringformat:"0.2f" }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_saldact|default:0|stringformat:"0.2f" }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_comprom|default:0|stringformat:"0.2f" }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_xconfir|default:0|stringformat:"0.2f" }} </td>
-							<td class="columns_tab align_tex_right">{{ var_exifield.exs_dsponib|default:0|stringformat:"0.2f" }} </td>
-							<td class="columns_tab"><a class="icon-eye botones"     href="{% url 'inventarios:exi_view' var_exifield.id %}"></a></td>
-							<td class="columns_tab"><a class="icon-edit botones"    href="{% url 'inventarios:exi_edit' var_exifield.id %}"></a></td>
-							<td class="columns_tab"><a class="icon-trash botones"   href="{% url 'inventarios:exi_delet' var_exifield.id %}"></a></td>
-							<td class="columns_tab"><a class="icon-th-list botones" href="{% url 'inventarios:exi_tiket' var_exifield.id %}" target="_blank"></a></td>
-						</tr>
-						{% endfor %}
-						{% else %}
-						<h4> No hay registros en Existencias </h4>
-						{% endif %}
-						<br/>
-					</tbody>
-				</table>
-				<div class="page_content">
-					<ul class="pager_botons">
-						<li>
-							{% if page_obj.has_previous %}
-							<a class="icon-left-open pager_prev" href="?page={{page_obj.previous_page_number}}">Previous</a>
-							{% endif %}
-						</li>
-						<li>
-							{% if page_obj.has_next %}
-							<a class="pager_next" href="?page={{page_obj.next_page_number}}">Next <span class="icon-right-open"></span></a>
-							{% endif %}
-						</li>
-					</ul>
-				</div>
-			</div>
+                <a class="icon-print align_tex_left crea_boton" target="_blank" href="{% url 'inventarios:exi_pdf' %}">Print-Pdf</a>
+                <a class="icon-print align_tex_left crea_boton" target="_blank" href="{% url 'inventarios:exi_print' %}">Pirnt</a>
+                <a class="icon-print align_tex_left crea_boton" target="_blank" href="{% url 'inventarios:exi_tikts' %}">Tiket's</a>
+                <a class="icon-database crea_boton" href="{% url 'inventarios:exi_new' %}">Crear nuevo</a>
+            </div>
+            <form id="form1" name="form1" method="POST" action="{% url 'inventarios:exi_search' %}">{% csrf_token %}
+                <label for="seleccion"></label>
+                <label for="fnd_myfound"></label>
+                <input type="hidde" name="fnd_templat" value="pnl">
+                <input type="text" name="fnd_myfound" id="fnd_idfound" />
+                <input type="submit" name="enviar" id="enviar" value="Buscar" />
+            </form>
+            <div>
+                <table border="1" >
+                    <thead>
+                        <tr color="#:000066">
+                            <th class="head_tab">Producto</th>
+                            <th class="head_tab">Detalle del producto</th>
+                            <th class="head_tab">Tbla</th>
+                            <th class="head_tab">Unid.</th>
+                            <th class="head_tab">Precio-vnta. publico</th>
+                            <th class="head_tab">Saldo Inicial</th>
+                            <th class="head_tab">Saldo Ingresos</th>
+                            <th class="head_tab">Saldo Egresos</th>
+                            <th class="head_tab">Saldo Actual</th>
+                            <th class="head_tab">Saldo Comprom.</th>
+                            <th class="head_tab">Saldo x Confirm.</th>
+                            <th class="head_tab">Saldo Disponible</th>
+                            <th class="head_tab" colspan="3">Opción</th>
+                            <th class="head_tab">Tikt</th>
+                        </tr>
+                    </thead>
+                    <tbody border="0">
+                        {% if object_list %}
+                        {% for var_exifield in object_list %}
+                        <tr>
+                            <td class="columns_tab">{{ var_exifield.exs_product }} </td>
+                            <td class="columns_tab">{{ var_exifield.exs_detalle }} </td>
+                            <td class="columns_tab">{{ var_exifield.exs_tabtall }} </td>
+                            <td class="columns_tab">{{ var_exifield.exs_idunida }} </td>
+                            <td class="columns_tab align_tex_right">{{ var_exifield.exs_publico|default:0|stringformat:"0.2f" }} </td>
+                            <td class="columns_tab align_tex_right">{{ var_exifield.exs_saldinc|default:0|stringformat:"0.2f" }} </td>
+                            <td class="columns_tab align_tex_right">{{ var_exifield.exs_ingreso|default:0|stringformat:"0.2f" }} </td>
+                            <td class="columns_tab align_tex_right">{{ var_exifield.exs_egresos|default:0|stringformat:"0.2f" }} </td>
+                            <td class="columns_tab align_tex_right">{{ var_exifield.exs_saldact|default:0|stringformat:"0.2f" }} </td>
+                            <td class="columns_tab align_tex_right">{{ var_exifield.exs_comprom|default:0|stringformat:"0.2f" }} </td>
+                            <td class="columns_tab align_tex_right">{{ var_exifield.exs_xconfir|default:0|stringformat:"0.2f" }} </td>
+                            <td class="columns_tab align_tex_right">{{ var_exifield.exs_dsponib|default:0|stringformat:"0.2f" }} </td>
+                            <td class="columns_tab"><a class="icon-eye botones"     href="{% url 'inventarios:exi_view' var_exifield.id %}"></a></td>
+                            <td class="columns_tab"><a class="icon-edit botones"    href="{% url 'inventarios:exi_edit' var_exifield.id %}"></a></td>
+                            <td class="columns_tab"><a class="icon-trash botones"   href="{% url 'inventarios:exi_delet' var_exifield.id %}"></a></td>
+                            <td class="columns_tab"><a class="icon-th-list botones" href="{% url 'inventarios:exi_tiket' var_exifield.id %}" target="_blank"></a></td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <h4> No hay registros en Existencias </h4>
+                        {% endif %}
+                        <br/>
+                    </tbody>
+                </table>
+                <div class="page_content">
+                    <ul class="pager_botons">
+                        <li>
+                            {% if page_obj.has_previous %}
+                            <a class="icon-left-open pager_prev" href="?page={{page_obj.previous_page_number}}">Previous</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if page_obj.has_next %}
+                            <a class="pager_next" href="?page={{page_obj.next_page_number}}">Next <span class="icon-right-open"></span></a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
 {% endblock context %}

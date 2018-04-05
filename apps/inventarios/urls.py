@@ -6,7 +6,7 @@ from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista,
                     MrkNuevo, MrkView, MrkEdita, MrkDelet, ModLista, ModNuevo,
                     ModView, ModEdita, ModDelet, ColLista, ColNuevo, ColView,
                     ColEdita, ColDelet, TllLista, TllNuevo, TllView, TllEdita,
-                    TllDelet, Mrkkyselect, TablaTalla, PopTalla)
+                    TllDelet, Mrkkyselect, TablaTalla, PopTalla, IngTalla)
 from mundosport.utils import login_required_view
 
 # from django.conf import settings
@@ -47,6 +47,7 @@ urlpatterns = [
     url(r'^TllEdita/(?P<pk>\w+)/$',    login_required_view(TllEdita.as_view()), name='tll_edit'),
     url(r'^TllElimina/(?P<pk>\w+)/$',  login_required_view(TllDelet.as_view()), name='tll_delet'),
     url(r'^TllPopup/(?P<pk>\d+)/$',    login_required_view(PopTalla.as_view()), name='pop_talla'),
+    url(r'^TllIngreso/(?P<pk>\d+)/$',  login_required_view(IngTalla.as_view()), name='ing_talla'),
 
     url(r'^ExiPanel',                  login_required_view(ExiLista.as_view()), name='exi_panel'),
     url(r'^ExiSearch',                 login_required_view(ExiBuscar.as_view()), name='exi_search'),
