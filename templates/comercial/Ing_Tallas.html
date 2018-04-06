@@ -122,10 +122,6 @@
             <br>
 
             <div><button class="icon-reply form_submit" type="button" id="btn_botclik" onclick="enviar()"> Continuar  </button></div>
-
-            {% comment %}
-                <div><button class="icon-reply form_submit" type="button" id="btn_botclik" onclick="calculatotal(); datos(01,02,03,04,05,06,07,08,09,10,11,12,13,54);"> Continuar  </button></div>
-            {% endcomment %}
             <br>
            <br>
 {% endblock context %}
@@ -166,7 +162,7 @@
             knt_xtlla11=document.getElementById('ids_kntid11').value || 0;
             knt_xtlla12=document.getElementById('ids_kntid12').value || 0;
             knt_xtlla13=document.getElementById('ids_kntid13').value || 0;
-            jsw_prcpubl={{ object.exs_publico|default:'0'}};
+            jsw_prcpubl={{ object.exs_costact|default:'0'}};
             knt_tottall=Number(knt_xtlla01)+Number(knt_xtlla02)+Number(knt_xtlla03)+Number(knt_xtlla04)+Number(knt_xtlla05)+Number(knt_xtlla06)+Number(knt_xtlla07)+Number(knt_xtlla08)+Number(knt_xtlla09)+Number(knt_xtlla10)+Number(knt_xtlla11)+Number(knt_xtlla12)+Number(knt_xtlla13);
             document.getElementById('ids_kntidad').value=knt_tottall;
             jsw_sbtotal=knt_tottall * jsw_prcpubl;

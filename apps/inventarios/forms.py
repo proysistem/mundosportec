@@ -180,6 +180,11 @@ class TabtallaForm(forms.ModelForm):
 
 class ExistenciaEditForm(forms.ModelForm):
 
+    exs_fechinv = forms.DateField(
+        initial=localtime(now()).date(),
+        widget=forms.DateInput(attrs={"type": "date"}, format='%Y-%m-%d',)
+    )
+
     tex_inici01 = forms.DecimalField(required=False)
     tex_inici02 = forms.DecimalField(required=False)
     tex_inici03 = forms.DecimalField(required=False)
@@ -366,7 +371,7 @@ class ExistenciaEditForm(forms.ModelForm):
 
     def save(self, commit=True):
         instance = super(ExistenciaEditForm, self).save(commit=False)
-        if instance.exs_tabtall.lower() != "x":
+        if instance.exs_tabtall.lower() != "X":
             sxt = Saldoxtalla(
                 tex_product=instance,
                 tex_inici01=self.cleaned_data['tex_inici01'],

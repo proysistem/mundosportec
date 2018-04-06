@@ -42,10 +42,8 @@
             <div class="crea_content color_6D7969">
                 <h3 class="crea_proceso">Inventarios:  Existencias</h3>
             </div>
-            <form id="form1" name="form1" method="POST" action="{% url 'inventarios:exi_search' %}">{% csrf_token %}
-                <label for="seleccion"></label>
-                <label for="fnd_myfound"></label>
-                <input type="hidde" name="fnd_templat" value="pop">
+            <form id="form_search" name="form_search" method="POST" action="{% url 'inventarios:exi_search' %}">{% csrf_token %}
+                <input type="hidden" name="fnd_templat" value=" ">
                 <input type="text" name="fnd_myfound" id="fnd_idfound" />
                 <input type="submit" name="enviar" id="enviar" value="Buscar" />
             </form>

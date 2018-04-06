@@ -8,9 +8,7 @@ from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista,
                     ColEdita, ColDelet, TllLista, TllNuevo, TllView, TllEdita,
                     TllDelet, Mrkkyselect, TablaTalla, PopTalla, IngTalla)
 from mundosport.utils import login_required_view
-
 # from django.conf import settings
-
 # from apps.parametros.views import  CliLista, PrvLista, VndLista, MviLista, PedLista, FacLista
 # from apps.parametros.views import  CjaLista, CjrLista, McjLista, MdaLista
 # SucNuevo, SucView, SucEdita, SucDelet
