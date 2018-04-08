@@ -74,7 +74,7 @@ class Vendedor(models.Model):
 class Ingreso(models.Model):
     ing_ningres = models.AutoField('Núm. de Ingreso', primary_key=True)
     ing_tipomov = models.PositiveIntegerField("Tipo de movimiento", choices=TIPO_MOV_CHOICES, default=TIPO_MOV_CHOICES.INGRESO)
-    ing_fechped = models.DateField('Fecha de compra')
+    ing_feching = models.DateField('Fecha de compra')
     ing_proveed = models.ForeignKey(Proveedor)
     ing_vendedo = models.ForeignKey(Vendedor, null=True, blank=True)
     ing_statreg = models.CharField('Status del Registro', max_length=1, default=1)
@@ -102,11 +102,13 @@ class Pedido(models.Model):
 class Movinvent(models.Model):
     mvi_nummovi = models.AutoField('Núm. de movimiento', primary_key=True)
     mvi_npedido = models.ForeignKey('Pedido', verbose_name='Núm. de pedido', null=True, blank=True)
+    mvi_ningres = models.ForeignKey('Ingreso', verbose_name='Núm. de ingreso', null=True, blank=True)
 
     mvi_fechmov = models.DateField('Fecha')
     mvi_tipomov = models.PositiveIntegerField("Tipo de movimiento", choices=TIPO_MOV_CHOICES)
     mvi_vendedo = models.ForeignKey(Vendedor)
-    mvi_cliente = models.ForeignKey(Cliente)
+    mvi_cliente = models.ForeignKey(Cliente, null=True, blank=True)
+    mvi_proveed = models.ForeignKey(Proveedor, null=True, blank=True)
     mvi_product = models.ForeignKey(Existencia)
     mvi_unidade = models.CharField("Unidad", max_length=5)
 

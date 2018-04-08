@@ -236,9 +236,9 @@ class IngNuevo(CreateView):
 
             if nuevo_mov.is_valid():
                 mov_instance = nuevo_mov.save(commit=False)
-                mov_instance.mvi_npedido = self.object
-                mov_instance.mvi_fechmov = self.object.ing_fechped
-                mov_instance.mvi_cliente = self.object.ing_proveed
+                mov_instance.mvi_ningres = self.object
+                mov_instance.mvi_fechmov = self.object.ing_feching
+                mov_instance.mvi_proveed = self.object.ing_proveed
                 mov_instance.mvi_vendedo = self.object.ing_vendedo
                 mov_instance.mvi_tipomov = self.object.ing_tipomov
                 mov_instance.save(commit=True)
@@ -253,6 +253,72 @@ class IngNuevo(CreateView):
             #     movimientos.instance = self.object
             #     movimientos.save()
         return super(IngNuevo, self).form_valid(form)
+
+
+class IngEdita(UpdateView):
+    """Modifica Ingresos"""
+    model = Ingreso
+    form_class = IngresoForm
+    template_name = 'comercial/Ing_Edita.html'
+    # formnam = 'comercial:ped_edit'
+
+    def get_queryset(self):
+        return Ingreso.objects.prefetch_related(Prefetch(
+            'movinvent_set', queryset=Movinvent.objects.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'))))
+
+    def get_success_url(self):
+        return reverse_lazy('comercial:ing_edit', kwargs={"pk": self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super(IngEdita, self).get_context_data(**kwargs)
+
+        if self.request.POST:
+            # context['movimientos'] = MovinventFormset(self.request.POST, queryset=Movinvent.objects.select_related())
+            context['nuevo_mov'] = MovinventInlineForm(self.request.POST)
+        else:
+            context['nuevo_mov'] = MovinventInlineForm()
+            # TODO: Hay un problema de 0n queries, debido a la generación de múltiples formset con mismo queryset, probablemente
+            #       Probé con select_related sin éxito aún.
+            movimientos = self.object.movinvent_set.all()
+            total = 0
+            for movimiento in movimientos:
+                total += movimiento.subtotal
+
+            context['movimientos'] = movimientos
+            context['total'] = total
+        return context
+
+    def form_invalid(self, form):
+        return super(IngEdita, self).form_invalid(form)
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        nuevo_mov = context['nuevo_mov']
+        # movimientos = context['movimientos']
+        with transaction.atomic():
+            self.object = form.save()
+
+            if nuevo_mov.is_valid():
+                mov_instance = nuevo_mov.save(commit=False)
+                mov_instance.mvi_ningres = self.object
+                mov_instance.mvi_fechmov = self.object.ing_feching
+                mov_instance.mvi_proveed = self.object.ing_proveed
+                mov_instance.mvi_vendedo = self.object.ing_vendedo
+                mov_instance.mvi_tipomov = self.object.ing_tipomov
+                mov_instance.save(commit=True)
+            else:
+                return self.form_invalid(nuevo_mov)
+            # if movimientos.is_valid():
+            #     # TODO: Validate per form in formset
+            #     #       Although, formset.is_valid do this.
+            #     # for form in movimientos:
+            #     #     if form.is_valid():
+            #     #         form.
+            #     movimientos.instance = self.object
+            #     movimientos.save()
+        return super(IngEdita, self).form_valid(form)
+
 
 # ======== P E D I D O S =========== #
 

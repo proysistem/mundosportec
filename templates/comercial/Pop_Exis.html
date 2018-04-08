@@ -43,7 +43,7 @@
                 <h3 class="crea_proceso">Inventarios:  Existencias</h3>
             </div>
             <form id="form_search" name="form_search" method="POST" action="{% url 'inventarios:exi_search' %}">{% csrf_token %}
-                <input type="hidden" name="fnd_templat" value=" ">
+                <input type="hidden" name="fnd_templat" value="pop">
                 <input type="text" name="fnd_myfound" id="fnd_idfound" />
                 <input type="submit" name="enviar" id="enviar" value="Buscar" />
             </form>

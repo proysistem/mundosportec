@@ -733,17 +733,21 @@ class ExiBuscar(TemplateView):
         # wrk_templt = self.get_template_names('comercial/Pop_Exis.html'),
         wrk_buscar = request.POST['fnd_myfound']
         wrk_itflag = request.POST['fnd_templat']
-        if wrk_itflag:
+        if wrk_itflag == 'pop':
             wrk_template = 'comercial/Pop_Exis.html'
+        elif wrk_itflag == 'panel':
+            wrk_template = 'inventarios/Exi_Panel.html'
         else:
-            wrk_template = 'comercial/Exi_Panel.html'
-
+            # TODO: Mostrar error
+            wrk_template = ''
+            pass
+        # import pdb; pdb.set_trace()
         # wrk_byprod = Existencia.objects.filter(exs_product=wrk_buscar)
         # TODO: Aumentar espectro de busqueda
         wrk_results = self.get_queryset().filter(
             Q(exs_product=wrk_buscar) | Q(exs_detalle__contains=wrk_buscar)
         )
-        return render(request, wrk_template, {'productos': wrk_results, 'wrk_bydetal': True})
+        return render(request, wrk_template, {'productos': wrk_results, 'object_list': wrk_results, 'wrk_bydetal': True})
         # return render(request, 'comercial/Pop_Exis.html', {'productos': wrk_results, 'wrk_bydetal': True})
 
     def get_queryset(self):
