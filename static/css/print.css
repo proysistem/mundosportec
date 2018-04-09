@@ -50,6 +50,7 @@ page {
     }
 .print_item
     {
+    max-width: 271px;
     margin-left: 5px;
     font-size: 0.85em;
     font-weight: bold;

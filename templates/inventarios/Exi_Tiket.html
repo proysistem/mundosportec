@@ -28,17 +28,38 @@
                                     &nbsp;&nbsp;Talla.: {{ talla }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     &nbsp;&nbsp;Cód.aux: {{ object.exs_costact|default:''|stringformat:"0.0f" }}
                                     &nbsp;&nbsp; <svg class="barcode"
-  jsbarcode-format="code128c"
-  jsbarcode-ean128="true"
-  jsbarcode-flat="false"
-  jsbarcode-height="40"
-  jsbarcode-fontsize="14"
-  jsbarcode-value="{{ object.exs_product }}"
-  jsbarcode-textmargin="0">
-</svg> &nbsp;
+                                          jsbarcode-format="code128c"
+                                          jsbarcode-ean128="true"
+                                          jsbarcode-flat="false"
+                                          jsbarcode-height="40"
+                                          jsbarcode-fontsize="14"
+                                          jsbarcode-value="{{ object.exs_product }}"
+                                          jsbarcode-textmargin="0">
+                                        </svg> &nbsp;
                                 </td>
                             {% cycle "" "</tr>" %}
                         {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    {% for _ in object.exs_saldact|por_saldo %}
+                        {{ saldo_talla }}
+                        {% cycle "<tr>" "" %}
+                            <td class="print_item"><br>
+                                &nbsp;&nbsp;{{ object.exs_abrevia }}<br>
+                                &nbsp;&nbsp;Talla.: - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;Cód.aux: {{ object.exs_costact|default:''|stringformat:"0.0f" }}
+                                &nbsp;&nbsp; <svg class="barcode"
+                                      jsbarcode-format="code128c"
+                                      jsbarcode-ean128="true"
+                                      jsbarcode-flat="false"
+                                      jsbarcode-height="40"
+                                      jsbarcode-fontsize="14"
+                                      jsbarcode-value="{{ object.exs_product }}"
+                                      jsbarcode-textmargin="0">
+                                    </svg> &nbsp;
+                            </td>
+
+                        {% cycle "" "</tr>" %}
                     {% endfor %}
                 {% endif %}
 
