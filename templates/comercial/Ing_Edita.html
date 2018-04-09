@@ -71,8 +71,8 @@
 							<div class="width_010"><label for="{{form.ing_vendedo.name}}">{{ form.ing_vendedo.label }}</label></div>
 							<div class="form_widget width_025">{{ form.ing_vendedo }} </div>
 							<div class="width_040">&nbsp;</div>
-							<div class="width_015"><label for="{{form.ing_ningres.name}}">{{form.ing_ningres.label}}</label></div>
-							<div class="form_widget width_010">{{ ingreso.pk }}</div>
+							<div class="width_015"><label for="{{form.ing_facprov.name}}">{{form.ing_facprov.label}}</label></div>
+							<div class="form_widget width_010">{{ form.ing_facprov }}</div>
 						</div>
 					</fieldset>
 				</div>
@@ -153,9 +153,10 @@
 			</div>
 		</form>
 		<br>
-		<form name="form_factura" method="POST" enctype="multipart" action="{% url 'comercial:fac_new' %}">{% csrf_token %}
-			<input type="hidden" name="pedido_id" value="{{ object.pk }}">
-			<div><button name="sub_factura" class="icon-reply form_submit" type="submit" onkeydown="validadowky();"> P a g a r </button></div>
+		<form name="form_factura" method="POST" enctype="multipart" action="{% url 'comercial:com_new' %}">{% csrf_token %}
+			<input type="hidden" name="ingreso_id" value="{{ object.pk }}">
+			<input type="hidden" name="facproveed" value="" id="facproveed">
+			<div><button name="sub_compra" class="icon-reply form_submit" type="submit" onkeydown="validadowky();"> P a g a r </button></div>
 		</form>
 	</div>
 {% endblock context%}
@@ -163,6 +164,13 @@
 {% block js %}
 
 	<script type="text/javascript">
+
+		var ing_facprov = document.getElementById("id_ing_facprov");
+		ing_facprov.addEventListener("keypress", function(e){
+			var facproveed = document.getElementById("facproveed");
+			facproveed.value = ing_facprov.value;
+		});
+
 		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 		// Solo permite facturar con click, si da un enter no acepta   //
 		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -182,7 +190,7 @@
 					}
 				document.form_transac['mvi_kntidad'].value="";
 				document.getElementById("inp_tabtall").value="";
-				window.open("{% url 'comercial:pop_exist' %}", "prd_winpops", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=520,width=1180,left=210,top=200");
+				window.open("{% url 'comercial:pop_exist' %}?all", "prd_winpops", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=520,width=1180,left=210,top=200");
 				}, false);
 		// - - Accesa a productos por cod.del producto digitados o cod.de barras  //
 		//	jsw_ctrlprd = document.getElementById('inp_kntidad').disabled;

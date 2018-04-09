@@ -1,6 +1,6 @@
 from django.db import models
-from apps.finanzas.models import Cajera, Caja, Moneda, Provedor
-from apps.inventarios.models import Existencia, Unidad
+from apps.finanzas.models import Cajera, Caja, Moneda
+from apps.inventarios.models import Existencia  # , Unidad
 from apps.parametros.models import Pais, Provincia, Ciudad, Zipcodigo, Sucursal, Categoria, Controlador
 from apps.parametros.choices import TIPO_MOV_CHOICES
 from django.utils import timezone
@@ -150,9 +150,16 @@ class Movinvent(models.Model):
             saldos = self.mvi_product.saldoxtalla
         except ObjectDoesNotExist:
             existencia = self.mvi_product
-            comprom_actual = getattr(existencia, 'exs_comprom', None)
-            existencia.exs_comprom = (comprom_actual or 0) + self.mvi_kntidad
-            existencia.exs_dsponib = (existencia.exs_dsponib or 0) - existencia.exs_comprom
+            if self.mvi_tipomov == TIPO_MOV_CHOICES.EGRESO:
+                comprom_actual = getattr(existencia, 'exs_comprom', None)
+                existencia.exs_comprom = (comprom_actual or 0) + self.mvi_kntidad
+                existencia.exs_dsponib = (existencia.exs_dsponib or 0) - existencia.exs_comprom
+            elif self.mvi_tipomov == TIPO_MOV_CHOICES.INGRESO:
+                existencia.exs_ingreso = (existencia.exs_ingreso or 0) + self.mvi_kntidad
+                existencia.exs_saldact = (existencia.exs_ingreso or 0) + self.mvi_kntidad
+                existencia.exs_dsponib = (existencia.exs_dsponib or 0) + self.mvi_kntidad
+            else:  # Es transferencia
+                pass
             existencia.save()
         else:
             # for num_talla in range(1, 14):
@@ -160,20 +167,30 @@ class Movinvent(models.Model):
             #     egr_nuevo = egr_actual + getattr(self, "mvi_talla{0:02d}".format(num_talla)) or 0
             #     setattr(saldos, "tex_egres{0:02d}".format(num_talla), egr_nuevo)
             for num_talla in range(1, 14):
-                cmp_actual = getattr(saldos, "tex_compr{0:02d}".format(num_talla)) or 0
-                dsp_nuevo = cmp_actual + getattr(self, "mvi_talla{0:02d}".format(num_talla)) or 0
-                setattr(saldos, "tex_dispo{0:02d}".format(num_talla), dsp_nuevo)
+                knt_movim = getattr(self, "mvi_talla{0:02d}".format(num_talla)) or 0
+                if self.mvi_tipomov == TIPO_MOV_CHOICES.EGRESO:
+                    cmp_actua = getattr(saldos, "tex_compr{0:02d}".format(num_talla)) or 0
+                    cmp_nuevo = cmp_actua + knt_movim
+                    # dsp_nuevo = cmp_actual +
+                    setattr(saldos, "tex_compr{0:02d}".format(num_talla), cmp_nuevo)
+                    # setattr(saldos, "tex_dispo{0:02d}".format(num_talla), dsp_nuevo)
+                elif self.mvi_tipomov == TIPO_MOV_CHOICES.INGRESO:
+                    ing_actual = getattr(saldos, "tex_ingre{0:02d}".format(num_talla)) or 0
+                    nuevo_ingr = getattr(self, "mvi_talla{0:02d}".format(num_talla)) or 0
+                    setattr(saldos, "tex_ingre{0:02d}".format(num_talla), ing_actual + nuevo_ingr)
+                else:  # Es transferencia
+                    pass
             saldos.save()
 
 
 class Compra(models.Model):
     com_idcompr = models.AutoField('Id. de Compra', primary_key=True)
-    com_ctrlcom = models.CharField('Núm. de Compra', max_length=12, editable=False)
+    com_facprov = models.CharField('Nº Fac. Proveedor', max_length=12)
     com_ningres = models.ForeignKey(Ingreso, verbose_name='Núm. de Ingreso', null=True, blank=True)
     com_fechcom = models.DateField('Fecha de la Compra', default=timezone.now)
     com_cajanum = models.ForeignKey(Caja, verbose_name='Núm. de caja', null=True, blank=True)
     com_cajeras = models.ForeignKey(Cajera, verbose_name='Cód. de Cajera', null=True, blank=True)
-    com_proveed = models.ForeignKey(Provedor, verbose_name='Cód. de Proveedor', null=True, blank=True)
+    com_proveed = models.ForeignKey(Proveedor, verbose_name='Cód. de Proveedor', null=True, blank=True)
     com_vendedo = models.ForeignKey(Vendedor, verbose_name='Cód. de Vendedor', null=True, blank=True)
     com_monedas = models.ForeignKey(Moneda, verbose_name='Núm. de Moneda', null=True, blank=True)
     com_cotizac = models.DecimalField('Cotización', max_digits=9, decimal_places=2, null=True, blank=True)
@@ -190,27 +207,13 @@ class Compra(models.Model):
     com_pgocred = models.DecimalField('Crédito personal', max_digits=15, decimal_places=2, null=True, blank=True)
     com_otropgo = models.DecimalField('Internet (Paypal)', max_digits=15, decimal_places=2, null=True, blank=True)
 
+    class Meta:
+        # TODO: Decidir campos únicos.
+        # unique_together = ["com_facprov", "com_proveed"]
+        pass
+
     def __str__(self):
         return str(self.com_idcompr) if self.com_idcompr else super(Compra, self).__str__()
-
-    def save(self, *args, **kwargs):
-        # if not self.id:
-        # if 'request' in kwargs and self.user is None:
-        # import pdb; pdb.set_trace()
-        if 'request' in kwargs:
-            request = kwargs.pop('request')
-            if request:
-                sucursal = request.user.sucursal
-                # TODO: Validar en views que Sucursal de usuario esté activa y tenga Controlador
-                controlador = Controlador.objects.get(ctl_sucrsal=sucursal)
-
-                with transaction.atomic():
-                    self.com_ctrlfac = "{0:02d}{1:09d}".format(sucursal.id, controlador.ctl_secue01 + 1)
-                    controlador.ctl_secue01 += 1
-                    controlador.save()
-                    super(Compra, self).save(*args, **kwargs)
-        else:
-            super(Compra, self).save(*args, **kwargs)
 
 
 class Factura(models.Model):

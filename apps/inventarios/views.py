@@ -10,7 +10,7 @@ from .models import Division, Marca, Modelo, Color, Tabtalla, Existencia, Saldox
 from .forms import (DivisionForm, MarcaForm, ModeloForm, ColorForm, TabtallaForm, ExistenciaForm,
                     SaldoxtallaForm, ExistenciaEditForm)
 # from django.views.defaults import page_not_found
-# from django.http import Http404, HttpResponse
+from django.http import Http404  # , HttpResponse
 # import pdfkit
 # from jinja2 import Environment, FileSystemLoader
 
@@ -46,16 +46,16 @@ class ExiPdf(ListView):
         return Existencia.objects.select_related('exs_idunida', 'saldoxtalla')
 
     def get_context_data(self, **kwargs):
-        html = super(ExiPdf, self).get_context_data(**kwargs)
+        # html = super(ExiPdf, self).get_context_data(**kwargs)
         context = super(ExiPdf, self).get_context_data(**kwargs)
         context['totaldesaldos'] = self.get_queryset().aggregate(totaldesaldos=Sum('exs_saldact'))['totaldesaldos']
-        options = {
-                'page-size': 'A5',
-                'margin-top': '0.1in',
-                'margin-right': '0.1in',
-                'margin-bottom': '0.1in',
-                'margin-left': '0.1in',
-        }
+        # options = {
+        #         'page-size': 'A5',
+        #         'margin-top': '0.1in',
+        #         'margin-right': '0.1in',
+        #         'margin-bottom': '0.1in',
+        #         'margin-left': '0.1in',
+        # }
         # pdfkit.from_string(html, 'nuevo_pdf.pdf', options=options)
         return context
 
@@ -400,7 +400,9 @@ class PopExist(ListView):
         queryset = super(PopExist, self).get_queryset()
         user = self.request.user
         sucursal = user.sucursal
-        return queryset.filter(exs_saldact__gt=0.00, exs_sucursa=sucursal)
+        if self.request.GET.get('all', None) is None:
+            queryset = queryset.filter(exs_saldact__gt=0.00)
+        return queryset.filter(exs_sucursa=sucursal)
 
 
 class ExiQuery(DetailView):

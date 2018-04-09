@@ -337,12 +337,14 @@ class MovinventForm(forms.ModelForm):
 
 class IngresoForm(forms.ModelForm):
     ing_feching = forms.DateField(initial=localtime(now()).date())
+    ing_facprov = forms.CharField(max_length=12)
 
     class Meta:
         model = Ingreso
         fields = [
                 # 'ing_tipomov',
                 'ing_feching',
+                'ing_facprov',
                 'ing_proveed',
                 'ing_vendedo',
                 'ing_sucursa',
@@ -358,7 +360,8 @@ class IngresoForm(forms.ModelForm):
                 'ing_proveed':   forms.Select(),
                 'ing_vendedo':   forms.Select(),
                 'ing_sucursa':   forms.HiddenInput(),
-                }
+                # ''
+        }
 
 
 class PedidoForm(forms.ModelForm):
@@ -390,24 +393,12 @@ class PedidoForm(forms.ModelForm):
 class CompraForm(forms.ModelForm):
     com_fechcom = forms.DateField(initial=localtime(now()).date())
 
-    def save(self, commit=True, *args, **kwargs):
-        request = None
-        if 'request' in kwargs:
-            request = kwargs.pop('request')
-
-        compra = super(CompraForm, self).save(commit=True, *args, **kwargs)
-        if request:
-            compra.save(request=request)
-        return compra
-
-        # else:
-        #     super(Fompra, self).save(*args, **kwargs)
-
     class Meta:
         model = Compra
         fields = [
                 'com_idcompr',
                 'com_fechcom',
+                'com_facprov',
                 'com_cajanum',
                 'com_cajeras',
                 'com_proveed',

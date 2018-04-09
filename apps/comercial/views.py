@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
-from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura, Ingreso
+from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura, Ingreso, Compra
 from apps.comercial.forms import (ClienteForm, ProveedorForm, VendedorForm, MovinventInlineForm,
-                                  MovinventForm, PedidoForm, FacturaForm, IngresoForm)
+                                  MovinventForm, PedidoForm, FacturaForm, IngresoForm, CompraForm)
 from django.db import transaction
 from django.db.models import F, Prefetch
-from django.forms import inlineformset_factory
+# from django.forms import inlineformset_factory
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 
@@ -214,6 +214,7 @@ class IngNuevo(CreateView):
             #       Probé con select_related sin éxito aún.
         return context
 
+    # TODO: Sobreescribir save y guardar datos de sucursal.
     # def post(self, request, *args, **kwargs):
     #     self.object = None
     #     form = self.get_form()
@@ -318,6 +319,73 @@ class IngEdita(UpdateView):
             #     movimientos.instance = self.object
             #     movimientos.save()
         return super(IngEdita, self).form_valid(form)
+
+
+# ======== C O M P R A S =========== #
+
+class ComNuevo(CreateView):
+    model = Compra
+    form_class = CompraForm
+    template_name = "comercial/Com_New.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ComNuevo, self).get_context_data(**kwargs)
+        ingreso = getattr(self, 'ingreso', None)
+        if ingreso:
+            movimientos = self.ingreso.movinvent_set.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios')).all()
+            context['movimientos'] = movimientos
+
+            suma_iva = 0
+            total = 0
+            for movimiento in movimientos:
+                total += movimiento.subtotal
+                suma_iva += movimiento.subtotal * (movimiento.mvi_impuest/100)
+            # context['movimientos'] = movimientos
+            context['total'] = total
+            context['suma_iva'] = suma_iva
+            context['total_iva'] = total + suma_iva
+        return context
+
+    def get_success_url(self):
+        # TODO: Ir a impresión de factura
+        return reverse_lazy('comercial:ing_new')
+        # , kwargs={"pk": self.object.pk}
+
+    def post(self, request, *args, **kwargs):
+        if 'sub_compra' in request.POST and 'ingreso_id' in request.POST:
+            self.object = None
+            request.POST = request.POST.copy()
+            try:
+                ingreso = Ingreso.objects.get(pk=request.POST['ingreso_id'])
+            except Exception:
+                pass
+            else:
+                # factura = Factura(
+                #         fac_npedido=pedido,
+                #         fac_cliente=pedido.ped_cliente,
+                #         fac_vendedo=pedido.ped_vendedo,
+                #         fac_fechfac=timezone.now()
+                #     )
+                # self.object = factura
+                self.ingreso = ingreso
+                form_data = {
+                    'com_ningres': ingreso.ing_ningres,
+                    'com_proveed': ingreso.ing_proveed.pk,
+                    'com_vendedo': ingreso.ing_vendedo.pk,
+                    'com_facprov': request.POST['facproveed'],
+                    'com_fechcom': timezone.now()
+                }
+                request.POST.update(form_data)
+                form = self.get_form()
+                form.initial = form_data
+                return self.form_invalid(form)
+                # if form.is_valid():
+                #     # pedido.ped_statreg = # TODO: Cambiar estado a Choices de Estado
+                #     return self.form_valid(form)
+                # else:
+                #     return self.form_invalid(form)
+        return super(ComNuevo, self).post(request, *args, **kwargs)
 
 
 # ======== P E D I D O S =========== #
