@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura, Ingreso
+from .models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura, Ingreso, Compra
 from django.utils.timezone import localtime, now
 from apps.inventarios.models import Existencia
 
@@ -385,6 +385,97 @@ class PedidoForm(forms.ModelForm):
                 'ped_vendedo':   forms.Select(),
                 'ped_sucursa':   forms.HiddenInput(),
                 }
+
+
+class CompraForm(forms.ModelForm):
+    com_fechcom = forms.DateField(initial=localtime(now()).date())
+
+    def save(self, commit=True, *args, **kwargs):
+        request = None
+        if 'request' in kwargs:
+            request = kwargs.pop('request')
+
+        compra = super(CompraForm, self).save(commit=True, *args, **kwargs)
+        if request:
+            compra.save(request=request)
+        return compra
+
+        # else:
+        #     super(Fompra, self).save(*args, **kwargs)
+
+    class Meta:
+        model = Compra
+        fields = [
+                'com_idcompr',
+                'com_fechcom',
+                'com_cajanum',
+                'com_cajeras',
+                'com_proveed',
+                'com_vendedo',
+                'com_ningres',
+                'com_monedas',
+                'com_cotizac',
+                'com_totitms',
+                'com_totvlor',
+                'com_totdsct',
+                'com_totrkrg',
+                'com_totflet',
+                'com_totaran',
+                'com_tottaxs',
+                'com_pgoefec',
+                'com_pgocheq',
+                'com_pgotjcr',
+                'com_pgocred',
+                'com_otropgo',
+        ]
+
+        labels = {
+
+                'com_idcompr':  'Núm. de Compra',
+                'com_fechcom':  'Fecha de Compra',
+                'com_cajanum':  'Núm. de Caja',
+                'com_cajeras':  'Cajer@',
+                'com_proveed':  'Proveedor ',
+                'com_vendedo':  'Vendedor',
+                'com_ningres':  'Núm. de ingreso',
+                'com_monedas':  'Moneda',
+                'com_cotizac':  'Cotización',
+                'com_totitms':  'Items',
+                'com_totvlor':  'Total Valor',
+                'com_totdsct':  'Total Descuentos',
+                'com_totrkrg':  'Totla de Recargos',
+                'com_totflet':  'Total de Flete',
+                'com_totaran':  'Total Aranceles',
+                'com_tottaxs':  'Total IVA',
+                'com_pgoefec':  'Efectivo',
+                'com_pgocheq':  'Cheques',
+                'com_pgotjcr':  'Tarj./Crédito',
+                'com_pgocred':  'Crédit.Personal',
+                'com_otropgo':  'Otra forma',
+        }
+        widgets = {
+                # com_idcompr':  NumberInput(),
+                'com_fechcom':  forms.DateInput(attrs={"type": "date"}),
+                'com_cajanum':  forms.Select(),
+                'com_cajeras':  forms.Select(),
+                'com_proveed':  forms.Select(),
+                'com_vendedo':  forms.Select(),
+                'com_ningres':  forms.HiddenInput(),
+                'com_monedas':  forms.Select(),
+                'com_cotizac':  forms.NumberInput(),
+                'com_totitms':  forms.NumberInput(),
+                'com_totvlor':  forms.NumberInput(),
+                'com_totdsct':  forms.NumberInput(),
+                'com_totrkrg':  forms.NumberInput(),
+                'com_totflet':  forms.NumberInput(),
+                'com_totaran':  forms.NumberInput(),
+                'com_tottaxs':  forms.NumberInput(),
+                'com_pgoefec':  forms.NumberInput(),
+                'com_pgocheq':  forms.NumberInput(),
+                'com_pgotjcr':  forms.NumberInput(),
+                'com_pgocred':  forms.NumberInput(),
+                'com_otropgo':  forms.NumberInput(),
+        }
 
 
 class FacturaForm(forms.ModelForm):

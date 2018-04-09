@@ -1,5 +1,5 @@
 from django.db import models
-from apps.finanzas.models import Cajera, Caja, Moneda
+from apps.finanzas.models import Cajera, Caja, Moneda, Provedor
 from apps.inventarios.models import Existencia, Unidad
 from apps.parametros.models import Pais, Provincia, Ciudad, Zipcodigo, Sucursal, Categoria, Controlador
 from apps.parametros.choices import TIPO_MOV_CHOICES
@@ -164,6 +164,53 @@ class Movinvent(models.Model):
                 dsp_nuevo = cmp_actual + getattr(self, "mvi_talla{0:02d}".format(num_talla)) or 0
                 setattr(saldos, "tex_dispo{0:02d}".format(num_talla), dsp_nuevo)
             saldos.save()
+
+
+class Compra(models.Model):
+    com_idcompr = models.AutoField('Id. de Compra', primary_key=True)
+    com_ctrlcom = models.CharField('Núm. de Compra', max_length=12, editable=False)
+    com_ningres = models.ForeignKey(Ingreso, verbose_name='Núm. de Ingreso', null=True, blank=True)
+    com_fechcom = models.DateField('Fecha de la Compra', default=timezone.now)
+    com_cajanum = models.ForeignKey(Caja, verbose_name='Núm. de caja', null=True, blank=True)
+    com_cajeras = models.ForeignKey(Cajera, verbose_name='Cód. de Cajera', null=True, blank=True)
+    com_proveed = models.ForeignKey(Provedor, verbose_name='Cód. de Proveedor', null=True, blank=True)
+    com_vendedo = models.ForeignKey(Vendedor, verbose_name='Cód. de Vendedor', null=True, blank=True)
+    com_monedas = models.ForeignKey(Moneda, verbose_name='Núm. de Moneda', null=True, blank=True)
+    com_cotizac = models.DecimalField('Cotización', max_digits=9, decimal_places=2, null=True, blank=True)
+    com_totitms = models.DecimalField('Total de items', max_digits=15, decimal_places=2, null=True, blank=True)
+    com_totvlor = models.DecimalField('Total del valor', max_digits=15, decimal_places=2, null=True, blank=True)
+    com_totdsct = models.DecimalField('Total de descuentos', max_digits=15, decimal_places=2, null=True, blank=True)
+    com_totrkrg = models.DecimalField('Total de recaregos', max_digits=15, decimal_places=2, null=True, blank=True)
+    com_totflet = models.DecimalField('Total por deliver (transporte)', max_digits=15, decimal_places=2, null=True, blank=True)
+    com_totaran = models.DecimalField('Total aranceles', max_digits=15, decimal_places=2, null=True, blank=True)
+    com_tottaxs = models.DecimalField('Total taxes', max_digits=15, decimal_places=2, null=True, blank=True)
+    com_pgoefec = models.DecimalField('Cash', max_digits=15, decimal_places=2, null=True, blank=True)
+    com_pgocheq = models.DecimalField('Cheque', max_digits=15, decimal_places=2, null=True, blank=True)
+    com_pgotjcr = models.DecimalField('T./Crédito', max_digits=15, decimal_places=2, null=True, blank=True)
+    com_pgocred = models.DecimalField('Crédito personal', max_digits=15, decimal_places=2, null=True, blank=True)
+    com_otropgo = models.DecimalField('Internet (Paypal)', max_digits=15, decimal_places=2, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.com_idcompr) if self.com_idcompr else super(Compra, self).__str__()
+
+    def save(self, *args, **kwargs):
+        # if not self.id:
+        # if 'request' in kwargs and self.user is None:
+        # import pdb; pdb.set_trace()
+        if 'request' in kwargs:
+            request = kwargs.pop('request')
+            if request:
+                sucursal = request.user.sucursal
+                # TODO: Validar en views que Sucursal de usuario esté activa y tenga Controlador
+                controlador = Controlador.objects.get(ctl_sucrsal=sucursal)
+
+                with transaction.atomic():
+                    self.com_ctrlfac = "{0:02d}{1:09d}".format(sucursal.id, controlador.ctl_secue01 + 1)
+                    controlador.ctl_secue01 += 1
+                    controlador.save()
+                    super(Compra, self).save(*args, **kwargs)
+        else:
+            super(Compra, self).save(*args, **kwargs)
 
 
 class Factura(models.Model):
