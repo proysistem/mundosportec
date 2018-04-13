@@ -12,7 +12,7 @@
                 <a class="icon-print align_tex_left crea_boton" target="_blank" href="{% url 'inventarios:exi_tikts' %}">Tiket's</a>
                 <a class="icon-database crea_boton" href="{% url 'inventarios:exi_new' %}">Crear nuevo</a>
             </div>
-            <form id="form_search" name="form_search" method="POST" action="{% url 'inventarios:exi_search' %}">{% csrf_token %}
+            <form id="form_search" name="form_search" method="POST" action="{% url 'inventarios:mvi_search' %}">{% csrf_token %}
                 <input type="hidden" name="fnd_templat" value="panel">
                 <input type="text" name="fnd_myfound" id="fnd_idfound" />
                 <input type="submit" name="enviar" id="enviar" value="Buscar" />

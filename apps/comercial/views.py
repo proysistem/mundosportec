@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView, TemplateView
 from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura, Ingreso, Compra
 from apps.comercial.forms import (ClienteForm, ProveedorForm, VendedorForm, MovinventInlineForm,
                                   MovinventForm, PedidoForm, FacturaForm, IngresoForm, CompraForm)
 from django.db import transaction
-from django.db.models import F, Prefetch
-# from django.forms import inlineformset_factory
+from django.db.models import F, Prefetch, Sum, Q
+from django.shortcuts import render
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 
@@ -140,16 +140,46 @@ class VndDelet(DeleteView):
 
 # ======== MOVIMIENTOS DE INVENTARIOS "MOVINVENT" =========== #
 
+
+class MviBuscar(TemplateView):
+    """Busqueda en Movimientos """
+    def post(self, request, *args, **kwargs):
+        wrk_buscar = request.POST['fnd_myfound']
+        wrk_itflag = request.POST['fnd_templat']
+        if wrk_itflag == 'movim':
+            wrk_template = 'comercial/Mvi_Panel.html'
+        elif wrk_itflag == 'panel':
+            wrk_template = 'comercial/Mvi_Panel.html'
+        else:
+            # TODO: Mostrar error
+            wrk_template = ''
+        pass
+        # import pdb; pdb.set_trace()
+        # wrk_byprod = Movinvent.objects.filter(exs_product=wrk_buscar)
+        # TODO: Aumentar espectro de busqueda
+        wrk_results = self.get_queryset().filter(
+            Q(mvi_product=wrk_buscar) | Q(mvi_nummovi__contains=wrk_buscar)
+        )
+        return render(request, wrk_template, {'movimiento': wrk_results, 'object_list': wrk_results, 'wrk_byprod': True})
+
+    def get_queryset(self):
+        return Movinvent.objects
+
+    #     user = self.request.user
+    #     sucursal = user.sucursal
+    #     return Movinvent.objects.filter(exs_sucursa=sucursal)
+
+
 class MviLista(ListView):
     """Listado de Movinvent"""
     model = Movinvent
-    template_name = 'conercial/Mvi_Panel.html'
-    paginate_by = 8
+    template_name = 'comercial/Mvi_Panel.html'
+    paginate_by = 18
 
 
 class MviView(DetailView):
     """Listado de Movinvent"""
-    template_name = 'conercial/Mvi_View.html'
+    template_name = 'comercial/Mvi_View.html'
     model = Movinvent
 
 
@@ -157,7 +187,7 @@ class MviNuevo(CreateView):
     """Crear Movinvent"""
     model = Movinvent
     form_class = MovinventForm
-    template_name = 'conercial/Mvi_New.html'
+    template_name = 'comercial/Mvi_New.html'
     success_url = reverse_lazy('comercial:mvi_panel')
 
 
@@ -165,7 +195,7 @@ class MviEdita(UpdateView):
     """Listado de Movinvents"""
     model = Movinvent
     form_class = MovinventForm
-    template_name = 'conercial/Mvi_Edit.html'
+    template_name = 'comercial/Mvi_Edit.html'
     success_url = reverse_lazy('comercial:mvi_panel')
 
 
@@ -173,7 +203,7 @@ class MviDelet(DeleteView):
     """Listado de Movinvents"""
     model = Movinvent
     form_class = MovinventForm
-    template_name = 'conercial/Mvi_Delet.html'
+    template_name = 'comercial/Mvi_Delet.html'
     success_url = reverse_lazy('comercial:mvi_panel')
 
 

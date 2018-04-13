@@ -6,7 +6,8 @@ from apps.comercial.views import (CliLista, CliNuevo, CliView, CliEdita, CliDele
                                   PedLista, PedNuevo, PedView, PedEdita, PedDelet, PedRepor,
                                   FacLista, FacPrint, FacNuevo, FacView, FacEdita, FacPaid, FacDelet,
                                   IngNuevo, IngEdita,
-                                  ComNuevo, )
+                                  ComNuevo,
+                                  MviBuscar, )
 from apps.inventarios.views import PopExist
 from mundosport.utils import login_required_view
 
@@ -30,6 +31,7 @@ urlpatterns = [
     url(r'^VndEdita/(?P<pk>\d+)/$',    login_required_view(VndEdita.as_view()), name='vnd_edit'),
     url(r'^VndElimina/(?P<pk>\d+)/$',  login_required_view(VndDelet.as_view()), name='vnd_delet'),
 
+    url(r'^MviSearch',                 login_required_view(MviBuscar.as_view()), name='mvi_search'),
     url(r'^MviPanel',                  login_required_view(MviLista.as_view()), name='mvi_panel'),
     url(r'^MviNuevo/$',                login_required_view(MviNuevo.as_view()), name='mvi_new'),
     url(r'^MviConsulta/(?P<pk>\d+)/$', login_required_view(MviView.as_view()),  name='mvi_view'),
