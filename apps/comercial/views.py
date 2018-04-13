@@ -158,7 +158,7 @@ class MviBuscar(TemplateView):
         # wrk_byprod = Movinvent.objects.filter(exs_product=wrk_buscar)
         # TODO: Aumentar espectro de busqueda
         wrk_results = self.get_queryset().filter(
-            Q(mvi_product=wrk_buscar) | Q(mvi_nummovi__contains=wrk_buscar)
+            Q(mvi_nummovi=wrk_buscar) | Q(mvi_product__contains=wrk_buscar)
         )
         return render(request, wrk_template, {'movimiento': wrk_results, 'object_list': wrk_results, 'wrk_byprod': True})
 
