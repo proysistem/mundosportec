@@ -353,6 +353,38 @@ class IngEdita(UpdateView):
 
 # ======== C O M P R A S =========== #
 
+class ComLista(ListView):
+    """Listado de Compra"""
+    model = Compra
+    template_name = 'comercial/Com_Panel.html'
+    paginate_by = 12
+
+
+class ComBuscar(TemplateView):
+    """Busqueda en Compras """
+    def post(self, request, *args, **kwargs):
+        wrk_buscar = request.POST['fnd_myfound']
+        wrk_itflag = request.POST['fnd_templat']
+        if wrk_itflag == 'COMP':
+            wrk_template = 'comercial/Com_Panel.html'
+        elif wrk_itflag == 'panel':
+            wrk_template = 'comercial/Com_Panel.html'
+        else:
+            # TODO: Mostrar error
+            wrk_template = ''
+        pass
+        # import pdb; pdb.set_trace()
+        # wrk_byprod = Movinvent.objects.filter(exs_product=wrk_buscar)
+        # TODO: Aumentar espectro de busqueda
+        wrk_results = self.get_queryset().filter(
+            Q(com_facprov=wrk_buscar) | Q(com_proveed__contains=wrk_buscar)
+        )
+        return render(request, wrk_template, {'facturas': wrk_results, 'object_list': wrk_results, 'wrk_byproved': True})
+
+    def get_queryset(self):
+        return Compra.objects
+
+
 class ComNuevo(CreateView):
     model = Compra
     form_class = CompraForm
@@ -685,11 +717,40 @@ class PedDelet(DeleteView):
 # ======== F A C T U R A S =========== #
 
 
+class FacBuscar(TemplateView):
+    """Busqueda en Factura """
+    def post(self, request, *args, **kwargs):
+        wrk_buscar = request.POST['fnd_myfound']
+        wrk_itflag = request.POST['fnd_templat']
+        if wrk_itflag == 'FACT':
+            wrk_template = 'comercial/Fac_Panel.html'
+        elif wrk_itflag == 'panel':
+            wrk_template = 'comercial/Fac_Panel.html'
+        else:
+            # TODO: Mostrar error
+            wrk_template = ''
+        pass
+        # import pdb; pdb.set_trace()
+        # wrk_byprod = Movinvent.objects.filter(exs_product=wrk_buscar)
+        # TODO: Aumentar espectro de busqueda
+        wrk_results = self.get_queryset().filter(
+            Q(fac_ctrlfac=wrk_buscar) | Q(fac_cliente__contains=wrk_buscar)
+        )
+        return render(request, wrk_template, {'facturas': wrk_results, 'object_list': wrk_results, 'wrk_bycliente': True})
+
+    def get_queryset(self):
+        return Factura.objects
+
+    #     user = self.request.user
+    #     sucursal = user.sucursal
+    #     return Movinvent.objects.filter(exs_sucursa=sucursal)
+
+
 class FacLista(ListView):
     """Listado de Facturas"""
     model = Factura
     template_name = 'comercial/Fac_Panel.html'
-    paginate_by = 8
+    paginate_by = 12
 
 
 class FacPrint(ListView):

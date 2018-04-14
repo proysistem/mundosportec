@@ -64,7 +64,7 @@
                 <table border="1" >
                     <thead>
                         <tr color="#:000066">
-                            <th class="head_tab">Producto</th>
+                            <th class="head_tab" colspan="2">Producto</th>
                             <th class="head_tab">Detalle del producto</th>
                             <th class="head_tab">Tbla</th>
                             <th class="head_tab">Unid.</th>
@@ -82,18 +82,19 @@
                         {% if productos %}
                         {% for var_exifield in productos %}
                             <tr id="elemento" OnMouseOver="Resaltar_On(this);" OnMouseOut="Resaltar_Off(this);" OnClick="datos('{{ var_exifield.exs_product }}','{{ var_exifield.exs_detalle }}','{{ var_exifield.exs_tabtall }}','{{ var_exifield.exs_idunida }}','{{ var_exifield.exs_publico|default:0|stringformat:"0.2f" }}','{{ var_exifield.pk }}');">
-                                <td>{{ var_exifield.exs_product }} </td>
-                                <td>{{ var_exifield.exs_detalle }} </td>
-                                <td>{{ var_exifield.exs_tabtall }} </td>
-                                <td>{{ var_exifield.exs_idunida }} </td>
-                                <td>{{ var_exifield.exs_publico|default:0|stringformat:"0.2f" }}</td>
-                                <td>{{ var_exifield.exs_saldinc|default:0|stringformat:"0.2f" }}</td>
-                                <td>{{ var_exifield.exs_ingreso|default:0|stringformat:"0.2f" }}</td>
-                                <td>{{ var_exifield.exs_egresos|default:0|stringformat:"0.2f" }}</td>
-                                <td>{{ var_exifield.exs_saldact|default:0|stringformat:"0.2f" }}</td>
-                                <td>{{ var_exifield.exs_comprom|default:0|stringformat:"0.2f" }}</td>
-                                <td>{{ var_exifield.exs_xconfir|default:0|stringformat:"0.2f" }}</td>
-                                <td>{{ var_exifield.exs_dsponib|default:0|stringformat:"0.2f" }}</td>
+                                <td class="align_tex_right">{% if var_exifield.exs_imgprod %}<img src="{{var_exifield.exs_imgprod.url}}" width="60px">{% endif %}</td>
+                                <td class="align_tex_left">{{ var_exifield.exs_product }} </td>
+                                <td class="align_tex_left">{{ var_exifield.exs_detalle }} </td>
+                                <td class="align_tex_center">{{ var_exifield.exs_tabtall }} </td>
+                                <td class="align_tex_center">{{ var_exifield.exs_idunida }} </td>
+                                <td class="align_tex_right">{{ var_exifield.exs_publico|default:0|stringformat:"0.2f" }}</td>
+                                <td class="align_tex_right">{{ var_exifield.exs_saldinc|default:0|stringformat:"0.2f" }}</td>
+                                <td class="align_tex_right">{{ var_exifield.exs_ingreso|default:0|stringformat:"0.2f" }}</td>
+                                <td class="align_tex_right">{{ var_exifield.exs_egresos|default:0|stringformat:"0.2f" }}</td>
+                                <td class="align_tex_right">{{ var_exifield.exs_saldact|default:0|stringformat:"0.2f" }}</td>
+                                <td class="align_tex_right">{{ var_exifield.exs_comprom|default:0|stringformat:"0.2f" }}</td>
+                                <td class="align_tex_right">{{ var_exifield.exs_xconfir|default:0|stringformat:"0.2f" }}</td>
+                                <td class="align_tex_right">{{ var_exifield.exs_dsponib|default:0|stringformat:"0.2f" }}</td>
                             </tr>
                         {% endfor %}
                         {% else %}

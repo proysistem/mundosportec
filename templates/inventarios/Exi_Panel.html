@@ -21,7 +21,7 @@
                 <table border="1" >
                     <thead>
                         <tr color="#:000066">
-                            <th class="head_tab">Producto</th>
+                            <th class="head_tab" colspan="2">Producto</th>
                             <th class="head_tab">Detalle del producto</th>
                             <th class="head_tab">Tbla</th>
                             <th class="head_tab">Unid.</th>
@@ -41,6 +41,7 @@
                         {% if object_list %}
                         {% for var_exifield in object_list %}
                         <tr>
+                            <td>{% if var_exifield.exs_imgprod %}<img src="{{var_exifield.exs_imgprod.url}}" width="80px">{% endif %}</td>
                             <td class="columns_tab">{{ var_exifield.exs_product }} </td>
                             <td class="columns_tab">{{ var_exifield.exs_detalle }} </td>
                             <td class="columns_tab">{{ var_exifield.exs_tabtall }} </td>

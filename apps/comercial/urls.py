@@ -4,9 +4,9 @@ from apps.comercial.views import (CliLista, CliNuevo, CliView, CliEdita, CliDele
                                   VndLista, VndNuevo, VndView, VndEdita, VndDelet,
                                   MviLista, MviNuevo, MviView, MviEdita, MviDelet,
                                   PedLista, PedNuevo, PedView, PedEdita, PedDelet, PedRepor,
-                                  FacLista, FacPrint, FacNuevo, FacView, FacEdita, FacPaid, FacDelet,
+                                  FacLista, FacPrint, FacNuevo, FacView, FacEdita, FacPaid, FacDelet, FacBuscar,
                                   IngNuevo, IngEdita,
-                                  ComNuevo,
+                                  ComNuevo, ComLista, ComBuscar,
                                   MviBuscar, )
 from apps.inventarios.views import PopExist
 from mundosport.utils import login_required_view
@@ -53,7 +53,8 @@ urlpatterns = [
     url(r'^IngEdita/(?P<pk>\d+)/$',    login_required_view(IngEdita.as_view()), name='ing_edit'),
     url(r'^IngElimina/(?P<pk>\d+)/$',  login_required_view(PedDelet.as_view()), name='ing_delet'),
 
-    # url(r'^ComPanel',                  login_required_view(FacLista.as_view()), name='fac_panel'),
+    url(r'^ComSearch',                 login_required_view(ComBuscar.as_view()), name='com_search'),
+    url(r'^ComPanel',                  login_required_view(ComLista.as_view()), name='com_panel'),
     url(r'^ComNuevo/$',                login_required_view(ComNuevo.as_view()), name='com_new'),
     # url(r'^ComPaid/(?P<pk>\d+)/$',     login_required_view(FacPaid.as_view()), name='fac_paid'),
     # url(r'^ComConsulta/(?P<pk>\d+)/$', login_required_view(FacView.as_view()),  name='fac_view'),
@@ -61,6 +62,7 @@ urlpatterns = [
     # url(r'^ComElimina/(?P<pk>\d+)/$',  login_required_view(FacDelet.as_view()), name='fac_delet'),
     # url(r'^ComPrint/(?P<pk>\d+)/$',    login_required_view(FacPrint.as_view()), name='fac_print'),
 
+    url(r'^FacSearch',                 login_required_view(FacBuscar.as_view()), name='fac_search'),
     url(r'^FacPanel',                  login_required_view(FacLista.as_view()), name='fac_panel'),
     url(r'^FacNuevo/$',                login_required_view(FacNuevo.as_view()), name='fac_new'),
     url(r'^FacPaid/(?P<pk>\d+)/$',     login_required_view(FacPaid.as_view()), name='fac_paid'),

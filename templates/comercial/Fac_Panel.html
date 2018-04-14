@@ -1,0 +1,91 @@
+{% extends 'base/base_comercial.html' %}
+
+{% block title %} Panel de Facturas {% endblock title %}</title>
+
+{% block context %}
+
+            <div class="crea_content">
+                <h3 class="crea_proceso">Comercial:  facturación</h3>
+                <a class="icon-database crea_boton" href="{% url 'comercial:ped_new' %}">Facturar</a>
+
+            </div>
+            <form id="form_search" name="form_search" method="POST" action="{% url 'comercial:fac_search' %}">{% csrf_token %}
+                <input type="hidden" name="fnd_templat" value="FACT">
+                <input type="text" name="fnd_myfound" id="fnd_idfound" />
+                <input type="submit" name="enviar" id="enviar" value="Buscar" />
+            </form>
+            <div>
+                <table border="1" >
+                    <thead>
+                        <tr color="#:000066">
+                            <th class="head_tab">N.FACTURA</th>
+                            <th class="head_tab">N.PEDIDO</th>
+                            <th class="head_tab">FECHA DE FACTURA</th>
+                            <th class="head_tab">CAJA</th>
+                            <th class="head_tab">CAJERA</th>
+                            <th class="head_tab">CLNTE</th>
+                            <th class="head_tab">VENDED.</th>
+                            <th class="head_tab">MONEDA</th>
+                            <th class="head_tab">COTIZ.</th>
+                            <th class="head_tab">TOT.ITMS</th>
+                            <th class="head_tab">SUBTOT</th>
+                            <th class="head_tab">DSCTOS</th>
+                            <th class="head_tab">RCARGO</th>
+                            <th class="head_tab">TRANSP</th>
+                            <th class="head_tab">ARACEL</th>
+                            <th class="head_tab">I.V.A.</th>
+                            <th class="head_tab">PAGO EFECT.</th>
+                            <th class="head_tab">PAGO CHEQUE</th>
+                            <th class="head_tab">PAG. T/CRED</th>
+                            <th class="head_tab">CREDIT. PERSONAL</th>
+                            <th class="head_tab">OTR.FORM. PAGO</th>
+                        </tr>
+                    </thead>
+                    <tbody border="0">
+                        {% if object_list %}
+                        {% for var_facfield in object_list %}
+                        <tr>
+                            <td class="columns_tab align_tex_left"> {{ var_facfield.fac_ctrlfac }}</td>
+                            <td class="columns_tab align_tex_right"> {{ var_facfield.fac_npedido }}</td>
+                            <td class="columns_tab align_tex_left"> {{ var_facfield.fac_fechfac }}</td>
+                            <td class="columns_tab align_tex_left"> {{ var_facfield.fac_cajanum }}</td>
+                            <td class="columns_tab align_tex_left"> {{ var_facfield.fac_cajeras }}</td>
+                            <td class="columns_tab align_tex_left"> {{ var_facfield.fac_cliente }}</td>
+                            <td class="columns_tab align_tex_left"> {{ var_facfield.fac_vendedo }}</td>
+                            <td class="columns_tab align_tex_left"> {{ var_facfield.fac_monedas }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_cotizac |default:''|stringformat:"0.0f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totitms |default:''|stringformat:"0.0f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totvlor |default:''|stringformat:"0.0f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totdsct |default:''|stringformat:"0.0f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totrkrg |default:''|stringformat:"0.0f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totflet |default:''|stringformat:"0.0f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totaran |default:''|stringformat:"0.0f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_tottaxs |default:''|stringformat:"0.0f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_pgoefec |default:''|stringformat:"0.0f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_pgocheq |default:''|stringformat:"0.0f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_pgotjcr |default:''|stringformat:"0.0f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_pgocred |default:''|stringformat:"0.0f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_otropgo |default:''|stringformat:"0.0f" }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <h4> No hay registros en facturas </h4>
+                        {% endif %}
+                    </tbody>
+                </table>
+                <div class="page_content">
+                    <ul class="pager_botons">
+                        <li>
+                            {% if page_obj.has_previous %}
+                            <a class="icon-left-open pager_prev" href="?page={{page_obj.previous_page_number}}">Previous</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if page_obj.has_next %}
+                            <a class="pager_next" href="?page={{page_obj.next_page_number}}">Next <span class="icon-right-open"></span></a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+{% endblock context %}
