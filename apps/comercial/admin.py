@@ -1,10 +1,12 @@
 from django.contrib import admin
 
-from .models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura
+from .models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura, Compra
 
 admin.site.register(Cliente)
 admin.site.register(Proveedor)
 admin.site.register(Vendedor)
+admin.site.register(Compra)
+admin.site.register(Factura)
 admin.site.register(Movinvent)
 
 

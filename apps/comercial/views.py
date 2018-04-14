@@ -143,6 +143,8 @@ class VndDelet(DeleteView):
 
 class MviBuscar(TemplateView):
     """Busqueda en Movimientos """
+    paginate_by = 12
+
     def post(self, request, *args, **kwargs):
         wrk_buscar = request.POST['fnd_myfound']
         wrk_itflag = request.POST['fnd_templat']
@@ -174,7 +176,7 @@ class MviLista(ListView):
     """Listado de Movinvent"""
     model = Movinvent
     template_name = 'comercial/Mvi_Panel.html'
-    paginate_by = 18
+    paginate_by = 12
 
 
 class MviView(DetailView):
