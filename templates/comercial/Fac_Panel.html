@@ -19,15 +19,17 @@
                     <thead>
                         <tr color="#:000066">
                             <th class="head_tab">N.FACTURA</th>
-                            <th class="head_tab">N.PEDIDO</th>
+                            <th class="head_tab">PEDID</th>
                             <th class="head_tab">FECHA DE FACTURA</th>
-                            <th class="head_tab">CAJA</th>
-                            <th class="head_tab">CAJERA</th>
+                            <th class="head_tab">CJA</th>
+                            <th class="head_tab">CJERA</th>
                             <th class="head_tab">CLNTE</th>
                             <th class="head_tab">VENDED.</th>
-                            <th class="head_tab">MONEDA</th>
+                            {% comment %}
+                            <th class="head_tab">MOND.</th>
                             <th class="head_tab">COTIZ.</th>
-                            <th class="head_tab">TOT.ITMS</th>
+                            <th class="head_tab">ITMS</th>
+                            {% endcomment %}
                             <th class="head_tab">SUBTOT</th>
                             <th class="head_tab">DSCTOS</th>
                             <th class="head_tab">RCARGO</th>
@@ -52,9 +54,11 @@
                             <td class="columns_tab align_tex_left"> {{ var_facfield.fac_cajeras }}</td>
                             <td class="columns_tab align_tex_left"> {{ var_facfield.fac_cliente }}</td>
                             <td class="columns_tab align_tex_left"> {{ var_facfield.fac_vendedo }}</td>
+                            {% comment %}
                             <td class="columns_tab align_tex_left"> {{ var_facfield.fac_monedas }}</td>
                             <td class="columns_tab align_tex_right">{{ var_facfield.fac_cotizac |default:''|stringformat:"0.0f" }}</td>
                             <td class="columns_tab align_tex_right">{{ var_facfield.fac_totitms |default:''|stringformat:"0.0f" }}</td>
+                            {% endcomment %}
                             <td class="columns_tab align_tex_right">{{ var_facfield.fac_totvlor |default:''|stringformat:"0.0f" }}</td>
                             <td class="columns_tab align_tex_right">{{ var_facfield.fac_totdsct |default:''|stringformat:"0.0f" }}</td>
                             <td class="columns_tab align_tex_right">{{ var_facfield.fac_totrkrg |default:''|stringformat:"0.0f" }}</td>

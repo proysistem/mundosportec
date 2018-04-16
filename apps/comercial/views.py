@@ -721,6 +721,8 @@ class PedDelet(DeleteView):
 
 class FacBuscar(TemplateView):
     """Busqueda en Factura """
+    paginate_by = 10
+
     def post(self, request, *args, **kwargs):
         wrk_buscar = request.POST['fnd_myfound']
         wrk_itflag = request.POST['fnd_templat']
@@ -752,7 +754,7 @@ class FacLista(ListView):
     """Listado de Facturas"""
     model = Factura
     template_name = 'comercial/Fac_Panel.html'
-    paginate_by = 12
+    paginate_by = 10
 
 
 class FacPrint(ListView):
