@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import F, Sum
 from apps.finanzas.models import Cajera, Caja, Moneda
 from apps.inventarios.models import Existencia  # , Unidad
 from apps.parametros.models import Pais, Provincia, Ciudad, Zipcodigo, Sucursal, Categoria, Controlador
@@ -241,6 +242,29 @@ class Factura(models.Model):
     fac_pgocred = models.DecimalField('Crédito personal', max_digits=15, decimal_places=2, null=True, blank=True)
     fac_otropgo = models.DecimalField('Internet (Paypal)', max_digits=15, decimal_places=2, null=True, blank=True)
 
+    def calcular_totales(self):
+        # fac_totitms, fac_totvlor, fac_totdsct, fac_totrkrg, fac_totflet, fac_totaran, fac_tottaxs,
+        if self.fac_npedido:
+            movimientos = self.fac_npedido.movinvent_set.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'),
+                subt_iva=F('mvi_impuest')/100.00 * F('mvi_kntidad') * F('mvi_precios')
+            ).aggregate(
+                fac_totvlor=Sum('subtotal'),
+                fac_totitms=Sum('mvi_kntidad'),
+                fac_totdsct=Sum('mvi_desctos'),
+                fac_totrkrg=Sum('mvi_rcargos'),
+                fac_totflet=Sum('mvi_deliver'),
+                fac_totaran=Sum('mvi_arancel'),
+                fac_tottaxs=Sum('subt_iva'),
+            )
+            self.fac_totvlor = movimientos['fac_totvlor']
+            self.fac_totitms = movimientos['fac_totitms']
+            self.fac_totdsct = movimientos['fac_totdsct']
+            self.fac_totrkrg = movimientos['fac_totrkrg']
+            self.fac_totflet = movimientos['fac_totflet']
+            self.fac_totaran = movimientos['fac_totaran']
+            self.fac_tottaxs = movimientos['fac_tottaxs']
+
     def __str__(self):
         return str(self.fac_idfactu) if self.fac_idfactu else super(Factura, self).__str__()
 
@@ -261,4 +285,5 @@ class Factura(models.Model):
                     controlador.save()
                     super(Factura, self).save(*args, **kwargs)
         else:
+            self.calcular_totales()
             super(Factura, self).save(*args, **kwargs)
