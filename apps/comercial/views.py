@@ -738,7 +738,7 @@ class FacBuscar(TemplateView):
         # wrk_byprod = Movinvent.objects.filter(exs_product=wrk_buscar)
         # TODO: Aumentar espectro de busqueda
         wrk_results = self.get_queryset().filter(
-            Q(fac_ctrlfac=wrk_buscar) |
+            Q(fac_ctrlfac__icontains=wrk_buscar) |
             Q(fac_cliente__clt_frsname__icontains=wrk_buscar) |
             Q(fac_cliente__clt_midname__icontains=wrk_buscar) |
             Q(fac_cliente__clt_secmane__icontains=wrk_buscar))
