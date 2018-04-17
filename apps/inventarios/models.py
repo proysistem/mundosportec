@@ -166,6 +166,7 @@ class Existencia(models.Model):
                 str(self.exs_idmodel.mod_abrevia),  # 08
                 str(self.exs_idcolor.col_abrevia)   # 10
             )[:30]  # TODO: Analizar si aumentar el 'max_length' a 33 (+3 por los espacios)
+
             self.exs_tabtall = "{}".format(
                 str(self.exs_idmodel.mod_tabtall)  # 2
             ) if self.exs_idmodel.mod_tabtall else 'X'

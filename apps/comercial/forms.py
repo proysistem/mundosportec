@@ -337,7 +337,7 @@ class MovinventForm(forms.ModelForm):
 
 class IngresoForm(forms.ModelForm):
     ing_feching = forms.DateField(initial=localtime(now()).date())
-    ing_facprov = forms.CharField(max_length=12)
+    # ing_facprov = forms.CharField(max_length=12)
 
     class Meta:
         model = Ingreso

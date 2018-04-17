@@ -75,6 +75,7 @@ class Ingreso(models.Model):
     ing_ningres = models.AutoField('Núm. de Ingreso', primary_key=True)
     ing_tipomov = models.PositiveIntegerField("Tipo de movimiento", choices=TIPO_MOV_CHOICES, default=TIPO_MOV_CHOICES.INGRESO)
     ing_feching = models.DateField('Fecha de compra')
+    ing_facprov = models.CharField('Nº Fac. Proveedor', max_length=15)
     ing_proveed = models.ForeignKey(Proveedor)
     ing_vendedo = models.ForeignKey(Vendedor, null=True, blank=True)
     ing_statreg = models.CharField('Status del Registro', max_length=1, default=1)

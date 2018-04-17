@@ -372,6 +372,7 @@ class ExistenciaEditForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super(ExistenciaEditForm, self).save(commit=False)
         if instance.exs_tabtall.lower() != "x":
+            # TODO: Use 'get_or_create' of Saldoxtalla manager.
             sxt = Saldoxtalla(
                 tex_product=instance,
                 tex_inici01=self.cleaned_data['tex_inici01'],

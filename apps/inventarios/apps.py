@@ -2,8 +2,7 @@ from django.apps import AppConfig
 
 
 class InventariosConfig(AppConfig):
-    name = 'inventarios'
+    name = 'apps.inventarios'
 
-
-class EasyPDFConfig(AppConfig):
-    name = 'easy_pdf'
+    def ready(self):
+        import apps.inventarios.signals

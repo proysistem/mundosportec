@@ -379,7 +379,7 @@ class ComBuscar(TemplateView):
         # wrk_byprod = Movinvent.objects.filter(exs_product=wrk_buscar)
         # TODO: Aumentar espectro de busqueda
         wrk_results = self.get_queryset().filter(
-            Q(com_facprov=wrk_buscar) | Q(com_proveed__contains=wrk_buscar)
+            Q(com_facprov__icontains=wrk_buscar) | Q(com_proveed__prv_frsname__icontains=wrk_buscar)
         )
         return render(request, wrk_template, {'facturas': wrk_results, 'object_list': wrk_results, 'wrk_byproved': True})
 
@@ -738,8 +738,10 @@ class FacBuscar(TemplateView):
         # wrk_byprod = Movinvent.objects.filter(exs_product=wrk_buscar)
         # TODO: Aumentar espectro de busqueda
         wrk_results = self.get_queryset().filter(
-            Q(fac_ctrlfac=wrk_buscar) | Q(fac_cliente__contains=wrk_buscar)
-        )
+            Q(fac_ctrlfac=wrk_buscar) |
+            Q(fac_cliente__clt_frsname__icontains=wrk_buscar) |
+            Q(fac_cliente__clt_midname__icontains=wrk_buscar) |
+            Q(fac_cliente__clt_secmane__icontains=wrk_buscar))
         return render(request, wrk_template, {'facturas': wrk_results, 'object_list': wrk_results, 'wrk_bycliente': True})
 
     def get_queryset(self):
