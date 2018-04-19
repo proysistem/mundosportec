@@ -76,6 +76,11 @@ page {
     {
     font-weight: 5em;
     }
+.print_fsize2em
+    {
+    font-size: 2em;
+    }
+
 /*
     body {
     font-weight: 200;
