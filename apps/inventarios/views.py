@@ -553,7 +553,7 @@ class ExiLista(ListView):
     model = Existencia
     template_name = 'inventarios/Exi_Panel.html'
     ordering = ['pk']
-    paginate_by = 8
+    paginate_by = 10
 
     def get_queryset(self):
         queryset = super(ExiLista, self).get_queryset()
