@@ -1,0 +1,79 @@
+{% extends 'base/base_comercial.html' %}
+
+{% block title %} Panel de  Vendedor  {% endblock title %}</title>
+
+{% block context %}
+
+			<div class="crea_content">
+				<h2 class="crea_proceso">Comercial: Vendedor </h2>
+				<a class="icon-database crea_boton" href="{% url 'comercial:vnd_new' %}">Crear nuevo</a>
+
+			</div>
+			<div>
+				<table border="1" >
+					<thead>
+					 	<tr color="#:000066">
+					 		<th class="head_tab">Foto</th>
+					 		<th class="head_tab" colspan="2">Nombres</th>
+					 		<th class="head_tab">Apellidos</th>
+					 		<th class="head_tab">Fechnac</th>
+					 		<th class="head_tab">Direcci</th>
+					 		<th class="head_tab">Ciudad</th>
+					 		<th class="head_tab">Estado</th>
+					 		<th class="head_tab">País</th>
+					 		<th class="head_tab">Cód. Postal</th>
+					 		<th class="head_tab">Telefono</th>
+					 		<th class="head_tab">Celular</th>
+					 		<th class="head_tab">e-mail</th>
+					 		<th class="head_tab">R.U.C.</th>
+					 		<th class="head_tab">Catg.</th>
+					 		<th class="head_tab" colspan="3">Opcoón</th>
+					 	</tr>
+					</thead>
+					<tbody border="0">
+					 	{% if object_list %}
+					 	{% for var_clifield in object_list %}
+					 	<tr>
+							<td class="columns_tab">{{ var_clifield.vnd_imgclte }} </td>
+							<td class="columns_tab">{{ var_clifield.vnd_frsname }} </td>
+							<td class="columns_tab">{{ var_clifield.vnd_midname }} </td>
+							<td class="columns_tab">{{ var_clifield.vnd_secmane }} </td>
+							<td class="columns_tab">{{ var_clifield.vnd_fechnac }} </td>
+							<td class="columns_tab">{{ var_clifield.vnd_direcci }} </td>
+							<td class="columns_tab">{{ var_clifield.vnd_ciudade }} </td>
+							<td class="columns_tab">{{ var_clifield.vnd_estados }} </td>
+							<td class="columns_tab">{{ var_clifield.vnd_country }} </td>
+							<td class="columns_tab">{{ var_clifield.vnd_zipcodg }} </td>
+							<td class="columns_tab">{{ var_clifield.vnd_telefon }} </td>
+							<td class="columns_tab">{{ var_clifield.vnd_celular }} </td>
+							<td class="columns_tab">{{ var_clifield.vnd_correoe }} </td>
+							<td class="columns_tab">{{ var_clifield.vnd_rgunico }} </td>
+							<td class="columns_tab">{{ var_clifield.vnd_categor }} </td>
+
+							<td class="columns_tab"><a class="icon-eye botones"   href="{% url 'comercial:vnd_view'  var_clifield.pk %}"></a></td>
+							<td class="columns_tab"><a class="icon-edit botones"  href="{% url 'comercial:vnd_edit'  var_clifield.pk %}"></a></td>
+							<td class="columns_tab"><a class="icon-trash botones" href="#"></a></td>
+						</tr>
+						{% endfor %}
+						{% else %}
+						<h4> No hay registros en Vendedor  </h4>
+						{% endif %}
+						<br/>
+					</tbody>
+				</table>
+				<div class="page_content">
+					<ul class="pager_botons">
+						<li>
+							{% if page_obj.has_previous %}
+							<a class="icon-left-open pager_prev" href="?page={{page_obj.previous_page_number}}">Previous</a>
+							{% endif %}
+						</li>
+						<li>
+							{% if page_obj.has_next %}
+							<a class="pager_next" href="?page={{page_obj.next_page_number}}">Next <span class="icon-right-open"></span></a>
+							{% endif %}
+						</li>
+					</ul>
+				</div>
+			</div>
+{% endblock context %}

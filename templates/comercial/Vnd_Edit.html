@@ -1,0 +1,81 @@
+{% extends 'base/base_comercial.html' %}
+
+{% block title %} Modifica Vendedor {% endblock title %}</title>
+
+            {% block context%}
+            <div class="crea_content">
+                <h2 class="crea_proceso">Comercial:  Vendedor</h2>
+                <a class="icon-reply crea_boton" href="{% url 'comercial:vnd_panel' %}">Volver</a>
+
+            </div>
+            <div>
+                <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="form_content">
+                        <div class="form_titulo"><h1>Modifica Vendedor</h1></div>
+                        {% if form.errors %}
+
+                            <div class="form_errors" role="alert">
+                                {{ form.errors }}
+                            </div>
+
+                        {% endif %}
+
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <strong>{{ field.label }}</strong>: {{ error }}<br>
+                            {% endfor %}
+                        {% endfor %}
+
+                        {% for error in form.non_field_errors %}
+                            <strong>{{ error }}</strong>
+                        {% endfor %}
+
+
+                        {% if nuevo_mov.errors %}
+
+                            <div class="form_errors" role="alert">
+                                {{ nuevo_mov.errors }}
+                            </div>
+
+                        {% endif %}
+
+                        {% for field in nuevo_mov %}
+                            {% for error in field.errors %}
+                                <strong>{{ field.label }}</strong>: {{ error }}<br>
+                            {% endfor %}
+                        {% endfor %}
+
+                        {% for error in nuevo_mov.non_field_errors %}
+                            <strong>{{ error }}</strong>
+                        {% endfor %}
+
+                        <div class="form_esc">
+                            <a class="icon-cancel" href="{% url 'comercial:vnd_panel' %}"></a>
+                        </div>
+                        {% if forms.error %}
+                            <div class="form_errors" role="alert">
+                                {{ form.error }}
+                            </div>
+                        {% endif %}
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_frsname.name}}">{{form.vnd_frsname.label}}</label></div><div class="form_widget">{{form.vnd_frsname}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_midname.name}}">{{form.vnd_midname.label}}</label></div><div class="form_widget">{{form.vnd_midname}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_secmane.name}}">{{form.vnd_secmane.label}}</label></div><div class="form_widget">{{form.vnd_secmane}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_fechnac.name}}">{{form.vnd_fechnac.label}}</label></div><div class="form_widget">{{form.vnd_fechnac}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_direcci.name}}">{{form.vnd_direcci.label}}</label></div><div class="form_widget">{{form.vnd_direcci}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_ciudade.name}}">{{form.vnd_ciudade.label}}</label></div><div class="form_widget">{{form.vnd_ciudade}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_estados.name}}">{{form.vnd_estados.label}}</label></div><div class="form_widget">{{form.vnd_estados}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_country.name}}">{{form.vnd_country.label}}</label></div><div class="form_widget">{{form.vnd_country}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_zipcodg.name}}">{{form.vnd_zipcodg.label}}</label></div><div class="form_widget">{{form.vnd_zipcodg}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_telefon.name}}">{{form.vnd_telefon.label}}</label></div><div class="form_widget">{{form.vnd_telefon}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_ncelula.name}}">{{form.vnd_ncelula.label}}</label></div><div class="form_widget">{{form.vnd_ncelula}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_correoe.name}}">{{form.vnd_correoe.label}}</label></div><div class="form_widget">{{form.vnd_correoe}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_addrimg.name}}">{{form.vnd_addrimg.label}}</label></div><div class="form_widget">{{form.vnd_addrimg}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_rgunico.name}}">{{form.vnd_rgunico.label}}</label></div><div class="form_widget">{{form.vnd_rgunico}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.vnd_categor.name}}">{{form.vnd_categor.label}}</label></div><div class="form_widget">{{form.vnd_categor}}</div></div>
+                        <br><br>
+                        <div ><button class="icon-database form_submit" type="submit">  Guardar  </button></div>
+                        <br>
+                    </div>
+                </form>
+            </div>
+        {% endblock context%}

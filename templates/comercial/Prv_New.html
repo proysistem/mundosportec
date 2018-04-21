@@ -1,0 +1,81 @@
+{% extends 'base/base_comercial.html' %}
+
+{% block title %} Graba Proveedor {% endblock title %}</title>
+
+            {% block context%}
+            <div class="crea_content">
+                <h3 class="crea_proceso">Comercial:  Proveedor</h3>
+                <a class="icon-reply crea_boton" href="{% url 'comercial:prv_panel' %}">Volver</a>
+
+            </div>
+            <div>
+                <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="form_content">
+                        <div class="form_titulo"><h1>Graba Proveedor</h1></div>
+                        {% if form.errors %}
+
+                            <div class="form_errors" role="alert">
+                                {{ form.errors }}
+                            </div>
+
+                        {% endif %}
+
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <strong>{{ field.label }}</strong>: {{ error }}<br>
+                            {% endfor %}
+                        {% endfor %}
+
+                        {% for error in form.non_field_errors %}
+                            <strong>{{ error }}</strong>
+                        {% endfor %}
+
+
+                        {% if nuevo_mov.errors %}
+
+                            <div class="form_errors" role="alert">
+                                {{ nuevo_mov.errors }}
+                            </div>
+
+                        {% endif %}
+
+                        {% for field in nuevo_mov %}
+                            {% for error in field.errors %}
+                                <strong>{{ field.label }}</strong>: {{ error }}<br>
+                            {% endfor %}
+                        {% endfor %}
+
+                        {% for error in nuevo_mov.non_field_errors %}
+                            <strong>{{ error }}</strong>
+                        {% endfor %}
+
+                        <div class="form_esc">
+                            <a class="icon-cancel" href="{% url 'comercial:prv_panel' %}"></a>
+                        </div>
+                        {% if forms.error %}
+                            <div class="form_errors" role="alert">
+                                {{ form.error }}
+                            </div>
+                        {% endif %}
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_frsname.name}}">{{form.prv_frsname.label}}</label></div><div class="form_widget">{{form.prv_frsname}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_midname.name}}">{{form.prv_midname.label}}</label></div><div class="form_widget">{{form.prv_midname}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_secmane.name}}">{{form.prv_secmane.label}}</label></div><div class="form_widget">{{form.prv_secmane}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_fechnac.name}}">{{form.prv_fechnac.label}}</label></div><div class="form_widget">{{form.prv_fechnac}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_direcci.name}}">{{form.prv_direcci.label}}</label></div><div class="form_widget">{{form.prv_direcci}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_ciudade.name}}">{{form.prv_ciudade.label}}</label></div><div class="form_widget">{{form.prv_ciudade}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_estados.name}}">{{form.prv_estados.label}}</label></div><div class="form_widget">{{form.prv_estados}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_country.name}}">{{form.prv_country.label}}</label></div><div class="form_widget">{{form.prv_country}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_zipcodg.name}}">{{form.prv_zipcodg.label}}</label></div><div class="form_widget">{{form.prv_zipcodg}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_telefon.name}}">{{form.prv_telefon.label}}</label></div><div class="form_widget">{{form.prv_telefon}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_celular.name}}">{{form.prv_celular.label}}</label></div><div class="form_widget">{{form.prv_celular}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_correoe.name}}">{{form.prv_correoe.label}}</label></div><div class="form_widget">{{form.prv_correoe}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_imgprov.name}}">{{form.prv_imgprov.label}}</label></div><div class="form_widget">{{form.prv_imgprov}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_rgunico.name}}">{{form.prv_rgunico.label}}</label></div><div class="form_widget">{{form.prv_rgunico}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.prv_categor.name}}">{{form.prv_categor.label}}</label></div><div class="form_widget">{{form.prv_categor}}</div></div>
+                        <br><br>
+                        <div ><button class="icon-database form_submit" type="submit">  Guardar  </button></div>
+                        <br>
+                    </div>
+                </form>
+            </div>
+        {% endblock context%}

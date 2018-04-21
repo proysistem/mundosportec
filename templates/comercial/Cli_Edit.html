@@ -1,0 +1,81 @@
+{% extends 'base/base_comercial.html' %}
+
+{% block title %} Modifica Clientes {% endblock title %}</title>
+
+            {% block context%}
+            <div class="crea_content">
+                <h3 class="crea_proceso">Comercial:  Clientes</h3>
+                <a class="icon-reply crea_boton" href="{% url 'comercial:cli_panel' %}">Volver</a>
+
+            </div>
+            <div>
+                <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="form_content">
+                        <div class="form_titulo"><h1>Modifica Clientes</h1></div>
+                        {% if form.errors %}
+
+                            <div class="form_errors" role="alert">
+                                {{ form.errors }}
+                            </div>
+
+                        {% endif %}
+
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <strong>{{ field.label }}</strong>: {{ error }}<br>
+                            {% endfor %}
+                        {% endfor %}
+
+                        {% for error in form.non_field_errors %}
+                            <strong>{{ error }}</strong>
+                        {% endfor %}
+
+
+                        {% if nuevo_mov.errors %}
+
+                            <div class="form_errors" role="alert">
+                                {{ nuevo_mov.errors }}
+                            </div>
+
+                        {% endif %}
+
+                        {% for field in nuevo_mov %}
+                            {% for error in field.errors %}
+                                <strong>{{ field.label }}</strong>: {{ error }}<br>
+                            {% endfor %}
+                        {% endfor %}
+
+                        {% for error in nuevo_mov.non_field_errors %}
+                            <strong>{{ error }}</strong>
+                        {% endfor %}
+
+                        <div class="form_esc">
+                            <a class="icon-cancel" href="{% url 'comercial:cli_panel' %}"></a>
+                        </div>
+                        {% if forms.error %}
+                            <div class="form_errors" role="alert">
+                                {{ form.error }}
+                            </div>
+                        {% endif %}
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_frsname.name}}">{{form.clt_frsname.label}}</label></div><div class="form_widget">{{form.clt_frsname}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_midname.name}}">{{form.clt_midname.label}}</label></div><div class="form_widget">{{form.clt_midname}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_secmane.name}}">{{form.clt_secmane.label}}</label></div><div class="form_widget">{{form.clt_secmane}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_fechnac.name}}">{{form.clt_fechnac.label}}</label></div><div class="form_widget">{{form.clt_fechnac}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_direcci.name}}">{{form.clt_direcci.label}}</label></div><div class="form_widget">{{form.clt_direcci}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_ciudade.name}}">{{form.clt_ciudade.label}}</label></div><div class="form_widget">{{form.clt_ciudade}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_estados.name}}">{{form.clt_estados.label}}</label></div><div class="form_widget">{{form.clt_estados}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_country.name}}">{{form.clt_country.label}}</label></div><div class="form_widget">{{form.clt_country}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_zipcodg.name}}">{{form.clt_zipcodg.label}}</label></div><div class="form_widget">{{form.clt_zipcodg}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_telefon.name}}">{{form.clt_telefon.label}}</label></div><div class="form_widget">{{form.clt_telefon}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_celular.name}}">{{form.clt_celular.label}}</label></div><div class="form_widget">{{form.clt_celular}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_correoe.name}}">{{form.clt_correoe.label}}</label></div><div class="form_widget">{{form.clt_correoe}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_imgclte.name}}">{{form.clt_imgclte.label}}</label></div><div class="form_widget">{{form.clt_imgclte}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_rgunico.name}}">{{form.clt_rgunico.label}}</label></div><div class="form_widget">{{form.clt_rgunico}}</div></div>
+                        <div class="form_row"><div class="form_label"><label for="{{form.clt_categor.name}}">{{form.clt_categor.label}}</label></div><div class="form_widget">{{form.clt_categor}}</div></div>
+                        <br><br>
+                        <div ><button class="icon-database form_submit" type="submit">  Guardar  </button></div>
+                        <br>
+                    </div>
+                </form>
+            </div>
+        {% endblock context%}

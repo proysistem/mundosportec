@@ -1,0 +1,44 @@
+{% extends 'base/base_comercial.html' %}
+
+{% block title %} Visualiza Proveedor  {% endblock title %}</title>
+
+            {% block context%}
+            <div class="crea_content">
+                <h2 class="crea_proceso">comercial: Proveedor </h2>
+                <a class="icon-reply crea_boton" href="{% url 'comercial:prv_panel' %}">Volver</a>
+
+            </div>
+            <div>
+                <div>
+                    <div class="form_content">
+                        <div class="form_titulo"><h1>Visualiza Proveedor </h1></div>
+                        <div class="form_esc">
+                            <a href="{% url 'comercial:prv_panel' %}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button></a>
+                        </div>
+                        {% if forms.error %}
+                            <div class="form_errors" role="alert">
+                                {{ form.error }}
+                            </div>
+                        {% endif %}
+                        <div class="form_row"><div class="form_label">Primer nombre </div><div class="form_widget">{{ object.prv_frsname }}</div></div>
+                        <div class="form_row"><div class="form_label">Segundo nombre</div><div class="form_widget">{{ object.prv_midname }}</div></div>
+                        <div class="form_row"><div class="form_label">Apellidos     </div><div class="form_widget">{{ object.prv_secmane }}</div></div>
+                        <div class="form_row"><div class="form_label">F./Nacimiento </div><div class="form_widget">{{ object.prv_fechnac }}</div></div>
+                        <div class="form_row"><div class="form_label">Dirección     </div><div class="form_widget">{{ object.prv_direcci }}</div></div>
+                        <div class="form_row"><div class="form_label">Ciudad        </div><div class="form_widget">{{ object.prv_ciudade }}</div></div>
+                        <div class="form_row"><div class="form_label">Estado        </div><div class="form_widget">{{ object.prv_estados }}</div></div>
+                        <div class="form_row"><div class="form_label">País          </div><div class="form_widget">{{ object.prv_country }}</div></div>
+                        <div class="form_row"><div class="form_label">Cód. postal   </div><div class="form_widget">{{ object.prv_zipcodg }}</div></div>
+                        <div class="form_row"><div class="form_label">Telefono      </div><div class="form_widget">{{ object.prv_telefon }}</div></div>
+                        <div class="form_row"><div class="form_label">Celular       </div><div class="form_widget">{{ object.prv_celular }}</div></div>
+                        <div class="form_row"><div class="form_label">e-mail        </div><div class="form_widget">{{ object.prv_correoe }}</div></div>
+                        <div class="form_row"><div class="form_label">R.U.C.        </div><div class="form_widget">{{ object.prv_rgunico }}</div></div>
+                        <div class="form_row"><div class="form_label">Status        </div><div class="form_widget">{{ object.prv_categor }}</div></div>
+                        <div class="form_row"><div class="form_label">FOTO          </div><div class="form_widget">{{ object.prv_imgclte }}</div></div>
+                        <br><br>
+                        <div ><a class="icon-reply crea_boton" href="{% url 'comercial:prv_panel' %}">  Ok   </a></div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        {% endblock context%}

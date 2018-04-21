@@ -18,7 +18,7 @@ class Cliente(models.Model):
     clt_direcci = models.CharField('Direccion Domiciliaria', max_length=50)
     clt_ciudade = models.ForeignKey(Ciudad, null=True, blank=True)
     clt_estados = models.ForeignKey(Provincia, null=True, blank=True)
-    cli_country = models.ForeignKey(Pais, null=True, blank=True)
+    clt_country = models.ForeignKey(Pais, null=True, blank=True)
     clt_zipcodg = models.ForeignKey(Zipcodigo, null=True, blank=True)
     clt_telefon = models.CharField('Telefono', max_length=15, blank=True)
     clt_celular = models.CharField('Celular', max_length=15, blank=True)
@@ -49,6 +49,8 @@ class Proveedor(models.Model):
     prv_rgunico = models.CharField('Registro Unico', max_length=20, blank=True)
     prv_categor = models.ForeignKey(Categoria, null=True, blank=True)
 
+    def __str__(self):
+        return self.prv_frsname
 
 class Vendedor(models.Model):
 
@@ -213,6 +215,29 @@ class Compra(models.Model):
         # TODO: Decidir campos únicos.
         # unique_together = ["com_facprov", "com_proveed"]
         pass
+
+    def calcular_totales(self):
+        # com_totitms, com_totvlor, com_totdsct, com_totrkrg, com_totflet, com_totaran, com_tottaxs,
+        if self.com_ningres:
+            movimientos = self.com_ningres.movinvent_set.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'),
+                subt_iva=F('mvi_impuest')/100.00 * F('mvi_kntidad') * F('mvi_precios')
+            ).aggregate(
+                com_totvlor=Sum('subtotal'),
+                com_totitms=Sum('mvi_kntidad'),
+                com_totdsct=Sum('mvi_desctos'),
+                com_totrkrg=Sum('mvi_rcargos'),
+                com_totflet=Sum('mvi_deliver'),
+                com_totaran=Sum('mvi_arancel'),
+                com_tottaxs=Sum('subt_iva'),
+            )
+            self.com_totvlor = movimientos['com_totvlor']
+            self.com_totitms = movimientos['com_totitms']
+            self.com_totdsct = movimientos['com_totdsct']
+            self.com_totrkrg = movimientos['com_totrkrg']
+            self.com_totflet = movimientos['com_totflet']
+            self.com_totaran = movimientos['com_totaran']
+            self.com_tottaxs = movimientos['com_tottaxs']
 
     def __str__(self):
         return str(self.com_idcompr) if self.com_idcompr else super(Compra, self).__str__()

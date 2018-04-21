@@ -4,7 +4,7 @@
 
 			{% block context%}
 			<div class="crea_content">
-				<h3 class="crea_proceso">Inventarios: Colores</h3>
+				<h2 class="crea_proceso">Inventarios: Colores</h2>
 				<a class="icon-reply crea_boton" href="{% url 'inventarios:col_panel' %}">Volver</a>
 
 			</div>
@@ -26,7 +26,7 @@
 						<div class="form_row"><div class="form_label">Indicador   </div><div class="form_widget">{{ object.col_indicad }}</div></div>
 						<div class="form_row"><div class="form_label">Status      </div><div class="form_widget">{{ object.col_statreg }}</div></div>
 						<br><br>
-						<div ><a class="icon-reply crea_boton" href="{% url 'inventarios:mrk_panel' %}">  Ok   </a></div>
+						<div ><a class="icon-reply crea_boton" href="{% url 'inventarios:col_panel' %}">  Ok   </a></div>
 						<br>
 					</div>
 				</div>

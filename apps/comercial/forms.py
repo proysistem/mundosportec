@@ -16,7 +16,7 @@ class ClienteForm(forms.ModelForm):
                 'clt_direcci',
                 'clt_ciudade',
                 'clt_estados',
-                'cli_country',
+                'clt_country',
                 'clt_zipcodg',
                 'clt_telefon',
                 'clt_celular',
@@ -33,7 +33,7 @@ class ClienteForm(forms.ModelForm):
                 'clt_direcci':  'Dirección',
                 'clt_ciudade':  'Ciudad',
                 'clt_estados':  'Provincia',
-                'cli_country':  'Pais',
+                'clt_country':  'Pais',
                 'clt_zipcodg':  'Cód. Postal',
                 'clt_telefon':  'Núm. de telefono',
                 'clt_celular':  'Núm. de Celular',
@@ -47,15 +47,15 @@ class ClienteForm(forms.ModelForm):
                 'clt_midname': forms.TextInput(),
                 'clt_secmane': forms.TextInput(),
                 'clt_fechnac': forms.DateInput(attrs={"type": "date"}),
-                'clt_direcci': forms.Select(),
+                'clt_direcci': forms.TextInput(),
                 'clt_ciudade': forms.Select(),
                 'clt_estados': forms.Select(),
-                'cli_country': forms.Select(),
+                'clt_country': forms.Select(),
                 'clt_zipcodg': forms.Select(),
                 'clt_telefon': forms.NumberInput(),
                 'clt_celular': forms.NumberInput(),
                 'clt_correoe': forms.EmailInput(),
-                # 'clt_imgclte': forms.NumberInput(),
+                'clt_imgclte': forms.ClearableFileInput(),
                 'clt_rgunico': forms.TextInput(),
                 'clt_categor': forms.Select(),
                 }
@@ -107,7 +107,7 @@ class ProveedorForm(forms.ModelForm):
                 'prv_midname': forms.TextInput(),
                 'prv_secmane': forms.TextInput(),
                 'prv_fechnac': forms.DateInput(attrs={"type": "date"}),
-                'prv_direcci': forms.Select(),
+                'prv_direcci': forms.TextInput(),
                 'prv_ciudade': forms.Select(),
                 'prv_estados': forms.Select(),
                 'prv_country': forms.Select(),
@@ -115,7 +115,7 @@ class ProveedorForm(forms.ModelForm):
                 'prv_telefon': forms.NumberInput(),
                 'prv_celular': forms.NumberInput(),
                 'prv_correoe': forms.EmailInput(),
-                # 'prv_imgprov': forms.NumberInput(),
+                'prv_imgprov': forms.ClearableFileInput(),
                 'prv_rgunico': forms.TextInput(),
                 'prv_categor': forms.Select(),
         }
@@ -167,7 +167,7 @@ class VendedorForm(forms.ModelForm):
                 'vnd_midname': forms.TextInput(),
                 'vnd_secmane': forms.TextInput(),
                 'vnd_fechnac': forms.DateInput(attrs={"type": "date"}),
-                'vnd_direcci': forms.Select(),
+                'vnd_direcci': forms.TextInput(),
                 'vnd_ciudade': forms.Select(),
                 'vnd_estados': forms.Select(),
                 'vnd_country': forms.Select(),
@@ -175,7 +175,7 @@ class VendedorForm(forms.ModelForm):
                 'vnd_telefon': forms.NumberInput(),
                 'vnd_ncelula': forms.NumberInput(),
                 'vnd_correoe': forms.EmailInput(),
-                # 'vnd_addrimg': forms.NumberInput(),
+                'vnd_addrimg': forms.ClearableFileInput(),
                 'vnd_rgunico': forms.TextInput(),
                 'vnd_categor': forms.Select(),
                 }
@@ -342,26 +342,35 @@ class IngresoForm(forms.ModelForm):
     class Meta:
         model = Ingreso
         fields = [
+                # 'ing_ningres',
                 # 'ing_tipomov',
                 'ing_feching',
                 'ing_facprov',
                 'ing_proveed',
                 'ing_vendedo',
+                # 'ing_statreg',
                 'ing_sucursa',
-        ]
+                ]
         labels = {
-                # 'ing_tipomov': 'Tipo de Movimiento',
-                'ing_feching': 'Fecha de compra',
-                'ing_proveed': 'Proveedor ',
+                # 'ing_ningres': '',
+                # 'ing_tipomov': '',
+                'ing_feching': 'Fecha Ingreso',
+                'ing_facprov': 'Fact.del Proveedor',
+                'ing_proveed': 'Proveedor',
                 'ing_vendedo': 'Vendedor',
-        }
+                # 'ing_statreg': 'Status del Reg.',
+                'ing_sucursa': 'Sucursal',
+                }
         widgets = {
-                'ing_feching':   forms.DateInput(attrs={"type": "date"}),
-                'ing_proveed':   forms.Select(),
-                'ing_vendedo':   forms.Select(),
-                'ing_sucursa':   forms.HiddenInput(),
-                # ''
-        }
+                'ing_feching': forms.DateInput(attrs={"type": "date"}),
+                # 'ing_ningres': forms.Select(),
+                # 'ing_tipomov': forms.Select(),
+                'ing_facprov': forms.NumberInput(),
+                'ing_proveed': forms.Select(),
+                'ing_vendedo': forms.Select(),
+                # 'ing_statreg': forms.HiddenInput(),
+                'ing_sucursa': forms.HiddenInput(),
+                }
 
 
 class PedidoForm(forms.ModelForm):

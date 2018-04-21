@@ -23,15 +23,15 @@
                     {% for talla, saldo_talla in object|por_tallas:'tex_actua' %}
                         {% for _ in saldo_talla|por_saldo %}
                             {% cycle "<tr>" "" %}
-                                <td class="print_item"><br>
+                                <td class="print_item">{% comment %}<br> {% endcomment %}
                                     &nbsp;&nbsp;{{ object.exs_abrevia }}<br>
-                                    &nbsp;&nbsp;<span class="print_fsize2em">Talla.: &nbsp;{{ talla }}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;<span class="print_fsize2em">Talla.: &nbsp;{{ talla }}</span>
                                     &nbsp;&nbsp;Cód.aux: {{ object.exs_costact|default:''|stringformat:"0.0f" }}
                                     &nbsp;&nbsp; <svg class="barcode"
                                           jsbarcode-format="code128c"
                                           jsbarcode-ean128="true"
                                           jsbarcode-flat="false"
-                                          jsbarcode-height="20"
+                                          jsbarcode-height="22"
                                           jsbarcode-fontsize="14"
                                           jsbarcode-value="{{ object.exs_product }}"
                                           jsbarcode-textmargin="0">

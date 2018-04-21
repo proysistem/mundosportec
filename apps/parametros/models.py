@@ -69,6 +69,8 @@ class Categoria(models.Model):
     ktg_detalle = models.CharField('Detalle', max_length=15)
     ktg_abrevia = models.CharField('Abreviatura', max_length=7)
 
+    def __str__(self):
+        return "%s" % (self.ktg_detalle)
 
 # class Tipomovim(models.Model):
 
