@@ -400,8 +400,8 @@ class PopExist(ListView):
         queryset = super(PopExist, self).get_queryset()
         user = self.request.user
         sucursal = user.sucursal
-        if self.request.GET.get('all', None) is None:
-            queryset = queryset.filter(exs_saldact__gt=0.00)
+        # if self.request.GET.get('all', None) is None:
+        #     queryset = queryset.filter(exs_saldact__gt=0.00)
         return queryset.filter(exs_sucursa=sucursal)
 
 
@@ -747,7 +747,7 @@ class ExiBuscar(TemplateView):
         # wrk_byprod = Existencia.objects.filter(exs_product=wrk_buscar)
         # TODO: Aumentar espectro de busqueda
         wrk_results = self.get_queryset().filter(
-            Q(exs_product=wrk_buscar) | Q(exs_detalle__contains=wrk_buscar)
+            Q(exs_product__contains=wrk_buscar) | Q(exs_detalle__icontains=wrk_buscar)
         )
         return render(request, wrk_template, {'productos': wrk_results, 'object_list': wrk_results, 'wrk_bydetal': True})
         # return render(request, 'comercial/Pop_Exis.html', {'productos': wrk_results, 'wrk_bydetal': True})
@@ -755,7 +755,8 @@ class ExiBuscar(TemplateView):
     def get_queryset(self):
         user = self.request.user
         sucursal = user.sucursal
-        return Existencia.objects.filter(exs_saldact__gt=0.00, exs_sucursa=sucursal)
+        # return Existencia.objects.filter(exs_saldact__gt=0.00, exs_sucursa=sucursal)
+        return Existencia.objects.filter(exs_sucursa=sucursal)
 
 # ====================================================================#
 # ==================  SALDOS  X  TALLAS  =============================#

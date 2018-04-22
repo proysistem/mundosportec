@@ -1,296 +1,297 @@
 {% extends 'base/base_comercial.html' %}
 
 {% block title %} Grabar Ingresos {% endblock title %}</title>
-			{% block context%}
-			<div class="crea_content">
-				<h3 class="crea_proceso">Comercial:  Compras</h3>
-				<a class="icon-reply crea_boton" href="{% url 'comercial:com_panel' %}">Volver</a>
-			</div>
-			<div>
-				<form name="form_transac" method="POST" enctype="multipart">{% csrf_token %}
-					<div class="form_content">
-						<div>
-							<div class="form_titulo"><h1> Grabar Ingresos </h1></div>
-							{% if form.errors %}
+            {% block context%}
+            <div class="crea_content">
+                <h3 class="crea_proceso">Comercial:  Compras</h3>
+                <a class="icon-reply crea_boton" href="{% url 'comercial:com_panel' %}">Volver</a>
+            </div>
+            <div>
+                <form name="form_transac" method="POST" enctype="multipart">{% csrf_token %}
+                    <div class="form_content">
+                        <div>
+                            <div class="form_titulo"><h1> Grabar Ingresos </h1></div>
+                            {% if form.errors %}
 
-								<div class="form_errors" role="alert">
-									{{ form.errors }}
-								</div>
+                                <div class="form_errors" role="alert">
+                                    {{ form.errors }}
+                                </div>
 
-							{% endif %}
+                            {% endif %}
 
-							{% for field in form %}
-								{% for error in field.errors %}
-									<strong>{{ field.label }}</strong>: {{ error }}<br>
-								{% endfor %}
-							{% endfor %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <strong>{{ field.label }}</strong>: {{ error }}<br>
+                                {% endfor %}
+                            {% endfor %}
 
-							{% for error in form.non_field_errors %}
-								<strong>{{ error }}</strong>
-							{% endfor %}
-
-
-							{% if nuevo_mov.errors %}
-
-								<div class="form_errors" role="alert">
-									{{ nuevo_mov.errors }}
-								</div>
-
-							{% endif %}
-
-							{% for field in nuevo_mov %}
-								{% for error in field.errors %}
-									<strong>{{ field.label }}</strong>: {{ error }}<br>
-								{% endfor %}
-							{% endfor %}
-
-							{% for error in nuevo_mov.non_field_errors %}
-								<strong>{{ error }}</strong>
-							{% endfor %}
-
-							<div class="form_esc">
-								<a class="icon-cancel" href="{% url 'comercial:com_panel' %}"></a>
-							</div>
-						</div>
-						{% comment %}
-						<td class="columns_tab width_010"> <input name="mvi_product" required id="cod_product" onclick="popsaldo()" onblur="poptallas()"/></td>
-						<div class="form_row"><div class="form_label"><label for="{{form.mvi_motivos.name}}">{{form.mvi_motivos.label}}</label></div><div>{{form.mvi_motivos}}</div></div>
-						{% endcomment %}
-						<div>
-							<fieldset>
-								<div class="form_row_all">
-									<div class="width_010"><label for="{{form.ing_proveed.name}}">{{form.ing_proveed.label}}</label></div>
-									<div class="form_widget width_025">{{ form.ing_proveed }}</div>
-									<div class="width_040">&nbsp;</div>
-									<div class="width_015"><label for="{{form.ing_feching.name}}">{{form.ing_feching.label}}</label></div>
-									<div class="form_widget width_010">{{ form.ing_feching }} </div>
-								</div >
-								<div class="form_row_all">
-									<div class="width_010"><label for="{{form.ing_vendedo.name}}">{{ form.ing_vendedo.label }}</label></div>
-									<div class="form_widget width_025">{{ form.ing_vendedo }} </div>
-									<div class="width_040">&nbsp;</div>
-									<div class="width_015"><label for="{{form.ing_facprov.name}}">{{form.ing_facprov.label}}</label></div>
-									<div class="form_widget width_010">{{ form.ing_facprov }}</div>
-								</div>
-							</fieldset>
-						</div>
-						<div>
-							<table border="0" class="width_100">
-								<thead border="1">
-								 	<tr color="#:000066">
-								 		<th class="head_tab width_015">Producto</th>
-								 		<th class="head_tab width_040">Detalle del producto</th>
-								 		<th class="head_tab width_010">Cantidad</th>
-								 		<th class="head_tab width_005">Und.</th>
-								 		<th class="head_tab width_010">Precio</th>
-								 		<th class="head_tab width_005">Dscto.</th>
-								 		<th class="head_tab width_005">IVA(%)</th>
-								 		<th class="head_tab width_010">Valor</th>
-								 		<th class="head_tab width_010">@</th>
-								 	</tr>
-								</thead>
-								<tbody border="1" id="movimientos">
-									<tr>
-										<input name="pop_pedKyPr" type="hidden" id="inp_pedKyPr" value=" ">
-										<input name="pop_pedTbtl" type="hidden" id="inp_tabtall" value=" ">
-										<input name="mvi_rcargos" type="hidden" id="inp_rcargos" value="0">
-										<input name="mvi_deliver" type="hidden" id="inp_deliver" value="0">
-										<input name="mvi_arancel" type="hidden" id="inp_arancel" value="0">
-										<input name="mvi_talla01" type="hidden">
-										<input name="mvi_talla02" type="hidden">
-										<input name="mvi_talla03" type="hidden">
-										<input name="mvi_talla04" type="hidden">
-										<input name="mvi_talla05" type="hidden">
-										<input name="mvi_talla06" type="hidden">
-										<input name="mvi_talla07" type="hidden">
-										<input name="mvi_talla08" type="hidden">
-										<input name="mvi_talla09" type="hidden">
-										<input name="mvi_talla10" type="hidden">
-										<input name="mvi_talla11" type="hidden">
-										<input name="mvi_talla12" type="hidden">
-										<input name="mvi_talla13" type="hidden">
-									</tr>
-									<tr id="templates">
-										<td class="columns_tab width_015"> <input name="mvi_product" id="inp_product" autofocus required autocomplete="off" /></td>
-										<td class="columns_tab width_040"> <input name="pop_pedDtll" disabled="disabled"></td>
-										<td class="columns_tab width_010"> <input name="mvi_kntidad" id="inp_kntidad" class="align_tex_right"  required type="number" step="0.01" pattern="[0-9]" autocomplete="off" disabled="disabled" /></td>
-										<td class="columns_tab width_005"> <input name="mvi_unidade" disabled="disabled"></td>
-										<td class="columns_tab width_010"> <input class="align_tex_right" name="mvi_precios" id="inp_precios" type="number"></td>
-										<td class="columns_tab width_005"> <input class="align_tex_right" name="mvi_desctos" id="inp_desctos" disabled="disabled" value="0.00"></td>
-										<td class="columns_tab width_005"> <input class="align_tex_right" name="mvi_impuest" readonly="readonly" value="12.00"></td>
-										<td class="columns_tab width_010"> <input class="align_tex_right" name="pop_valores" stringformat:'0.2f' type="number" step="0.01" readonly="readonly"></td>
-										<td><div class=""><button class="icon-basket iconos" type="submit"></button></div></td>
-									</tr>
-								</tbody>
-								<tr>
-								</tr>
+                            {% for error in form.non_field_errors %}
+                                <strong>{{ error }}</strong>
+                            {% endfor %}
 
 
-								<tr>
-									<td class="columns_tab">{{form.fac_cajeras.label}}</td>
-									<td class="columns_tab align_tex_right"><label>Total de Itms </label>
-									<td class="columns_tab">{{ form.fac_cajeras }} </td>
-									<td class="columns_tab">{{ form.totpago }} </td>
-									<td class="columns_tab align_tex_right" colspan="3"><label>Total a pagar</labed></td>
-									<td class="columns_tab align_tex_right warnig1"> {{ total|stringformat:'0.2f' }} </td>
-								</tr>
-								<tr>
-								</tr>
-							</table>
-						</div>
-						<br>
-						{% if forms.error %}
-							<div class="form_errors" role="alert">
-								{{ form.error }}
-							</div>
-						{% endif %}
-						<div ><a class="icon-cc-visa crea_boton" href="{% url 'comercial:ing_new' %}">  Cancelar  </a></div>
-						<br>
-					</div>
-				</form>
-			</div>
-		{% endblock context%}
+                            {% if nuevo_mov.errors %}
 
-		{% block js %}
+                                <div class="form_errors" role="alert">
+                                    {{ nuevo_mov.errors }}
+                                </div>
 
-			<script type="text/javascript">
-				// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-				// Accesa a productos por un click en campo cod.del producto   //
-				// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-				var pop_callprd = document.getElementById("inp_product");
-				if(pop_callprd.addEventListener){
-					jsw_ctrlprd = document.getElementById('inp_kntidad').disabled;
-					pop_callprd.addEventListener("click", function(){
-						if (jsw_ctrlprd){
-							document.getElementById('inp_kntidad').disabled = false;
-							}
-						document.form_transac['mvi_kntidad'].value="";
-						document.getElementById("inp_tabtall").value="";
-						window.open("{% url 'comercial:pop_exist' %}?all", "prd_winpops", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=520,width=1180,left=210,top=200");
-						}, false);
-				// - - Accesa a productos por cod.del producto digitados o cod.de barras  //
-				//	jsw_ctrlprd = document.getElementById('inp_kntidad').disabled;
+                            {% endif %}
 
-					pop_callprd.addEventListener("change", function(){
-						var campo1 = document.getElementById("inp_product").value;
-						if(campo1.length > 0){
-							tmp_keyprod = document.form_transac["mvi_product"].value;
-							if (jsw_ctrlprd){
-								document.getElementById('inp_kntidad').disabled = false;
-							//	document.getElementById('inp_kntidad').focus();
-								};
-							document.form_transac['mvi_kntidad'].value="";
-							document.getElementById("inp_tabtall").value="";
-							var url = "{% url 'inventarios:exi_query' exs_product=987654321 %}".replace('987654321', tmp_keyprod);
-							queryexi(url);
-							}
-						else
-							{
-							document.getElementById('inp_product').focus();
-							}
-						}, false);
-					}
-				// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-				// Verifica los estados en el campo de cantidades        //
-				// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-				var lst_calltll = document.getElementById("inp_kntidad");
-				if(lst_calltll.addEventListener){
-					var jsw_tabtlla = document.getElementById("inp_tabtall").value;
-					var jsw_kntidad = document.getElementById("inp_kntidad").value || 0;
-					lst_calltll.addEventListener("submit", function(){
-						var jsw_keyprod = document.form_transac['pop_pedKyPr'].value;
-						if (jsw_kntidad < 1){
-							if (jsw_tabtlla != "X"){
-								var url = "{% url 'inventarios:ing_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
-								poptalla(url);
-								}
-							else{
-								alert("Falta Cantidad..!!");
-								};
-							};
-						},
-					lst_calltll.addEventListener("click", function(){
-						var jsw_tabtlla = document.getElementById("inp_tabtall").value;
-						var jsw_keyprod = document.form_transac['pop_pedKyPr'].value;
-						if (jsw_tabtlla != "X"){
-							var url = "{% url 'inventarios:ing_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
-							poptalla(url);
-							}
-						else{
-							document.form_transac['inp_precios'].disabled = false;
-							document.form_transac['inp_desctos'].disabled = false;
-							document.form_transac['mvi_talla01'].value=0;
-							document.form_transac['mvi_talla02'].value=0;
-							document.form_transac['mvi_talla03'].value=0;
-							document.form_transac['mvi_talla04'].value=0;
-							document.form_transac['mvi_talla05'].value=0;
-							document.form_transac['mvi_talla06'].value=0;
-							document.form_transac['mvi_talla07'].value=0;
-							document.form_transac['mvi_talla08'].value=0;
-							document.form_transac['mvi_talla09'].value=0;
-							document.form_transac['mvi_talla10'].value=0;
-							document.form_transac['mvi_talla11'].value=0;
-							document.form_transac['mvi_talla12'].value=0;
-							document.form_transac['mvi_talla13'].value=0;
-							alert("Este producto no tiene tallas");
-							};
-						},
-					lst_calltll.addEventListener("change", function(){
-						jsw_tabtlla = document.form_transac["pop_pedTbtl"].value;
-						jsw_keyprod = document.form_transac["pop_pedKyPr"].value;
-						if (jsw_tabtlla != "X"){
-							alert("Este producto tiene tallas: ", jsw_tabtlla);
-							var url = "{% url 'inventarios:ing_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
-							poptalla(url);
-							}
-						else{
-							document.form_transac['inp_precios'].disabled = false;
-							document.form_transac['inp_desctos'].disabled = false;
-							document.form_transac['mvi_talla01'].value=0;
-							document.form_transac['mvi_talla02'].value=0;
-							document.form_transac['mvi_talla03'].value=0;
-							document.form_transac['mvi_talla04'].value=0;
-							document.form_transac['mvi_talla05'].value=0;
-							document.form_transac['mvi_talla06'].value=0;
-							document.form_transac['mvi_talla07'].value=0;
-							document.form_transac['mvi_talla08'].value=0;
-							document.form_transac['mvi_talla09'].value=0;
-							document.form_transac['mvi_talla10'].value=0;
-							document.form_transac['mvi_talla11'].value=0;
-							document.form_transac['mvi_talla12'].value=0;
-							document.form_transac['mvi_talla13'].value=0;
-							calcula();
-							}
-						},
-					false)));
-					}
-				// - - - - - - - - - - - - - - - - - - - - - - - - - -//
-				// Calculo de valor x item por cambio en el precio    //
-				// - - - - - - - - - - - - - - - - - - - - - - - - - -//
-				var lst_callprc = document.getElementById("inp_precios");
-				if(lst_callprc.addEventListener){
-					lst_callprc.addEventListener("change", function(){calcula()}, false);
-				}
+                            {% for field in nuevo_mov %}
+                                {% for error in field.errors %}
+                                    <strong>{{ field.label }}</strong>: {{ error }}<br>
+                                {% endfor %}
+                            {% endfor %}
 
-				function calcula(){
-					var jsw_cantida = document.form_transac['mvi_kntidad'].value || 0.00;
-					var jsw_precios = document.form_transac['mvi_precios'].value || 0.00;
-					document.form_transac['pop_valores'].value = (jsw_cantida * jsw_precios) || 0.00;
-					document.form_transac['mvi_precios'].value = jsw_precios;
-					}
+                            {% for error in nuevo_mov.non_field_errors %}
+                                <strong>{{ error }}</strong>
+                            {% endfor %}
 
-				function poptalla(url){
-					document.form_transac['inp_precios'].disabled = false;
-					document.form_transac['inp_desctos'].disabled = false;
-					window.open(url, "pop_dtallas", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=200,width=920,left=380,top=450");
-					}
+                            <div class="form_esc">
+                                <a class="icon-cancel" href="{% url 'comercial:com_panel' %}"></a>
+                            </div>
+                        </div>
+                        {% comment %}
+                        <td class="columns_tab width_010"> <input name="mvi_product" required id="cod_product" onclick="popsaldo()" onblur="poptallas()"/></td>
+                        <div class="form_row"><div class="form_label"><label for="{{form.mvi_motivos.name}}">{{form.mvi_motivos.label}}</label></div><div>{{form.mvi_motivos}}</div></div>
+                        {% endcomment %}
+                        <div>
+                            <fieldset>
+                                <div class="form_row_all">
+                                    <div class="width_010"><label for="{{form.ing_proveed.name}}">{{form.ing_proveed.label}}</label></div>
+                                    <div class="form_widget width_025">{{ form.ing_proveed }}</div>
+                                    <div class="width_040">&nbsp;</div>
+                                    <div class="width_015"><label for="{{form.ing_feching.name}}">{{form.ing_feching.label}}</label></div>
+                                    <div class="form_widget width_010">{{ form.ing_feching }} </div>
+                                </div >
+                                <div class="form_row_all">
+                                    <div class="width_010"><label for="{{form.ing_vendedo.name}}">{{ form.ing_vendedo.label }}</label></div>
+                                    <div class="form_widget width_025">{{ form.ing_vendedo }} </div>
+                                    <div class="width_040">&nbsp;</div>
+                                    <div class="width_015"><label for="{{form.ing_facprov.name}}">{{form.ing_facprov.label}}</label></div>
+                                    <div class="form_widget width_010">{{ form.ing_facprov }}</div>
+                                    <input name="ing_sucursa" id="id_ing_sucursa" type="hidden" value="{{ user.sucursal.pk }}">
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div>
+                            <table border="0" class="width_100">
+                                <thead border="1">
+                                    <tr color="#:000066">
+                                        <th class="head_tab width_015">Producto</th>
+                                        <th class="head_tab width_040">Detalle del producto</th>
+                                        <th class="head_tab width_010">Cantidad</th>
+                                        <th class="head_tab width_005">Und.</th>
+                                        <th class="head_tab width_010">Precio</th>
+                                        <th class="head_tab width_005">Dscto.</th>
+                                        <th class="head_tab width_005">IVA(%)</th>
+                                        <th class="head_tab width_010">Valor</th>
+                                        <th class="head_tab width_010">@</th>
+                                    </tr>
+                                </thead>
+                                <tbody border="1" id="movimientos">
+                                    <tr>
+                                        <input name="pop_pedKyPr" type="hidden" id="inp_pedKyPr" value=" ">
+                                        <input name="pop_pedTbtl" type="hidden" id="inp_tabtall" value=" ">
+                                        <input name="mvi_rcargos" type="hidden" id="inp_rcargos" value="0">
+                                        <input name="mvi_deliver" type="hidden" id="inp_deliver" value="0">
+                                        <input name="mvi_arancel" type="hidden" id="inp_arancel" value="0">
+                                        <input name="mvi_talla01" type="hidden">
+                                        <input name="mvi_talla02" type="hidden">
+                                        <input name="mvi_talla03" type="hidden">
+                                        <input name="mvi_talla04" type="hidden">
+                                        <input name="mvi_talla05" type="hidden">
+                                        <input name="mvi_talla06" type="hidden">
+                                        <input name="mvi_talla07" type="hidden">
+                                        <input name="mvi_talla08" type="hidden">
+                                        <input name="mvi_talla09" type="hidden">
+                                        <input name="mvi_talla10" type="hidden">
+                                        <input name="mvi_talla11" type="hidden">
+                                        <input name="mvi_talla12" type="hidden">
+                                        <input name="mvi_talla13" type="hidden">
+                                    </tr>
+                                    <tr id="templates">
+                                        <td class="columns_tab width_015"> <input name="mvi_product" id="inp_product" autofocus required autocomplete="off" /></td>
+                                        <td class="columns_tab width_040"> <input name="pop_pedDtll" disabled="disabled"></td>
+                                        <td class="columns_tab width_010"> <input name="mvi_kntidad" id="inp_kntidad" class="align_tex_right"  required type="number" step="0.01" pattern="[0-9]" autocomplete="off" disabled="disabled" /></td>
+                                        <td class="columns_tab width_005"> <input name="mvi_unidade" disabled="disabled"></td>
+                                        <td class="columns_tab width_010"> <input class="align_tex_right" name="mvi_precios" id="inp_precios" type="number"></td>
+                                        <td class="columns_tab width_005"> <input class="align_tex_right" name="mvi_desctos" id="inp_desctos" disabled="disabled" value="0.00"></td>
+                                        <td class="columns_tab width_005"> <input class="align_tex_right" name="mvi_impuest" readonly="readonly" value="12.00"></td>
+                                        <td class="columns_tab width_010"> <input class="align_tex_right" name="pop_valores" stringformat:'0.2f' type="number" step="0.01" readonly="readonly"></td>
+                                        <td><div class=""><button class="icon-basket iconos" type="submit"></button></div></td>
+                                    </tr>
+                                </tbody>
+                                <tr>
+                                </tr>
 
-				function queryexi(url){
-					document.form_transac['inp_precios'].disabled = false;
-					document.form_transac['inp_desctos'].disabled = false;
-					window.open(url, "qry_existenc", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=20,width=20");
-					}
-			</script>
 
-		{% endblock js %}
+                                <tr>
+                                    <td class="columns_tab">{{form.fac_cajeras.label}}</td>
+                                    <td class="columns_tab align_tex_right"><label>Total de Itms </label>
+                                    <td class="columns_tab">{{ form.fac_cajeras }} </td>
+                                    <td class="columns_tab">{{ form.totpago }} </td>
+                                    <td class="columns_tab align_tex_right" colspan="3"><label>Total a pagar</labed></td>
+                                    <td class="columns_tab align_tex_right warnig1"> {{ total|stringformat:'0.2f' }} </td>
+                                </tr>
+                                <tr>
+                                </tr>
+                            </table>
+                        </div>
+                        <br>
+                        {% if forms.error %}
+                            <div class="form_errors" role="alert">
+                                {{ form.error }}
+                            </div>
+                        {% endif %}
+                        <div ><a class="icon-cc-visa crea_boton" href="{% url 'comercial:ing_new' %}">  Cancelar  </a></div>
+                        <br>
+                    </div>
+                </form>
+            </div>
+        {% endblock context%}
+
+        {% block js %}
+
+            <script type="text/javascript">
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+                // Accesa a productos por un click en campo cod.del producto   //
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+                var pop_callprd = document.getElementById("inp_product");
+                if(pop_callprd.addEventListener){
+                    jsw_ctrlprd = document.getElementById('inp_kntidad').disabled;
+                    pop_callprd.addEventListener("click", function(){
+                        if (jsw_ctrlprd){
+                            document.getElementById('inp_kntidad').disabled = false;
+                            }
+                        document.form_transac['mvi_kntidad'].value="";
+                        document.getElementById("inp_tabtall").value="";
+                        window.open("{% url 'comercial:pop_exist' %}?all", "prd_winpops", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=520,width=1180,left=210,top=200");
+                        }, false);
+                // - - Accesa a productos por cod.del producto digitados o cod.de barras  //
+                //  jsw_ctrlprd = document.getElementById('inp_kntidad').disabled;
+
+                    pop_callprd.addEventListener("change", function(){
+                        var campo1 = document.getElementById("inp_product").value;
+                        if(campo1.length > 0){
+                            tmp_keyprod = document.form_transac["mvi_product"].value;
+                            if (jsw_ctrlprd){
+                                document.getElementById('inp_kntidad').disabled = false;
+                            //  document.getElementById('inp_kntidad').focus();
+                                };
+                            document.form_transac['mvi_kntidad'].value="";
+                            document.getElementById("inp_tabtall").value="";
+                            var url = "{% url 'inventarios:exi_query' exs_product=987654321 %}".replace('987654321', tmp_keyprod);
+                            queryexi(url);
+                            }
+                        else
+                            {
+                            document.getElementById('inp_product').focus();
+                            }
+                        }, false);
+                    }
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+                // Verifica los estados en el campo de cantidades        //
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+                var lst_calltll = document.getElementById("inp_kntidad");
+                if(lst_calltll.addEventListener){
+                    var jsw_tabtlla = document.getElementById("inp_tabtall").value;
+                    var jsw_kntidad = document.getElementById("inp_kntidad").value || 0;
+                    lst_calltll.addEventListener("submit", function(){
+                        var jsw_keyprod = document.form_transac['pop_pedKyPr'].value;
+                        if (jsw_kntidad < 1){
+                            if (jsw_tabtlla != "X"){
+                                var url = "{% url 'inventarios:ing_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
+                                poptalla(url);
+                                }
+                            else{
+                                alert("Falta Cantidad..!!");
+                                };
+                            };
+                        },
+                    lst_calltll.addEventListener("click", function(){
+                        var jsw_tabtlla = document.getElementById("inp_tabtall").value;
+                        var jsw_keyprod = document.form_transac['pop_pedKyPr'].value;
+                        if (jsw_tabtlla != "X"){
+                            var url = "{% url 'inventarios:ing_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
+                            poptalla(url);
+                            }
+                        else{
+                            document.form_transac['inp_precios'].disabled = false;
+                            document.form_transac['inp_desctos'].disabled = false;
+                            document.form_transac['mvi_talla01'].value=0;
+                            document.form_transac['mvi_talla02'].value=0;
+                            document.form_transac['mvi_talla03'].value=0;
+                            document.form_transac['mvi_talla04'].value=0;
+                            document.form_transac['mvi_talla05'].value=0;
+                            document.form_transac['mvi_talla06'].value=0;
+                            document.form_transac['mvi_talla07'].value=0;
+                            document.form_transac['mvi_talla08'].value=0;
+                            document.form_transac['mvi_talla09'].value=0;
+                            document.form_transac['mvi_talla10'].value=0;
+                            document.form_transac['mvi_talla11'].value=0;
+                            document.form_transac['mvi_talla12'].value=0;
+                            document.form_transac['mvi_talla13'].value=0;
+                            alert("Este producto no tiene tallas");
+                            };
+                        },
+                    lst_calltll.addEventListener("change", function(){
+                        jsw_tabtlla = document.form_transac["pop_pedTbtl"].value;
+                        jsw_keyprod = document.form_transac["pop_pedKyPr"].value;
+                        if (jsw_tabtlla != "X"){
+                            alert("Este producto tiene tallas: ", jsw_tabtlla);
+                            var url = "{% url 'inventarios:ing_talla' pk=987654321 %}".replace('987654321', jsw_keyprod);
+                            poptalla(url);
+                            }
+                        else{
+                            document.form_transac['inp_precios'].disabled = false;
+                            document.form_transac['inp_desctos'].disabled = false;
+                            document.form_transac['mvi_talla01'].value=0;
+                            document.form_transac['mvi_talla02'].value=0;
+                            document.form_transac['mvi_talla03'].value=0;
+                            document.form_transac['mvi_talla04'].value=0;
+                            document.form_transac['mvi_talla05'].value=0;
+                            document.form_transac['mvi_talla06'].value=0;
+                            document.form_transac['mvi_talla07'].value=0;
+                            document.form_transac['mvi_talla08'].value=0;
+                            document.form_transac['mvi_talla09'].value=0;
+                            document.form_transac['mvi_talla10'].value=0;
+                            document.form_transac['mvi_talla11'].value=0;
+                            document.form_transac['mvi_talla12'].value=0;
+                            document.form_transac['mvi_talla13'].value=0;
+                            calcula();
+                            }
+                        },
+                    false)));
+                    }
+                // - - - - - - - - - - - - - - - - - - - - - - - - - -//
+                // Calculo de valor x item por cambio en el precio    //
+                // - - - - - - - - - - - - - - - - - - - - - - - - - -//
+                var lst_callprc = document.getElementById("inp_precios");
+                if(lst_callprc.addEventListener){
+                    lst_callprc.addEventListener("change", function(){calcula()}, false);
+                }
+
+                function calcula(){
+                    var jsw_cantida = document.form_transac['mvi_kntidad'].value || 0.00;
+                    var jsw_precios = document.form_transac['mvi_precios'].value || 0.00;
+                    document.form_transac['pop_valores'].value = (jsw_cantida * jsw_precios) || 0.00;
+                    document.form_transac['mvi_precios'].value = jsw_precios;
+                    }
+
+                function poptalla(url){
+                    document.form_transac['inp_precios'].disabled = false;
+                    document.form_transac['inp_desctos'].disabled = false;
+                    window.open(url, "pop_dtallas", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=200,width=920,left=380,top=450");
+                    }
+
+                function queryexi(url){
+                    document.form_transac['inp_precios'].disabled = false;
+                    document.form_transac['inp_desctos'].disabled = false;
+                    window.open(url, "qry_existenc", "directories=no,menubar=no,status=no,toolbar=no,location=no,scrollbars=no,fullscreen=no,height=20,width=20");
+                    }
+            </script>
+
+        {% endblock js %}
 
