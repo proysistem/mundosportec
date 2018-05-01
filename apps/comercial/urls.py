@@ -7,7 +7,9 @@ from apps.comercial.views import (CliLista, CliNuevo, CliView, CliEdita, CliDele
                                   FacLista, FacPrint, FacNuevo, FacView, FacEdita, FacPaid, FacDelet, FacBuscar,
                                   IngNuevo, IngEdita,
                                   ComNuevo, ComLista, ComBuscar,
-                                  MviBuscar, )
+                                  MviBuscar,
+                                  AjcLista, AjcNuevo, AjcRepor, AjcView, AjcEdita, AjcDelet,
+                                  NcrBuscar, NcrLista, NcrNuevo, NcrView, NcrEdita, NcrDelet, NcrPrint)
 from apps.inventarios.views import PopExist
 from mundosport.utils import login_required_view
 
@@ -70,5 +72,21 @@ urlpatterns = [
     url(r'^FacEdita/(?P<pk>\d+)/$',    login_required_view(FacEdita.as_view()), name='fac_edit'),
     url(r'^FacElimina/(?P<pk>\d+)/$',  login_required_view(FacDelet.as_view()), name='fac_delet'),
     url(r'^FacPrint/(?P<pk>\d+)/$',    login_required_view(FacPrint.as_view()), name='fac_print'),
+    url(r'^PopProdc',                  login_required_view(PopExist.as_view()), name='pop_exist'),
+
+    url(r'^AjcPanel',                  login_required_view(AjcLista.as_view()), name='ajc_panel'),
+    url(r'^AjcNuevo/$',                login_required_view(AjcNuevo.as_view()), name='ajc_new'),
+    url(r'^AjcRepor',                  login_required_view(AjcRepor.as_view()), name='ajc_repor'),
+    url(r'^AjcConsulta/(?P<pk>\d+)/$', login_required_view(AjcView.as_view()),  name='ajc_view'),
+    url(r'^AjcEdita/(?P<pk>\d+)/$',    login_required_view(AjcEdita.as_view()), name='ajc_edit'),
+    url(r'^AjcElimina/(?P<pk>\d+)/$',  login_required_view(AjcDelet.as_view()), name='ajc_delet'),
+
+    url(r'^NcrSearch',                 login_required_view(NcrBuscar.as_view()), name='ncr_search'),
+    url(r'^NcrPanel',                  login_required_view(NcrLista.as_view()), name='ncr_panel'),
+    url(r'^NcrNuevo/$',                login_required_view(NcrNuevo.as_view()), name='ncr_new'),
+    url(r'^NcrConsulta/(?P<pk>\d+)/$', login_required_view(NcrView.as_view()),  name='ncr_view'),
+    url(r'^NcrEdita/(?P<pk>\d+)/$',    login_required_view(NcrEdita.as_view()), name='ncr_edit'),
+    url(r'^NcrElimina/(?P<pk>\d+)/$',  login_required_view(NcrDelet.as_view()), name='ncr_delet'),
+    url(r'^NcrPrint/(?P<pk>\d+)/$',    login_required_view(NcrPrint.as_view()), name='ncr_print'),
 
 ]

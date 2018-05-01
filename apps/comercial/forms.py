@@ -1,5 +1,6 @@
 from django import forms
-from .models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura, Ingreso, Compra
+from .models import (Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura,
+                     Ingreso, Compra, Notacred, Ajustecr)
 from django.utils.timezone import localtime, now
 from apps.inventarios.models import Existencia
 
@@ -246,12 +247,19 @@ class MovinventForm(forms.ModelForm):
         model = Movinvent
         fields = [
                 'mvi_npedido',
+                'mvi_npedido',
+                'mvi_ningres',
+                'mvi_najustd',
+                'mvi_najustc',
+
                 'mvi_fechmov',
                 'mvi_tipomov',
                 'mvi_vendedo',
                 'mvi_cliente',
+                'mvi_proveed',
                 'mvi_product',
                 'mvi_unidade',
+
                 'mvi_talla01',
                 'mvi_talla02',
                 'mvi_talla03',
@@ -277,12 +285,19 @@ class MovinventForm(forms.ModelForm):
         labels = {
 
                 'mvi_npedido': 'Núm. de pedido',
+                'mvi_npedido': 'Núm. de Pedido',
+                'mvi_ningres': 'Núm. de Ingreso',
+                'mvi_najustd': 'Núm. de Nota/debito',
+                'mvi_najustc': 'Núm. de Nota/credito',
+
                 'mvi_fechmov': 'Fecha',
                 'mvi_tipomov': 'Tpo.movimiento',
                 'mvi_vendedo': 'Vendedor',
                 'mvi_cliente': 'Cliente',
+                'mvi_proveed': 'Proveedor',
                 'mvi_product': 'Producto',
                 'mvi_unidade': 'Unidad',
+
                 'mvi_talla01': 'talla01',
                 'mvi_talla02': 'talla02',
                 'mvi_talla03': 'talla03',
@@ -566,4 +581,121 @@ class FacturaForm(forms.ModelForm):
                 'fac_pgotjcr':  forms.NumberInput(),
                 'fac_pgocred':  forms.NumberInput(),
                 'fac_otropgo':  forms.NumberInput(),
+        }
+
+
+class AjustecrForm(forms.ModelForm):
+    ajc_fechajs = forms.DateField(initial=localtime(now()).date())
+
+    class Meta:
+        model = Ajustecr
+        fields = [
+                # 'ajc_tipomov',
+                'ajc_fechajs',
+                'ajc_cliente',
+                'ajc_vendedo',
+                'ajc_sucursa',
+        ]
+        labels = {
+                # 'ajc_tipomov': 'Tipo de Movimiento',
+                'ajc_fechajs': 'Fecha/ajuste',
+                'ajc_cliente': 'Cliente ',
+                'ajc_vendedo': 'Vendedor',
+        }
+        widgets = {
+                'ajc_fechajs':   forms.DateInput(attrs={"type": "date"}),
+                'ajc_cliente':   forms.Select(),
+                'ajc_vendedo':   forms.Select(),
+                'ajc_sucursa':   forms.HiddenInput(),
+                }
+
+
+class NotacredForm(forms.ModelForm):
+    ncr_fechnta = forms.DateField(initial=localtime(now()).date())
+
+    def save(self, commit=True, *args, **kwargs):
+        request = None
+        if 'request' in kwargs:
+            request = kwargs.pop('request')
+
+        notacred = super(NotacredForm, self).save(commit=True, *args, **kwargs)
+        if request:
+            notacred.save(request=request)
+        return notacred
+
+        # else:
+        #     super(Notacred, self).save(*args, **kwargs)
+
+    class Meta:
+        model = Notacred
+        fields = [
+                'ncr_idnotas',
+                'ncr_fechnta',
+                'ncr_cajanum',
+                'ncr_cajeras',
+                'ncr_cliente',
+                'ncr_vendedo',
+                'ncr_najuste',
+                'ncr_monedas',
+                'ncr_cotizac',
+                'ncr_totitms',
+                'ncr_totvlor',
+                'ncr_totdsct',
+                'ncr_totrkrg',
+                'ncr_totflet',
+                'ncr_totaran',
+                'ncr_tottaxs',
+                'ncr_pgoefec',
+                'ncr_pgocheq',
+                'ncr_pgotjcr',
+                'ncr_pgocred',
+                'ncr_otropgo',
+        ]
+
+        labels = {
+
+                'ncr_idnotas':  'Núm.Nota/CR',
+                'ncr_fechnta':  'Fech.Nota/CR',
+                'ncr_cajanum':  'Núm. de Caja',
+                'ncr_cajeras':  'Cajer@',
+                'ncr_cliente':  'Cliente ',
+                'ncr_vendedo':  'Vendedor',
+                'ncr_najuste':  'Núm./ajuste',
+                'ncr_monedas':  'Moneda',
+                'ncr_cotizac':  'Cotización',
+                'ncr_totitms':  'Items',
+                'ncr_totvlor':  'Total Valor',
+                'ncr_totdsct':  'Total Descuentos',
+                'ncr_totrkrg':  'Totla de Recargos',
+                'ncr_totflet':  'Total de Flete',
+                'ncr_totaran':  'Total Aranceles',
+                'ncr_tottaxs':  'Total IVA',
+                'ncr_pgoefec':  'Efectivo',
+                'ncr_pgocheq':  'Cheques',
+                'ncr_pgotjcr':  'Tarj./Crédito',
+                'ncr_pgocred':  'Crédit.Personal',
+                'ncr_otropgo':  'Otra forma',
+        }
+        widgets = {
+                # ncr_idnotas':  NumberInput(),
+                # 'ncr_fechnta':  forms.DateInput(attrs={"type": "date"}),
+                'ncr_cajanum':  forms.Select(),
+                'ncr_cajeras':  forms.Select(),
+                'ncr_cliente':  forms.Select(),
+                'ncr_vendedo':  forms.Select(),
+                # 'ncr_najuste':  forms.HiddenInput(),
+                'ncr_monedas':  forms.Select(),
+                'ncr_cotizac':  forms.NumberInput(),
+                'ncr_totitms':  forms.NumberInput(),
+                'ncr_totvlor':  forms.NumberInput(),
+                'ncr_totdsct':  forms.NumberInput(),
+                'ncr_totrkrg':  forms.NumberInput(),
+                'ncr_totflet':  forms.NumberInput(),
+                'ncr_totaran':  forms.NumberInput(),
+                'ncr_tottaxs':  forms.NumberInput(),
+                'ncr_pgoefec':  forms.NumberInput(),
+                'ncr_pgocheq':  forms.NumberInput(),
+                'ncr_pgotjcr':  forms.NumberInput(),
+                'ncr_pgocred':  forms.NumberInput(),
+                'ncr_otropgo':  forms.NumberInput(),
         }

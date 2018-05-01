@@ -52,6 +52,7 @@ class Proveedor(models.Model):
     def __str__(self):
         return self.prv_frsname
 
+
 class Vendedor(models.Model):
 
     vnd_frsname = models.CharField('Primer Nombre', max_length=15)
@@ -103,10 +104,42 @@ class Pedido(models.Model):
         return str(self.ped_npedido)
 
 
+class Ajustedb(models.Model):
+    ajd_najustd = models.AutoField('Núm. de Nota/db', primary_key=True)
+    ajd_tipomov = models.PositiveIntegerField("Tipo de movimiento", choices=TIPO_MOV_CHOICES, default=TIPO_MOV_CHOICES.NOTADB)
+    ajd_fechajs = models.DateField('Fecha de Nota/db')
+    ajd_facprov = models.CharField('Nº Fac. Proveedor', max_length=15)
+    ajd_proveed = models.ForeignKey(Proveedor)
+    ajd_vendedo = models.ForeignKey(Vendedor, null=True, blank=True)
+    ajd_statreg = models.CharField('Status del Registro', max_length=1, default=1)
+    # 1=En proceso, 2=Ajustada, 7=Anulada, 9=Eliminada
+    ajd_sucursa = models.ForeignKey(Sucursal, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.ajd_najustd)
+
+
+class Ajustecr(models.Model):
+    ajc_najustc = models.AutoField('Núm. de Nota/cr', primary_key=True)
+    ajc_tipomov = models.PositiveIntegerField("Tipo de movimiento", choices=TIPO_MOV_CHOICES, default=TIPO_MOV_CHOICES.NOTACR)
+    ajc_fechajs = models.DateField('Fecha de Nota/cr')
+    ajc_facclte = models.CharField('Nº Fac. Cliente', max_length=15)
+    ajc_cliente = models.ForeignKey(Cliente)
+    ajc_vendedo = models.ForeignKey(Vendedor, null=True, blank=True)
+    ajc_statreg = models.CharField('Status del Registro', max_length=1, default=1)
+    # 1=En proceso, 2=Ajustada, 7=Anulada, 9=Eliminada
+    ajc_sucursa = models.ForeignKey(Sucursal, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.ajc_najustc)
+
+
 class Movinvent(models.Model):
     mvi_nummovi = models.AutoField('Núm. de movimiento', primary_key=True)
     mvi_npedido = models.ForeignKey('Pedido', verbose_name='Núm. de pedido', null=True, blank=True)
     mvi_ningres = models.ForeignKey('Ingreso', verbose_name='Núm. de ingreso', null=True, blank=True)
+    mvi_najustd = models.ForeignKey('Ajustedb', verbose_name='Núm. de Ajuste/db.', null=True, blank=True)
+    mvi_najustc = models.ForeignKey('Ajustecr', verbose_name='Núm. de Ajuste/cr.', null=True, blank=True)
 
     mvi_fechmov = models.DateField('Fecha')
     mvi_tipomov = models.PositiveIntegerField("Tipo de movimiento", choices=TIPO_MOV_CHOICES)
@@ -162,6 +195,10 @@ class Movinvent(models.Model):
                 existencia.exs_ingreso = (existencia.exs_ingreso or 0) + self.mvi_kntidad
                 existencia.exs_saldact = (existencia.exs_ingreso or 0) + self.mvi_kntidad
                 existencia.exs_dsponib = (existencia.exs_dsponib or 0) + self.mvi_kntidad
+            elif self.mvi_tipomov == TIPO_MOV_CHOICES.NOTACR:
+                existencia.exs_ingreso = (existencia.exs_ingreso or 0) + self.mvi_kntidad
+                existencia.exs_saldact = (existencia.exs_ingreso or 0) + self.mvi_kntidad
+                existencia.exs_dsponib = (existencia.exs_dsponib or 0) + self.mvi_kntidad
             else:  # Es transferencia
                 pass
             existencia.save()
@@ -182,9 +219,15 @@ class Movinvent(models.Model):
                     ing_actual = getattr(saldos, "tex_ingre{0:02d}".format(num_talla)) or 0
                     nuevo_ingr = getattr(self, "mvi_talla{0:02d}".format(num_talla)) or 0
                     setattr(saldos, "tex_ingre{0:02d}".format(num_talla), ing_actual + nuevo_ingr)
+                elif self.mvi_tipomov == TIPO_MOV_CHOICES.NOTACR:
+                    ing_actual = getattr(saldos, "tex_ingre{0:02d}".format(num_talla)) or 0
+                    nuevo_ingr = getattr(self, "mvi_talla{0:02d}".format(num_talla)) or 0
+                    setattr(saldos, "tex_ingre{0:02d}".format(num_talla), ing_actual + nuevo_ingr)
                 else:  # Es transferencia
                     pass
             saldos.save()
+
+# ##############################  TODO CALCULO POR N/CREDITO
 
 
 class Compra(models.Model):
@@ -312,3 +355,74 @@ class Factura(models.Model):
         else:
             self.calcular_totales()
             super(Factura, self).save(*args, **kwargs)
+
+
+class Notacred(models.Model):
+    ncr_idnotas = models.AutoField('Id. de Notacred', primary_key=True)
+    ncr_ctrlnta = models.CharField('Núm. de Notacred', max_length=12, editable=False)
+    ncr_najuste = models.ForeignKey(Ajustecr, verbose_name='Núm. de ajuste', null=True, blank=True)
+    ncr_fechnta = models.DateField('Fecha de la Notacred', default=timezone.now)
+    ncr_cajanum = models.ForeignKey(Caja, verbose_name='Núm. de caja', null=True, blank=True)
+    ncr_cajeras = models.ForeignKey(Cajera, verbose_name='Cód. de Cajera', null=True, blank=True)
+    ncr_cliente = models.ForeignKey(Cliente, verbose_name='Cód. de Cliente', null=True, blank=True)
+    ncr_vendedo = models.ForeignKey(Vendedor, verbose_name='Cód. de Vendedor', null=True, blank=True)
+    ncr_monedas = models.ForeignKey(Moneda, verbose_name='Núm. de Moneda', null=True, blank=True)
+    ncr_cotizac = models.DecimalField('Cotización', max_digits=9, decimal_places=2, null=True, blank=True)
+    ncr_totitms = models.DecimalField('Total de items', max_digits=15, decimal_places=2, null=True, blank=True)
+    ncr_totvlor = models.DecimalField('Total del valor', max_digits=15, decimal_places=2, null=True, blank=True)
+    ncr_totdsct = models.DecimalField('Total de descuentos', max_digits=15, decimal_places=2, null=True, blank=True)
+    ncr_totrkrg = models.DecimalField('Total de recaregos', max_digits=15, decimal_places=2, null=True, blank=True)
+    ncr_totflet = models.DecimalField('Total por deliver (transporte)', max_digits=15, decimal_places=2, null=True, blank=True)
+    ncr_totaran = models.DecimalField('Total aranceles', max_digits=15, decimal_places=2, null=True, blank=True)
+    ncr_tottaxs = models.DecimalField('Total taxes', max_digits=15, decimal_places=2, null=True, blank=True)
+    ncr_pgoefec = models.DecimalField('Cash', max_digits=15, decimal_places=2, null=True, blank=True)
+    ncr_pgocheq = models.DecimalField('Cheque', max_digits=15, decimal_places=2, null=True, blank=True)
+    ncr_pgotjcr = models.DecimalField('T./Crédito', max_digits=15, decimal_places=2, null=True, blank=True)
+    ncr_pgocred = models.DecimalField('Crédito personal', max_digits=15, decimal_places=2, null=True, blank=True)
+    ncr_otropgo = models.DecimalField('Internet (Paypal)', max_digits=15, decimal_places=2, null=True, blank=True)
+
+    def calcular_totales(self):
+        # ncr_totitms, ncr_totvlor, ncr_totdsct, ncr_totrkrg, ncr_totflet, ncr_totaran, ncr_tottaxs,
+        if self.ncr_najuste:
+            movimientos = self.ncr_najuste.movinvent_set.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'),
+                subt_iva=F('mvi_impuest')/100.00 * F('mvi_kntidad') * F('mvi_precios')
+            ).aggregate(
+                ncr_totvlor=Sum('subtotal'),
+                ncr_totitms=Sum('mvi_kntidad'),
+                ncr_totdsct=Sum('mvi_desctos'),
+                ncr_totrkrg=Sum('mvi_rcargos'),
+                ncr_totflet=Sum('mvi_deliver'),
+                ncr_totaran=Sum('mvi_arancel'),
+                ncr_tottaxs=Sum('subt_iva'),
+            )
+            self.ncr_totvlor = movimientos['ncr_totvlor']
+            self.ncr_totitms = movimientos['ncr_totitms']
+            self.ncr_totdsct = movimientos['ncr_totdsct']
+            self.ncr_totrkrg = movimientos['ncr_totrkrg']
+            self.ncr_totflet = movimientos['ncr_totflet']
+            self.ncr_totaran = movimientos['ncr_totaran']
+            self.ncr_tottaxs = movimientos['ncr_tottaxs']
+
+    def __str__(self):
+        return str(self.ncr_idnotas) if self.ncr_idnotas else super(Notacred, self).__str__()
+
+    def save(self, *args, **kwargs):
+        # if not self.id:
+        # if 'request' in kwargs and self.user is None:
+        # import pdb; pdb.set_trace()
+        if 'request' in kwargs:
+            request = kwargs.pop('request')
+            if request:
+                sucursal = request.user.sucursal
+                # TODO: Validar en views que Sucursal de usuario esté activa y tenga Controlador
+                controlador = Controlador.objects.get(ctl_sucrsal=sucursal)
+
+                with transaction.atomic():
+                    self.ncr_ctrlnta = "{0:02d}{1:09d}".format(sucursal.id, controlador.ctl_secue05 + 1)
+                    controlador.ctl_secue05 += 1
+                    controlador.save()
+                    super(Notacred, self).save(*args, **kwargs)
+        else:
+            self.calcular_totales()
+            super(Notacred, self).save(*args, **kwargs)

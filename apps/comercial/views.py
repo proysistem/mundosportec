@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView, TemplateView
-from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura, Ingreso, Compra
+from apps.comercial.models import Cliente, Proveedor, Vendedor, Movinvent, Pedido, Factura, Ingreso, Compra, Ajustecr, Notacred
 from apps.comercial.forms import (ClienteForm, ProveedorForm, VendedorForm, MovinventInlineForm,
-                                  MovinventForm, PedidoForm, FacturaForm, IngresoForm, CompraForm)
+                                  MovinventForm, PedidoForm, FacturaForm, IngresoForm, CompraForm,
+                                  AjustecrForm, NotacredForm)
 from django.db import transaction
 from django.db.models import F, Prefetch, Sum, Q
 from django.shortcuts import render
@@ -381,7 +382,7 @@ class ComBuscar(TemplateView):
         wrk_results = self.get_queryset().filter(
             Q(com_facprov__icontains=wrk_buscar) | Q(com_proveed__prv_frsname__icontains=wrk_buscar)
         )
-        return render(request, wrk_template, {'facturas': wrk_results, 'object_list': wrk_results, 'wrk_byproved': True})
+        return render(request, wrk_template, {'notascred': wrk_results, 'object_list': wrk_results, 'wrk_byproved': True})
 
     def get_queryset(self):
         return Compra.objects
@@ -938,3 +939,325 @@ class FacPaid(UpdateView):
         return super(PedEdita, self).form_valid(form)
 
 # ========    =========== #
+
+
+# ======== A J U S T E  POR  C R E D I T O S =========== #
+
+
+class AjcLista(ListView):
+    """Listado de Ajustecr"""
+    model = Ajustecr
+    template_name = 'comercial/Ajc_Panel.html'
+    paginate_by = 12
+
+
+class AjcView(DetailView):
+    """Visualiza Ajustecr"""
+    template_name = 'comercial/Ajc_View.html'
+    model = Ajustecr
+
+
+class AjcNuevo(CreateView):
+    """Crear Ajustecr"""
+    model = Ajustecr
+    form_class = AjustecrForm
+    template_name = 'comercial/Ajc_New.html'
+
+    def get_success_url(self):
+        return reverse_lazy('comercial:ajc_edit', kwargs={"pk": self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super(AjcNuevo, self).get_context_data(**kwargs)
+
+        if self.request.POST:
+            # context['movimientos'] = MovinventFormset(self.request.POST, queryset=Movinvent.objects.select_related())
+            context['nuevo_mov'] = MovinventInlineForm(self.request.POST)
+        else:
+            context['nuevo_mov'] = MovinventInlineForm()
+            # TODO: Hay un problema de 0n queries, debido a la generación de múltiples formset con mismo queryset, probablemente
+            #       Probé con select_related sin éxito aún.
+        return context
+
+    # def post(self, request, *args, **kwargs):
+    #     self.object = None
+    #     form = self.get_form()
+    #     import pdb; pdb.set_trace()
+    #     if form.is_valid():
+    #         return self.form_valid(form)
+    #     else:
+    #         return self.form_invalid(form)
+
+    def form_invalid(self, form):
+        # import pdb; pdb.set_trace()
+        return super(AjcNuevo, self).form_invalid(form)
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        nuevo_mov = context['nuevo_mov']
+        # movimientos = context['movimientos']
+        with transaction.atomic():
+            self.object = form.save()
+
+            if nuevo_mov.is_valid():
+                mov_instance = nuevo_mov.save(commit=False)
+                mov_instance.mvi_najustc = self.object
+                mov_instance.mvi_fechmov = self.object.ajc_fechajs
+                mov_instance.mvi_cliente = self.object.ajc_cliente
+                mov_instance.mvi_vendedo = self.object.ajc_vendedo
+                mov_instance.mvi_tipomov = self.object.ajc_tipomov
+                mov_instance.save(commit=True)
+            else:
+                return self.form_invalid(form)
+            # if movimientos.is_valid():
+            #     # TODO: Validate per form in formset
+            #     #       Although, formset.is_valid do this.
+            #     # for form in movimientos:
+            #     #     if form.is_valid():
+            #     #         form.
+            #     movimientos.instance = self.object
+            #     movimientos.save()
+        return super(AjcNuevo, self).form_valid(form)
+
+
+class AjcEdita(UpdateView):
+    """Modifica Ajustecr"""
+    model = Ajustecr
+    form_class = AjustecrForm
+    template_name = 'comercial/Ajc_Edit.html'
+    formnam = 'comercial:ajc_edit'
+
+    def get_queryset(self):
+        return Ajustecr.objects.prefetch_related(Prefetch(
+            'movinvent_set', queryset=Movinvent.objects.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'))))
+
+    def get_success_url(self):
+        return reverse_lazy('comercial:ajc_edit', kwargs={"pk": self.object.pk})
+
+    # def get_success_url(self):
+    #     if request.method == 'POST' and 'sub_factura' in self.request.POST:
+    #         return reverse_lazy('comercial:fac_edit', kwargs={"pk": self.object.pk})
+    #     else:
+    #         return reverse_lazy('comercial:ajc_edit', kwargs={"pk": self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super(AjcEdita, self).get_context_data(**kwargs)
+
+        if self.request.POST:
+            # context['movimientos'] = MovinventFormset(self.request.POST, queryset=Movinvent.objects.select_related())
+            context['nuevo_mov'] = MovinventInlineForm(self.request.POST)
+        else:
+            context['nuevo_mov'] = MovinventInlineForm()
+            # TODO: Hay un problema de 0n queries, debido a la generación de múltiples formset con mismo queryset, probablemente
+            #       Probé con select_related sin éxito aún.
+            movimientos = self.object.movinvent_set.all()
+            total = 0
+            for movimiento in movimientos:
+                total += movimiento.subtotal
+
+            context['movimientos'] = movimientos
+            context['total'] = total
+        return context
+
+    def form_invalid(self, form):
+        return super(AjcEdita, self).form_invalid(form)
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        nuevo_mov = context['nuevo_mov']
+        # movimientos = context['movimientos']
+        with transaction.atomic():
+            self.object = form.save()
+
+            if nuevo_mov.is_valid():
+                mov_instance = nuevo_mov.save(commit=False)
+                mov_instance.mvi_najustc = self.object
+                mov_instance.mvi_fechmov = self.object.ajc_fechajs
+                mov_instance.mvi_cliente = self.object.ajc_cliente
+                mov_instance.mvi_vendedo = self.object.ajc_vendedo
+                mov_instance.mvi_tipomov = self.object.ajc_tipomov
+                mov_instance.save(commit=True)
+            else:
+                return self.form_invalid(nuevo_mov)
+            # if movimientos.is_valid():
+            #     # TODO: Validate per form in formset
+            #     #       Although, formset.is_valid do this.
+            #     # for form in movimientos:
+            #     #     if form.is_valid():
+            #     #         form.
+            #     movimientos.instance = self.object
+            #     movimientos.save()
+        return super(AjcEdita, self).form_valid(form)
+
+
+# https://www.pythoniza.me/pdfs-en-django-con-reportlab/
+class AjcRepor(ListView):
+    model = Ajustecr
+    template_name = "comercial/Ajc_Report.html"
+    # context_object_name = "c"
+
+
+class AjcDelet(DeleteView):
+    """Elimina  Ajustecrs"""
+    model = Ajustecr
+    form_class = AjustecrForm
+    template_name = 'comercial/Ajc_Delet.html'
+    success_url = reverse_lazy('comercial:ajc_panel')
+
+
+# ======== N O T A   DE   C R E D I T O =========== #
+
+
+class NcrBuscar(TemplateView):
+    """Busqueda en Notacred """
+    paginate_by = 10
+
+    def post(self, request, *args, **kwargs):
+        wrk_buscar = request.POST['fnd_myfound']
+        wrk_itflag = request.POST['fnd_templat']
+        if wrk_itflag == 'NOTA':
+            wrk_template = 'comercial/Ncr_Panel.html'
+        elif wrk_itflag == 'panel':
+            wrk_template = 'comercial/Ncr_Panel.html'
+        else:
+            # TODO: Mostrar error
+            wrk_template = ''
+        pass
+        # import pdb; pdb.set_trace()
+        # wrk_byprod = Movinvent.objects.filter(exs_product=wrk_buscar)
+        # TODO: Aumentar espectro de busqueda
+        wrk_results = self.get_queryset().filter(
+            Q(ncr_ctrlnta__icontains=wrk_buscar) |
+            Q(ncr_cliente__clt_frsname__icontains=wrk_buscar) |
+            Q(ncr_cliente__clt_midname__icontains=wrk_buscar) |
+            Q(ncr_cliente__clt_secmane__icontains=wrk_buscar))
+        return render(request, wrk_template, {'notacred': wrk_results, 'object_list': wrk_results, 'wrk_bycliente': True})
+
+    def get_queryset(self):
+        return Notacred.objects
+
+    #     user = self.request.user
+    #     sucursal = user.sucursal
+    #     return Movinvent.objects.filter(exs_sucursa=sucursal)
+
+
+class NcrLista(ListView):
+    """Listado de Notacred"""
+    model = Notacred
+    template_name = 'comercial/Ncr_Panel.html'
+    paginate_by = 12
+
+
+class NcrPrint(ListView):
+    """Listado de Notacred"""
+    model = Notacred
+    template_name = 'comercial/Ncr_New.html'
+    paginate_by = 12
+
+
+class NcrView(DetailView):
+    """Visualiza reg. Notacred"""
+    template_name = 'comercial/Ncr_View.html'
+    model = Notacred
+
+
+class NcrNuevo(CreateView):
+    """Crear Notacred"""
+    model = Notacred
+    form_class = NotacredForm
+    template_name = 'comercial/Ncr_New.html'
+    # success_url = reverse_lazy('comercial:ncr_panel')
+
+    def form_valid(self, form):
+        # import pdb,  pdb.set_trace()
+        self.object = form.save(request=self.request)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_context_data(self, **kwargs):
+        context = super(NcrNuevo, self).get_context_data(**kwargs)
+        ajustecr = getattr(self, 'ajustecr', None)
+        if ajustecr:
+            movimientos = self.ajustecr.movinvent_set.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios')).all()
+            context['movimientos'] = movimientos
+
+            suma_iva = 0
+            total = 0
+            for movimiento in movimientos:
+                total += movimiento.subtotal
+                suma_iva += movimiento.subtotal * (movimiento.mvi_impuest/100)
+            # context['movimientos'] = movimientos
+            context['total'] = total
+            context['suma_iva'] = suma_iva
+            context['total_iva'] = total + suma_iva
+        return context
+
+    def get_success_url(self):
+        # TODO: Ir a impresión de factura
+        return reverse_lazy('comercial:ajc_new')
+        # , kwargs={"pk": self.object.pk}
+
+    def post(self, request, *args, **kwargs):
+        if 'sub_notacred' in request.POST and 'ajustecr_id' in request.POST:
+            self.object = None
+            request.POST = request.POST.copy()
+            try:
+                ajustecr = Ajustecr.objects.get(pk=request.POST['ajustecr_id'])
+            except Exception:
+                pass
+            else:
+                # factura = Factura(
+                #         fac_npedido=ajustecr,
+                #         fac_cliente=ajustecr.ped_cliente,
+                #         fac_vendedo=ajustecr.ped_vendedo,
+                #         fac_fechfac=timezone.now()
+                #     )
+                # self.object = factura
+                self.ajustecr = ajustecr
+                form_data = {
+                    'ncr_najuste': ajustecr.ajc_najustc,
+                    'ncr_cliente': ajustecr.ajc_cliente.pk,
+                    'ncr_vendedo': ajustecr.ajc_vendedo.pk,
+                    'ncr_fechnta': timezone.now(),
+                }
+                request.POST.update(form_data)
+                form = self.get_form()
+                form.initial = form_data
+                return self.form_invalid(form)
+                # if form.is_valid():
+                #     # ajustecr.ped_statreg = # TODO: Cambiar estado a Choices de Estado
+                #     return self.form_valid(form)
+                # else:
+                #     return self.form_invalid(form)
+        return super(NcrNuevo, self).post(request, *args, **kwargs)
+
+
+class NcrEdita(UpdateView):
+    """Actualiza Notacred"""
+    model = Notacred
+    form_class = NotacredForm
+    template_name = 'comercial/Ncr_Edit.html'
+    success_url = reverse_lazy('comercial:ajc_new')
+
+    def get_queryset(self):
+        return Notacred.objects.prefetch_related(Prefetch(
+            'ncr_najuste__movinvent_set', queryset=Movinvent.objects.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'))))
+
+    def get_context_data(self, **kwargs):
+        context = super(NcrEdita, self).get_context_data(**kwargs)
+        total = 0
+        movimientos = self.get_object().ncr_najuste.movinvent_set.all()
+        for movimiento in movimientos:
+            total += movimiento.subtotal
+        # context['movimientos'] = movimientos
+        context['total'] = total
+        return context
+
+
+class NcrDelet(DeleteView):
+    """Elimina Notacred"""
+    model = Notacred
+    form_class = NotacredForm
+    template_name = 'comercial/Ncr_Delet.html'
+    success_url = reverse_lazy('comercial:ncr_panel')
