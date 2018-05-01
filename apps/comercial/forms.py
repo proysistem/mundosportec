@@ -415,7 +415,7 @@ class PedidoForm(forms.ModelForm):
 
 
 class CompraForm(forms.ModelForm):
-    com_fechcom = forms.DateField(initial=localtime(now()).date())
+    com_fechcom = forms.DateField(initial=now().date())
 
     class Meta:
         model = Compra

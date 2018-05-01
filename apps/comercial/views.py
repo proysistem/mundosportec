@@ -12,6 +12,7 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect
 
 from io import BytesIO
+from datetime import date
 
 from django.http import HttpResponse
 from reportlab.platypus import SimpleDocTemplate, Paragraph, TableStyle
@@ -439,8 +440,9 @@ class ComNuevo(CreateView):
                     'com_proveed': ingreso.ing_proveed.pk,
                     'com_vendedo': ingreso.ing_vendedo.pk,
                     'com_facprov': request.POST['facproveed'],
-                    'com_fechcom': timezone.now()
+                    'com_fechcom': date.today()
                 }
+
                 request.POST.update(form_data)
                 form = self.get_form()
                 form.initial = form_data
