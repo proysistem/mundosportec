@@ -3,7 +3,7 @@
 {% block title %} Edita Ingreso {% endblock title %}</title>
     {% block context%}
     <div class="crea_content">
-        <h3 class="crea_proceso">Comercial:  Ingresos</h3>
+        <h2 class="crea_proceso">Comercial:  Ingresos</h2>
         <a class="icon-print iconos align_tex_left crea_boton" target="_blank" href="{% url 'comercial:ped_repor' %}">Print</a>
         <a class="icon-reply crea_boton" href="{% url 'comercial:fac_panel' %}">Volver</a>
     </div>
@@ -74,7 +74,6 @@
                             <div class="width_015"><label for="{{form.ing_facprov.name}}">{{form.ing_facprov.label}}</label></div>
                             <div class="form_widget width_010">{{ form.ing_facprov }}</div>
                             <input name="ing_sucursa" id="id_ing_sucursa" type="hidden" value="{{ user.sucursal.pk }}">
-
                         </div>
                     </fieldset>
                 </div>
@@ -155,7 +154,7 @@
             </div>
         </form>
         <br>
-        <form name="form_factura" method="POST" enctype="multipart" action="{% url 'comercial:com_new' %}">{% csrf_token %}
+        <form name="form_compra" method="POST" enctype="multipart" action="{% url 'comercial:com_new' %}">{% csrf_token %}
             <input type="hidden" name="ingreso_id" value="{{ object.pk }}">
             <input type="hidden" name="facproveed" value="{{ object.ing_facprov }}" id="facproveed">
             <div><button name="sub_compra" class="icon-reply form_submit" type="submit" onkeydown="validadowky();"> P a g a r </button></div>

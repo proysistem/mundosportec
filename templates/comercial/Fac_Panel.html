@@ -28,8 +28,8 @@
                             {% comment %}
                             <th class="head_tab">MOND.</th>
                             <th class="head_tab">COTIZ.</th>
-                            <th class="head_tab">ITMS</th>
                             {% endcomment %}
+                            <th class="head_tab">ITMS</th>
                             <th class="head_tab">SUBTOT</th>
                             <th class="head_tab">DSCTOS</th>
                             <th class="head_tab">RCARGO</th>
@@ -57,19 +57,19 @@
                             {% comment %}
                             <td class="columns_tab align_tex_left"> {{ var_facfield.fac_monedas }}</td>
                             <td class="columns_tab align_tex_right">{{ var_facfield.fac_cotizac |default:''|stringformat:"0.0f" }}</td>
-                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totitms |default:''|stringformat:"0.0f" }}</td>
                             {% endcomment %}
-                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totvlor |default:''|stringformat:"0.0f" }}</td>
-                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totdsct |default:''|stringformat:"0.0f" }}</td>
-                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totrkrg |default:''|stringformat:"0.0f" }}</td>
-                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totflet |default:''|stringformat:"0.0f" }}</td>
-                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totaran |default:''|stringformat:"0.0f" }}</td>
-                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_tottaxs |default:''|stringformat:"0.0f" }}</td>
-                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_pgoefec |default:''|stringformat:"0.0f" }}</td>
-                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_pgocheq |default:''|stringformat:"0.0f" }}</td>
-                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_pgotjcr |default:''|stringformat:"0.0f" }}</td>
-                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_pgocred |default:''|stringformat:"0.0f" }}</td>
-                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_otropgo |default:''|stringformat:"0.0f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totitms |default:''|stringformat:"0.2f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totvlor |default:''|stringformat:"0.2f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totdsct |default:''|stringformat:"0.2f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totrkrg |default:''|stringformat:"0.2f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totflet |default:''|stringformat:"0.2f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_totaran |default:''|stringformat:"0.2f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_tottaxs |default:''|stringformat:"0.2f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_pgoefec |default:''|stringformat:"0.2f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_pgocheq |default:''|stringformat:"0.2f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_pgotjcr |default:''|stringformat:"0.2f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_pgocred |default:''|stringformat:"0.2f" }}</td>
+                            <td class="columns_tab align_tex_right">{{ var_facfield.fac_otropgo |default:''|stringformat:"0.2f" }}</td>
                         </tr>
                         {% endfor %}
                         {% else %}

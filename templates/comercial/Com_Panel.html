@@ -25,8 +25,10 @@
                             <th class="head_tab">CAJERA</th>
                             <th class="head_tab">PROVEED</th>
                             <th class="head_tab">VENDED.</th>
+                            {% comment %}
                             <th class="head_tab">MONEDA</th>
                             <th class="head_tab">COTIZ.</th>
+                            {% endcomment %}
                             <th class="head_tab">TOT.ITMS</th>
                             <th class="head_tab">SUBTOT</th>
                             <th class="head_tab">DSCTOS</th>
@@ -52,8 +54,10 @@
                             <td class="columns_tab align_tex_left"> {{ var_comfield.com_cajeras }}</td>
                             <td class="columns_tab align_tex_left"> {{ var_comfield.com_proveed }}</td>
                             <td class="columns_tab align_tex_left"> {{ var_comfield.com_vendedo }}</td>
+                            {% comment %}
                             <td class="columns_tab align_tex_left"> {{ var_comfield.com_monedas }}</td>
                             <td class="columns_tab align_tex_right">{{ var_comfield.com_cotizac |default:''|stringformat:"0.2f" }}</td>
+                            {% endcomment %}
                             <td class="columns_tab align_tex_right">{{ var_comfield.com_totitms |default:''|stringformat:"0.2f" }}</td>
                             <td class="columns_tab align_tex_right">{{ var_comfield.com_totvlor |default:''|stringformat:"0.2f" }}</td>
                             <td class="columns_tab align_tex_right">{{ var_comfield.com_totdsct |default:''|stringformat:"0.2f" }}</td>

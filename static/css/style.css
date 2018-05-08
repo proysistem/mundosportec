@@ -129,11 +129,19 @@ input:focus
     left: 20px;
     }
 .bicolor:nth-child(odd) {
-    background-color:#f2f2f2;
+    background-color: rgba(232,243,243, 0.3);
     padding: 0 0 1px 0;
 }
 .bicolor:nth-child(even) {
     background-color:#fbfbfb;
+    padding: 0 0 1px 0;
+}
+.rowcolor:nth-child(odd) {
+    background-color: rgba(242,255,255, 0.5);
+    padding: 0 0 1px 0;
+}
+.rowcolor:nth-child(even) {
+    background-color:#ffffff;
     padding: 0 0 1px 0;
 }
 .width_760 {width: 7.67%;}

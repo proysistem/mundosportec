@@ -402,15 +402,18 @@ class ComNuevo(CreateView):
                 subtotal=F('mvi_kntidad') * F('mvi_precios')).all()
             context['movimientos'] = movimientos
 
+            suma_dsc = 0
             suma_iva = 0
             total = 0
             for movimiento in movimientos:
                 total += movimiento.subtotal
-                suma_iva += movimiento.subtotal * (movimiento.mvi_impuest/100)
+                suma_dsc += movimiento.mvi_desctos
+                suma_iva += (movimiento.subtotal - (movimiento.mvi_desctos)) * (movimiento.mvi_impuest/100)
             # context['movimientos'] = movimientos
             context['total'] = total
+            context['suma_dsc'] = suma_dsc
             context['suma_iva'] = suma_iva
-            context['total_iva'] = total + suma_iva
+            context['total_iva'] = total + suma_iva - suma_dsc
         return context
 
     def get_success_url(self):
@@ -795,15 +798,18 @@ class FacNuevo(CreateView):
                 subtotal=F('mvi_kntidad') * F('mvi_precios')).all()
             context['movimientos'] = movimientos
 
+            suma_dsc = 0
             suma_iva = 0
             total = 0
             for movimiento in movimientos:
                 total += movimiento.subtotal
-                suma_iva += movimiento.subtotal * (movimiento.mvi_impuest/100)
+                suma_dsc += movimiento.mvi_desctos
+                suma_iva += (movimiento.subtotal - (movimiento.mvi_desctos)) * (movimiento.mvi_impuest/100)
             # context['movimientos'] = movimientos
             context['total'] = total
+            context['suma_dsc'] = suma_dsc
             context['suma_iva'] = suma_iva
-            context['total_iva'] = total + suma_iva
+            context['total_iva'] = total + suma_iva - suma_dsc
         return context
 
     def get_success_url(self):
@@ -1106,7 +1112,6 @@ class AjcDelet(DeleteView):
     template_name = 'comercial/Ajc_Delet.html'
     success_url = reverse_lazy('comercial:ajc_panel')
 
-
 # ======== N O T A   DE   C R E D I T O =========== #
 
 
@@ -1183,15 +1188,18 @@ class NcrNuevo(CreateView):
                 subtotal=F('mvi_kntidad') * F('mvi_precios')).all()
             context['movimientos'] = movimientos
 
+            suma_dsc = 0
             suma_iva = 0
             total = 0
             for movimiento in movimientos:
                 total += movimiento.subtotal
-                suma_iva += movimiento.subtotal * (movimiento.mvi_impuest/100)
+                suma_dsc += movimiento.mvi_desctos
+                suma_iva += (movimiento.subtotal - (movimiento.mvi_desctos)) * (movimiento.mvi_impuest/100)
             # context['movimientos'] = movimientos
             context['total'] = total
+            context['suma_dsc'] = suma_dsc
             context['suma_iva'] = suma_iva
-            context['total_iva'] = total + suma_iva
+            context['total_iva'] = total + suma_iva - suma_dsc
         return context
 
     def get_success_url(self):

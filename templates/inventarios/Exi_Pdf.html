@@ -37,7 +37,21 @@
         <tbody border="0">
             {% if productos %}
             {% for var_exifield in productos %}
-            <tr>
+            <tr class="rowcolor">
+{% comment %}
+                <td>
+            <svg class="barcode"
+              jsbarcode-format="code128c"
+              jsbarcode-ean128="true"
+              jsbarcode-flat="false"
+              jsbarcode-height="5"
+              jsbarcode-fontsize="4"
+              jsbarcode-value="{{ var_exifield.exs_product }}"
+              jsbarcode-textmargin="0">
+            </svg>
+
+                </td>
+{% endcomment %}
                 <td class="barcode align_tex_center"> {{ var_exifield.exs_product }} </td>
                 <td>{{ var_exifield.exs_detalle }} </td>
                 <td>{{ var_exifield.exs_idunida }} </td>
@@ -46,87 +60,87 @@
                     <div>
                         <div class="width_100">
                             <ul class="container_pop width_100">
-                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid01 }}</li>
-                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid02 }}</li>
-                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid03 }}</li>
-                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid04 }}</li>
-                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid05 }}</li>
-                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid06 }}</li>
-                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid07 }}</li>
-                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid08 }}</li>
-                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid09 }}</li>
-                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid10 }}</li>
-                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid11 }}</li>
-                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid12 }}</li>
-                                <li class="bicolor align_tex_center width_760 font_little">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid13 }}</li>
+                                <li class="align_tex_center width_760 font_little bicolor">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid01 }}</li>
+                                <li class="align_tex_center width_760 font_little        ">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid02 }}</li>
+                                <li class="align_tex_center width_760 font_little bicolor">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid03 }}</li>
+                                <li class="align_tex_center width_760 font_little        ">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid04 }}</li>
+                                <li class="align_tex_center width_760 font_little bicolor">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid05 }}</li>
+                                <li class="align_tex_center width_760 font_little        ">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid06 }}</li>
+                                <li class="align_tex_center width_760 font_little bicolor">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid07 }}</li>
+                                <li class="align_tex_center width_760 font_little        ">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid08 }}</li>
+                                <li class="align_tex_center width_760 font_little bicolor">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid09 }}</li>
+                                <li class="align_tex_center width_760 font_little        ">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid10 }}</li>
+                                <li class="align_tex_center width_760 font_little bicolor">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid11 }}</li>
+                                <li class="align_tex_center width_760 font_little        ">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid12 }}</li>
+                                <li class="align_tex_center width_760 font_little bicolor">{{ var_exifield.exs_idmodel.mod_tabtall.jgo_medid13 }}</li>
                             </ul>
                         </div>
                         <div class="width_100">
                             <ul class="container_pop width_100">
                                 {% if var_exifield.saldoxtalla.tex_actua01 > 0 %}
-                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua01|default:0|stringformat:"0.2f" }} </li>
+                                    <li class="align_tex_right  width_760 bicolor">{{ var_exifield.saldoxtalla.tex_actua01|default:0|stringformat:"0.2f" }} </li>
                                 {% else %}
-                                    <li class="bicolor align_tex_center width_760">___</li>
+                                    <li class="align_tex_center width_760 bicolor">___</li>
                                 {% endif %}
                                 {% if var_exifield.saldoxtalla.tex_actua02 > 0 %}
-                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua02|default:0|stringformat:"0.2f" }} </li>
+                                    <li class="align_tex_right  width_760        ">{{ var_exifield.saldoxtalla.tex_actua02|default:0|stringformat:"0.2f" }} </li>
                                 {% else %}
-                                    <li class="bicolor align_tex_center width_760">___</li>
+                                    <li class="align_tex_center width_760        ">___</li>
                                 {% endif %}
                                 {% if var_exifield.saldoxtalla.tex_actua03 > 0 %}
-                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua03|default:0|stringformat:"0.2f" }} </li>
+                                    <li class="align_tex_right  width_760 bicolor">{{ var_exifield.saldoxtalla.tex_actua03|default:0|stringformat:"0.2f" }} </li>
                                 {% else %}
-                                    <li class="bicolor align_tex_center width_760">___</li>
+                                    <li class="align_tex_center width_760 bicolor">___</li>
                                 {% endif %}
                                 {% if var_exifield.saldoxtalla.tex_actua04 > 0 %}
-                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua04|default:0|stringformat:"0.2f" }} </li>
+                                    <li class="align_tex_right  width_760        ">{{ var_exifield.saldoxtalla.tex_actua04|default:0|stringformat:"0.2f" }} </li>
                                 {% else %}
-                                    <li class="bicolor align_tex_center width_760">___</li>
+                                    <li class="align_tex_center width_760        ">___</li>
                                 {% endif %}
                                 {% if var_exifield.saldoxtalla.tex_actua05 > 0 %}
-                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua05|default:0|stringformat:"0.2f" }} </li>
+                                    <li class="align_tex_right  width_760 bicolor ">{{ var_exifield.saldoxtalla.tex_actua05|default:0|stringformat:"0.2f" }} </li>
                                 {% else %}
-                                    <li class="bicolor align_tex_center width_760">___</li>
+                                    <li class="align_tex_center width_760 bicolor">___</li>
                                 {% endif %}
                                 {% if var_exifield.saldoxtalla.tex_actua06 > 0 %}
-                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua06|default:0|stringformat:"0.2f" }} </li>
+                                    <li class="align_tex_right  width_760        ">{{ var_exifield.saldoxtalla.tex_actua06|default:0|stringformat:"0.2f" }} </li>
                                 {% else %}
-                                    <li class="bicolor align_tex_center width_760">___</li>
+                                    <li class="align_tex_center width_760        ">___</li>
                                 {% endif %}
                                 {% if var_exifield.saldoxtalla.tex_actua07 > 0 %}
-                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua07|default:0|stringformat:"0.2f" }} </li>
+                                    <li class="align_tex_right  width_760 bicolor ">{{ var_exifield.saldoxtalla.tex_actua07|default:0|stringformat:"0.2f" }} </li>
                                 {% else %}
-                                    <li class="bicolor align_tex_center width_760">___</li>
+                                    <li class="align_tex_center width_760 bicolor ">___</li>
                                 {% endif %}
                                 {% if var_exifield.saldoxtalla.tex_actua08 > 0 %}
-                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua08|default:0|stringformat:"0.2f" }} </li>
+                                    <li class="align_tex_right  width_760         ">{{ var_exifield.saldoxtalla.tex_actua08|default:0|stringformat:"0.2f" }} </li>
                                 {% else %}
-                                    <li class="bicolor align_tex_center width_760">___</li>
+                                    <li class="align_tex_center width_760         ">___</li>
                                 {% endif %}
                                 {% if var_exifield.saldoxtalla.tex_actua09 > 0 %}
-                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua09|default:0|stringformat:"0.2f" }} </li>
+                                    <li class="align_tex_right  width_760 bicolor">{{ var_exifield.saldoxtalla.tex_actua09|default:0|stringformat:"0.2f" }} </li>
                                 {% else %}
-                                    <li class="bicolor align_tex_center width_760">___</li>
+                                    <li class="align_tex_center width_760 bicolor">___</li>
                                 {% endif %}
                                 {% if var_exifield.saldoxtalla.tex_actua10 > 0 %}
-                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua10|default:0|stringformat:"0.2f" }} </li>
+                                    <li class="align_tex_right  width_760        ">{{ var_exifield.saldoxtalla.tex_actua10|default:0|stringformat:"0.2f" }} </li>
                                 {% else %}
-                                    <li class="bicolor align_tex_center width_760">___</li>
+                                    <li class="align_tex_center width_760        ">___</li>
                                 {% endif %}
                                 {% if var_exifield.saldoxtalla.tex_actua11 > 0 %}
-                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua11|default:0|stringformat:"0.2f" }} </li>
+                                    <li class="align_tex_right  width_760 bicolor">{{ var_exifield.saldoxtalla.tex_actua11|default:0|stringformat:"0.2f" }} </li>
                                 {% else %}
-                                    <li class="bicolor align_tex_center width_760">___</li>
+                                    <li class="align_tex_center width_760 bicolor">___</li>
                                 {% endif %}
                                 {% if var_exifield.saldoxtalla.tex_actua12 > 0 %}
-                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua12|default:0|stringformat:"0.2f" }} </li>
+                                    <li class="align_tex_right  width_760        ">{{ var_exifield.saldoxtalla.tex_actua12|default:0|stringformat:"0.2f" }} </li>
                                 {% else %}
-                                    <li class="bicolor align_tex_center width_760">___</li>
+                                    <li class="align_tex_center width_760        ">___</li>
                                 {% endif %}
                                 {% if var_exifield.saldoxtalla.tex_actua13 > 0 %}
-                                    <li class="bicolor align_tex_right width_760">{{ var_exifield.saldoxtalla.tex_actua13|default:0|stringformat:"0.2f" }} </li>
+                                    <li class="align_tex_right  width_760 bicolor">{{ var_exifield.saldoxtalla.tex_actua13|default:0|stringformat:"0.2f" }} </li>
                                 {% else %}
-                                    <li class="bicolor align_tex_center width_760">___</li>
+                                    <li class="align_tex_center width_760 bicolor">___</li>
                                 {% endif %}
                             </ul>
                         </div>
@@ -165,6 +179,13 @@
         </ul>
     </div>
 </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsbarcode@3.8.0/dist/barcodes/JsBarcode.code128.min.js"></script>
+
+    <script type="text/javascript">
+        JsBarcode(".barcode").init();
+    </script>
+
 {% endblock content %}
 
     <div id="page-footer">

@@ -93,7 +93,7 @@ class Ingreso(models.Model):
 class Pedido(models.Model):
     ped_npedido = models.AutoField('Núm. de Pedido', primary_key=True)
     ped_tipomov = models.PositiveIntegerField("Tipo de movimiento", choices=TIPO_MOV_CHOICES, default=TIPO_MOV_CHOICES.EGRESO)
-    ped_fechped = models.DateField('Fecha de pedido')
+    ped_fechped = models.DateField(verbose_name='Fecha de pedido')
     ped_cliente = models.ForeignKey(Cliente)
     ped_vendedo = models.ForeignKey(Vendedor, null=True, blank=True)
     ped_statreg = models.CharField('Status del Registro', max_length=1, default=1)
@@ -264,7 +264,7 @@ class Compra(models.Model):
         if self.com_ningres:
             movimientos = self.com_ningres.movinvent_set.select_related('mvi_product').annotate(
                 subtotal=F('mvi_kntidad') * F('mvi_precios'),
-                subt_iva=F('mvi_impuest')/100.00 * F('mvi_kntidad') * F('mvi_precios')
+                subt_iva=F('mvi_impuest')/100.00 * (F('mvi_kntidad') * F('mvi_precios') - F('mvi_desctos'))
             ).aggregate(
                 com_totvlor=Sum('subtotal'),
                 com_totitms=Sum('mvi_kntidad'),
@@ -284,6 +284,26 @@ class Compra(models.Model):
 
     def __str__(self):
         return str(self.com_idcompr) if self.com_idcompr else super(Compra, self).__str__()
+
+    def save(self, *args, **kwargs):
+        # if not self.id:
+        # if 'request' in kwargs and self.user is None:
+        # import pdb; pdb.set_trace()
+        # if 'request' in kwargs:
+        #     request = kwargs.pop('request')
+            # if request:
+            #     sucursal = request.user.sucursal
+                # TODO: Validar en views que Sucursal de usuario esté activa y tenga Controlador
+                # controlador = Controlador.objects.get(ctl_sucrsal=sucursal)
+
+                # with transaction.atomic():
+                #     self.fac_ctrlfac = "{0:02d}{1:09d}".format(sucursal.id, controlador.ctl_secue01 + 1)
+                #     controlador.ctl_secue01 += 1
+                #     controlador.save()
+                #     super(Factura, self).save(*args, **kwargs)
+        # else:
+            self.calcular_totales()
+            super(Compra, self).save(*args, **kwargs)
 
 
 class Factura(models.Model):
@@ -315,7 +335,7 @@ class Factura(models.Model):
         if self.fac_npedido:
             movimientos = self.fac_npedido.movinvent_set.select_related('mvi_product').annotate(
                 subtotal=F('mvi_kntidad') * F('mvi_precios'),
-                subt_iva=F('mvi_impuest')/100.00 * F('mvi_kntidad') * F('mvi_precios')
+                subt_iva=F('mvi_impuest')/100.00 * (F('mvi_kntidad') * F('mvi_precios') - F('mvi_desctos'))
             ).aggregate(
                 fac_totvlor=Sum('subtotal'),
                 fac_totitms=Sum('mvi_kntidad'),
@@ -386,7 +406,7 @@ class Notacred(models.Model):
         if self.ncr_najuste:
             movimientos = self.ncr_najuste.movinvent_set.select_related('mvi_product').annotate(
                 subtotal=F('mvi_kntidad') * F('mvi_precios'),
-                subt_iva=F('mvi_impuest')/100.00 * F('mvi_kntidad') * F('mvi_precios')
+                subt_iva=F('mvi_impuest')/100.00 * (F('mvi_kntidad') * F('mvi_precios') - F('mvi_desctos'))
             ).aggregate(
                 ncr_totvlor=Sum('subtotal'),
                 ncr_totitms=Sum('mvi_kntidad'),
