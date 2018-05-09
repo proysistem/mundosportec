@@ -21,12 +21,12 @@
                             <th class="head_tab">N.FACTURA</th>
                             <th class="head_tab">PEDID</th>
                             <th class="head_tab">FECHA DE FACTURA</th>
-                            <th class="head_tab">CJA</th>
-                            <th class="head_tab">CJERA</th>
                             <th class="head_tab">CLNTE</th>
                             <th class="head_tab">VENDED.</th>
                             {% comment %}
-                            <th class="head_tab">MOND.</th>
+                             <th class="head_tab">CJA</th>
+                            <th class="head_tab">CJERA</th>
+                           <th class="head_tab">MOND.</th>
                             <th class="head_tab">COTIZ.</th>
                             {% endcomment %}
                             <th class="head_tab">ITMS</th>
@@ -41,6 +41,7 @@
                             <th class="head_tab">PAG. T/CRED</th>
                             <th class="head_tab">CREDIT. PERSONAL</th>
                             <th class="head_tab">OTR.FORM. PAGO</th>
+                            <th class="head_tab" colspan="2">Opción</th>
                         </tr>
                     </thead>
                     <tbody border="0">
@@ -50,12 +51,12 @@
                             <td class="columns_tab align_tex_left"> {{ var_facfield.fac_ctrlfac }}</td>
                             <td class="columns_tab align_tex_right"> {{ var_facfield.fac_npedido }}</td>
                             <td class="columns_tab align_tex_left"> {{ var_facfield.fac_fechfac }}</td>
-                            <td class="columns_tab align_tex_left"> {{ var_facfield.fac_cajanum }}</td>
-                            <td class="columns_tab align_tex_left"> {{ var_facfield.fac_cajeras }}</td>
                             <td class="columns_tab align_tex_left"> {{ var_facfield.fac_cliente }}</td>
                             <td class="columns_tab align_tex_left"> {{ var_facfield.fac_vendedo }}</td>
                             {% comment %}
-                            <td class="columns_tab align_tex_left"> {{ var_facfield.fac_monedas }}</td>
+                             <td class="columns_tab align_tex_left"> {{ var_facfield.fac_cajanum }}</td>
+                            <td class="columns_tab align_tex_left"> {{ var_facfield.fac_cajeras }}</td>
+                           <td class="columns_tab align_tex_left"> {{ var_facfield.fac_monedas }}</td>
                             <td class="columns_tab align_tex_right">{{ var_facfield.fac_cotizac |default:''|stringformat:"0.0f" }}</td>
                             {% endcomment %}
                             <td class="columns_tab align_tex_right">{{ var_facfield.fac_totitms |default:''|stringformat:"0.2f" }}</td>
@@ -70,6 +71,8 @@
                             <td class="columns_tab align_tex_right">{{ var_facfield.fac_pgotjcr |default:''|stringformat:"0.2f" }}</td>
                             <td class="columns_tab align_tex_right">{{ var_facfield.fac_pgocred |default:''|stringformat:"0.2f" }}</td>
                             <td class="columns_tab align_tex_right">{{ var_facfield.fac_otropgo |default:''|stringformat:"0.2f" }}</td>
+                            <td class="columns_tab"><a class="icon-eye botones"   href="{% url 'comercial:fac_view' var_facfield.pk %}"></a></td>
+                            <td class="columns_tab"><a class="icon-print botones" href="{% url 'comercial:fac_print' var_facfield.fac_npedido %}" target="_blank"></a></td>
                         </tr>
                         {% endfor %}
                         {% else %}

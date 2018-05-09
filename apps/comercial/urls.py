@@ -6,7 +6,7 @@ from apps.comercial.views import (CliLista, CliNuevo, CliView, CliEdita, CliDele
                                   PedLista, PedNuevo, PedView, PedEdita, PedDelet, PedRepor,
                                   FacLista, FacPrint, FacNuevo, FacView, FacEdita, FacPaid, FacDelet, FacBuscar,
                                   IngNuevo, IngEdita,
-                                  ComNuevo, ComLista, ComBuscar,
+                                  ComNuevo, ComLista, ComBuscar, ComView, ComPrint,
                                   MviBuscar,
                                   AjcLista, AjcNuevo, AjcRepor, AjcView, AjcEdita, AjcDelet,
                                   NcrBuscar, NcrLista, NcrNuevo, NcrView, NcrEdita, NcrDelet, NcrPrint)
@@ -59,10 +59,10 @@ urlpatterns = [
     url(r'^ComPanel',                  login_required_view(ComLista.as_view()), name='com_panel'),
     url(r'^ComNuevo/$',                login_required_view(ComNuevo.as_view()), name='com_new'),
     # url(r'^ComPaid/(?P<pk>\d+)/$',     login_required_view(FacPaid.as_view()), name='fac_paid'),
-    # url(r'^ComConsulta/(?P<pk>\d+)/$', login_required_view(FacView.as_view()),  name='fac_view'),
+    url(r'^ComConsulta/(?P<pk>\d+)/$', login_required_view(ComView.as_view()),  name='com_view'),
     # url(r'^ComEdita/(?P<pk>\d+)/$',    login_required_view(FacEdita.as_view()), name='fac_edit'),
     # url(r'^ComElimina/(?P<pk>\d+)/$',  login_required_view(FacDelet.as_view()), name='fac_delet'),
-    # url(r'^ComPrint/(?P<pk>\d+)/$',    login_required_view(FacPrint.as_view()), name='fac_print'),
+    url(r'^ComPrint/(?P<pk>\d+)/$',    login_required_view(ComPrint.as_view()), name='com_print'),
 
     url(r'^FacSearch',                 login_required_view(FacBuscar.as_view()), name='fac_search'),
     url(r'^FacPanel',                  login_required_view(FacLista.as_view()), name='fac_panel'),

@@ -364,6 +364,61 @@ class ComLista(ListView):
     paginate_by = 12
 
 
+class ComPrint(ListView):
+    """Listado de Compras"""
+    model = Compra
+    form_class = CompraForm
+    template_name = 'comercial/Com_Print.html'
+    success_url = reverse_lazy('comercial:com_panel')
+
+    def get_queryset(self):
+        return Compra.objects.prefetch_related(Prefetch(
+            'com_ningres__movinvent_set', queryset=Movinvent.objects.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'))))
+
+    def get_context_data(self, **kwargs):
+        context = super(ComPrint, self).get_context_data(**kwargs)
+        total = 0
+        movimientos = self.get_object().com_ningres.movinvent_set.all()
+        for movimiento in movimientos:
+            total += movimiento.subtotal
+        # context['movimientos'] = movimientos
+        context['total'] = total
+        return context
+
+
+class ComView(DetailView):
+    """Visualiza reg. Compra"""
+    model = Compra
+    form_class = CompraForm
+    template_name = 'comercial/Com_View.html'
+    success_url = reverse_lazy('comercial:com_panel')
+
+    def get_queryset(self):
+        return Compra.objects.prefetch_related(Prefetch(
+            'com_ningres__movinvent_set', queryset=Movinvent.objects.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'))))
+
+    def get_context_data(self, **kwargs):
+        context = super(ComView, self).get_context_data(**kwargs)
+        movimientos = self.get_object().com_ningres.movinvent_set.all()
+
+        suma_dsc = 0
+        suma_iva = 0
+        total = 0
+        for movimiento in movimientos:
+            total += movimiento.subtotal
+            suma_dsc += movimiento.mvi_desctos
+            suma_iva += (movimiento.subtotal - (movimiento.mvi_desctos)) * (movimiento.mvi_impuest/100)
+        # context['movimientos'] = movimientos
+        context['total'] = total
+        context['suma_dsc'] = suma_dsc
+        context['suma_iva'] = suma_iva
+        context['total_fin'] = total + suma_iva - suma_dsc
+        context['total_pgo'] = 'com_pgoefec' + 'com_pgocheq' + 'com_pgotjcr' + 'com_pgocred' + 'com_otropgo'
+        return context
+
+
 class ComBuscar(TemplateView):
     """Busqueda en Compras """
     def post(self, request, *args, **kwargs):
@@ -748,7 +803,7 @@ class FacBuscar(TemplateView):
             Q(fac_cliente__clt_frsname__icontains=wrk_buscar) |
             Q(fac_cliente__clt_midname__icontains=wrk_buscar) |
             Q(fac_cliente__clt_secmane__icontains=wrk_buscar))
-        return render(request, wrk_template, {'facturas': wrk_results, 'object_list': wrk_results, 'wrk_bycliente': True})
+        return render(request, wrk_template, {'Compra': wrk_results, 'object_list': wrk_results, 'wrk_bycliente': True})
 
     def get_queryset(self):
         return Factura.objects
@@ -768,14 +823,69 @@ class FacLista(ListView):
 class FacPrint(ListView):
     """Listado de Facturas"""
     model = Factura
-    template_name = 'comercial/Ped_New.html'
-    paginate_by = 8
+    form_class = FacturaForm
+    template_name = 'comercial/Fac_Print.html'
+    success_url = reverse_lazy('comercial:fac_panel')
+
+    def get_queryset(self):
+        return Factura.objects.prefetch_related(Prefetch(
+            'fac_npedido__movinvent_set', queryset=Movinvent.objects.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'))))
+
+    def get_context_data(self, **kwargs):
+        context = super(FacEdita, self).get_context_data(**kwargs)
+        total = 0
+        movimientos = self.get_object().fac_npedido.movinvent_set.all()
+        for movimiento in movimientos:
+            total += movimiento.subtotal
+        # context['movimientos'] = movimientos
+        context['total'] = total
+        return context
 
 
 class FacView(DetailView):
     """Visualiza reg. Factura"""
-    template_name = 'comercial/Fac_View.html'
     model = Factura
+    form_class = FacturaForm
+    template_name = 'comercial/Fac_View.html'
+    success_url = reverse_lazy('comercial:fac_panel')
+
+    def get_queryset(self):
+        return Factura.objects.prefetch_related(Prefetch(
+            'fac_npedido__movinvent_set', queryset=Movinvent.objects.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'))))
+
+    def get_context_data(self, **kwargs):
+        context = super(FacView, self).get_context_data(**kwargs)
+        total = 0
+        movimientos = self.get_object().fac_npedido.movinvent_set.all()
+    #     for movimiento in movimientos:
+    #         total += movimiento.subtotal
+    #     # context['movimientos'] = movimientos
+    #     context['total'] = total
+    #     return context
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(FacView, self).get_context_data(**kwargs)
+    #     # pedido = getattr(self, 'pedido', None)
+    #     # if pedido:
+    #     # movimientos = self.pedido.movinvent_set.select_related('mvi_product').annotate(
+    #         subtotal=F('mvi_kntidad') * F('mvi_precios')).all()
+    #     context['movimientos'] = movimientos
+
+        suma_dsc = 0
+        suma_iva = 0
+        total = 0
+        for movimiento in movimientos:
+            total += movimiento.subtotal
+            suma_dsc += movimiento.mvi_desctos
+            suma_iva += (movimiento.subtotal - (movimiento.mvi_desctos)) * (movimiento.mvi_impuest/100)
+        # context['movimientos'] = movimientos
+        context['total'] = total
+        context['suma_dsc'] = suma_dsc
+        context['suma_iva'] = suma_iva
+        context['total_fin'] = total + suma_iva - suma_dsc
+        return context
 
 
 class FacNuevo(CreateView):

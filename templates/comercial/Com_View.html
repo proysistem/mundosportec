@@ -1,0 +1,317 @@
+{% extends 'base/base_comercial.html' %}
+
+{% block title %} Visualiza Compra {% endblock title %}</title>
+
+			{% block context%}
+			<div class="crea_content">
+				<h3 class="crea_proceso">Comercial:  Compras</h3>
+				<a class="icon-reply crea_boton" href="{% url 'comercial:com_panel' %}">Volver</a>
+			</div>
+			<div>
+				<form name="form_transac" method="POST" enctype="multipart">
+					<div class="form_content">
+						<div>
+							<div class="form_titulo"><h1> Visualiza Compra {% comment %} {{ object.com_ctrlfac }} {% endcomment %}</h1></div>
+
+							{% if form.errors %}
+
+								<div class="form_errors" role="alert">
+									{{ form.errors }}
+								</div>
+
+							{% endif %}
+
+							{% for field in form %}
+								{% for error in field.errors %}
+									<strong>{{ field.label }}</strong>: {{ error }}<br>
+								{% endfor %}
+							{% endfor %}
+
+							{% for error in form.non_field_errors %}
+								<strong>{{ error }}</strong>
+							{% endfor %}
+
+
+							{% if nuevo_mov.errors %}
+
+								<div class="form_errors" role="alert">
+									{{ nuevo_mov.errors }}
+								</div>
+
+							{% endif %}
+
+							{% for field in nuevo_mov %}
+								{% for error in field.errors %}
+									<strong>{{ field.label }}</strong>: {{ error }}<br>
+								{% endfor %}
+							{% endfor %}
+
+							{% for error in nuevo_mov.non_field_errors %}
+								<strong>{{ error }}</strong>
+							{% endfor %}
+
+
+
+
+							<div class="form_esc">
+								<a class="icon-cancel" href="{% url 'comercial:com_panel' %}"></a>
+							</div>
+						</div>
+						{% comment %}
+						<td class="columns_tab width_010"> <input name="mvi_product" required id="cod_product" onclick="popsaldo()" onblur="poptallas()"/></td>
+						<div class="form_row"><div class="form_label"><label for="{{form.mvi_motivos.name}}">{{form.mvi_motivos.label}}</label></div><div>{{form.mvi_motivos}}</div></div>
+						{% endcomment %}
+						<div>
+							<fieldset>
+								<div class="form_row_all">
+									<div class="width_010"><label>Proveedor.:</label></div>
+									<div class="form_widget width_025">{{ object.com_proveed }} </div>
+									<div class="width_050">&nbsp;</div>
+									<div class="width_005"><label class="align_tex_right">Fecha.:</label></div>
+									<div class="form_widget width_010">{{ object.com_fechcom }} </div>
+								</div >
+								<div class="form_row_all">
+									<div class="width_010"><label>Vendedor.:</label></div>
+									<div class="form_widget width_025">{{ object.com_vendedo }} </div>
+									<div class="width_050">&nbsp;</div>
+									<div class="width_005"><label class="align_tex_right">Factura.:</label></div>
+									<div class="width_010 align_tex_right color_6D7969 warnig1">{{ object.com_facprov }}</div>
+								</div>
+							</fieldset>
+						</div>
+						<div>
+							<table border="0" class="width_100">
+								<thead border="1">
+								 	<tr color="#:000066">
+								 		<th class="head_tab width_015">Producto</th>
+								 		<th class="head_tab width_040">Detalle del producto</th>
+								 		<th class="head_tab width_010">Cantidad</th>
+								 		<th class="head_tab width_005">Und.</th>
+								 		<th class="head_tab width_010">Precio</th>
+								 		<th class="head_tab width_005">Dscto.</th>
+								 		<th class="head_tab width_005">IVA</th>
+								 		<th class="head_tab width_010">Valor</th>
+								 	</tr>
+								</thead>
+								<tbody border="1" id="movimientos">
+									{% for movimiento in object.com_ningres.movinvent_set.all %}
+										<tr >
+											<input type="hidden" value='{{ movimiento.mvi_nummovi }}' />
+											<td class="columns_tab width_015"> <input value="{{ movimiento.mvi_product.exs_product }}" disabled="disabled"/></td>
+											<td class="columns_tab width_040"> <input value="{{ movimiento.mvi_product.exs_detalle }}" disabled="disabled"></td>
+											<td class="columns_tab width_010"> <input class="align_tex_right" value='{{ movimiento.mvi_kntidad|default:0|stringformat:"0.2f" }}' disabled="disabled"/></td>
+											<td class="columns_tab width_005"> <input value="{{ movimiento.pop_pedUnid }}" disabled="disabled"></td>
+											<td class="columns_tab width_010"> <input class="align_tex_right" value='{{ movimiento.mvi_precios|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
+											<td class="columns_tab width_005"> <input class="align_tex_right" value='{{ movimiento.mvi_desctos|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
+											<td class="columns_tab width_005"> <input class="align_tex_right" value='{{ movimiento.mvi_impuest|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
+											<td class="columns_tab width_010"> <input class="align_tex_right" value='{{ movimiento.subtotal|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
+										</tr>
+									{% endfor %}
+									<tr>
+										{% comment %}
+										{{ form.com_ningres }}
+										<input name="pop_pedKyPr" type="hidden" id="inp_pedKyPr" value=" ">
+										<input name="pop_pedTbtl" type="hidden" id="inp_tabtall" value=" ">
+										<input name="mvi_rcargos" type="hidden" id="inp_rcargos" value="0">
+										<input name="mvi_deliver" type="hidden" id="inp_deliver" value="0">
+										<input name="mvi_arancel" type="hidden" id="inp_arancel" value="0">
+										<input name="mvi_talla01" type="hidden">
+										<input name="mvi_talla02" type="hidden">
+										<input name="mvi_talla03" type="hidden">
+										<input name="mvi_talla04" type="hidden">
+										<input name="mvi_talla05" type="hidden">
+										<input name="mvi_talla06" type="hidden">
+										<input name="mvi_talla07" type="hidden">
+										<input name="mvi_talla08" type="hidden">
+										<input name="mvi_talla09" type="hidden">
+										<input name="mvi_talla10" type="hidden">
+										<input name="mvi_talla11" type="hidden">
+										<input name="mvi_talla12" type="hidden">
+										<input name="mvi_talla13" type="hidden">
+										{% endcomment %}
+									</tr>
+								</tbody>
+								<tfoot onchange="sum_frmapgo()">
+									<tr class="totales">
+										<td colspan="2">
+											<table border="0" width="100%">
+												<tr class="width_100">
+													<td class="columns_tab width_030 align_tex_right" colspan="2">Forma de pago:</td>
+													<td class="columns_tab width_020 align_tex_right"><label>Cash:</label>
+													<td class="columns_tab width_025 align_tex_right warnig1">{{ object.com_pgoefec|stringformat:'0.2f' }}</td>
+													<td class="width_025 align_tex_right"><label>Total Itms:</label>
+												</tr>
+											</table>
+										</td>
+										<td colspan="6">
+											<table border="0" width="100%">
+												<tr class="width_100">
+													<td width="22%" class="columns_tab align_tex_right warnig1">{{ object.com_totitms|stringformat:'0.2f' }} </td>
+													<td width="56%" class="align_tex_right" colspan="3"><label>Sub-total:</label>
+													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ total|stringformat:'0.2f' }} </td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr class="totales">
+										<td colspan="2">
+											<table border="0" width="100%">
+												<tr class="width_100">
+													<td class="width_030 align_tex_right" colspan="2"></td>
+													<td class="width_020 align_tex_right"><label>Cheque:</label>
+													<td class="columns_tab width_025 align_tex_right warnig1">{{ object.com_pgocheq|stringformat:'0.2f' }}</td>
+													<td class="width_025 align_tex_right"><label></label>
+												</tr>
+											</table>
+										</td>
+										<td colspan="6">
+											<table border="0" width="100%">
+												<tr class="width_100">
+													<td width="22%"</td>
+													<td width="56%" class="align_tex_right" colspan="3"><label>Descuentos:</label>
+													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ suma_dsc|stringformat:'0.2f' }} </td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr class="totales">
+										<td colspan="2">
+											<table border="0" width="100%">
+												<tr class="width_100">
+													<td class="width_015 align_tex_right">Moneda:</td>
+													<td class="columns_tab width_015 align_tex_right warnig1">{{ object.com_monedas|stringformat:'0.2f' }} </td>
+													<td class="width_020 align_tex_right"><label>Tarj./Créd.:</label>
+													<td class="columns_tab width_025 align_tex_right warnig1">{{ object.com_pgotjcr|stringformat:'0.2f' }}</td>
+													<td class="width_025 align_tex_right"><label></label>
+												</tr>
+											</table>
+										</td>
+										<td colspan="6">
+											<table border="0" width="100%">
+												<tr class="width_100">
+													<td width="22%"</td>
+													<td width="56%" class="align_tex_right" colspan="3"><label>Recargos:</label>
+													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ object.com_rkargos|stringformat:'0.2f' }} </td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr class="totales">
+										<td colspan="2">
+											<table border="0" width="100%">
+												<tr class="width_100">
+													<td class="width_015 align_tex_right">Cotizac:</td>
+													<td class="columns_tab width_015 align_tex_right warnig1">{{ object.com_cotizac|stringformat:'0.2f' }} </td>
+													<td class="width_020 align_tex_right"><label>Crédito:</label>
+													<td class="columns_tab width_025 align_tex_right warnig1">{{ object.com_pgocred|stringformat:'0.2f' }}</td>
+													<td class="width_025 align_tex_right"><label></label>
+												</tr>
+											</table>
+										</td>
+										<td colspan="6">
+											<table border="0" width="100%">
+												<tr class="width_100">
+													<td width="22%"</td>
+													<td width="56%" class="align_tex_right" colspan="3"><label>Transporte:</label>
+													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ object.com_deliver|stringformat:'0.2f' }} </td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr class="totales">
+										<td colspan="2">
+											<table border="0" width="100%">
+												<tr class="width_100">
+													<td class="width_015 align_tex_right">Caja:</td>
+													<td class="columns_tab width_015 align_tex_right warnig1">{{ object.com_numcaja|stringformat:'0.2f' }} </td>
+													<td class="width_020 align_tex_right"><label>Internet:</label>
+													<td class="columns_tab width_025 align_tex_right warnig1">{{ object.com_otropgo|stringformat:'0.2f' }}</td>
+													<td class="width_025 align_tex_center"><label>Recibido</label>
+												</tr>
+											</table>
+										</td>
+										<td colspan="6">
+											<table border="0" width="100%">
+												<tr class="width_100">
+													<td width="35%" class="align_tex_center" colspan="2">Cambio</td>
+													<td width="43%" class="align_tex_right"><label>I.V.A.</label>
+													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ suma_iva|stringformat:'0.2f' }} </td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr class="totales">
+										<td colspan="2">
+											<table border="0" width="100%">
+												<tr class="width_100">
+													<td class="width_015 align_tex_right">Cajer@:</td>
+													<td class="columns_tab width_015 align_tex_right warnig1">{{ object.com_monedas|stringformat:'0.2f' }} </td>
+													<td class="columns_tab width_020 align_tex_right">
+														<label>
+															<span> Totoal
+																{% comment %}<button class="totales icon-database width_100" type="submit">Pagar</button> {% endcomment %}
+															</span>
+														</label>
+													</td>
+													<td class="columns_tab width_025 align_tex_right warnig1"><input id="fld_tpagado" readonly="readonly"> </td>
+													<td width="25%" class="columns_tab align_tex_right warnig1"><input id="inf_entrega" name="inf_entrega" type="number" pattern="[0-9]"></td>
+												</tr>
+											</table>
+										</td>
+										<td colspan="6">
+											<table border="0" width="100%">
+												<tr class="width_100">
+													<td width="35%" class="columns_tab align_tex_right warnig1" colspan="2"><input id="idf_cambios" name="inf_cambios" type="number" pattern="[0-9]"></td>
+													<td width="43%" class="align_tex_right"><label>TOTAL=></label>
+													<td width="22%" class="columns_tab align_tex_right warnig1"> {{ total_fin|stringformat:'0.2f' }} </td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						{% if forms.error %}
+							<div class="form_errors" role="alert">
+								{{ form.error }}
+							</div>
+						{% endif %}
+						<br>
+					</div>
+				</form>
+				<br><br>
+                    <div ><a class="icon-reply crea_boton" href="{% url 'comercial:com_panel' %}">  Ok   </a></div>
+                <br>
+			</div>
+		{% endblock context%}
+
+		{% block js %}
+
+			<script type="text/javascript">
+				var	jsw_pgoefec,
+					jsw_pgocheq,
+					jsw_pgotjcr,
+					jsw_pgocred,
+					jsw_otropgo,
+					jsw_entrega,
+					jsw_cambios,
+					jsw_tpagado;
+
+				function sum_frmapgo(){
+					jsw_tpagado=0;
+					jsw_pgoefec=document.form_transac['com_pgoefec'].value || 0;
+					jsw_pgocheq=document.form_transac['com_pgocheq'].value || 0;
+					jsw_pgotjcr=document.form_transac['com_pgotjcr'].value || 0;
+					jsw_pgocred=document.form_transac['com_pgocred'].value || 0;
+					jsw_otropgo=document.form_transac['com_otropgo'].value || 0;
+					jsw_entrega=document.form_transac['inf_entrega'].value || 0;
+					jsw_cambios=document.form_transac['inf_cambios'].value || 0;
+					jsw_tpagado=Number(jsw_pgoefec)+Number(jsw_pgocheq)+Number(jsw_pgotjcr)+Number(jsw_pgocred)+Number(jsw_otropgo);
+					// alert(jsw_tpagado);
+					document.getElementById("fld_tpagado").value=jsw_tpagado;
+					}
+				sum_frmapgo();
+			</script>
+
+		{% endblock js %}
+
