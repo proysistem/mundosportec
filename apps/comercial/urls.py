@@ -6,7 +6,7 @@ from apps.comercial.views import (CliLista, CliNuevo, CliView, CliEdita, CliDele
                                   PedLista, PedNuevo, PedView, PedEdita, PedDelet, PedRepor,
                                   FacLista, FacPrint, FacNuevo, FacView, FacEdita, FacPaid, FacDelet, FacBuscar,
                                   IngNuevo, IngEdita,
-                                  ComNuevo, ComLista, ComBuscar, ComView, ComPrint,
+                                  ComNuevo, ComLista, ComBuscar, ComView, ComPrint, ComTiket,
                                   MviBuscar,
                                   AjcLista, AjcNuevo, AjcRepor, AjcView, AjcEdita, AjcDelet,
                                   NcrBuscar, NcrLista, NcrNuevo, NcrView, NcrEdita, NcrDelet, NcrPrint)
@@ -63,6 +63,7 @@ urlpatterns = [
     # url(r'^ComEdita/(?P<pk>\d+)/$',    login_required_view(FacEdita.as_view()), name='fac_edit'),
     # url(r'^ComElimina/(?P<pk>\d+)/$',  login_required_view(FacDelet.as_view()), name='fac_delet'),
     url(r'^ComPrint/(?P<pk>\d+)/$',    login_required_view(ComPrint.as_view()), name='com_print'),
+    url(r'^ComTiket/(?P<pk>\d+)/$',    login_required_view(ComTiket.as_view()), name='com_Tiket'),
 
     url(r'^FacSearch',                 login_required_view(FacBuscar.as_view()), name='fac_search'),
     url(r'^FacPanel',                  login_required_view(FacLista.as_view()), name='fac_panel'),

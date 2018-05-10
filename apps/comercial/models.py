@@ -227,8 +227,6 @@ class Movinvent(models.Model):
                     pass
             saldos.save()
 
-# ##############################  TODO CALCULO POR N/CREDITO
-
 
 class Compra(models.Model):
     com_idcompr = models.AutoField('Id. de Compra', primary_key=True)

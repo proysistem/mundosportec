@@ -364,6 +364,38 @@ class ComLista(ListView):
     paginate_by = 12
 
 
+class ComTiket(DetailView):
+    """Visualiza reg. Compra"""
+    model = Compra
+    form_class = CompraForm
+    template_name = 'comercial/Com_Tiket.html'
+    success_url = reverse_lazy('comercial:com_panel')
+
+    def get_queryset(self):
+        return Compra.objects.prefetch_related(Prefetch(
+            'com_ningres__movinvent_set', queryset=Movinvent.objects.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'))))
+
+    def get_context_data(self, **kwargs):
+        context = super(ComView, self).get_context_data(**kwargs)
+        movimientos = self.get_object().com_ningres.movinvent_set.all()
+
+        # suma_dsc = 0
+        # suma_iva = 0
+        # total = 0
+        # for movimiento in movimientos:
+        #     total += movimiento.subtotal
+        #     suma_dsc += movimiento.mvi_desctos
+        #     suma_iva += (movimiento.subtotal - (movimiento.mvi_desctos)) * (movimiento.mvi_impuest/100)
+        # # context['movimientos'] = movimientos
+        # context['total'] = total
+        # context['suma_dsc'] = suma_dsc
+        # context['suma_iva'] = suma_iva
+        # context['total_fin'] = total + suma_iva - suma_dsc
+        # context['total_pgo'] = 'com_pgoefec' + 'com_pgocheq' + 'com_pgotjcr' + 'com_pgocred' + 'com_otropgo'
+        return context
+
+
 class ComPrint(ListView):
     """Listado de Compras"""
     model = Compra
@@ -1276,6 +1308,32 @@ class NcrView(DetailView):
     """Visualiza reg. Notacred"""
     template_name = 'comercial/Ncr_View.html'
     model = Notacred
+    form_class = NotacredForm
+    success_url = reverse_lazy('comercial:ncr_panel')
+
+    def get_queryset(self):
+        return Notacred.objects.prefetch_related(Prefetch(
+            'ncr_najuste__movinvent_set', queryset=Movinvent.objects.select_related('mvi_product').annotate(
+                subtotal=F('mvi_kntidad') * F('mvi_precios'))))
+
+    def get_context_data(self, **kwargs):
+        context = super(NcrView, self).get_context_data(**kwargs)
+        total = 0
+        movimientos = self.get_object().ncr_najuste.movinvent_set.all()
+
+        suma_dsc = 0
+        suma_iva = 0
+        total = 0
+        for movimiento in movimientos:
+            total += movimiento.subtotal
+            suma_dsc += movimiento.mvi_desctos
+            suma_iva += (movimiento.subtotal - (movimiento.mvi_desctos)) * (movimiento.mvi_impuest/100)
+        # context['movimientos'] = movimientos
+        context['total'] = total
+        context['suma_dsc'] = suma_dsc
+        context['suma_iva'] = suma_iva
+        context['total_fin'] = total + suma_iva - suma_dsc
+        return context
 
 
 class NcrNuevo(CreateView):

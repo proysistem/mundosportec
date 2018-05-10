@@ -39,6 +39,7 @@
                             <th class="head_tab">PAG. T/CRED</th>
                             <th class="head_tab">CREDIT. PERSONAL</th>
                             <th class="head_tab">OTR.FORM. PAGO</th>
+                            <th class="head_tab" colspan="2">Opción</th>
                         </tr>
                     </thead>
                     <tbody border="0">
@@ -66,6 +67,8 @@
                             <td class="columns_tab align_tex_right">{{ var_ncrfield.ncr_pgotjcr |default:''|stringformat:"0.2f" }}</td>
                             <td class="columns_tab align_tex_right">{{ var_ncrfield.ncr_pgocred |default:''|stringformat:"0.2f" }}</td>
                             <td class="columns_tab align_tex_right">{{ var_ncrfield.ncr_otropgo |default:''|stringformat:"0.2f" }}</td>
+                            <td class="columns_tab"><a class="icon-eye botones"   href="{% url 'comercial:ncr_view' var_ncrfield.pk %}"></a></td>
+                            <td class="columns_tab"><a class="icon-print botones" href="{% url 'comercial:ncr_print' var_ncrfield.ncr_najuste %}" target="_blank"></a></td>
                         </tr>
                         {% endfor %}
                         {% else %}
