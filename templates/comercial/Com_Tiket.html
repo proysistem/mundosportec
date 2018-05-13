@@ -1,4 +1,4 @@
-{% extends 'base/base_comercial.html' %}
+{% extends 'base/base_print.html' %}{% load inventarios_filters %}
 
 {% block title %} Tikets en Compra {% endblock title %}</title>
 
@@ -30,7 +30,7 @@
 					</tr>
 				{% endfor %}
 
-                {% if object.com_ningres.movinvent_set.all %}
+                {% if object.movinvent_set.all %}
                     {% for talla, saldo_talla in object|por_tallas:'tex_actua' %}
                         {% for _ in saldo_talla|por_saldo %}
                             {% cycle "<tr>" "" %}
@@ -52,6 +52,9 @@
                         {% endfor %}
                     {% endfor %}
                 {% else %}
+                    {% comment %}
+                      # TODO: Èsto está mal (?) no recuerdo qué se hizo aquí.
+                    {% endcomment %}
                     {% for _ in object.exs_saldact|por_saldo %}
                         {{ saldo_talla }}
                         {% cycle "<tr>" "" %}

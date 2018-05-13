@@ -396,11 +396,11 @@ class ComTiket(DetailView):
         return context
 
 
-class ComPrint(ListView):
+class ComPrint(DetailView):
     """Listado de Compras"""
     model = Compra
     form_class = CompraForm
-    template_name = 'comercial/Com_Print.html'
+    template_name = 'comercial/Com_Tiket.html'
     success_url = reverse_lazy('comercial:com_panel')
 
     def get_queryset(self):
@@ -852,7 +852,7 @@ class FacLista(ListView):
     paginate_by = 10
 
 
-class FacPrint(ListView):
+class FacPrint(DetailView):
     """Listado de Facturas"""
     model = Factura
     form_class = FacturaForm
@@ -865,7 +865,7 @@ class FacPrint(ListView):
                 subtotal=F('mvi_kntidad') * F('mvi_precios'))))
 
     def get_context_data(self, **kwargs):
-        context = super(FacEdita, self).get_context_data(**kwargs)
+        context = super(FacPrint, self).get_context_data(**kwargs)
         total = 0
         movimientos = self.get_object().fac_npedido.movinvent_set.all()
         for movimiento in movimientos:
