@@ -128,6 +128,9 @@ class Existencia(models.Model):
     exs_imgprod = models.ImageField(upload_to="productos", blank=True)
     exs_statreg = models.BooleanField('Status del Registro', default=True)
 
+    def get_tabtalla(self):
+        return self.exs_idmodel.mod_tabtall
+
     def __str__(self):
         return self.exs_product
 
