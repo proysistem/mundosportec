@@ -1,60 +1,300 @@
+{% extends 'base/base_print.html' %}
+
+{% block title %} Facturación {% endblock title %}</title>
+
+{% block context %}
+
+	<div>
+				<div>
+					<div class="form_titulo"><h1> Factura {% comment %} {{ object.fac_ctrlfac }} {% endcomment %}</h1></div>
+
+					{% if form.errors %}
+
+						<div class="form_errors" role="alert">
+							{{ form.errors }}
+						</div>
+
+					{% endif %}
+
+					{% for field in form %}
+						{% for error in field.errors %}
+							<strong>{{ field.label }}</strong>: {{ error }}<br>
+						{% endfor %}
+					{% endfor %}
+
+					{% for error in form.non_field_errors %}
+						<strong>{{ error }}</strong>
+					{% endfor %}
 
 
+					{% if nuevo_mov.errors %}
 
-{% extends 'base/base.html' %}
+						<div class="form_errors" role="alert">
+							{{ nuevo_mov.errors }}
+						</div>
 
-{% block title %} Graba Facturas {% endblock title %}</title>
+					{% endif %}
 
-		{% block context%}
+					{% for field in nuevo_mov %}
+						{% for error in field.errors %}
+							<strong>{{ field.label }}</strong>: {{ error }}<br>
+						{% endfor %}
+					{% endfor %}
 
-		<section>
-			<article>
-				<div>
-					<div>Factura: </div> <div> fac_numfacr</div>
-				</div>
-				<div>
-					<div>Fecha : </div> <div> fac_fechmov</div>
-				</div>
-				<div>
-					<div>Cliente : </div> <div> fac_cliente</div>
-				</div>
-			</article>
-		</section>
-		<section>
-			<article>
-				<div>
-					<div>producto </div> <div> cantid.</div><div> Preecio</div><div>IVA</div><div> Total</div>
-				</div>
-				<div>
-					<div>mvi_product </div> <div>mvi_kntidad</div><div>mvi_precios</div><div>mvi_impuest</div><div>wrk_totales</div>
-				</div>
-			</article>
-		</section>
-		<section>
-			<article>
-				<div>
-					<div>Forma/pago</div> <div>fac_pgoefec</div><div>fac_totitms</div><div>Total.valores</div><div>fac_totvlor</div>
-				</div>
-				<div>
-					<div>&quote;</div> <div>fac_pgocheq</div><div>&quote;</div><div>Total.dscto</div><div>fac_totdsct</div>
-				</div>
-				<div>
-					<div>&quote;</div> <div>fac_pgotjcr</div><div>&quote;</div><div>Total.Recargos</div><div>fac_totrkrg</div>
-				</div>
-				<div>
-				<div>
-					<div>&quote;</div> <div>fac_pgotjcr</div><div>&quote;</div><div>Total.Aranceles</div><div>fac_totaran</div>
-				</div>
-				<div>
-				<div>
-					<div>&quote;</div> <div>fac_pgocred</div><div>&quote;</div><div>Total.IVA</div><div>fac_tottaxs</div>
-				</div>
-				<div>
-				<div>
-					<div>&quote;</div> <div>wrk_totpgdo</div><div>&quote;</div><div>Total.a Pagar</div><div>wrk_totapag</div>
-				</div>
-			</article>
-		</section>
+					{% for error in nuevo_mov.non_field_errors %}
+						<strong>{{ error }}</strong>
+					{% endfor %}
 
+				</div>
+				{% comment %}
+				<td class="columns_tab width_010"> <input name="mvi_product" required id="cod_product" onclick="popsaldo()" onblur="poptallas()"/></td>
+				<div class="form_row"><div class="form_label"><label for="{{form.mvi_motivos.name}}">{{form.mvi_motivos.label}}</label></div><div>{{form.mvi_motivos}}</div></div>
+				{% endcomment %}
+				<div>
+					<fieldset>
+						<div class="form_row_all">
+							<div class="width_010"><label>Cliente.:</label></div>
+							<div class="form_widget width_025">{{ object.fac_cliente }} </div>
+							<div class="width_050">&nbsp;</div>
+							<div class="width_005"><label class="align_tex_right">Fecha</label></div>
+							<div class="form_widget width_010">{{ object.fac_fechfac }} </div>
+						</div >
+						<div class="form_row_all">
+							<div class="width_010"><label>Vendedor.:</label></div>
+							<div class="form_widget width_025">{{ object.fac_vendedo }} </div>
+							<div class="width_050">&nbsp;</div>
+							<div class="width_005"><label class="align_tex_right">Número</label></div>
+							<div class="width_010 align_tex_right color_6D7969 warnig1">{{ object.fac_ctrlfac }}</div>
+						</div>
+					</fieldset>
+				</div>
+				<div>
+					<table border="0" class="width_100">
+						<thead border="1">
+						 	<tr color="#:ffffff">
+						 		<th class="width_015 bordesito">Producto</th>
+						 		<th class="width_040 bordesito">Detalle del producto</th>
+						 		<th class="width_010 bordesito">Cantidad</th>
+						 		<th class="width_005 bordesito">Und.</th>
+						 		<th class="width_010 bordesito">Precio</th>
+						 		<th class="width_005 bordesito">Dscto.</th>
+						 		<th class="width_005 bordesito">IVA</th>
+						 		<th class="width_010 bordesito">Valor</th>
+						 	</tr>
+						</thead>
+						<tbody border="1" id="movimientos">
+							{% for movimiento in object.fac_npedido.movinvent_set.all %}
+								<tr >
+									<input type="hidden" value='{{ movimiento.mvi_nummovi }}' />
+									<td class="columns_tab width_015"> <input value="{{ movimiento.mvi_product.exs_product }}" disabled="disabled"/></td>
+									<td class="columns_tab width_040"> <input value="{{ movimiento.mvi_product.exs_detalle }}" disabled="disabled"></td>
+									<td class="columns_tab width_010"> <input class="align_tex_right" value='{{ movimiento.mvi_kntidad|default:0|stringformat:"0.2f" }}' disabled="disabled"/></td>
+									<td class="columns_tab width_005"> <input value="{{ movimiento.pop_pedUnid }}" disabled="disabled"></td>
+									<td class="columns_tab width_010"> <input class="align_tex_right" value='{{ movimiento.mvi_precios|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
+									<td class="columns_tab width_005"> <input class="align_tex_right" value='{{ movimiento.mvi_desctos|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
+									<td class="columns_tab width_005"> <input class="align_tex_right" value='{{ movimiento.mvi_impuest|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
+									<td class="columns_tab width_010"> <input class="align_tex_right" value='{{ movimiento.subtotal|default:0|stringformat:"0.2f" }}' disabled="disabled"></td>
+								</tr>
+							{% endfor %}
+							{% comment %}
+							<tr>
+								{{ form.fac_npedido }}
+								<input name="pop_pedKyPr" type="hidden" id="inp_pedKyPr" value=" ">
+								<input name="pop_pedTbtl" type="hidden" id="inp_tabtall" value=" ">
+								<input name="mvi_rcargos" type="hidden" id="inp_rcargos" value="0">
+								<input name="mvi_deliver" type="hidden" id="inp_deliver" value="0">
+								<input name="mvi_arancel" type="hidden" id="inp_arancel" value="0">
+								<input name="mvi_talla01" type="hidden">
+								<input name="mvi_talla02" type="hidden">
+								<input name="mvi_talla03" type="hidden">
+								<input name="mvi_talla04" type="hidden">
+								<input name="mvi_talla05" type="hidden">
+								<input name="mvi_talla06" type="hidden">
+								<input name="mvi_talla07" type="hidden">
+								<input name="mvi_talla08" type="hidden">
+								<input name="mvi_talla09" type="hidden">
+								<input name="mvi_talla10" type="hidden">
+								<input name="mvi_talla11" type="hidden">
+								<input name="mvi_talla12" type="hidden">
+								<input name="mvi_talla13" type="hidden">
+							</tr>
+							{% endcomment %}
+						</tbody>
+						<tfoot>
+							<tr class="totales">
+								<td colspan="2">
+									<table border="0" width="100%">
+										<tr class="width_100">
+											<td class="columns_tab width_030 align_tex_right" colspan="2">Forma de pago:</td>
+											<td class="columns_tab width_020 align_tex_right"><label>Cash:</label></td>
+											<td class="columns_tab width_025 align_tex_right warnig1">{{ object.fac_pgoefec|stringformat:'0.2f' }}</td>
+											<td class="width_025 align_tex_right"><label>Total Itms:</label></td>
+										</tr>
+									</table>
+								</td>
+								<td colspan="6">
+									<table border="0" width="100%">
+										<tr class="width_100">
+											<td width="22%" class="columns_tab align_tex_right warnig1">{{ object.fac_totitms|stringformat:'0.2f' }} </td>
+											<td width="56%" class="align_tex_right" colspan="3"><label>Sub-total:</label></td>
+											<td width="22%" class="columns_tab align_tex_right warnig1"> {{ total|stringformat:'0.2f' }} </td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr class="totales">
+								<td colspan="2">
+									<table border="0" width="100%">
+										<tr class="width_100">
+											<td class="width_030 align_tex_right" colspan="2"></td>
+											<td class="width_020 align_tex_right"><label>Cheque:</label></td>
+											<td class="columns_tab width_025 align_tex_right warnig1">{{ object.fac_pgocheq|stringformat:'0.2f' }}</td>
+											<td class="width_025 align_tex_right"><label></label></td>
+										</tr>
+									</table>
+								</td>
+								<td colspan="6">
+									<table border="0" width="100%">
+										<tr class="width_100">
+											<td width="22%"></td>
+											<td width="56%" class="align_tex_right" colspan="3"><label>Descuentos:</label></td>
+											<td width="22%" class="columns_tab align_tex_right warnig1"> {{ suma_dsc|stringformat:'0.2f' }} </td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr class="totales">
+								<td colspan="2">
+									<table border="0" width="100%">
+										<tr class="width_100">
+											<td class="width_015 align_tex_right">Moneda:</td>
+											<td class="columns_tab width_015 align_tex_right warnig1">{{ object.fac_monedas|stringformat:'0.2f' }} </td>
+											<td class="width_020 align_tex_right"><label>Tarj./Créd.:</label></td>
+											<td class="columns_tab width_025 align_tex_right warnig1">{{ object.fac_pgotjcr|stringformat:'0.2f' }}</td>
+											<td class="width_025 align_tex_right"><label></label></td>
+										</tr>
+									</table>
+								</td>
+								<td colspan="6">
+									<table border="0" width="100%">
+										<tr class="width_100">
+											<td width="22%"></td>
+											<td width="56%" class="align_tex_right" colspan="3"><label>Recargos:</label></td>
+											<td width="22%" class="columns_tab align_tex_right warnig1"> {{ object.fac_rkargos|stringformat:'0.2f' }} </td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr class="totales">
+								<td colspan="2">
+									<table border="0" width="100%">
+										<tr class="width_100">
+											<td class="width_015 align_tex_right">Cotizac:</td>
+											<td class="columns_tab width_015 align_tex_right warnig1">{{ object.fac_cotizac|stringformat:'0.2f' }} </td>
+											<td class="width_020 align_tex_right"><label>Crédito:</label></td>
+											<td class="columns_tab width_025 align_tex_right warnig1">{{ object.fac_pgocred|stringformat:'0.2f' }}</td>
+											<td class="width_025 align_tex_right"><label></label></td>
+										</tr>
+									</table>
+								</td>
+								<td colspan="6">
+									<table border="0" width="100%">
+										<tr class="width_100">
+											<td width="22%"></td>
+											<td width="56%" class="align_tex_right" colspan="3"><label>Transporte:</label></td>
+											<td width="22%" class="columns_tab align_tex_right warnig1"> {{ object.fac_deliver|stringformat:'0.2f' }} </td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr class="totales">
+								<td colspan="2">
+									<table border="0" width="100%">
+										<tr class="width_100">
+											<td class="width_015 align_tex_right">Caja:</td>
+											<td class="columns_tab width_015 align_tex_right warnig1">{{ object.fac_numcaja|stringformat:'0.2f' }} </td>
+											<td class="width_020 align_tex_right"><label>Internet:</label></td>
+											<td class="columns_tab width_025 align_tex_right warnig1">{{ object.fac_otropgo|stringformat:'0.2f' }}</td>
+											<td class="width_025 align_tex_center"><label>Recibido</label></td>
+										</tr>
+									</table>
+								</td>
+								<td colspan="6">
+									<table border="0" width="100%">
+										<tr class="width_100">
+											<td width="35%" class="align_tex_center" colspan="2">Cambio</td>
+											<td width="43%" class="align_tex_right"><label>I.V.A.</label></td>
+											<td width="22%" class="columns_tab align_tex_right warnig1"> {{ suma_iva|stringformat:'0.2f' }} </td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr class="totales">
+								<td colspan="2">
+									<table border="0" width="100%">
+										<tr class="width_100">
+											<td class="width_015 align_tex_right">Cajer@:</td>
+											<td class="columns_tab width_015 align_tex_right warnig1">{{ object.fac_monedas|stringformat:'0.2f' }} </td>
+											<td class="width_020 align_tex_right">
+												<label>
+													<span>
+														{% comment %}<button class="totales icon-database width_100" type="submit">Pagar</button> {% endcomment %}
+														<img src="/static/images/total.png" onload="sum_frmapgo()" width="62" height="20">
+													</span>
+												</label>
+											</td>
+											<td class="columns_tab width_025 align_tex_right warnig1"><input id="fld_tpagado" name="frm_tpagado" disabled="disabled"></td>
+											<td width="25%" class="columns_tab align_tex_right warnig1"><input id="inf_entrega" name="inf_entrega" type="number" pattern="[0-9]" disabled="disabled"></td>
+										</tr>
+									</table>
+								</td>
+								<td colspan="6">
+									<table border="0" width="100%">
+										<tr class="width_100">
+											<td width="35%" class="columns_tab align_tex_right warnig1" colspan="2"><input id="idf_cambios" name="inf_cambios" type="number" pattern="[0-9]" disabled="disabled"></td>
+											<td width="43%" class="align_tex_right"><label>TOTAL=></label></td>
+											<td width="22%" class="columns_tab align_tex_right warnig1"> {{ total_fin|stringformat:'0.2f' }} </td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				{% if forms.error %}
+					<div class="form_errors" role="alert">
+						{{ form.error }}
+					</div>
+				{% endif %}
+				<br>
+	</div>
+{% endblock context%}
 
-		{% endblock context%}
+{% block js %}
+
+	<script type="text/javascript">
+		var	jsw_pgoefec,
+			jsw_pgocheq,
+			jsw_pgotjcr,
+			jsw_pgocred,
+			jsw_otropgo,
+			jsw_entrega,
+			jsw_cambios,
+			jsw_tpagado;
+
+		function sum_frmapgo(){
+			jsw_tpagado=0;
+			jsw_pgoefec=document.form_transac['fac_pgoefec'].value || 0;
+			jsw_pgocheq=document.form_transac['fac_pgocheq'].value || 0;
+			jsw_pgotjcr=document.form_transac['fac_pgotjcr'].value || 0;
+			jsw_pgocred=document.form_transac['fac_pgocred'].value || 0;
+			jsw_otropgo=document.form_transac['fac_otropgo'].value || 0;
+			jsw_entrega=document.form_transac['inf_entrega'].value || 0;
+			jsw_cambios=document.form_transac['inf_cambios'].value || 0;
+			jsw_tpagado=Number(jsw_pgoefec)+Number(jsw_pgocheq)+Number(jsw_pgotjcr)+Number(jsw_pgocred)+Number(jsw_otropgo);
+			document.getElementById("fld_tpagado").value=jsw_tpagado;
+			}
+	</script>
+
+{% endblock js %}
+

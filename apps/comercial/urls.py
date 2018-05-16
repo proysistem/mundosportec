@@ -63,7 +63,7 @@ urlpatterns = [
     # url(r'^ComEdita/(?P<pk>\d+)/$',    login_required_view(FacEdita.as_view()), name='fac_edit'),
     # url(r'^ComElimina/(?P<pk>\d+)/$',  login_required_view(FacDelet.as_view()), name='fac_delet'),
     url(r'^ComPrint/(?P<pk>\d+)/$',    login_required_view(ComPrint.as_view()), name='com_print'),
-    url(r'^ComTiket/(?P<pk>\d+)/$',    login_required_view(ComTiket.as_view()), name='com_Tiket'),
+    url(r'^ComTiket/(?P<pk>\d+)/$',    login_required_view(ComTiket.as_view()), name='com_tiket'),
 
     url(r'^FacSearch',                 login_required_view(FacBuscar.as_view()), name='fac_search'),
     url(r'^FacPanel',                  login_required_view(FacLista.as_view()), name='fac_panel'),

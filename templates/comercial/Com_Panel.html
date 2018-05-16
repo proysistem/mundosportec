@@ -1,6 +1,6 @@
 {% extends 'base/base_comercial.html' %}
 
-{% block title %} Panel de cOMPRAS {% endblock title %}</title>
+{% block title %} Panel de Compras {% endblock title %}</title>
 
 {% block context %}
 
@@ -19,18 +19,18 @@
                     <thead>
                         <tr color="#:000066">
                             <th class="head_tab">N.INGRESO</th>
-                            <th class="head_tab">FACTURA DE PROVEEDOR</th>
+                            <th class="head_tab">FACTURA/PROV.</th>
                             <th class="head_tab">FECHA DE FACTURA</th>
-                            <th class="head_tab">CAJA</th>
-                            <th class="head_tab">CAJERA</th>
                             <th class="head_tab">PROVEED</th>
                             <th class="head_tab">VENDED.</th>
                             {% comment %}
+                            <th class="head_tab">CAJA</th>
+                            <th class="head_tab">CAJERA</th>
                             <th class="head_tab">MONEDA</th>
                             <th class="head_tab">COTIZ.</th>
                             {% endcomment %}
                             <th class="head_tab">TOT.ITMS</th>
-                            <th class="head_tab">SUBTOT</th>
+                            <th class="head_tab">SUBTOTAL</th>
                             <th class="head_tab">DSCTOS</th>
                             <th class="head_tab">RCARGO</th>
                             <th class="head_tab">TRANSP</th>
@@ -41,7 +41,7 @@
                             <th class="head_tab">PAG. T/CRED</th>
                             <th class="head_tab">CREDIT. PERSONAL</th>
                             <th class="head_tab">OTR.FORM. PAGO</th>
-                            <th class="head_tab" colspan="2">Opción</th>
+                            <th class="head_tab" colspan="3">Opción Ver.Imp.Tik</th>
                         </tr>
                     </thead>
                     <tbody border="0">
@@ -51,11 +51,11 @@
                             <td class="columns_tab align_tex_left"> {{ var_comfield.com_ningres }}</td>
                             <td class="columns_tab align_tex_right"> {{ var_comfield.com_facprov }}</td>
                             <td class="columns_tab align_tex_left"> {{ var_comfield.com_fechcom }}</td>
-                            <td class="columns_tab align_tex_left"> {{ var_comfield.com_cajanum }}</td>
-                            <td class="columns_tab align_tex_left"> {{ var_comfield.com_cajeras }}</td>
                             <td class="columns_tab align_tex_left"> {{ var_comfield.com_proveed }}</td>
                             <td class="columns_tab align_tex_left"> {{ var_comfield.com_vendedo }}</td>
                             {% comment %}
+                            <td class="columns_tab align_tex_left"> {{ var_comfield.com_cajanum }}</td>
+                            <td class="columns_tab align_tex_left"> {{ var_comfield.com_cajeras }}</td>
                             <td class="columns_tab align_tex_left"> {{ var_comfield.com_monedas }}</td>
                             <td class="columns_tab align_tex_right">{{ var_comfield.com_cotizac |default:''|stringformat:"0.2f" }}</td>
                             {% endcomment %}
@@ -73,6 +73,7 @@
                             <td class="columns_tab align_tex_right">{{ var_comfield.com_otropgo |default:''|stringformat:"0.2f" }}</td>
                             <td class="columns_tab"><a class="icon-eye botones"   href="{% url 'comercial:com_view' var_comfield.pk %}"></a></td>
                             <td class="columns_tab"><a class="icon-print botones" href="{% url 'comercial:com_print' var_comfield.pk %}" target="_blank"></a></td>
+                            <td class="columns_tab"><a class="icon-th-list botones color_yellow" href="{% url 'comercial:com_tiket' var_comfield.pk %}" target="_blank"></a></td>
                         </tr>
                         {% endfor %}
                         {% else %}

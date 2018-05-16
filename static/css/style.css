@@ -194,7 +194,11 @@ input:focus
     {
     color: yellow;
     }
-.bordesito
+.color_white /* Exi_View,   */
+    {
+    color: white;
+    }
+.borders
     {
     border-style: solid 1px;
     }

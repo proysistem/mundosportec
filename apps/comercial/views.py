@@ -377,14 +377,14 @@ class ComTiket(DetailView):
                 subtotal=F('mvi_kntidad') * F('mvi_precios'))))
 
     def get_context_data(self, **kwargs):
-        context = super(ComView, self).get_context_data(**kwargs)
+        context = super(ComTiket, self).get_context_data(**kwargs)
         movimientos = self.get_object().com_ningres.movinvent_set.all()
 
         # suma_dsc = 0
         # suma_iva = 0
-        # total = 0
-        # for movimiento in movimientos:
-        #     total += movimiento.subtotal
+        total = 0
+        for movimiento in movimientos:
+            total += movimiento.subtotal
         #     suma_dsc += movimiento.mvi_desctos
         #     suma_iva += (movimiento.subtotal - (movimiento.mvi_desctos)) * (movimiento.mvi_impuest/100)
         # # context['movimientos'] = movimientos
@@ -400,7 +400,7 @@ class ComPrint(DetailView):
     """Listado de Compras"""
     model = Compra
     form_class = CompraForm
-    template_name = 'comercial/Com_Tiket.html'
+    template_name = 'comercial/Com_Print.html'
     success_url = reverse_lazy('comercial:com_panel')
 
     def get_queryset(self):
@@ -410,12 +410,21 @@ class ComPrint(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ComPrint, self).get_context_data(**kwargs)
-        total = 0
         movimientos = self.get_object().com_ningres.movinvent_set.all()
+
+        suma_dsc = 0
+        suma_iva = 0
+        total = 0
         for movimiento in movimientos:
             total += movimiento.subtotal
+            suma_dsc += movimiento.mvi_desctos
+            suma_iva += (movimiento.subtotal - (movimiento.mvi_desctos)) * (movimiento.mvi_impuest/100)
         # context['movimientos'] = movimientos
         context['total'] = total
+        context['suma_dsc'] = suma_dsc
+        context['suma_iva'] = suma_iva
+        context['total_fin'] = total + suma_iva - suma_dsc
+        context['total_pgo'] = 'com_pgoefec' + 'com_pgocheq' + 'com_pgotjcr' + 'com_pgocred' + 'com_otropgo'
         return context
 
 
@@ -868,10 +877,20 @@ class FacPrint(DetailView):
         context = super(FacPrint, self).get_context_data(**kwargs)
         total = 0
         movimientos = self.get_object().fac_npedido.movinvent_set.all()
+
+        suma_dsc = 0
+        suma_iva = 0
+        total = 0
         for movimiento in movimientos:
             total += movimiento.subtotal
+            suma_dsc += movimiento.mvi_desctos
+            suma_iva += (movimiento.subtotal - (movimiento.mvi_desctos)) * (movimiento.mvi_impuest/100)
         # context['movimientos'] = movimientos
         context['total'] = total
+        context['suma_dsc'] = suma_dsc
+        context['suma_iva'] = suma_iva
+        context['total_fin'] = total + suma_iva - suma_dsc
+        context['total_pgo'] = 'fac_pgoefec' + 'fac_pgocheq' + 'fac_pgotjcr' + 'fac_pgocred' + 'fac_otropgo'
         return context
 
 
