@@ -1,0 +1,48 @@
+{% extends 'base/base_print.html' %}{% load inventarios_filters %}
+
+{% block title %} Tickets de Productos {% endblock title %}
+
+{% block context %}
+     <div class="print_content-reina">
+        {% if tikets %}
+          <table class="print_item_cont" border="0">
+                {% for items in tikets %}
+                      {% cycle "<tr>" "" %}
+                          <td class="print_ticket-reina">
+                              <div>
+                                <img class="imagen_reina" src="/static/images/ticket.png">
+                              </div>
+                              <div class="print_block-reina">
+                                <span class="print_fsize2em">{{ items|stringformat:"03d" }}</span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="print_fsize2em">{{ items|stringformat:"03d" }}</span>
+                              </div>
+                          </td>
+                      {% cycle "" "</tr>" %}
+                {% endfor %}
+          </table>
+        {% else %}
+          <p>....No hay rifas disponibles. {{ tikets }}</p>
+        {% endif %}
+    </div>
+
+        {% comment %}
+{% with ''|center:n as range %}
+{% for _ in range %}
+                              <img  width="100" src="/static/images/ticket.png">
+
+                              &nbsp;&nbsp;<span class="print_fsize2em">Num.: &nbsp;{{ n }}</span>
+{% endfor %}
+{% endwith %}
+
+{% endcomment %}
+ {% endblock context %}
+}
+
+
+
+

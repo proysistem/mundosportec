@@ -1,0 +1,32 @@
+class Comprobante(models.Model):
+    cmp_comprob = models.CharField('Núm. Comprobante', max_length=18, editable=False, unique=True, db_index=True)
+    cmp_ncuenta = models.ForeignKey(Plancuenta, verbose_name="Cuenta/Plan de Ctas.")
+    cmp_fechcmp = models.DateField('Fecha de comprobante')
+    cmp_usernam = models.ForeignKey(User)
+    cmp_sucursa = models.ForeignKey(Sucursal)
+    cmp_origpro = models.CharField('Origen del proceso=programa de origen', max_length=35)
+    cmp_origtra = models.CharField('Origen de transacción (F=Factura,C=Compra,Cheques, hacer Tabla)', max_length=01)
+    cmp_numorig = models.CharField('Numero o ref. de origen', max_length=25)
+    cmp_tpoenti = models.CharField('Tipo de entidad (C=Cliente,P=Proveedor,hacer Tabla)', max_length=01)
+    cmp_entidad = models.CharField('Código de entidad', max_length=15)
+    cmp_mondalt = models.ForeignKey(Moneda, verbose_name='Moneda alterna', null=True, blank=True)
+    cmp_mondaof = models.ForeignKey(Moneda, verbose_name='Moneda oficial', null=True, blank=True)
+    cmp_cotizac = models.DecimalField('Cotización', max_digits=9, decimal_places=2, null=True, blank=True)
+    cmp_cajanum = models.ForeignKey(Caja, verbose_name='Núm. de caja', null=True, blank=True)
+    cmp_cajeras = models.ForeignKey(Cajera, verbose_name='Cód. de Cajera', null=True, blank=True)
+    cmp_detalle = models.CharField('Detalle del movimiento', max_length=40)
+    cmp_cantida = models.DecimalField('Cantidad', max_digits=13, decimal_places=2, null=True, blank=True)
+    cmp_tpomovi = models.CharField('Tipo de Movimiento D=Débito, C=Credito, I=Inicial', max_length=01)
+    cmp_valores = models.DecimalField('Valor', max_digits=15, decimal_places=2, null=True, blank=True)
+    cmp_nivlcta = models.NumericField('Nivel de cta.', max_digits=1)
+    cmp_periodo = models.NumericField('Periodo contable', max_digits=2)
+    cmp_costord = models.NumericField('Núm. de Orden costo')
+    cmp_costcta = models.ForeignKey(Plancuenta, verbose_name='Cuenta/Plan de Ctas.')
+    cmp_statreg = models.CharField('Estado del Reg.' max_length=1)
+                                    # Estado/Regist(0-1-2-3-4-5)
+                                    # Reg.Inactivo.<╜ | | | | |
+                                    # Reg.Activo...<--+ | | | |
+                                    # Reg.Mayorizad<----+ | | |
+                                    # Rep.Inconsist<------+ | |
+                                    # Reg.Eliminado<--------+ |
+                                    # Reg.Desconocd<----------+

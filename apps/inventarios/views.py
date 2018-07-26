@@ -517,6 +517,12 @@ class ExiPrint(ListView):
 #             return response
 #         return HttpResponse("Not found")
 
+def ReyTiket(request):
+    n = 300
+    context = {'tikets': range(11, n+1)}
+    template = 'inventarios/Rey_Tiket.html'
+    return render(request, template, context)
+
 
 class ExiTiket(DetailView):
     """Listado de Existencia"""

@@ -6,7 +6,7 @@ from .views import (ExiLista, ExiNuevo, ExiView, ExiEdita, ExiDelet, SxtLista,
                     MrkNuevo, MrkView, MrkEdita, MrkDelet, ModLista, ModNuevo,
                     ModView, ModEdita, ModDelet, ColLista, ColNuevo, ColView,
                     ColEdita, ColDelet, TllLista, TllNuevo, TllView, TllEdita,
-                    TllDelet, Mrkkyselect, TablaTalla, PopTalla, IngTalla)
+                    TllDelet, Mrkkyselect, TablaTalla, PopTalla, IngTalla, ReyTiket)
 from mundosport.utils import login_required_view
 # from django.conf import settings
 # from apps.parametros.views import  CliLista, PrvLista, VndLista, MviLista, PedLista, FacLista
@@ -52,6 +52,7 @@ urlpatterns = [
     url(r'^ExiPrint',                  login_required_view(ExiPrint.as_view()), name='exi_print'),
     url(r'^ExiPdf',                    login_required_view(ExiPdf.as_view()),   name='exi_pdf'),
     url(r'^ExiTikts',                  login_required_view(ExiTikts.as_view()), name='exi_tikts'),
+    url(r'^ReyTikt',                   ReyTiket, name='rey_tikts'),
     url(r'^ExiTiket/(?P<pk>\d+)/$',    login_required_view(ExiTiket.as_view()), name='exi_tiket'),
     url(r'^ExiNuevo/$',                login_required_view(ExiNuevo.as_view()), name='exi_new'),
     url(r'^ExiEdita/(?P<pk>\d+)/$',    login_required_view(ExiEdita.as_view()), name='exi_edit'),
